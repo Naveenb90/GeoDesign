@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geo Design - Soil Testing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* General Body & Scroll */
+    html, body {
+      scroll-behavior: smooth;
+      height: 100%;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+    }
+    body {
+      background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
+      color: #1e293b;
+    }
+
+    section {
+      scroll-snap-align: start;
+    }
+
+    /* Client logo scroll animation */
+    @keyframes slide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-slide {
+      display: flex;
+      animation: slide 25s linear infinite;
+    }
+  </style>
+</head>
+<body class="font-sans">
+
+<!-- Header -->
+<header class="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur-md shadow z-50">
+  <div class="flex items-center space-x-4">
+    <img src="assets/img/logo.png" alt="Logo" class="h-20 w-40 object-contain">
+    <div class="flex flex-col items-start">
+        <span class="text-4xl font-extrabold text-gray-900">Geo Design</span>
+        <span class="text-sm text-gray-600 mt-1">We care for your safety & investment</span>
+    </div>
+  </div>
+  <nav>
+    <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Contact Us</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="h-screen pt-[100px] flex items-center justify-center bg-cover bg-center relative"
+         style="background-image: url('assets/img/hero-site.jpg')">
+  <div class="text-center max-w-5xl p-8 bg-white/30 rounded-3xl shadow-lg backdrop-blur-md">
+    <h1 class="text-4xl font-bold mb-4 text-gray-900">Building Dreams, One Brick at a Time</h1>
+    <p class="mb-6 text-lg text-gray-800">Quality Soil Testing services for Residential, Commercial and Government projects</p>
+    <a href="#contact"
+       class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Get a Quote</a>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="h-screen pt-[100px] relative w-full flex items-center justify-center bg-gray-100">
+  <div class="relative w-4/5 h-[80vh] bg-gray-300 rounded-xl shadow-lg overflow-hidden">
+    <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/30 z-10">
+      <button id="play-video" class="bg-red-600 text-white rounded-full w-24 h-24 flex items-center justify-center text-4xl shadow-lg hover:bg-red-700 transition">
+        ▶
+      </button>
+    </div>
+    <div id="video-container" class="absolute inset-0 hidden">
+      <iframe class="w-full h-full"
+              src=""
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<script>
+  const videoSection = document.querySelector('section:nth-of-type(2)');
+  const videoContainer = document.getElementById('video-container');
+  const overlay = document.getElementById('video-overlay');
+  const iframe = videoContainer.querySelector('iframe');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        overlay.style.opacity = 0;
+        videoContainer.classList.remove('hidden');
+        iframe.src = `https://www.youtube.com/embed/FdMVB_qNAAY?autoplay=1&rel=0&mute=0`;
+        observer.unobserve(videoSection);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(videoSection);
+</script>
+
+<!-- Soil Testing Issues & Importance -->
+<section class="h-screen pt-[100px] py-16 px-6 bg-gradient-to-br from-sky-800 via-white-700 to-sky-900 text-white rounded-xl">
+  <h2 class="text-4xl font-bold text-center mb-12">Soil Testing Issues</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6 mb-16">
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">📍</span>
+      <h4 class="font-bold mb-1">Site Access</h4>
+      <p class="text-sm">Quality of access impacts site investigation.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🧱</span>
+      <h4 class="font-bold mb-1">Type of Soil</h4>
+      <p class="text-sm">Clay is reactive, sand settles under load, silt loses strength when wet.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🌳</span>
+      <h4 class="font-bold mb-1">Trees & Roots</h4>
+      <p class="text-sm">Roots may draw moisture, causing shrinkage near footings.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🪨</span>
+      <h4 class="font-bold mb-1">Rock Boulders</h4>
+      <p class="text-sm">May move underground or create voids when excavated.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">⚠️</span>
+      <h4 class="font-bold mb-1">Soft Soil</h4>
+      <p class="text-sm">Can settle under load affecting stability.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🌊</span>
+      <h4 class="font-bold mb-1">Marine Clays</h4>
+      <p class="text-sm">May have low or no bearing capacity.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">⛰️</span>
+      <h4 class="font-bold mb-1">Slopes</h4>
+      <p class="text-sm">Steeper slopes may have slip potential.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">💧</span>
+      <h4 class="font-bold mb-1">Low-Lying Areas</h4>
+      <p class="text-sm">Could contain acid sulfate soils.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🛠️</span>
+      <h4 class="font-bold mb-1">Filled Areas</h4>
+      <p class="text-sm">May have un-compacted soils causing settlement.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">⚡</span>
+      <h4 class="font-bold mb-1">Cut & Fill Pads</h4>
+      <p class="text-sm">Could experience differential settlement.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">💦</span>
+      <h4 class="font-bold mb-1">Water Table</h4>
+      <p class="text-sm">Depths can affect excavation feasibility.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🪨</span>
+      <h4 class="font-bold mb-1">Rock Layers</h4>
+      <p class="text-sm">May impact excavation.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🚰</span>
+      <h4 class="font-bold mb-1">Wastewater Suitability</h4>
+      <p class="text-sm">Soil suitability for sewerage and greywater disposal.</p>
+    </div>
+    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-4xl mb-2 block">🏞️</span>
+      <h4 class="font-bold mb-1">Land Block</h4>
+      <p class="text-sm">Suitability for on-site wastewater disposal.</p>
+    </div>
+  </div>
+
+  <h3 class="text-3xl font-bold text-center mb-8">Why Soil Testing is Important?</h3>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-5xl text-sky-400 mb-4 block">🏦</span>
+      <h4 class="text-2xl font-bold mb-3">Protect Your Investment</h4>
+      <p class="text-lg">Proper foundations prevent building movement and wall cracks.</p>
+    </div>
+    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-5xl text-sky-400 mb-4 block">💰</span>
+      <h4 class="text-2xl font-bold mb-3">Prevent Future Costs</h4>
+      <p class="text-lg">Identify issues early, estimate costs, make informed land decisions.</p>
+    </div>
+    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+      <span class="text-5xl text-sky-400 mb-4 block">🔬</span>
+      <h4 class="text-2xl font-bold mb-3">Residential Soil Testing</h4>
+      <p class="text-lg">Soil samples are collected and analyzed for safe construction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- About + Services Section -->
+<section class="h-screen pt-[100px] flex flex-col items-center justify-center px-6 text-center space-y-16 bg-gradient-to-b from-sky-200 via-white to-sky-100 py-12">
+  <!-- About Us -->
+  <div class="w-full max-w-6xl">
+    <h2 class="text-4xl font-extrabold mb-8 text-sky-700">About Us</h2>
+    <div class="flex flex-col md:flex-row gap-8 bg-white/20 rounded-3xl p-8 shadow-lg backdrop-blur-md">
+      <div class="flex-1">
+        <ul class="space-y-6 text-left">
+          <!-- About points -->
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Services -->
+  <div class="w-full max-w-6xl">
+    <h2 class="text-4xl font-extrabold mb-8 text-sky-700">Our Services</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Services boxes -->
+    </div>
+  </div>
+</section>
+
+<!-- Projects + Clients Section -->
+<section class="h-screen pt-[100px] flex flex-col items-center justify-center px-6 text-center space-y-12 bg-white/10 rounded-xl">
+  
+  <!-- Projects -->
+  <div class="w-full">
+    <h2 class="text-3xl font-bold mb-8">Recent Projects</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+      <img src="assets/img/project-1.jpg" class="rounded-lg shadow-lg" alt="Project 1">
+      <img src="assets/img/project-2.jpg" class="rounded-lg shadow-lg" alt="Project 2">
+      <img src="assets/img/project-3.jpg" class="rounded-lg shadow-lg" alt="Project 3">
+    </div>
+  </div>
+
+<!-- Clients Section -->
+<div class="w-full">
+  <h2 class="text-3xl font-bold mb-8">Our Clients</h2>
+  <div class="overflow-hidden relative max-w-8xl mx-auto">
+    <div class="flex animate-slide whitespace-nowrap space-x-6">
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/ahuja.jpg" alt="Ahuja" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/aravind_eye_hospital.jpg" alt="Aravind Eye Hospital" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/bhoomi.jpg" alt="bhoomi" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/ccclindia.png" alt="cccindia" class="h-16 object-contain">
+      </div>
+     <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/chatankulam.jpg" alt="chatankulam" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/chennai-silks.jpg" alt="chennai-silks" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/crescentz.jpg" alt="crescentz" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/karpagam.png" alt="karpagam" class="h-16 object-contain">
+      </div>
+           <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/srikrishnasweets.jpg" alt="srikrishnasweets" class="h-16 object-contain">
+      </div>
+      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+        <img src="assets/img/Jain-Housing_Logo.jpg" alt="Jain-Housing_Logo" class="h-16 object-contain">
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="h-screen pt-[100px] flex flex-col items-center justify-center px-6 text-center">
+  <h2 class="text-3xl font-bold mb-8">Contact Us</h2>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+        action="geodesign123@gmail.com"
+        class="max-w-lg mx-auto bg-white/20 rounded-2xl p-6 shadow space-y-4">
+    <input type="hidden" name="form-name" value="contact">
+    <p class="hidden">
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </p>
+
+    <input type="text" name="name" placeholder="Your Name"
+           class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required>
+    <input type="email" name="email" placeholder="Your Email"
+           class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required>
+    <textarea name="message" rows="4" placeholder="Your Message"
+              class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required></textarea>
+    <button type="submit"
+            class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Send</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer class="fixed bottom-0 left-0 w-full py-4 text-center text-sm bg-white/30 backdrop-blur-md">
+  © 2025 Geo Design. All Rights Reserved.
+</footer>
+
+</body>
+</html>
