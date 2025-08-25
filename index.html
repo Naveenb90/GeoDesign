@@ -44,13 +44,22 @@
         <span class="text-sm text-gray-600 mt-1">We care for your safety & investment</span>
     </div>
   </div>
+  <nav class="max-w-6xl mx-auto flex justify-between p-4">
+    <ul class="flex space-x-6">
+      <li><a href="#video" class="hover:text-sky-500">Watch Video</a></li>
+      <li><a href="#issue" class="hover:text-sky-500">Why It Matters</a></li>
+      <li><a href="#about" class="hover:text-sky-500">What We Do</a></li>
+      <li><a href="#projects" class="hover:text-sky-500">Who We Work With</a></li>
+
+    </ul>
+  </nav>
   <nav>
-    <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Contact Us</a>
+    <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
   </nav>
 </header>
 
 <!-- Hero Section -->
-<section class="min-h-screen pt-24 md:pt-32 flex items-center justify-center bg-cover bg-center relative"
+<section id="hero" class="min-h-screen pt-24 md:pt-32 flex items-center justify-center bg-cover bg-center relative"
          style="background-image: url('assets/img/hero-site.jpg')">
   <div class="text-center max-w-5xl p-8 bg-white/30 rounded-3xl shadow-lg backdrop-blur-md">
     <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Building Dreams, One Brick at a Time</h1>
@@ -61,7 +70,7 @@
 </section>
 
 <!-- Video Section -->
-<section class="min-h-screen pt-24 md:pt-32 relative w-full flex items-center justify-center bg-gray-100">
+<section id="video" class="min-h-screen pt-24 md:pt-32 relative w-full flex items-center justify-center bg-gray-100">
   <div class="relative w-11/12 md:w-4/5 h-[60vh] md:h-[80vh] bg-gray-300 rounded-xl shadow-lg overflow-hidden">
     <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/30 z-10">
       <button id="play-video" class="bg-red-600 text-white rounded-full w-20 h-20 md:w-24 md:h-24 flex items-center justify-center text-3xl md:text-4xl shadow-lg hover:bg-red-700 transition">
@@ -101,7 +110,7 @@
 </script>
 
 <!-- Soil Testing Issues & Importance -->
-<section class="min-h-screen pt-24 md:pt-32 py-16 px-6 bg-gradient-to-br from-sky-800 via-sky-700 to-sky-900 text-white rounded-xl">
+<section id="issue" class="min-h-screen pt-24 md:pt-32 py-16 px-6 bg-gradient-to-br from-sky-800 via-sky-700 to-sky-900 text-white rounded-xl">
   <h2 class="text-4xl font-bold text-center mb-12">Soil Testing Issues</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
     <!-- your soil testing issue cards here (unchanged) -->
@@ -198,7 +207,7 @@
 </section>
 
 <!-- About + Services Section -->
-<section class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-16 bg-gradient-to-b from-sky-200 via-white to-sky-100 py-12">
+<section id="about" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-16 bg-gradient-to-b from-sky-200 via-white to-sky-100 py-12">
   <!-- About Us -->
   <div class="w-full max-w-6xl">
     <h2 class="text-4xl font-extrabold mb-8 text-sky-700">About Us</h2>
@@ -221,7 +230,7 @@
 </section>
 
 <!-- Projects + Clients Section -->
-<section class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-12 bg-white/10 rounded-xl">
+<section id="projects" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-12 bg-white/10 rounded-xl">
   <!-- Projects -->
     
   <!-- Projects -->
@@ -277,7 +286,7 @@
 <!-- Contact Section -->
 <section id="contact" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center">
   <h2 class="text-3xl font-bold mb-8">Contact Us</h2>
-  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field"
+  <form name="contact" nmethod="POST" data-netlify="true" netlify-honeypot="bot-field"
         class="max-w-lg mx-auto bg-white/20 rounded-2xl p-6 shadow space-y-4">
     <input type="hidden" name="form-name" value="contact">
     <p class="hidden">
