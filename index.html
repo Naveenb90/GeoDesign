@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+   <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Geo Design - Soil Testing</title>
+  <!-- Fonts & Tailwind -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    /* General Body & Scroll */
+   <style>
     html, body {
       scroll-behavior: smooth;
       height: 100%;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+
+    font-family: 'Montserrat', sans-serif ; /* force Inter everywhere */
+    }
+     header, header * {
+     font-family: 'Montserrat', sans-serif;
     }
     body {
       background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
       color: #1e293b;
+      font-family: 'Montserrat', sans-serif !important; /* force Inter everywhere */
     }
-
     section {
       scroll-snap-align: start;
     }
-
-    /* Client logo scroll animation */
     @keyframes slide {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -36,39 +38,64 @@
 <body class="font-sans">
 
 <!-- Header -->
-<header class="fixed top-0 left-0 w-full flex items-center justify-between px-6 py-4 bg-white/70 backdrop-blur-md shadow z-50">
-  <div class="flex items-center space-x-4">
-    <img src="assets/img/logo.png" alt="Logo" class="h-20 w-20 object-contain">
-    <div class="flex flex-col items-start">
-        <span class="text-2xl font-extrabold text-gray-900">Geo Design</span>
-        <span class="text-sm text-gray-600 mt-1">We care for your safety & investment</span>
+<header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+    <!-- Logo -->
+    <div class="flex items-center space-x-3">
+      <!--  <img src="assets/img/logo.png" alt="Logo" class="h-12 w-12 object-contain"-->
+      <div class="flex flex-col">
+        <span class="text-xl font-extrabold text-gray-900">Geo Design</span>
+        <span class="text-xs text-gray-600">We care for your Safety & Investment</span>
+      </div>
     </div>
-  </div>
-  <nav class="max-w-6xl mx-auto flex justify-between p-4">
-    <ul class="flex space-x-6">
-      <li><a href="#video" class="hover:text-sky-500">Watch Video</a></li>
-      <li><a href="#issue" class="hover:text-sky-500">Why It Matters</a></li>
-      <li><a href="#about" class="hover:text-sky-500">Who We Are</a></li>
-      <li><a href="#services" class="hover:text-sky-500">What We Do</a></li>
-      <li><a href="#projects" class="hover:text-sky-500">Who We Work With</a></li>
+    
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="#video" class="hover:text-sky-500">Watch Video</a>
+      <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
+      <a href="#about" class="hover:text-sky-500">Who We Are</a>
+      <a href="#services" class="hover:text-sky-500">What We Do</a>
+      <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
+      <a href="#contact" 
+         class="ml-4 px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
+    </nav>
 
-    </ul>
-  </nav>
-  <nav>
-    <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
+    <!-- Mobile Menu Button -->
+    <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+      ☰
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown -->
+  <nav id="menu" class="hidden md:hidden flex flex-col space-y-2 px-6 pb-4">
+    <a href="#video" class="hover:text-sky-500">Watch Video</a>
+    <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
+    <a href="#about" class="hover:text-sky-500">Who We Are</a>
+    <a href="#services" class="hover:text-sky-500">What We Do</a>
+    <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
+    <a href="#contact" 
+       class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
   </nav>
 </header>
 
+<script>
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("menu");
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
+</script>
+
 <!-- Hero Section -->
-<section id="hero" class="min-h-screen pt-24 md:pt-32 flex items-center justify-center bg-cover bg-center relative"
+<section id="hero" class="min-h-screen flex items-center justify-center pt-32 bg-cover bg-center relative"
          style="background-image: url('assets/img/hero-site.jpg')">
   <div class="text-center max-w-5xl p-8 bg-white/30 rounded-3xl shadow-lg backdrop-blur-md">
-    <h1 class="text-4xl md:text-4xl font-bold mb-4 text-gray-900">Building Dreams, One Brick at a Time</h1>
-    <p class="mb-4 text-lg text-gray-800">Quality Soil Testing services for Residential, Commercial and Government projects</p>
-    <a href="#contact"
-       class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Get a Quote</a>
+    <h1 class="text-4xl md:text-4xl font-bold mb-4 text-gray-900">Secure Soil, Strong Structures, Safe Future</h1>
+    <p class="mb-6 text-lg text-gray-800">Expert soil testing for residential, commercial, and government projects</p>
+    <a href="#contact" class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Get a Quote</a>
   </div>
 </section>
+
 
 <!-- Video Section -->
 <section id="video" class="min-h-screen pt-24 md:pt-32 relative w-full flex items-center justify-center bg-gray-100">
@@ -109,6 +136,7 @@
 
   observer.observe(videoSection);
 </script>
+
 
 <!-- Soil Testing Issues & Importance -->
 <section id="issue" class="min-h-screen pt-24 md:pt-32 py-16 px-6 bg-gradient-to-br from-sky-800 via-sky-700 to-sky-900 text-white rounded-xl">
@@ -207,120 +235,124 @@
   </div>
 </section>
 
-
-<!-- About Section -->
-<section id="about"  class="py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-6 space-y-20">
-
-    <!-- About Us -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-      <!-- Right: Text -->
-      <div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
-         <ul class="space-y-4 text-gray-600 leading-relaxed">
-          <li>✔️ Our company was established by Geotechnical Engineers. The main objective of our company is Geo Technical consulting services for civil works. </li>
-          <li>✔️ We mainly take the soil test for bore-hole works in residential buildings, apartments, high rise buildings, commercial buildings, bridges and all civil works.</li>
-          <li>✔️ We have completed more than 5000 sites all over Tamilnadu & South India. We have well equipped Soil mechanics Laboratory at Coimbatore and Chennai.</li>
-          <li>✔️ We carry out tests on Soil and Rock Samples in field and laboratory. We have sufficient Geotechnical Engineers and labours to do work. We have 5 Geotechnical Engineers and 20 Civil Engineers working with us.</li>
-
-        </ul>
-      </div>
-            <!-- Left: Image -->
-      <div>
+<!-- Vision and Mission Section -->
+<!-- Vision & Mission Section -->
+<section id="about" class="py-20 px-6 bg-gray-50">
+  <div class="max-w-6xl mx-auto space-y-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <div>
         <img src="assets/img/engineers_at_work .jpeg" alt="About Us" class="rounded-2xl shadow-lg">
       </div>
+      <div>
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
+        <ul class="space-y-4 text-gray-600 leading-relaxed">
+          <li>✔️ Founded by experienced Geotechnical Engineers, our company specializes in providing expert geotechnical consulting services for civil engineering projects. </li>
+          <li>✔️ We conduct comprehensive soil testing for bore-hole investigations across a wide range of constructions, including residential buildings, apartments, high-rises, commercial complexes, and bridges.</li>
+          <li>✔️ With over 5,000 successful projects completed throughout Tamil Nadu and South India, our company operates well-equipped soil mechanics laboratories in Coimbatore and Chennai.</li>
+          <li>✔️ We perform thorough testing of soil and rock samples both on-site and in the laboratory, supported by a skilled team of 5 Geotechnical Engineers and 20 Civil Engineers, ensuring reliable and efficient project execution.</li>
+        </ul>
+      </div>
+   
     </div>
-
     <!-- Vision -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <!-- Left: Text -->
-      <div class="md:order-2">
+      <!-- Text -->
+      <div class="text-center md:text-left flex flex-col justify-center">
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Vision</h2>
         <p class="text-gray-600 leading-relaxed">
-          Our vision is to grow our Geotechnical team in order to offer a broad spectrum of specialist Engineering, Consulting services to become our Clients' preferred Professional Service Provider through excellence and efficiency in all aspects of the project. Whether it is a building project, or any other civil engineering project, that will exceed expectations and set new standards.
+          Our vision is to expand and strengthen our Geotechnical team to provide a comprehensive range of specialized engineering and consulting services, becoming our clients’ preferred professional service partner. We aim to deliver every project—whether a building or civil engineering endeavor—with excellence, efficiency, and innovation, consistently exceeding expectations and setting new industry standards.
         </p>
       </div>
-      <!-- Right: Image -->
-      <div class="md:order-1">
-        <img src="assets/img/mission2.jpg" alt="Vision" class="rounded-2xl shadow-lg">
+      <!-- Image -->
+      <div class="flex justify-center">
+        <img src="assets/img/mission2.jpg" alt="Vision" class="rounded-lg shadow-lg w-full max-w-md md:max-w-lg object-contain">
       </div>
     </div>
 
     <!-- Mission -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <!-- Left: Image -->
-
-      <!-- Right: Text -->
-      <div>
+      <!-- Image -->
+      <div class="flex justify-center">
+        <img src="assets/img/mission3.jpg" alt="Mission" class="rounded-lg shadow-lg w-full max-w-md md:max-w-lg object-contain">
+      </div>
+      <!-- Text -->
+      <div class="text-center md:text-left flex flex-col justify-center">
         <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
         <p class="text-gray-600 leading-relaxed">
-         Offer excellent service in each of our professional disciplines, in accordance with statutory practices, codes of conduct and integrity, thereby developing our team and providing a leading platform from which to service the construction and in particular, our valued Clients.
+          Our mission is to deliver outstanding service across all our professional disciplines, adhering to statutory regulations, codes of conduct, and ethical standards. We are committed to nurturing our team and providing a strong, reliable platform to serve the construction industry, with a focus on consistently meeting and exceeding the expectations of our valued clients.
         </p>
       </div>
+    </div>
 
-            <div>
-        <img src="assets/img/mission3.jpg" alt="Mission" class="rounded-2xl shadow-lg">
+  </div>
+</section>
+
+
+<!-- Services -->
+<section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-200 via-white to-sky-100">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-700 mb-12">Our Services</h2>
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Soil Testing for All Types of Constructions</h3>
+        <p class="text-base sm:text-sm">Comprehensive soil investigation to determine bearing capacity, settlement behavior, and suitability for buildings, roads, and industrial projects.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Laboratory Soil Testing</h3>
+        <p class="text-base sm:text-sm">State-of-the-art soil mechanics laboratory for analyzing strength, composition, and moisture properties that influence design and performance.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Foundation & Foundation Design</h3>
+        <p class="text-base sm:text-sm">Expert design and execution of deep foundations to support high-rise buildings, bridges, and heavy structures.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Plate Load Test</h3>
+        <p class="text-base sm:text-sm">On-site testing to evaluate soil bearing capacity and settlement characteristics for shallow foundations.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Load Test / Pull Out Test</h3>
+        <p class="text-base sm:text-sm">Critical testing to validate the load-carrying capacity and stability of piles, ensuring reliability in foundation systems.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Electrical Resistivity Test</h3>
+        <p class="text-base sm:text-sm">Subsurface investigation to map soil stratification, groundwater, and rock layers using resistivity methods for better foundation planning.</p>
+      </div>
+      
+      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+        <h3 class="text-xl sm:text-2xl font-bold mb-3">Topographical & Contour Survey</h3>
+        <p class="text-base sm:text-">Precise land surveys to capture terrain features and elevation data, supporting site planning, drainage design, and infrastructure projects.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Projects + Clients -->
+<section id="projects" class="min-h-screen flex items-center justify-center pt-32 px-6 bg-white">
+  <div class="max-w-6xl w-full text-center space-y-16">
+    
+    <!-- Projects -->
+    <div>
+      <h2 class="text-3xl font-bold mb-8">Recent Projects</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <img src="assets/img/project-1.jpg" class="rounded-lg shadow-lg" alt="Project 1">
+        <img src="assets/img/project-2.jpg" class="rounded-lg shadow-lg" alt="Project 2">
+        <img src="assets/img/project-3.jpg" class="rounded-lg shadow-lg" alt="Project 3">
       </div>
     </div>
 
-  </div>
-</section>
-
-    <!-- Services -->
-  <section id="services" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-16 bg-gradient-to-b from-sky-200 via-white to-sky-100 py-12">
-  <div class="w-full max-w-6xl">
-    <h2 class="text-4xl font-extrabold mb-8 text-sky-700">Our Services</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-        <h3 class="text-2xl font-bold mb-3">Soil Testing for All Types of Constructions</h3> 
-        <p class="text-lg">Comprehensive soil investigation to determine bearing capacity, settlement behavior, and suitability for buildings, roads, and industrial projects.</p> </div> 
-        <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-        <h3 class="text-2xl font-bold mb-3">Laboratory Soil Testing</h3> 
-        <p class="text-lg">State-of-the-art soil mechanics laboratory for analyzing strength, composition, and moisture properties that influence design and performance.</p> </div> 
-        <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-          <h3 class="text-2xl font-bold mb-3">Pile Foundation & Foundation Design</h3> 
-          <p class="text-lg">Expert design and execution of deep foundations to support high-rise buildings, bridges, and heavy structures.</p> </div>
-
-      <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-          <h3 class="text-2xl font-bold mb-3">Plate Load Test</h3> 
-          <p class="text-lg">On-site testing to evaluate soil bearing capacity and settlement characteristics for shallow foundations.</p> </div>
-
-          <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-          <h3 class="text-2xl font-bold mb-3">Pile Load Test / Pull Out Test</h3> 
-          <p class="text-lg">Critical testing to validate the load-carrying capacity and stability of piles, ensuring reliability in foundation systems.</p> </div>
-
-          <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-          <h3 class="text-2xl font-bold mb-3">Electrical Resistivity Test</h3> 
-          <p class="text-lg">Subsurface investigation to map soil stratification, groundwater, and rock layers using resistivity methods for better foundation planning.</p> </div>
-
-          <div class="p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"> 
-          <h3 class="text-2xl font-bold mb-3">Topographical & Contour Survey</h3> 
-          <p class="text-lg">Precise land surveys to capture terrain features and elevation data, supporting site planning, drainage design, and infrastructure projects.</p> </div>
-  </div>
-
-</section>
-
-<!-- Projects + Clients Section -->
-<section id="projects" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center space-y-12 bg-white/10 rounded-xl">
-  <!-- Projects -->
-    
-  <!-- Projects -->
-  <div class="w-full">
-    <h2 class="text-3xl font-bold mb-8">Recent Projects</h2>
-    <div class="grid md:grid-cols-3 gap-6">
-      <img src="assets/img/project-1.jpg" class="rounded-lg shadow-lg" alt="Project 1">
-      <img src="assets/img/project-2.jpg" class="rounded-lg shadow-lg" alt="Project 2">
-      <img src="assets/img/project-3.jpg" class="rounded-lg shadow-lg" alt="Project 3">
-    </div>
-  </div>
-
-<!-- Clients Section -->
-<div class="w-full">
-  <h2 class="text-3xl font-bold mb-8">Our Clients</h2>
-  <div class="overflow-hidden relative max-w-8xl mx-auto">
-    <div class="flex animate-slide whitespace-nowrap space-x-6">
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+    <!-- Clients -->
+    <div>
+      <h2 class="text-3xl font-bold mb-8">Our Clients</h2>
+      <div class="overflow-hidden relative max-w-6xl mx-auto">
+        <div class="flex animate-slide whitespace-nowrap space-x-6">
+           <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
         <img src="assets/img/ahuja.jpg" alt="Ahuja" class="h-16 object-contain">
       </div>
       <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
@@ -350,36 +382,67 @@
       <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
         <img src="assets/img/Jain-Housing_Logo.jpg" alt="Jain-Housing_Logo" class="h-16 object-contain">
       </div>
+
+        </div>
+      </div>
     </div>
+
   </div>
-</div>
 </section>
 
-<!-- Contact Section -->
-<section id="contact" class="min-h-screen pt-24 md:pt-32 flex flex-col items-center justify-center px-6 text-center">
-  <h2 class="text-3xl font-bold mb-8">Contact Us</h2>
-  <form name="contact" nmethod="POST" data-netlify="true" netlify-honeypot="bot-field"
-        class="max-w-lg mx-auto bg-white/20 rounded-2xl p-6 shadow space-y-4">
-    <input type="hidden" name="form-name" value="contact">
-    <p class="hidden">
-      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
-    </p>
+<!-- Contact -->
+<section id="contact" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center">
+  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 bg-white/30 backdrop-blur-lg rounded-3xl p-8 shadow-lg">
+    <!-- Left: Address -->
+<div class="space-y-4 text-gray-700">
+  <h2 class="text-2xl sm:text-3xl font-bold">Contact Us</h2>
 
-    <input type="text" name="name" placeholder="Your Name"
-           class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required>
-    <input type="email" name="email" placeholder="Your Email"
-           class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required>
-    <textarea name="message" rows="4" placeholder="Your Message"
-              class="w-full p-3 rounded-xl bg-white/30 focus:outline-none" required></textarea>
-    <button type="submit"
-            class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Send</button>
-  </form>
+  <!-- Offices -->
+  <div class="space-y-1">
+    <p class="font-semibold">📍 Head Office:</p>
+    <p class="pl-6 text-base sm:text-lg">Old No. 40, New No. 29, 8th Street, K.K.Pudur, Coimbatore - 641038</p>
+  </div>
+  <div class="space-y-1">
+    <p class="font-semibold">📍 Branch Office:</p>
+    <p class="pl-6 text-base sm:text-lg">No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094</p>
+  </div>
+
+  <!-- Phone Numbers -->
+  <div class="space-y-1">
+    <p class="font-semibold">📞 Phone Numbers:</p>
+    <p class="pl-6 text-base sm:text-lg flex items-center space-x-4">
+      <span class="flex items-center space-x-1"><span>☎️</span><span>0422 - 4202452</span></span>
+      <span class="flex items-center space-x-1"><span>📱</span><span>+91 9043344488</span></span>
+    </p>
+  </div>
+
+  <!-- Email -->
+  <p class="text-base sm:text-lg flex items-center space-x-2">
+    <span>✉️</span>
+    <span>geodesign123@gmail.com</span>
+  </p>
+
+  <!-- Working Hours -->
+  <p class="text-base sm:text-lg flex items-center space-x-2">
+    <span>🕒</span>
+    <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
+  </p>
+</div>
+
+    <!-- Right: Form -->
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+      <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
+      <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
+      <input type="text" name="service" placeholder="Type of service request" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
+      <textarea name="message" rows="4" placeholder="Your Message" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required></textarea>
+      <button type="submit" class="w-full px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Send</button>
+    </form>
+  </div>
 </section>
 
 <!-- Footer -->
-<footer class="py-4 text-center text-sm bg-white/30 backdrop-blur-md">
-  © 2025 Geo Design. All Rights Reserved.
+<footer class="fixed bottom-0 left-0 w-full bg-sky/80 backdrop-blur-md shadow text-center py-3 text-sm z-50">
+  © 2025 GeoDesign India Private Limited. All Rights Reserved.
 </footer>
-
-</body>
-</html>
