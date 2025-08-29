@@ -1,448 +1,760 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Geo Design - Soil Testing</title>
+
+<head>
+  <title>Geo Design - Soil Testing Experts</title>
+  <meta name="description"
+    content="Geo Design provides reliable soil testing services for residential, commercial, and government projects. Serving Tamil Nadu & South India with 5000+ completed projects.">
+  <meta name="keywords"
+    content="soil testing, geotechnical services, borehole test, soil mechanics, Coimbatore, Chennai, Geo Design">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
   <!-- Fonts & Tailwind -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@600;700&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-   <style>
-    html, body {
+  <!-- Head Section (Fonts & Tailwind) -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* Global */
+    html,
+    body {
       scroll-behavior: smooth;
       height: 100%;
-
-    font-family: 'Montserrat', sans-serif ; /* force Inter everywhere */
-    }
-     header, header * {
-     font-family: 'Montserrat', sans-serif;
-    }
-    body {
-      background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
+      font-family: 'Inter', sans-serif;
+      /* Body text */
       color: #1e293b;
-      font-family: 'Montserrat', sans-serif !important; /* force Inter everywhere */
+      background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
     }
-    section {
-      scroll-snap-align: start;
+
+    /* Header & Navigation */
+    header,
+    header * {
+      font-family: 'Montserrat', sans-serif;
     }
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+
+    /* Hero / Catchy Copy */
+    #hero h1,
+    #contact h3 {
+      font-family: 'Playfair Display', serif;
+      /* Elegant & standout headings */
     }
-    .animate-slide {
-      display: flex;
-      animation: slide 25s linear infinite;
+
+    #hero p,
+    #contact p,
+    #contact ul li {
+      font-family: 'Inter', sans-serif;
+      /* Body font for readability */
+    }
+
+    /* Section Titles */
+    section h2,
+    section h3 {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Footer */
+    footer,
+    footer * {
+      font-family: 'Inter', sans-serif;
     }
   </style>
+
 </head>
+
 <body class="font-sans">
 
-<!-- Header -->
-<header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow z-50">
-  <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-    <!-- Logo -->
-    <div class="flex items-center space-x-3">
-      <!--  <img src="assets/img/logo.png" alt="Logo" class="h-12 w-12 object-contain"-->
-      <div class="flex flex-col">
-        <span class="text-xl font-extrabold text-gray-900">Geo Design</span>
-        <span class="text-xs text-gray-600">We care for your Safety & Investment</span>
-      </div>
-    </div>
-    
-    <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center space-x-6">
-      <a href="#video" class="hover:text-sky-500">Watch Video</a>
-      <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
-      <a href="#about" class="hover:text-sky-500">Who We Are</a>
-      <a href="#services" class="hover:text-sky-500">What We Do</a>
-      <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
-      <a href="#contact" 
-         class="ml-4 px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
-    </nav>
-
-    <!-- Mobile Menu Button -->
-    <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
-      ☰
-    </button>
-  </div>
-
-  <!-- Mobile Dropdown -->
-  <nav id="menu" class="hidden md:hidden flex flex-col space-y-2 px-6 pb-4">
-    <a href="#video" class="hover:text-sky-500">Watch Video</a>
-    <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
-    <a href="#about" class="hover:text-sky-500">Who We Are</a>
-    <a href="#services" class="hover:text-sky-500">What We Do</a>
-    <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
-    <a href="#contact" 
-       class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in Touch</a>
-  </nav>
-</header>
-
-<script>
-  const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("menu");
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
-</script>
-
-<!-- Hero Section -->
-<section id="hero" class="min-h-screen flex items-center justify-center pt-32 bg-cover bg-center relative"
-         style="background-image: url('assets/img/hero-site.jpg')">
-  <div class="text-center max-w-5xl p-8 bg-white/30 rounded-3xl shadow-lg backdrop-blur-md">
-    <h1 class="text-4xl md:text-4xl font-bold mb-4 text-gray-900">Secure Soil, Strong Structures, Safe Future</h1>
-    <p class="mb-6 text-lg text-gray-800">Expert soil testing for residential, commercial, and government projects</p>
-    <a href="#contact" class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Get a Quote</a>
-  </div>
-</section>
-
-
-<!-- Video Section -->
-<section id="video" class="min-h-screen pt-24 md:pt-32 relative w-full flex items-center justify-center bg-gray-100">
-  <div class="relative w-11/12 md:w-4/5 h-[60vh] md:h-[80vh] bg-gray-300 rounded-xl shadow-lg overflow-hidden">
-    <div id="video-overlay" class="absolute inset-0 flex items-center justify-center bg-black/30 z-10">
-      <button id="play-video" class="bg-red-600 text-white rounded-full w-20 h-20 md:w-24 md:h-24 flex items-center justify-center text-3xl md:text-4xl shadow-lg hover:bg-red-700 transition">
-        ▶
-      </button>
-    </div>
-    <div id="video-container" class="absolute inset-0 hidden">
-      <iframe class="w-full h-full"
-              src=""
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-</section>
-
-<script>
-  const videoSection = document.querySelector('section:nth-of-type(2)');
-  const videoContainer = document.getElementById('video-container');
-  const overlay = document.getElementById('video-overlay');
-  const iframe = videoContainer.querySelector('iframe');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        overlay.style.opacity = 0;
-        videoContainer.classList.remove('hidden');
-        iframe.src = `https://www.youtube.com/embed/FdMVB_qNAAY?autoplay=1&rel=0&mute=0`;
-        observer.unobserve(videoSection);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  observer.observe(videoSection);
-</script>
-
-
-<!-- Soil Testing Issues & Importance -->
-<section id="issue" class="min-h-screen pt-24 md:pt-32 py-16 px-6 bg-gradient-to-br from-sky-800 via-sky-700 to-sky-900 text-white rounded-xl">
-  <h2 class="text-4xl font-bold text-center mb-12">Why Soil Testing Matters?</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
-    <!-- your soil testing issue cards here (unchanged) -->
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">📍</span>
-      <h4 class="font-bold mb-1">Site Access</h4>
-      <p class="text-sm">Quality of access impacts site investigation.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🧱</span>
-      <h4 class="font-bold mb-1">Type of Soil</h4>
-      <p class="text-sm">Clay is reactive, sand settles under load, silt loses strength when wet.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🌳</span>
-      <h4 class="font-bold mb-1">Trees & Roots</h4>
-      <p class="text-sm">Roots may draw moisture, causing shrinkage near footings.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🪨</span>
-      <h4 class="font-bold mb-1">Rock Boulders</h4>
-      <p class="text-sm">May move underground or create voids when excavated.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">⚠️</span>
-      <h4 class="font-bold mb-1">Soft Soil</h4>
-      <p class="text-sm">Can settle under load affecting stability.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🌊</span>
-      <h4 class="font-bold mb-1">Marine Clays</h4>
-      <p class="text-sm">May have low or no bearing capacity.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">⛰️</span>
-      <h4 class="font-bold mb-1">Slopes</h4>
-      <p class="text-sm">Steeper slopes may have slip potential.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">💧</span>
-      <h4 class="font-bold mb-1">Low-Lying Areas</h4>
-      <p class="text-sm">Could contain acid sulfate soils.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🛠️</span>
-      <h4 class="font-bold mb-1">Filled Areas</h4>
-      <p class="text-sm">May have un-compacted soils causing settlement.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">⚡</span>
-      <h4 class="font-bold mb-1">Cut & Fill Pads</h4>
-      <p class="text-sm">Could experience differential settlement.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">💦</span>
-      <h4 class="font-bold mb-1">Water Table</h4>
-      <p class="text-sm">Depths can affect excavation feasibility.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🪨</span>
-      <h4 class="font-bold mb-1">Rock Layers</h4>
-      <p class="text-sm">May impact excavation.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🚰</span>
-      <h4 class="font-bold mb-1">Wastewater Suitability</h4>
-      <p class="text-sm">Soil suitability for sewerage and greywater disposal.</p>
-    </div>
-    <div class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-4xl mb-2 block">🏞️</span>
-      <h4 class="font-bold mb-1">Land Block</h4>
-      <p class="text-sm">Suitability for on-site wastewater disposal.</p>
-  </div>
-  </div>
-
-  <h3 class="text-3xl font-bold text-center mb-8">Why Soil Testing is Important?</h3>
-  <div class="grid md:grid-cols-3 gap-8">
-    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-5xl text-sky-400 mb-4 block">🏦</span>
-      <h4 class="text-2xl font-bold mb-3">Protect Your Investment</h4>
-      <p class="text-lg">Proper foundations prevent building movement and wall cracks.</p>
-    </div>
-    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-5xl text-sky-400 mb-4 block">💰</span>
-      <h4 class="text-2xl font-bold mb-3">Prevent Future Costs</h4>
-      <p class="text-lg">Identify issues early, estimate costs, make informed land decisions.</p>
-    </div>
-    <div class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
-      <span class="text-5xl text-sky-400 mb-4 block">🔬</span>
-      <h4 class="text-2xl font-bold mb-3">Residential Soil Testing</h4>
-      <p class="text-lg">Soil samples are collected and analyzed for safe construction.</p>
-    </div>
-  </div>
-</section>
-
-<!-- Vision and Mission Section -->
-<!-- Vision & Mission Section -->
-<section id="about" class="py-20 px-6 bg-gray-50">
-  <div class="max-w-6xl mx-auto space-y-20">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-    <div>
-        <img src="assets/img/engineers_at_work .jpeg" alt="About Us" class="rounded-2xl shadow-lg">
-      </div>
-      <div>
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
-        <ul class="space-y-4 text-gray-600 leading-relaxed">
-          <li>✔️ Founded by experienced Geotechnical Engineers, our company specializes in providing expert geotechnical consulting services for civil engineering projects. </li>
-          <li>✔️ We conduct comprehensive soil testing for bore-hole investigations across a wide range of constructions, including residential buildings, apartments, high-rises, commercial complexes, and bridges.</li>
-          <li>✔️ With over 5,000 successful projects completed throughout Tamil Nadu and South India, our company operates well-equipped soil mechanics laboratories in Coimbatore and Chennai.</li>
-          <li>✔️ We perform thorough testing of soil and rock samples both on-site and in the laboratory, supported by a skilled team of 5 Geotechnical Engineers and 20 Civil Engineers, ensuring reliable and efficient project execution.</li>
-        </ul>
-      </div>
-   
-    </div>
-    <!-- Vision -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <!-- Text -->
-      <div class="text-center md:text-left flex flex-col justify-center">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Vision</h2>
-        <p class="text-gray-600 leading-relaxed">
-          Our vision is to expand and strengthen our Geotechnical team to provide a comprehensive range of specialized engineering and consulting services, becoming our clients’ preferred professional service partner. We aim to deliver every project—whether a building or civil engineering endeavor—with excellence, efficiency, and innovation, consistently exceeding expectations and setting new industry standards.
-        </p>
-      </div>
-      <!-- Image -->
-      <div class="flex justify-center">
-        <img src="assets/img/mission2.jpg" alt="Vision" class="rounded-lg shadow-lg w-full max-w-md md:max-w-lg object-contain">
-      </div>
-    </div>
-
-    <!-- Mission -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      <!-- Image -->
-      <div class="flex justify-center">
-        <img src="assets/img/mission3.jpg" alt="Mission" class="rounded-lg shadow-lg w-full max-w-md md:max-w-lg object-contain">
-      </div>
-      <!-- Text -->
-      <div class="text-center md:text-left flex flex-col justify-center">
-        <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
-        <p class="text-gray-600 leading-relaxed">
-          Our mission is to deliver outstanding service across all our professional disciplines, adhering to statutory regulations, codes of conduct, and ethical standards. We are committed to nurturing our team and providing a strong, reliable platform to serve the construction industry, with a focus on consistently meeting and exceeding the expectations of our valued clients.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- Services -->
-<section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-200 via-white to-sky-100">
-  <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-700 mb-12">Our Services</h2>
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Soil Testing for All Types of Constructions</h3>
-        <p class="text-base sm:text-sm">Comprehensive soil investigation to determine bearing capacity, settlement behavior, and suitability for buildings, roads, and industrial projects.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Laboratory Soil Testing</h3>
-        <p class="text-base sm:text-sm">State-of-the-art soil mechanics laboratory for analyzing strength, composition, and moisture properties that influence design and performance.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Foundation & Foundation Design</h3>
-        <p class="text-base sm:text-sm">Expert design and execution of deep foundations to support high-rise buildings, bridges, and heavy structures.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Plate Load Test</h3>
-        <p class="text-base sm:text-sm">On-site testing to evaluate soil bearing capacity and settlement characteristics for shallow foundations.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Load Test / Pull Out Test</h3>
-        <p class="text-base sm:text-sm">Critical testing to validate the load-carrying capacity and stability of piles, ensuring reliability in foundation systems.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Electrical Resistivity Test</h3>
-        <p class="text-base sm:text-sm">Subsurface investigation to map soil stratification, groundwater, and rock layers using resistivity methods for better foundation planning.</p>
-      </div>
-      
-      <div class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
-        <h3 class="text-xl sm:text-2xl font-bold mb-3">Topographical & Contour Survey</h3>
-        <p class="text-base sm:text-">Precise land surveys to capture terrain features and elevation data, supporting site planning, drainage design, and infrastructure projects.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Projects + Clients -->
-<section id="projects" class="min-h-screen flex items-center justify-center pt-32 px-6 bg-white">
-  <div class="max-w-6xl w-full text-center space-y-16">
-    
-    <!-- Projects -->
-    <div>
-      <h2 class="text-3xl font-bold mb-8">Recent Projects</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <img src="assets/img/project-1.jpg" class="rounded-lg shadow-lg" alt="Project 1">
-        <img src="assets/img/project-2.jpg" class="rounded-lg shadow-lg" alt="Project 2">
-        <img src="assets/img/project-3.jpg" class="rounded-lg shadow-lg" alt="Project 3">
-      </div>
-    </div>
-
-    <!-- Clients -->
-    <div>
-      <h2 class="text-3xl font-bold mb-8">Our Clients</h2>
-      <div class="overflow-hidden relative max-w-6xl mx-auto">
-        <div class="flex animate-slide whitespace-nowrap space-x-6">
-           <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/ahuja.jpg" alt="Ahuja" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/aravind_eye_hospital.jpg" alt="Aravind Eye Hospital" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/bhoomi.jpg" alt="bhoomi" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/ccclindia.png" alt="cccindia" class="h-16 object-contain">
-      </div>
-     <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/chatankulam.jpg" alt="chatankulam" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/chennai-silks.jpg" alt="chennai-silks" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/crescentz.jpg" alt="crescentz" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/karpagam.png" alt="karpagam" class="h-16 object-contain">
-      </div>
-           <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/srikrishnasweets.jpg" alt="srikrishnasweets" class="h-16 object-contain">
-      </div>
-      <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
-        <img src="assets/img/Jain-Housing_Logo.jpg" alt="Jain-Housing_Logo" class="h-16 object-contain">
-      </div>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <!-- Logo -->
+      <div class="flex items-center space-x-3">
+        <!--  <img src="assets/img/logo.png" alt="Logo" class="h-12 w-12 object-contain"-->
+        <div class="flex flex-col">
+          <span class="text-xl font-extrabold text-gray-900">
+            Geo Design India Private Limited
+          </span>
+          <span class="text-xs text-gray-600">
+            We care for your Safety & Investment
+          </span>
 
         </div>
       </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-6">
+        <a href="#video" class="hover:text-sky-500">Watch Video</a>
+        <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
+        <a href="#about" class="hover:text-sky-500">Who We Are</a>
+        <a href="#services" class="hover:text-sky-500">What We Do</a>
+        <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
+        <a href="#contact" class="ml-4 px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in
+          Touch</a>
+      </nav>
+
+
+      <button id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
+        class="md:hidden text-2xl p-2">☰</button>
+
+      <!-- Mobile Dropdown -->
+      <nav id="menu" class="hidden md:hidden flex flex-col space-y-2 px-6 pb-4">
+        <a href="#video" class="hover:text-sky-500">Watch Video</a>
+        <a href="#issue" class="hover:text-sky-500">Why It Matters</a>
+        <a href="#about" class="hover:text-sky-500">Who We Are</a>
+        <a href="#services" class="hover:text-sky-500">What We Do</a>
+        <a href="#projects" class="hover:text-sky-500">Who We Work With</a>
+        <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500 text-white hover:bg-sky-600 transition">Get in
+          Touch</a>
+      </nav>
+  </header>
+
+  <script>
+    const btn = document.getElementById("menu-btn");
+    const menu = document.getElementById("menu");
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  </script>
+
+  <!-- Hero Section -->
+  <section id="hero" class="min-h-screen flex items-center justify-center pt-32 bg-cover bg-center relative"
+    style="background-image: url('assets/web/hero-site.jpg')">
+    <div class="text-center max-w-5xl p-8 bg-white/30 rounded-3xl shadow-lg backdrop-blur-md">
+      <h1 class="text-4xl md:text-4xl font-bold mb-4 text-gray-900">Secure Soil, Strong Structures, Safe Future</h1>
+      <p class="mb-6 text-lg text-gray-800">Expert soil testing for residential, commercial, and government projects</p>
+      <a href="#contact" class="px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Get a Quote</a>
+    </div>
+  </section>
+
+
+  <!-- Video Section -->
+  <section id="video" class="min-h-screen pt-24 md:pt-32 relative w-full flex items-center justify-center bg-gray-100">
+    <div class="relative w-11/12 md:w-4/5 h-[60vh] md:h-[80vh] bg-gray-300 rounded-xl shadow-lg overflow-hidden">
+      <div id="video-container" class="absolute inset-0">
+        <iframe class="w-full h-full" src="" title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const videoSection = document.getElementById('video');
+    const iframe = videoSection.querySelector('iframe');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Lazy-load YouTube iframe with native controls
+          iframe.src = 'https://www.youtube.com/embed/FdMVB_qNAAY?controls=1&rel=0&mute=0';
+          observer.unobserve(videoSection);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(videoSection);
+  </script>
+
+
+
+  <!-- Soil Testing Issues & Importance -->
+  <section id="issue"
+    class="min-h-screen pt-24 md:pt-32 py-16 px-6 bg-gradient-to-br from-sky-800 via-sky-700 to-sky-900 text-white rounded-xl">
+    <h2 class="text-4xl font-bold text-center mb-12">Why Soil Testing Matters?</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-16">
+      <!-- your soil testing issue cards here (unchanged) -->
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">📍</span>
+        <h4 class="font-bold mb-1">Site Access</h4>
+        <p class="text-sm">Quality of access impacts site investigation.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🧱</span>
+        <h4 class="font-bold mb-1">Type of Soil</h4>
+        <p class="text-sm">Clay is reactive, sand settles under load, silt loses strength when wet.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🌳</span>
+        <h4 class="font-bold mb-1">Trees & Roots</h4>
+        <p class="text-sm">Roots may draw moisture, causing shrinkage near footings.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🪨</span>
+        <h4 class="font-bold mb-1">Rock Boulders</h4>
+        <p class="text-sm">May move underground or create voids when excavated.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">⚠️</span>
+        <h4 class="font-bold mb-1">Soft Soil</h4>
+        <p class="text-sm">Can settle under load affecting stability.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🌊</span>
+        <h4 class="font-bold mb-1">Marine Clays</h4>
+        <p class="text-sm">May have low or no bearing capacity.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">⛰️</span>
+        <h4 class="font-bold mb-1">Slopes</h4>
+        <p class="text-sm">Steeper slopes may have slip potential.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">💧</span>
+        <h4 class="font-bold mb-1">Low-Lying Areas</h4>
+        <p class="text-sm">Could contain acid sulfate soils.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🛠️</span>
+        <h4 class="font-bold mb-1">Filled Areas</h4>
+        <p class="text-sm">May have un-compacted soils causing settlement.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">⚡</span>
+        <h4 class="font-bold mb-1">Cut & Fill Pads</h4>
+        <p class="text-sm">Could experience differential settlement.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">💦</span>
+        <h4 class="font-bold mb-1">Water Table</h4>
+        <p class="text-sm">Depths can affect excavation feasibility.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🪨</span>
+        <h4 class="font-bold mb-1">Rock Layers</h4>
+        <p class="text-sm">May impact excavation.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🚰</span>
+        <h4 class="font-bold mb-1">Wastewater Suitability</h4>
+        <p class="text-sm">Soil suitability for sewerage and greywater disposal.</p>
+      </div>
+      <div
+        class="p-6 bg-white/10 backdrop-blur-md rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-4xl mb-2 block">🏞️</span>
+        <h4 class="font-bold mb-1">Land Block</h4>
+        <p class="text-sm">Suitability for on-site wastewater disposal.</p>
+      </div>
     </div>
 
-  </div>
-</section>
+    <h3 class="text-3xl font-bold text-center mb-8">Why Soil Testing is Important?</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div
+        class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-5xl text-sky-400 mb-4 block">🏦</span>
+        <h4 class="text-2xl font-bold mb-3">Protect Your Investment</h4>
+        <p class="text-lg">Proper foundations prevent building movement and wall cracks.</p>
+      </div>
+      <div
+        class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-5xl text-sky-400 mb-4 block">💰</span>
+        <h4 class="text-2xl font-bold mb-3">Prevent Future Costs</h4>
+        <p class="text-lg">Identify issues early, estimate costs, make informed land decisions.</p>
+      </div>
+      <div
+        class="p-8 bg-gradient-to-br from-white/20 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 text-center">
+        <span class="text-5xl text-sky-400 mb-4 block">🔬</span>
+        <h4 class="text-2xl font-bold mb-3">Residential Soil Testing</h4>
+        <p class="text-lg">Soil samples are collected and analyzed for safe construction.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Contact -->
-<section id="contact" class="min-h-screen pt-32 pb-20 px-6 flex items-center justify-center">
-  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 bg-white/30 backdrop-blur-lg rounded-3xl p-8 shadow-lg">
-    <!-- Left: Address -->
-<div class="space-y-4 text-gray-700">
-  <h2 class="text-2xl sm:text-3xl font-bold">Contact Us</h2>
+  <!-- Vision and Mission Sectionclass="rounded-2xl shadow-lg" -->
+  <section id="about" class="py-20 px-6 bg-gray-50">
+    <div class="max-w-6xl mx-auto space-y-20">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img src="assets/web/engineers_at_work.jpeg" alt="About Us" class="rounded-lg shadow-lg w-full max-w-md"
+            loading="lazy">
 
-  <!-- Offices -->
-  <div class="space-y-1">
-    <p class="font-semibold">📍 Head Office:</p>
-    <p class="pl-6 text-base sm:text-lg">Old No. 40, New No. 29, 8th Street, K.K.Pudur, Coimbatore - 641038</p>
-  </div>
-  <div class="space-y-1">
-    <p class="font-semibold">📍 Branch Office:</p>
-    <p class="pl-6 text-base sm:text-lg">No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094</p>
-  </div>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">About Us</h2>
+          <ul class="space-y-4 text-gray-600 leading-relaxed">
+            <li>✔️ Founded by experienced Geotechnical Engineers, our company specializes in providing expert
+              geotechnical consulting services for civil engineering projects. </li>
+            <li>✔️ We conduct comprehensive soil testing for bore-hole investigations across a wide range of
+              constructions, including residential buildings, apartments, high-rises, commercial complexes, and bridges.
+            </li>
+            <li>✔️ With over 5,000 successful projects completed throughout Tamil Nadu and South India, our company
+              operates well-equipped soil mechanics laboratories in Coimbatore and Chennai.</li>
+            <li>✔️ We perform thorough testing of soil and rock samples both on-site and in the laboratory, supported by
+              a skilled team of 5 Geotechnical Engineers and 20 Civil Engineers, ensuring reliable and efficient project
+              execution.</li>
+          </ul>
+        </div>
 
-  <!-- Phone Numbers -->
-  <div class="space-y-1">
-    <p class="font-semibold">📞 Phone Numbers:</p>
-    <p class="pl-6 text-base sm:text-lg flex items-center space-x-4">
-      <span class="flex items-center space-x-1"><span>☎️</span><span>0422 - 4202452</span></span>
-      <span class="flex items-center space-x-1"><span>📱</span><span>+91 9043344488</span></span>
-    </p>
-  </div>
+      </div>
+      <!-- Vision -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Text -->
+        <div class="text-center md:text-left flex flex-col justify-center">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Vision</h2>
+          <p class="text-gray-600 leading-relaxed">
+            Our vision is to expand and strengthen our Geotechnical team to provide a comprehensive range of specialized
+            engineering and consulting services, becoming our clients’ preferred professional service partner. We aim to
+            deliver every project—whether a building or civil engineering endeavor—with excellence, efficiency, and
+            innovation, consistently exceeding expectations and setting new industry standards.
+          </p>
+        </div>
+        <!-- Image -->
+        <div class="flex justify-center">
+          <img src="assets/web/vision.jpg" alt="Vision" class="rounded-lg shadow-lg w-full max-w-md" loading="lazy">
+        </div>
+      </div>
 
-  <!-- Email -->
-  <p class="text-base sm:text-lg flex items-center space-x-2">
-    <span>✉️</span>
-    <span>geodesign123@gmail.com</span>
-  </p>
+      <!-- Mission -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <!-- Image -->
+        <div class="flex justify-center">
+          <img src="assets/web/mission.jpg" alt="Mission" class="rounded-lg shadow-lg w-full max-w-md" loading="lazy">
+        </div>
+        <!-- Text -->
+        <div class="text-center md:text-left flex flex-col justify-center">
+          <h2 class="text-3xl font-bold text-gray-800 mb-4">Our Mission</h2>
+          <p class="text-gray-600 leading-relaxed">
+            Our mission is to deliver outstanding service across all our professional disciplines, adhering to statutory
+            regulations, codes of conduct, and ethical standards. We are committed to nurturing our team and providing a
+            strong, reliable platform to serve the construction industry, with a focus on consistently meeting and
+            exceeding the expectations of our valued clients.
+          </p>
+        </div>
+      </div>
 
-  <!-- Working Hours -->
-  <p class="text-base sm:text-lg flex items-center space-x-2">
-    <span>🕒</span>
-    <span>Mon - Sat: 9:00 AM - 6:00 PM</span>
-  </p>
-</div>
+    </div>
+  </section>
 
-    <!-- Right: Form -->
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="space-y-4">
-      <input type="hidden" name="form-name" value="contact">
-      <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
-      <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
-      <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
-      <input type="text" name="service" placeholder="Type of service request" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required>
-      <textarea name="message" rows="4" placeholder="Your Message" class="w-full p-3 rounded-xl bg-blue/20 focus:outline-none" required></textarea>
-      <button type="submit" class="w-full px-6 py-3 bg-sky-500 text-white rounded-xl hover:bg-sky-600 transition">Send</button>
-    </form>
-  </div>
-</section>
 
-<!-- Footer -->
-<footer class="fixed bottom-0 left-0 w-full bg-sky/80 backdrop-blur-md shadow text-center py-3 text-sm z-50">
-  © 2025 GeoDesign India Private Limited. All Rights Reserved.
-</footer>
+  <!-- Services -->
+  <section id="services" class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-200 via-white to-sky-100">
+    <div class="max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-sky-700 mb-12">Our Services</h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Soil Testing for All Types of Constructions</h3>
+          <p class="text-base sm:text-sm">Comprehensive soil investigation to determine bearing capacity, settlement
+            behavior, and suitability for buildings, roads, and industrial projects.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Laboratory Soil Testing</h3>
+          <p class="text-base sm:text-sm">State-of-the-art soil mechanics laboratory for analyzing strength,
+            composition, and moisture properties that influence design and performance.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Foundation & Foundation Design</h3>
+          <p class="text-base sm:text-sm">Expert design and execution of deep foundations to support high-rise
+            buildings, bridges, and heavy structures.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Plate Load Test</h3>
+          <p class="text-base sm:text-sm">On-site testing to evaluate soil bearing capacity and settlement
+            characteristics for shallow foundations.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Pile Load Test / Pull Out Test</h3>
+          <p class="text-base sm:text-sm">Critical testing to validate the load-carrying capacity and stability of
+            piles, ensuring reliability in foundation systems.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Electrical Resistivity Test</h3>
+          <p class="text-base sm:text-sm">Subsurface investigation to map soil stratification, groundwater, and rock
+            layers using resistivity methods for better foundation planning.</p>
+        </div>
+
+        <div
+          class="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300">
+          <h3 class="text-xl sm:text-2xl font-bold mb-3">Topographical & Contour Survey</h3>
+          <p class="text-base sm:text-">Precise land surveys to capture terrain features and elevation data, supporting
+            site planning, drainage design, and infrastructure projects.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ✅ Projects + Clients Section -->
+  <section id="projects" class="min-h-screen flex flex-col items-center justify-center pt-32 px-6 bg-white">
+    <div class="max-w-6xl w-full text-center space-y-16">
+
+      <!-- ✅ Recent Projects -->
+      <section class="py-16 bg-white-50 rounded-2xl shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+          <h2 class="text-3xl font-bold mb-6">Recent Projects</h2>
+          <p class="text-gray-600 mb-10">A glimpse of our latest work in geotechnical engineering.</p>
+
+          <!-- Preview Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-8">
+            <img src="assets/gallery/gallery6.JPG" class="rounded-lg shadow-md hover:scale-105 transition"
+              alt="Project 1">
+            <img src="assets/gallery/gallery3.JPG" class="rounded-lg shadow-md hover:scale-105 transition"
+              alt="Project 2">
+            <img src="assets/gallery/gallery18.JPG" class="rounded-lg shadow-md hover:scale-105 transition"
+              alt="Project 3">
+            <img src="assets/gallery/gallery28.JPG" class="rounded-lg shadow-md hover:scale-105 transition"
+              alt="Project 4">
+            <img src="assets/gallery/gallery29.JPG" class="rounded-lg shadow-md hover:scale-105 transition"
+              alt="Project 5">
+            <img src="assets/gallery/gallery30.JPG"
+              class="rounded-lg shadow-md hover:scale-105 transition hidden md:block" alt="Project 6">
+          </div>
+
+          <!-- View Gallery Button -->
+          <button id="openGallery"
+            class="inline-block bg-sky-600 text-white font-semibold px-6 py-3 rounded-xl shadow hover:bg-sky-700 transition">
+            View Full Gallery
+          </button>
+        </div>
+      </section>
+
+      <section class="py-12 bg-white-50">
+        <h2 class="text-3xl font-bold text-center mb-8">Trusted By</h2>
+
+        <!-- Scrolling container -->
+        <div class="overflow-hidden relative">
+          <div class="flex animate-marquee space-x-12">
+
+            <!-- Repeat logos -->
+            <div class="flex items-center justify-center bg-gray-100 rounded-xl p-4 shadow-md">
+              <img src="assets/clients/client1.png" alt="Client 1" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-gray-100 rounded-xl p-4 shadow-md">
+              <img src="assets/clients/client2.png" alt="Client 2" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-gray-100 rounded-xl p-4 shadow-md">
+              <img src="assets/clients/client3.png" alt="Client 3" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client5.png" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client7.png" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client8.png" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client9.png" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client10.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client11.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client12.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client13.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client14.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client15.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client16.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client17.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client18.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client19.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-gray-100 rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client20.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client21.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client22.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client23.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client24.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client25.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client26.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client27.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client28.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-white rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client29.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+            <div class="flex items-center justify-center bg-gray-100 rounded-xl p-4 shadow-lg">
+              <img src="assets/clients/client30.jpg" alt="Bhoomi" class="h-16 object-contain">
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ✅ Fancybox (include ONCE in <head> or before </body>) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
+  <!-- Tailwind CSS custom animation -->
+  <style>
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      /* Start visible */
+      100% {
+        transform: translateX(-50%);
+      }
+
+      /* Move left by half (because we duplicate logos) */
+    }
+
+    .animate-marquee {
+      display: flex;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+      /* Adjust time for speed */
+    }
+  </style>
+
+
+  <script>
+    document.getElementById("openGallery").addEventListener("click", () => {
+      Fancybox.show([
+        { src: "assets/gallery/gallery1.jpg", type: "image" },
+        { src: "assets/gallery/gallery2.jpg", type: "image" },
+        { src: "assets/gallery/gallery3.jpg", type: "image" },
+        { src: "assets/gallery/gallery4.jpg", type: "image" },
+        { src: "assets/gallery/gallery5.jpg", type: "image" },
+        { src: "assets/gallery/gallery6.jpg", type: "image" },
+        { src: "assets/gallery/gallery7.jpg", type: "image" },
+        { src: "assets/gallery/gallery8.jpg", type: "image" },
+        { src: "assets/gallery/gallery9.jpg", type: "image" },
+        { src: "assets/gallery/gallery10.jpg", type: "image" },
+        { src: "assets/gallery/gallery11.jpg", type: "image" },
+        { src: "assets/gallery/gallery12.jpg", type: "image" },
+        { src: "assets/gallery/gallery13.jpg", type: "image" },
+        { src: "assets/gallery/gallery14.jpg", type: "image" },
+        { src: "assets/gallery/gallery15.jpg", type: "image" },
+        { src: "assets/gallery/gallery16.jpg", type: "image" },
+        { src: "assets/gallery/gallery17.jpg", type: "image" },
+        { src: "assets/gallery/gallery18.jpg", type: "image" },
+        { src: "assets/gallery/gallery19.jpg", type: "image" },
+        { src: "assets/gallery/gallery20.jpg", type: "image" },
+        { src: "assets/gallery/gallery21.jpg", type: "image" },
+        { src: "assets/gallery/gallery22.jpg", type: "image" },
+        { src: "assets/gallery/gallery23.jpg", type: "image" },
+        { src: "assets/gallery/gallery24.jpg", type: "image" },
+        { src: "assets/gallery/gallery25.jpg", type: "image" },
+        { src: "assets/gallery/gallery26.jpg", type: "image" },
+        { src: "assets/gallery/gallery27.jpg", type: "image" },
+        { src: "assets/gallery/gallery28.jpg", type: "image" },
+        { src: "assets/gallery/gallery29.jpg", type: "image" },
+        { src: "assets/gallery/gallery30.jpg", type: "image" },
+        { src: "assets/gallery/gallery31.jpg", type: "image" }
+      ], {
+        Thumbs: false,
+        Toolbar: true,
+        Carousel: {
+          transition: "slide",
+        }
+      });
+    });
+  </script>
+
+  <!-- Contact Section: Two-Column Layout (Form on Right) -->
+  <section id="contact"
+    class="min-h-screen flex items-center justify-center py-32 px-6 bg-gradient-to-b from-sky-50 to-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+      <!-- Left Column: Catchy Copy (Centered) -->
+      <div class="flex flex-col justify-center space-y-6">
+        <h3 class="text-5xl font-extrabold text-sky-700 leading-tight">You Are in Safe Hands</h3>
+        <p class="text-gray-700 text-lg">Every great project begins with the right foundation. With our expert soil
+          testing, your construction is built on safety, stability, and confidence.</p>
+        <p class="text-gray-700 text-lg font-semibold">The first step to your dream starts here — make sure it stands
+          strong for a lifetime.</p>
+        <ul class="space-y-3 text-gray-600">
+          <li>✔️ Fast and Reliable Testing</li>
+          <li>✔️ Detailed Reports & Recommendations</li>
+          <li>✔️ Trusted by 5000+ Projects Across Tamil Nadu</li>
+        </ul>
+      </div>
+
+
+      <!-- Right Column: Form -->
+      <div class="bg-white shadow-2xl rounded-3xl p-6 sm:p-8 md:p-10 w-full overflow-hidden">
+        <h2 class="text-3xl md:text-4xl font-bold text-sky-700 text-center mb-4">Get in Touch</h2>
+        <p class="text-center text-gray-600 mb-6">Have questions? Want a quote? Fill out the form below!</p>
+
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contactForm"
+          class="space-y-4">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+          <input type="text" name="name" placeholder="Your Name"
+            class="w-full p-3 sm:p-4 rounded-xl bg-gray-50 placeholder-gray-400 border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none transition shadow-sm hover:shadow-md"
+            required>
+
+          <input type="email" name="email" placeholder="Your Email"
+            class="w-full p-3 sm:p-4 rounded-xl bg-gray-50 placeholder-gray-400 border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none transition shadow-sm hover:shadow-md"
+            required>
+          <input type="tel" name="phone" placeholder="Your Phone Number"
+            class="w-full p-3 sm:p-4 rounded-xl bg-gray-50 placeholder-gray-400 border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none transition shadow-sm hover:shadow-md"
+            required>
+          <input type="text" name="service" placeholder="Type of Service Request"
+            class="w-full p-3 sm:p-4 rounded-xl bg-gray-50 placeholder-gray-400 border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none transition shadow-sm hover:shadow-md"
+            required>
+
+          <textarea name="message" rows="4" placeholder="Your Message"
+            class="w-full p-3 sm:p-4 rounded-xl bg-gray-50 placeholder-gray-400 border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-sky-300 focus:outline-none transition shadow-sm hover:shadow-md"
+            required></textarea>
+
+          <button type="submit"
+            class="w-full py-3 sm:py-4 bg-gradient-to-r from-sky-500 to-sky-600 text-white font-bold rounded-xl hover:from-sky-600 hover:to-sky-700 shadow-lg transition-all transform hover:-translate-y-1">Send
+            Message</button>
+        </form>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="hidden mt-4 p-4 bg-green-500 text-white rounded-lg text-center shadow-md">
+          Thank you! Your message has been sent.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+
+
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
+        });
+
+        if (response.ok) {
+          successMessage.classList.remove('hidden');
+          form.reset();
+        } else {
+          alert("There was an error submitting the form. Please try again.");
+        }
+      } catch (error) {
+        alert("Network error: " + error.message);
+      } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Message";
+      }
+    });
+  </script>
+
+
+  <!-- Footer -->
+  <footer class="bg-sky-100 text-gray-800 py-12">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+
+      <!-- Contact / Address -->
+      <div>
+        <h3 class="text-lg  mb-4">Contact Us</h3>
+        <p>📍 Head Office: Old No. 40, New No. 29, 8th Street, K.K.Pudur, Coimbatore - 641038</p>
+        <p>📍 Branch Office: No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094</p>
+        <p>📞 0422 - 4202452 | 📱 +91 9043344488</p>
+        <p>✉️ geodesign123@gmail.com</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="#hero" class="hover:text-sky-600">Home</a></li>
+          <li><a href="#video" class="hover:text-sky-600">Play</a></li>
+          <li><a href="#issue" class="hover:text-sky-600">Impact & Value </a></li>
+          <li><a href="#about" class="hover:text-sky-600">About Us</a></li>
+          <li><a href="#services" class="hover:text-sky-600">Services</a></li>
+          <li><a href="#projects" class="hover:text-sky-600">Projects & clients</a></li>
+          <li><a href="#contact" class="hover:text-sky-600">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Profiles -->
+      <div>
+        <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+        <div class="flex space-x-4">
+          <a href="#" target="_blank" class="hover:text-sky-600">🌐 Website</a>
+          <a href="#" target="_blank" class="hover:text-sky-600">📘 Facebook</a>
+          <a href="#" target="_blank" class="hover:text-sky-600">🐦 Twitter</a>
+          <a href="#" target="_blank" class="hover:text-sky-600">🔗 LinkedIn</a>
+          <a href="#" target="_blank" class="hover:text-sky-600">📸 Instagram</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Text -->
+    <div class="mt-8 text-center text-sm text-gray-600">
+      © 2025 GeoDesign India Private Limited. All Rights Reserved.
+    </div>
+  </footer>
