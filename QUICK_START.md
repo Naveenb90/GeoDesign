@@ -1,138 +1,111 @@
-# Quick Start Guide
+# Quick Start - Setup All Branches
 
-## Installation
+## 🚀 One-Command Setup
 
-1. **Install Dependencies**
-   ```bash
-   cd do_react
-   npm install
-   ```
-
-2. **Start Development Server**
-   ```bash
-   npm run dev
-   ```
-   The app will be available at `http://localhost:3000`
-
-## Project Structure
-
-```
-do_react/
-├── public/
-│   └── assets/          # Static assets (images, etc.)
-├── src/
-│   ├── components/      # React components
-│   │   ├── Header.jsx
-│   │   ├── Hero.jsx
-│   │   ├── VideoSection.jsx
-│   │   ├── IssueSection.jsx
-│   │   ├── AboutSection.jsx
-│   │   ├── ServicesSection.jsx
-│   │   ├── ProjectsSection.jsx
-│   │   ├── ContactSection.jsx
-│   │   ├── Footer.jsx
-│   │   └── ErrorBoundary.jsx
-│   ├── hooks/          # Custom React hooks
-│   │   └── useIntersectionObserver.js
-│   ├── constants/      # Data constants
-│   │   └── data.js
-│   ├── styles/         # Global styles
-│   │   └── index.css
-│   ├── App.jsx         # Main App component
-│   └── main.jsx        # Entry point
-├── index.html
-├── package.json
-├── vite.config.js
-└── tailwind.config.js
-```
-
-## Key Features
-
-- ✅ **Component-Based Architecture**: Modular, reusable components
-- ✅ **Performance Optimized**: Lazy loading, code splitting
-- ✅ **Accessible**: ARIA labels, keyboard navigation
-- ✅ **Responsive**: Mobile-first design
-- ✅ **Error Handling**: Error boundaries for graceful error handling
-- ✅ **Modern React**: Hooks, functional components
-
-## Customization
-
-### Updating Content
-
-All content is centralized in `src/constants/data.js`. Update:
-- Services
-- About points
-- Contact information
-- Social media links
-- etc.
-
-### Styling
-
-- Global styles: `src/styles/index.css`
-- Tailwind config: `tailwind.config.js`
-- Component-specific styles: Inline Tailwind classes
-
-### Adding New Components
-
-1. Create component in `src/components/`
-2. Import and use in `App.jsx`
-3. Add any data to `src/constants/data.js` if needed
-
-## Building for Production
+Run this to set up all branches to point to `do_react` folder:
 
 ```bash
-npm run build
+cd /Users/naveen/Documents/Geodesign/do_react
+./setup_branches.sh
 ```
 
-Output will be in the `dist/` folder.
+Or manually:
 
-## Deployment
+```bash
+cd /Users/naveen/Documents/Geodesign/do_react
+bash setup_branches.sh
+```
 
-### Netlify (Recommended)
+---
 
-1. Connect your Git repository
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Netlify Forms will automatically handle form submissions
+## 📋 Manual Setup (Step by Step)
 
-### Other Platforms
+### Step 1: Navigate to do_react
+```bash
+cd /Users/naveen/Documents/Geodesign/do_react
+```
 
-- **Vercel**: Similar to Netlify
-- **GitHub Pages**: Requires additional configuration
-- **Traditional Hosting**: Upload `dist/` folder contents
+### Step 2: Fetch All Remote Branches
+```bash
+git fetch origin
+```
 
-## Troubleshooting
+### Step 3: Setup Each Branch
 
-### Images Not Loading
+#### Master Branch
+```bash
+git checkout master
+git pull origin master
+git push origin master
+```
 
-- Check that assets are in `public/assets/`
-- Verify image paths in components match file structure
-- Ensure file extensions match (.jpg vs .JPG)
+#### Develop Branch
+```bash
+git checkout develop || git checkout -b develop origin/develop || git checkout -b develop
+git merge master
+git push origin develop
+```
 
-### Form Not Submitting
+#### Main Branch
+```bash
+git checkout main || git checkout -b main origin/main || git checkout -b main
+git merge master
+git push origin main
+```
 
-- Verify Netlify Forms is configured
-- Check browser console for errors
-- Ensure `data-netlify="true"` is in form tag
+#### Test Branch
+```bash
+git checkout test || git checkout -b test origin/test || git checkout -b test
+git merge master
+git push origin test
+```
 
-### Build Errors
+---
 
-- Clear `node_modules` and reinstall: `rm -rf node_modules && npm install`
-- Check Node.js version (requires v18+)
-- Verify all dependencies are installed
+## 📤 Push Latest Code (Quick Reference)
 
-## Next Steps
+### Push Current Branch
+```bash
+cd /Users/naveen/Documents/Geodesign/do_react
+git add .
+git commit -m "Your message"
+git push origin $(git branch --show-current)
+```
 
-1. Review `VALIDATION_AND_IMPROVEMENTS.md` for best practices
-2. Customize content in `src/constants/data.js`
-3. Add your own images to `public/assets/`
-4. Test on multiple devices and browsers
-5. Deploy to production
+### Push to Specific Branch
+```bash
+cd /Users/naveen/Documents/Geodesign/do_react
+git checkout master  # or develop, main, test
+git add .
+git commit -m "Your message"
+git push origin master
+```
 
-## Support
+### Push to All Branches
+```bash
+cd /Users/naveen/Documents/Geodesign/do_react
+git checkout master && git add . && git commit -m "Update" && git push origin master
+git checkout develop && git merge master && git push origin develop
+git checkout main && git merge master && git push origin main
+git checkout test && git merge master && git push origin test
+git checkout master
+```
 
-For issues or questions, refer to:
-- `VALIDATION_AND_IMPROVEMENTS.md` - Detailed documentation
-- `README.md` - General project information
+---
 
+## 📚 Documentation Files
 
+- **`SETUP_ALL_BRANCHES.md`** - Detailed setup instructions
+- **`PUSH_INSTRUCTIONS.md`** - Complete push guide
+- **`QUICK_START.md`** - This file (quick reference)
+
+---
+
+## ✅ After Setup
+
+All branches (`master`, `develop`, `main`, `test`) now work with:
+```
+/Users/naveen/Documents/Geodesign/do_react
+```
+
+**Always work from this folder for git operations!**
