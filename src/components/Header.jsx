@@ -71,6 +71,10 @@ function Header() {
               alt="GeoDesign Logo" 
               className="h-16 w-16 sm:h-20 sm:w-20 object-contain transition-transform duration-300 group-hover:scale-110"
               loading="eager"
+              fetchPriority="high"
+              width="80"
+              height="80"
+              decoding="async"
             />
           </div>
           <div className="flex flex-col">

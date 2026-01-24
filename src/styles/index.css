@@ -99,6 +99,20 @@ body {
   background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
   line-height: 1.6;
   overflow-x: hidden;
+  /* Prevent layout shifts during font loading */
+  font-display: swap;
+}
+
+/* Optimize image loading to prevent CLS */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Reserve space for images to prevent CLS */
+img[width][height] {
+  aspect-ratio: attr(width) / attr(height);
 }
 
 /* ============================================

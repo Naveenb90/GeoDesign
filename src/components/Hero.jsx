@@ -25,15 +25,20 @@ function Hero() {
     <section
       id="hero"
       className="min-h-screen flex items-center justify-center pt-20 pb-16 relative overflow-hidden"
-      style={{
-        backgroundImage: "url('/assets/web/hero-site.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
       role="banner"
       aria-label="Hero section"
     >
+      {/* Hero Image - Optimized for LCP */}
+      <img
+        src="/assets/web/hero-site.jpg"
+        alt="GeoDesign soil testing services"
+        className="absolute inset-0 w-full h-full object-cover"
+        loading="eager"
+        fetchPriority="high"
+        width="1920"
+        height="1080"
+        decoding="async"
+      />
       
       {/* Content Container with Enhanced Design */}
       <div className={`relative z-10 max-w-5xl mx-auto px-8 py-8 text-center transition-all duration-1000 ${

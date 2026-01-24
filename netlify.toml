@@ -12,7 +12,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-# Headers for security
+# Headers for security and performance
 [[headers]]
   for = "/*"
   [headers.values]
@@ -20,6 +20,32 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer-when-downgrade"
     X-XSS-Protection = "1; mode=block"
+
+# Cache static assets for performance
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 # Redirects for React Router (handled by _redirects file in public folder)
 # The _redirects file will be copied to dist during build

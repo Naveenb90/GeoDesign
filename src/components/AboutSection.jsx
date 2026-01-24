@@ -32,6 +32,9 @@ function AboutSection() {
               alt="GeoDesign engineers at work"
               className="rounded-lg shadow-lg w-full max-w-md"
               loading="lazy"
+              width="600"
+              height="400"
+              decoding="async"
             />
           </div>
           <div>
@@ -77,6 +80,9 @@ function AboutSection() {
               alt="GeoDesign mission"
               className="rounded-lg shadow-lg w-full max-w-md"
               loading="lazy"
+              width="600"
+              height="400"
+              decoding="async"
             />
           </div>
           <div className="text-center md:text-left flex flex-col justify-center">

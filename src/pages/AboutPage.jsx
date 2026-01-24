@@ -10,7 +10,7 @@ function AboutPage() {
         description="Learn about GeoDesign - Founded by experienced Geotechnical Engineers. Registered in DTCP and CMDA. Over 5000 successful projects in Tamil Nadu."
         keywords="about geodesign, geotechnical engineers, soil testing company, Tamil Nadu"
       />
-      <div className="pt-20">
+      <div className="pt-28">
         <AboutSection />
       </div>
     </>

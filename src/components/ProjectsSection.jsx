@@ -74,12 +74,12 @@ function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="min-h-screen flex flex-col items-center justify-center pt-20 pb-16 px-4 sm:px-6 bg-white"
+      className="pt-28 pb-16 px-4 sm:px-6 bg-white"
       aria-labelledby="projects-heading"
     >
-      <div className="max-w-6xl w-full text-center space-y-6">
+      <div className="max-w-6xl mx-auto w-full text-center space-y-6">
         {/* Recent Projects Section */}
-        <section className="py-16 bg-white-50 rounded-2xl shadow-sm">
+        <section className="py-8 bg-white-50 rounded-2xl shadow-sm">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 id="projects-heading" className="text-3xl font-bold mb-6">
               Recent Projects
@@ -97,6 +97,9 @@ function ProjectsSection() {
                   alt={image.alt}
                   className="rounded-lg shadow-md hover:scale-105 transition"
                   loading="lazy"
+                  width="400"
+                  height="300"
+                  decoding="async"
                 />
               ))}
             </div>

@@ -10,7 +10,7 @@ function ContactPage() {
         description="Contact GeoDesign for expert soil testing services. Head office in Coimbatore, branch in Chennai. Get a free quote today!"
         keywords="contact geodesign, soil testing quote, Coimbatore, Chennai, geotechnical consulting"
       />
-      <div className="pt-20">
+      <div className="pt-28">
         <ContactSection />
       </div>
     </>

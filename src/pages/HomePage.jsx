@@ -10,7 +10,7 @@ function HomePage() {
         description="GeoDesign provides reliable soil testing services for residential, commercial, and government projects in Tamil Nadu. 5000+ projects completed."
         keywords="soil testing, geotechnical services, Coimbatore, Chennai, foundation testing"
       />
-      <div className="pt-20">
+      <div className="pt-28">
         <Hero />
       </div>
     </>

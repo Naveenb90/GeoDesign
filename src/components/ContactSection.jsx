@@ -125,7 +125,7 @@ function ContactSection() {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center justify-center pt-20 pb-16 px-4 sm:px-6 bg-white relative"
+      className="min-h-screen flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 bg-white relative"
       aria-labelledby="contact-heading"
     >
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center relative z-10">

@@ -18,7 +18,7 @@ function OurOfficesPage() {
         description="Visit GeoDesign offices in Coimbatore and Chennai. Contact us for expert soil testing services across Tamil Nadu."
         keywords="geodesign offices, Coimbatore office, Chennai office, contact address"
       />
-      <div className="pt-20 pb-16 px-4 sm:px-6 bg-white">
+      <div className="pt-32 pb-16 px-4 sm:px-6 bg-white min-h-screen">
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <div className="text-center mb-12">

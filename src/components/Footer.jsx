@@ -11,7 +11,7 @@ import React from 'react'
 function Footer() {
   return (
     <footer
-      className="bg-sky-100 text-gray-800 py-6"
+      className="bg-sky-100 text-gray-800 py-4"
       role="contentinfo"
       aria-label="Site footer"
     >
