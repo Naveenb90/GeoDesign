@@ -79,7 +79,7 @@ function ProjectsSection() {
     >
       <div className="max-w-6xl mx-auto w-full text-center space-y-6">
         {/* Recent Projects Section */}
-        <section className="py-8 bg-white-50 rounded-2xl shadow-sm">
+        <section className="py-8 bg-gray-50 rounded-2xl shadow-sm">
           <div className="max-w-6xl mx-auto px-6 text-center">
             <h2 id="projects-heading" className="text-3xl font-bold mb-6">
               Recent Projects
@@ -117,7 +117,7 @@ function ProjectsSection() {
         </section>
 
         {/* Trusted By Section */}
-        <section className="py-12 bg-white-50">
+        <section className="py-12 bg-gray-50">
           <h2 className="text-3xl font-bold text-center mb-8">Trusted By</h2>
 
           {/* Scrolling container */}

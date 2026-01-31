@@ -10,7 +10,7 @@ function WhyItMattersPage() {
         description="Learn why soil testing is crucial for construction projects. Discover the importance of proper soil analysis for building safety and stability."
         keywords="why soil testing matters, importance of soil testing, soil testing benefits, construction safety"
       />
-      <div className="pt-20">
+      <div className="pt-28 min-h-screen bg-white">
         <IssueSection />
       </div>
     </>

@@ -88,6 +88,8 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Mobile: prevent zoom on input focus, allow pinch-zoom */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -96,11 +98,14 @@ body {
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
   color: #1e293b;
-  background: linear-gradient(to bottom, #bae6fd, #ffffff, #e0f2fe);
+  /* White background - no blue tint on mobile or desktop */
+  background: #ffffff;
   line-height: 1.6;
   overflow-x: hidden;
   /* Prevent layout shifts during font loading */
   font-display: swap;
+  /* Mobile: ensure no horizontal scroll or blue bleed */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Optimize image loading to prevent CLS */

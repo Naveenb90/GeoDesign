@@ -10,7 +10,9 @@ function ProjectsPage() {
         description="View our portfolio of 5000+ successful geotechnical projects across Tamil Nadu. Trusted by leading developers and construction companies."
         keywords="geodesign projects, soil testing projects, Tamil Nadu projects, construction projects"
       />
-      <ProjectsSection />
+      <div className="min-h-screen bg-white">
+        <ProjectsSection />
+      </div>
     </>
   )
 }

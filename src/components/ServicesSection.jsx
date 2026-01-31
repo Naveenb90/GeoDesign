@@ -15,7 +15,7 @@ function ServicesSection() {
   return (
     <section
       id="services"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-200 via-white to-sky-100 relative"
+      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white md:bg-gradient-to-b md:from-gray-50 md:via-white md:to-gray-50 relative"
       aria-labelledby="services-heading"
     >
 
