@@ -9,6 +9,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  /** Consistent inner page layout (matches production geodesign.co.in section pages) */
+  /**
+   * Inner pages: flex-1 fills main so footer stays in view with short content;
+   * avoids min-h-screen + footer stacking past 100vh (extra scroll to see footer).
+   */
+  /** Horizontal rhythm aligned across section pages; max width keeps content balanced on large screens */
+  .page-shell {
+    @apply pt-28 pb-14 sm:pb-16 px-3 sm:px-4 md:px-6 lg:px-8 flex-1 w-full min-w-0 min-h-0 bg-stone-50;
+  }
+
+  .page-shell-inner {
+    @apply max-w-6xl mx-auto w-full;
+  }
+}
+
 /* ============================================
    CSS CUSTOM PROPERTIES (Design Tokens)
    ============================================ */
@@ -41,10 +57,9 @@
   --spacing-2xl: 3rem;     /* 48px */
   --spacing-3xl: 4rem;     /* 64px */
   
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Montserrat', sans-serif;
-  --font-serif: 'Playfair Display', serif;
+  /* Typography — Inter (body) + Montserrat (headings) */
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Montserrat', system-ui, sans-serif;
   
   /* Shadows - Elevation System */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -83,6 +98,12 @@
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+}
+
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -96,28 +117,20 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   color: #1e293b;
   /* White background - no blue tint on mobile or desktop */
   background: #ffffff;
   line-height: 1.6;
   overflow-x: hidden;
-  /* Prevent layout shifts during font loading */
-  font-display: swap;
-  /* Mobile: ensure no horizontal scroll or blue bleed */
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Optimize image loading to prevent CLS */
+/* Optimize image loading to reduce CLS */
 img {
   max-width: 100%;
   height: auto;
   display: block;
-}
-
-/* Reserve space for images to prevent CLS */
-img[width][height] {
-  aspect-ratio: attr(width) / attr(height);
 }
 
 /* ============================================
@@ -127,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--color-gray-900);
+  color: #0f172a; /* slate-900 — overridden per-component via Tailwind when needed */
   margin: 0;
 }
 

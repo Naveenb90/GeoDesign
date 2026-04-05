@@ -8,9 +8,8 @@ export default {
     extend: {
       // Custom font families
       fontFamily: {
-        'sans': ['Inter', 'sans-serif'],
-        'display': ['Montserrat', 'sans-serif'],
-        'serif': ['Playfair Display', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Montserrat', 'system-ui', 'sans-serif'],
       },
       // Custom colors if needed
       colors: {

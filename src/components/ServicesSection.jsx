@@ -15,7 +15,7 @@ function ServicesSection() {
   return (
     <section
       id="services"
-      className="min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-white md:bg-gradient-to-b md:from-gray-50 md:via-white md:to-gray-50 relative"
+      className="min-h-screen py-20 px-2 sm:px-3 md:px-5 lg:px-6 bg-white md:bg-gradient-to-b md:from-gray-50 md:via-white md:to-gray-50 relative w-full min-w-0"
       aria-labelledby="services-heading"
     >
 
@@ -25,10 +25,10 @@ function ServicesSection() {
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 bg-sky-100 rounded-full">
             <span className="text-sky-600 font-semibold text-xs">Our Expertise</span>
           </div>
-          <h2 id="services-heading" className="text-3xl sm:text-4xl font-extrabold text-sky-700 mb-12">
+          <h2 id="services-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-12">
             Our Services
           </h2>
-          <p className="text-lg text-gray-600 mb-14 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-600 mb-14 max-w-3xl mx-auto">
             Delivering reliable soil testing & foundation solutions to build with confidence
           </p>
         </div>
@@ -38,17 +38,15 @@ function ServicesSection() {
           {services.map((service, index) => (
             <div
               key={index}
-              className="p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300"
+              className="group relative p-6 sm:p-8 bg-gradient-to-br from-white/30 to-white/10 rounded-3xl shadow-lg hover:scale-105 transition-transform duration-300 overflow-hidden"
               role="article"
               aria-labelledby={`service-${index}`}
             >
-              <h3 id={`service-${index}`} className="text-xl sm:text-2xl font-bold mb-3">
+              <h3 id={`service-${index}`} className="relative z-10 text-xl sm:text-2xl font-bold text-slate-800 mb-3">
                 {service.title}
               </h3>
-              <p className="text-base sm:text-sm">{service.description}</p>
-
-              {/* Hover Effect Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-50/0 to-sky-50/0 group-hover:from-sky-50/50 group-hover:to-transparent rounded-2xl transition-all duration-300 pointer-events-none"></div>
+              <p className="relative z-10 text-slate-600 text-base sm:text-sm">{service.description}</p>
+              <div className="absolute inset-0 bg-gradient-to-br from-sky-50/0 to-sky-50/0 group-hover:from-sky-50/50 group-hover:to-transparent rounded-3xl transition-all duration-300 pointer-events-none" aria-hidden="true"></div>
             </div>
           ))}
         </div>

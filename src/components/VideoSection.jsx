@@ -31,17 +31,16 @@ function VideoSection() {
     <section
       id="video"
       ref={sectionRef}
-      className="min-h-screen pt-20 pb-16 relative w-full flex items-center justify-center bg-gray-100"
+      className="min-h-screen pt-20 pb-16 px-2 sm:px-3 md:px-5 relative w-full min-w-0 flex items-center justify-center bg-gray-100"
       aria-label="Video section"
     >
       <div className="relative w-11/12 md:w-4/5 h-[70vh] bg-gray-300 rounded-xl shadow-lg overflow-hidden">
         <div className="absolute inset-0">
           {hasIntersected ? (
             <iframe
-              className="w-full h-full"
+              className="w-full h-full border-0"
               src={videoConfig.embedUrl}
               title="YouTube video player"
-              frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               loading="lazy"

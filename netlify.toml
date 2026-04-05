@@ -1,51 +1,12 @@
-# Netlify Configuration for GeoDesign React App
-# This file should be in the do_react folder (repository root)
-
 [build]
-  # Build command
   command = "npm run build"
-  
-  # Publish directory (relative to this file)
   publish = "dist"
 
-# Environment variables
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 
-# Headers for security and performance
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    X-XSS-Protection = "1; mode=block"
-
-# Cache static assets for performance
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-# Redirects for React Router (handled by _redirects file in public folder)
-# The _redirects file will be copied to dist during build
+# SPA fallback — client-side routes work on refresh
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

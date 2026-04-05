@@ -1,16 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import OfficeMapEmbed from '../components/OfficeMapEmbed'
 import SEO from '../components/SEO'
-import { contactInfo } from '../constants/data'
+import { contactInfo, mapEmbedUrls } from '../constants/data'
+import { SKY_OUTCOME_TILE_CLASS } from '../constants/skyTileClasses'
 
+/**
+ * Office locations: address column on the left, map on the right (desktop); stacked on small screens.
+ * Page shell and tiles align with About / Contact (white canvas, sky-gradient panels).
+ *
+ * @returns {JSX.Element}
+ */
 function OurOfficesPage() {
-  // Google Maps embed URL for Head Office (Coimbatore)
-  // You can get the embed URL from Google Maps by:
-  // 1. Go to Google Maps
-  // 2. Search for the address
-  // 3. Click Share → Embed a map
-  // 4. Copy the iframe src URL
-  const headOfficeMapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.5!2d76.9558!3d11.0168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDAxJzAwLjQiTiA3NsKwNTcnMjAuOCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin`
-
   return (
     <>
       <SEO
@@ -18,125 +19,107 @@ function OurOfficesPage() {
         description="Visit GeoDesign offices in Coimbatore and Chennai. Contact us for expert soil testing services across Tamil Nadu."
         keywords="geodesign offices, Coimbatore office, Chennai office, contact address"
       />
-      <div className="pt-32 pb-16 px-4 sm:px-6 bg-white min-h-screen">
-        <div className="max-w-7xl mx-auto">
-          {/* Page Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-sky-700 mb-4">
-              Our Offices
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Visit us at our offices in Coimbatore and Chennai for expert geotechnical consulting services
-            </p>
-          </div>
+      <div className="page-shell bg-white !pb-6 sm:!pb-8">
+        <div className="max-w-7xl mx-auto w-full">
+          <section className="w-full min-w-0 py-8 md:py-10 space-y-10 md:space-y-12">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-5 md:mb-6">
+                Our Offices
+              </h1>
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+                Visit us in Coimbatore or Chennai for expert geotechnical consulting across Tamil Nadu.
+              </p>
+            </div>
 
-          {/* Two Column Layout: Address & Google Maps */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-            {/* Left Column: Address Information */}
-            <div className="bg-white rounded-lg shadow-lg p-6 lg:p-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Contact Information</h2>
-              
-              {/* Head Office */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Head Office</h3>
-                <p className="text-gray-600 mb-3">Coimbatore, Tamil Nadu</p>
-                <address className="not-italic space-y-2 text-gray-600">
-                  <p className="flex items-start gap-2">
-                    <span className="text-sky-600 mt-1">📍</span>
-                    <span>{contactInfo.headOffice.address}</span>
+            {/* Head Office — details left, map right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+              <div className={`${SKY_OUTCOME_TILE_CLASS} flex flex-col justify-center text-left`}>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
+                  Head Office
+                </h2>
+                <p className="text-sm text-slate-500 mb-5">{contactInfo.headOffice.regionLabel}</p>
+                <address className="not-italic space-y-3 text-slate-600 text-base leading-relaxed">
+                  <p>
+                    <span aria-hidden="true">📍</span> {contactInfo.headOffice.address}
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">📞</span>
-                    <span>{contactInfo.phone.landline}</span>
+                  <p>
+                    <span aria-hidden="true">📞</span> {contactInfo.phone.landline}
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">📱</span>
-                    <a 
-                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`} 
-                      className="text-sky-600 hover:text-sky-700 hover:underline"
+                  <p>
+                    <a
+                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`}
+                      className="text-sky-700 hover:text-sky-800 hover:underline"
                     >
-                      {contactInfo.phone.mobile}
+                      📱 {contactInfo.phone.mobile}
                     </a>
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">✉️</span>
-                    <a 
-                      href={`mailto:${contactInfo.email}`} 
-                      className="text-sky-600 hover:text-sky-700 hover:underline"
-                    >
-                      {contactInfo.email}
+                  <p>
+                    <a href={`mailto:${contactInfo.email}`} className="text-sky-700 hover:text-sky-800 hover:underline">
+                      ✉️ {contactInfo.email}
                     </a>
                   </p>
                 </address>
               </div>
+              <div className="min-h-0">
+                <OfficeMapEmbed
+                  title="Head Office — Coimbatore"
+                  subtitle={contactInfo.headOffice.address}
+                  embedUrl={mapEmbedUrls.headOffice}
+                />
+              </div>
+            </div>
 
-              {/* Branch Office */}
-              <div>
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Branch Office</h3>
-                <p className="text-gray-600 mb-3">Chennai, Tamil Nadu</p>
-                <address className="not-italic space-y-2 text-gray-600">
-                  <p className="flex items-start gap-2">
-                    <span className="text-sky-600 mt-1">📍</span>
-                    <span>{contactInfo.branchOffice.address}</span>
+            {/* Branch Office — details left, map right */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+              <div className={`${SKY_OUTCOME_TILE_CLASS} flex flex-col justify-center text-left`}>
+                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
+                  Branch Office
+                </h2>
+                <p className="text-sm text-slate-500 mb-5">{contactInfo.branchOffice.regionLabel}</p>
+                <address className="not-italic space-y-3 text-slate-600 text-base leading-relaxed">
+                  <p>
+                    <span aria-hidden="true">📍</span> {contactInfo.branchOffice.address}
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">📞</span>
-                    <span>{contactInfo.phone.landline}</span>
+                  <p>
+                    <span aria-hidden="true">📞</span> {contactInfo.phone.landline}
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">📱</span>
-                    <a 
-                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`} 
-                      className="text-sky-600 hover:text-sky-700 hover:underline"
+                  <p>
+                    <a
+                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`}
+                      className="text-sky-700 hover:text-sky-800 hover:underline"
                     >
-                      {contactInfo.phone.mobile}
+                      📱 {contactInfo.phone.mobile}
                     </a>
                   </p>
-                  <p className="flex items-center gap-2">
-                    <span className="text-sky-600">✉️</span>
-                    <a 
-                      href={`mailto:${contactInfo.email}`} 
-                      className="text-sky-600 hover:text-sky-700 hover:underline"
-                    >
-                      {contactInfo.email}
+                  <p>
+                    <a href={`mailto:${contactInfo.email}`} className="text-sky-700 hover:text-sky-800 hover:underline">
+                      ✉️ {contactInfo.email}
                     </a>
                   </p>
                 </address>
               </div>
-            </div>
-
-            {/* Right Column: Google Maps */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 p-6 pb-0">Find Us</h2>
-              <div className="w-full h-full min-h-[400px]">
-                <iframe
-                  src={headOfficeMapUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: '400px' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="GeoDesign Head Office Location"
-                  className="w-full h-full"
-                ></iframe>
+              <div className="min-h-0">
+                <OfficeMapEmbed
+                  title="Branch Office — Chennai"
+                  subtitle={contactInfo.branchOffice.address}
+                  embedUrl={mapEmbedUrls.branchOffice}
+                />
               </div>
             </div>
-          </div>
 
-          {/* Contact Form CTA */}
-          <div className="text-center bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-3">Get in Touch</h2>
-            <p className="text-gray-600 mb-4">
-              Have questions? Want to schedule a consultation? Contact us today!
-            </p>
-            <a
-              href="/contact"
-              className="inline-block px-6 py-3 bg-sky-500 text-white font-semibold rounded-lg hover:bg-sky-600 transition-colors"
-            >
-              Contact Us
-            </a>
-          </div>
+            <div className={`${SKY_OUTCOME_TILE_CLASS} text-center`}>
+              <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">Submit an inquiry</h2>
+              <p className="text-slate-600 mb-6 max-w-xl mx-auto text-sm md:text-base">
+                Request a quote or ask a question on our dedicated inquiry page.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-block px-8 py-3 bg-gradient-to-r from-sky-600 to-sky-700 text-white font-semibold rounded-xl shadow-md hover:from-sky-700 hover:to-sky-800 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-white"
+              >
+                Go to inquiry form
+              </Link>
+            </div>
+          </section>
         </div>
       </div>
     </>

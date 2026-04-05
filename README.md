@@ -2,6 +2,8 @@
 
 A modern React application for GeoDesign - Expert Soil Testing Services in India.
 
+**Production:** [https://geodesign.co.in](https://geodesign.co.in) — inner pages use a white `page-shell` + `max-w-7xl` layout, sky card tokens, and typography (Inter, Montserrat). See [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) and the [docs index](docs/README.md). Service routes: [docs/SERVICES_PAGES.md](docs/SERVICES_PAGES.md). Git workflow template: [docs/git-local.example.md](docs/git-local.example.md) (copy to `docs/git-local.md`, gitignored).
+
 ## Features
 
 - ⚛️ Built with React 18 and Vite

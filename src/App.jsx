@@ -1,15 +1,17 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import ErrorBoundary from './components/ErrorBoundary'
+import ScrollToTop from './components/ScrollToTop'
 
 // Pages
 import HomePage from './pages/HomePage'
 import WhyItMattersPage from './pages/WhyItMattersPage'
 import AboutPage from './pages/AboutPage'
 import ServicesPage from './pages/ServicesPage'
+import ServiceDetailPage from './pages/ServiceDetailPage'
 import ProjectsPage from './pages/ProjectsPage'
 import ContactPage from './pages/ContactPage'
 import VideoPage from './pages/VideoPage'
@@ -29,27 +31,38 @@ function App() {
     <ErrorBoundary>
       <HelmetProvider>
         <Router>
-          <div className="font-sans min-h-screen bg-white">
+          <ScrollToTop />
+          <div className="font-sans min-h-screen bg-white w-full min-w-0 overflow-x-hidden flex flex-col">
+            <a href="#main-content" className="skip-link">Skip to main content</a>
             <Header />
-            <main className="min-h-screen bg-white">
+            <main
+              id="main-content"
+              className="flex-1 flex flex-col min-h-0 w-full min-w-0 bg-white"
+            >
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/why-it-matters" element={<WhyItMattersPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/services" element={<ServicesPage />} />
+                <Route path="/services/:slug" element={<ServiceDetailPage />} />
                 <Route path="/projects" element={<ProjectsPage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/video" element={<VideoPage />} />
                 <Route path="/our-offices" element={<OurOfficesPage />} />
                 {/* 404 Page */}
                 <Route path="*" element={
-                  <div className="min-h-screen flex items-center justify-center pt-28 bg-white">
+                  <div className="page-shell flex items-center justify-center">
                     <div className="text-center">
-                      <h1 className="text-4xl font-bold mb-4">404 - Page Not Found</h1>
-                      <p className="text-gray-600 mb-8">The page you're looking for doesn't exist.</p>
-                      <a href="/" className="px-6 py-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600">
+                      <h1 className="text-4xl font-semibold mb-4 font-display text-slate-900">404 - Page Not Found</h1>
+                      <p className="text-slate-600 mb-8">
+                        The page you&apos;re looking for doesn&apos;t exist.
+                      </p>
+                      <Link
+                        to="/"
+                        className="inline-block px-6 py-3 bg-gradient-to-r from-sky-600 to-sky-700 text-white font-semibold rounded-xl hover:from-sky-700 hover:to-sky-800 shadow-md"
+                      >
                         Go Home
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 } />

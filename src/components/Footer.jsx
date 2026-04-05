@@ -11,13 +11,13 @@ import React from 'react'
 function Footer() {
   return (
     <footer
-      className="bg-sky-100 text-gray-800 py-4"
+      className="shrink-0 bg-slate-100 text-slate-800 py-3 sm:py-4 border-t border-slate-200"
       role="contentinfo"
       aria-label="Site footer"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
         {/* Copyright */}
-        <div className="text-center text-sm text-gray-600">
+        <div className="text-center text-sm text-slate-600">
           <p>© {new Date().getFullYear()} GeoDesign India Private Limited. All Rights Reserved.</p>
         </div>
       </div>

@@ -17,6 +17,12 @@ module.exports = {
       { allowConstantExport: true },
     ],
     'react/prop-types': 'off', // Using TypeScript would be better, but keeping simple for now
+    // React 17+ JSX transform — `import React` is optional
+    'no-unused-vars': ['error', { varsIgnorePattern: '^React$' }],
+    'react/no-unknown-property': [
+      'error',
+      { ignore: ['netlify-honeypot', 'data-netlify'] },
+    ],
   },
 }
 

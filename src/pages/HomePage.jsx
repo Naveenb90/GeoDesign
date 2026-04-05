@@ -7,10 +7,11 @@ function HomePage() {
     <>
       <SEO
         title="GeoDesign - Expert Soil Testing Services in India"
-        description="GeoDesign provides reliable soil testing services for residential, commercial, and government projects in Tamil Nadu. 5000+ projects completed."
+        description="Know your ground — geotechnical soil testing and foundation engineering across Tamil Nadu. 5,000+ projects completed. GeoDesign India."
         keywords="soil testing, geotechnical services, Coimbatore, Chennai, foundation testing"
       />
-      <div className="pt-28 min-h-screen bg-white">
+      {/* Flex child fills main so hero + footer fit one viewport without redundant scroll */}
+      <div className="flex flex-1 flex-col min-h-0 w-full">
         <Hero />
       </div>
     </>

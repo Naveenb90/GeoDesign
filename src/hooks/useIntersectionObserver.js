@@ -25,7 +25,6 @@ import { useEffect, useRef, useState } from 'react'
  * }, [isVisible])
  */
 export function useIntersectionObserver(options = {}) {
-  const [isIntersecting, setIsIntersecting] = useState(false)
   const [hasIntersected, setHasIntersected] = useState(false)
   const elementRef = useRef(null)
 
@@ -36,7 +35,6 @@ export function useIntersectionObserver(options = {}) {
     // Check if IntersectionObserver is supported
     if (!('IntersectionObserver' in window)) {
       // Fallback: load immediately if not supported
-      setIsIntersecting(true)
       setHasIntersected(true)
       return
     }
@@ -44,10 +42,7 @@ export function useIntersectionObserver(options = {}) {
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0]
-        setIsIntersecting(entry.isIntersecting)
-        
-        // Once intersected, keep it loaded (don't unload)
-        if (entry.isIntersecting && !hasIntersected) {
+        if (entry.isIntersecting) {
           setHasIntersected(true)
         }
       },
@@ -63,7 +58,7 @@ export function useIntersectionObserver(options = {}) {
     return () => {
       observer.disconnect()
     }
-  }, [options.threshold, options.rootMargin, hasIntersected])
+  }, [options.threshold, options.rootMargin])
 
   return [elementRef, hasIntersected]
 }

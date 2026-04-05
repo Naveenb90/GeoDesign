@@ -24,23 +24,116 @@ export const navLinks = [
 ]
 
 /**
- * Soil testing issues and concerns
+ * Short intro for the Why It Matters page (shown under the H1).
  */
-export const soilIssues = [
-  { icon: '📍', title: 'Site Access', description: 'Quality of access impacts site investigation.' },
-  { icon: '🧱', title: 'Type of Soil', description: 'Clay is reactive, sand settles under load, silt loses strength when wet.' },
-  { icon: '🌳', title: 'Trees & Roots', description: 'Roots may draw moisture, causing shrinkage near footings.' },
-  { icon: '🪨', title: 'Rock Boulders', description: 'May move underground or create voids when excavated.' },
-  { icon: '⚠️', title: 'Soft Soil', description: 'Can settle under load affecting stability.' },
-  { icon: '🌊', title: 'Marine Clays', description: 'May have low or no bearing capacity.' },
-  { icon: '⛰️', title: 'Slopes', description: 'Steeper slopes may have slip potential.' },
-  { icon: '💧', title: 'Low-Lying Areas', description: 'Could contain acid sulfate soils.' },
-  { icon: '🛠️', title: 'Filled Areas', description: 'May have un-compacted soils causing settlement.' },
-  { icon: '⚡', title: 'Cut & Fill Pads', description: 'Could experience differential settlement.' },
-  { icon: '💦', title: 'Water Table', description: 'Depths can affect excavation feasibility.' },
-  { icon: '🪨', title: 'Rock Layers', description: 'May impact excavation.' },
-  { icon: '🚰', title: 'Wastewater Suitability', description: 'Soil suitability for sewerage and greywater disposal.' },
-  { icon: '🏞️', title: 'Land Block', description: 'Suitability for on-site wastewater disposal.' },
+export const whyItMattersIntro =
+  'Every site is different. Soil type, rock, groundwater, and past fill all affect how loads are carried and how structures settle over time. Mapping these factors early supports safer design and fewer costly surprises.'
+
+/**
+ * Soil and site factors grouped by theme for the Why It Matters page.
+ * @typedef {{ icon: string, title: string, description: string }} SoilIssueItem
+ * @typedef {{ id: string, title: string, blurb: string, items: SoilIssueItem[] }} SoilIssueGroup
+ * @type {SoilIssueGroup[]}
+ */
+export const soilIssueGroups = [
+  {
+    id: 'soil-rock',
+    title: 'Soil & ground conditions',
+    blurb: 'How the ground behaves under load and when excavated.',
+    items: [
+      {
+        icon: '🧱',
+        title: 'Type of Soil',
+        description: 'Clay is reactive, sand settles under load, silt loses strength when wet.',
+      },
+      {
+        icon: '⚠️',
+        title: 'Soft Soil',
+        description: 'Can settle under load affecting stability.',
+      },
+      {
+        icon: '🌊',
+        title: 'Marine Clays',
+        description: 'May have low or no bearing capacity.',
+      },
+      {
+        icon: '🪨',
+        title: 'Rock Boulders',
+        description: 'May move underground or create voids when excavated.',
+      },
+      {
+        icon: '🪨',
+        title: 'Rock Layers',
+        description: 'May impact excavation.',
+      },
+    ],
+  },
+  {
+    id: 'site-water',
+    title: 'Site access & water',
+    blurb: 'Access for investigation and groundwater-related risks.',
+    items: [
+      {
+        icon: '📍',
+        title: 'Site Access',
+        description: 'Quality of access impacts site investigation.',
+      },
+      {
+        icon: '💦',
+        title: 'Water Table',
+        description: 'Depths can affect excavation feasibility.',
+      },
+      {
+        icon: '💧',
+        title: 'Low-Lying Areas',
+        description: 'Could contain acid sulfate soils.',
+      },
+      {
+        icon: '⛰️',
+        title: 'Slopes',
+        description: 'Steeper slopes may have slip potential.',
+      },
+    ],
+  },
+  {
+    id: 'trees-earthworks',
+    title: 'Trees & earthworks',
+    blurb: 'Vegetation and man-made changes to levels.',
+    items: [
+      {
+        icon: '🌳',
+        title: 'Trees & Roots',
+        description: 'Roots may draw moisture, causing shrinkage near footings.',
+      },
+      {
+        icon: '🛠️',
+        title: 'Filled Areas',
+        description: 'May have un-compacted soils causing settlement.',
+      },
+      {
+        icon: '⚡',
+        title: 'Cut & Fill Pads',
+        description: 'Could experience differential settlement.',
+      },
+    ],
+  },
+  {
+    id: 'disposal',
+    title: 'Disposal & land use',
+    blurb: 'On-site suitability for wastewater and similar uses.',
+    items: [
+      {
+        icon: '🚰',
+        title: 'Wastewater Suitability',
+        description: 'Soil suitability for sewerage and greywater disposal.',
+      },
+      {
+        icon: '🏞️',
+        title: 'Land Block',
+        description: 'Suitability for on-site wastewater disposal.',
+      },
+    ],
+  },
 ]
 
 /**
@@ -179,54 +272,33 @@ export const clientLogos = [
 ]
 
 /**
- * Social media links
- * Update href values with actual URLs
- */
-export const socialLinks = [
-  {
-    href: 'https://www.justdial.com/Chennai/Geo-Design-INDIA-Pvt-Ltd-Opposite-to-Fish-Market-Bharatheswarar-Colony-Choolaimedu/044PXX44-XX44-121011105112-B1R2_BZDET',
-    label: 'Justdial',
-    icon: '📞',
-  },
-  {
-    href: 'https://www.google.com/search?client=safari&rls=en&q=geodesign.+coimbatore&ie=UTF-8&oe=UTF-8',
-    label: 'Google',
-    icon: '⭐',
-  },
-  { href: '#', label: 'Facebook', icon: '📘' },
-  { href: '#', label: 'Twitter', icon: '🐦' },
-  { href: '#', label: 'LinkedIn', icon: '🔗' },
-  { href: '#', label: 'Instagram', icon: '📸' },
-]
-
-/**
- * Footer quick links
- */
-export const footerLinks = [
-  { href: '#hero', label: 'Home' },
-  { href: '#video', label: 'Play' },
-  { href: '#issue', label: 'Impact & Value' },
-  { href: '#about', label: 'About Us' },
-  { href: '#services', label: 'Services' },
-  { href: '#projects', label: 'Projects & clients' },
-  { href: '#contact', label: 'Contact Us' },
-]
-
-/**
  * Contact information
  */
 export const contactInfo = {
   headOffice: {
     address: 'Old No. 40, New No. 29, 8th Street, K.K.Pudur, Coimbatore - 641038',
+    regionLabel: 'Coimbatore, Tamil Nadu',
   },
   branchOffice: {
     address: 'No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094',
+    regionLabel: 'Chennai, Tamil Nadu',
   },
   phone: {
     landline: '0422 - 4202452',
     mobile: '+91 9043344488',
   },
   email: 'geodesign123@gmail.com',
+}
+
+/**
+ * Google Maps iframe embed URLs (Maps → Share → Embed a map).
+ * Coordinate-based queries work without an API key; replace with official embed pb= URLs anytime.
+ */
+export const mapEmbedUrls = {
+  headOffice:
+    'https://www.google.com/maps?q=11.033309,76.940973&hl=en&z=16&output=embed',
+  branchOffice:
+    'https://www.google.com/maps?q=13.0924,80.2197&hl=en&z=16&output=embed',
 }
 
 /**

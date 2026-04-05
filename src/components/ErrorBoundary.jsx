@@ -49,7 +49,7 @@ class ErrorBoundary extends React.Component {
               Something went wrong
             </h1>
             <p className="text-gray-600 mb-6">
-              We're sorry, but something unexpected happened. Please try refreshing the page.
+              We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
             </p>
             <button
               onClick={() => {
@@ -60,7 +60,7 @@ class ErrorBoundary extends React.Component {
             >
               Refresh Page
             </button>
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className="mt-6 text-left">
                 <summary className="cursor-pointer text-sm text-gray-500">
                   Error Details (Development Only)

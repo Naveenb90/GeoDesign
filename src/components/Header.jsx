@@ -62,7 +62,7 @@ function Header() {
       }`}
       role="banner"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 lg:px-6 w-full">
         {/* Logo Section - Enhanced */}
         <Link to="/" className="flex items-center space-x-3 group">
           <div className="relative">
@@ -71,17 +71,13 @@ function Header() {
               alt="GeoDesign Logo" 
               className="h-16 w-16 sm:h-20 sm:w-20 object-contain transition-transform duration-300 group-hover:scale-110"
               loading="eager"
-              fetchPriority="high"
-              width="80"
-              height="80"
-              decoding="async"
             />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-extrabold text-gray-900 group-hover:text-sky-600 transition-colors">
+            <span className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-sky-700 transition-colors font-display tracking-tight">
               Geo Design
             </span>
-            <span className="text-xs text-gray-600 hidden sm:block">
+            <span className="text-xs text-slate-500 hidden sm:block">
               We care for your Safety & Investment
             </span>
           </div>
@@ -98,7 +94,7 @@ function Header() {
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
               location.pathname === '/'
                 ? 'text-sky-600 bg-sky-50'
-                : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
+                : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
             }`}
           >
             Home
@@ -110,7 +106,7 @@ function Header() {
               className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
                 location.pathname === link.href
                   ? 'text-sky-600 bg-sky-50'
-                  : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
+                  : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
               }`}
             >
               {link.label}
@@ -132,7 +128,7 @@ function Header() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
           onClick={toggleMenu}
-          className="lg:hidden p-2 text-gray-700 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
+          className="lg:hidden p-2 text-slate-700 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
         >
           <svg 
             className="w-6 h-6" 
@@ -168,7 +164,7 @@ function Header() {
             className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
               location.pathname === '/'
                 ? 'text-sky-600 bg-sky-50'
-                : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
+                : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
             }`}
           >
             Home
@@ -181,7 +177,7 @@ function Header() {
               className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
                 location.pathname === link.href
                   ? 'text-sky-600 bg-sky-50'
-                  : 'text-gray-700 hover:text-sky-600 hover:bg-sky-50'
+                  : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
               }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >

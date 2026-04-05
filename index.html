@@ -2,7 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    
+    <!-- Favicon - GeoDesign Logo -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/web/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/web/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/web/logo.png" />
+    <meta name="theme-color" content="#0ea5e9" />
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="GeoDesign provides reliable soil testing services for residential, commercial, and government projects in Tamil Nadu. Contact us today!" />
     <meta name="keywords" content="soil testing, geotechnical services, borehole test, soil mechanics, Coimbatore, Chennai, Geo Design" />
@@ -10,25 +16,51 @@
     <!-- Preconnect to external domains for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-    
-    <!-- Preload critical hero image for LCP optimization -->
-    <link rel="preload" as="image" href="/assets/web/hero-site.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="/assets/web/logo.png" fetchpriority="high" />
-    
-    <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" as="style" />
-    
-    <!-- Fonts with font-display swap for better LCP -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" /></noscript>
-    
-    <!-- Fancybox CSS - Load asynchronously -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" as="style" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'" />
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" /></noscript>
-    
+
+    <!-- Fonts — async load for better LCP (Inter body + Montserrat headings) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Preload hero LCP image -->
+    <link rel="preload" href="/assets/web/hero-site.jpg" as="image" />
+
+    <!-- Fancybox CSS — pinned to match ProjectsSection (5.0.36) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" />
+
     <title>GeoDesign - Expert Soil Testing Services in India</title>
+    
+    <!-- 
+      ============================================
+      ANALYTICS - Uncomment ONE of the options below
+      ============================================
+      
+      Option 1: Plausible Analytics (Privacy-friendly, no cookies, GDPR compliant)
+      Sign up at: https://plausible.io
+      <script defer data-domain="geodesign.in" src="https://plausible.io/js/script.js"></script>
+      
+      Option 2: Google Analytics 4
+      Get your Measurement ID from: https://analytics.google.com
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      </script>
+      
+      Replace G-XXXXXXXXXX with your actual Measurement ID
+      ============================================
+    -->
   </head>
   <body>
     <div id="root"></div>

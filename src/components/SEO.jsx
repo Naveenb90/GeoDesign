@@ -19,11 +19,15 @@ function SEO({
   description = 'GeoDesign provides reliable soil testing services for residential, commercial, and government projects in Tamil Nadu. Contact us today!',
   keywords = 'soil testing, geotechnical services, borehole test, soil mechanics, Coimbatore, Chennai, Geo Design',
   image = '/assets/web/hero-site.jpg',
-  url = 'https://geodesign.in',
+  url = 'https://geodesign.co.in',
   type = 'website'
 }) {
   const fullTitle = title.includes('GeoDesign') ? title : `${title} | GeoDesign`
   const fullUrl = typeof window !== 'undefined' ? `${url}${window.location.pathname}` : url
+
+  const siteOrigin = url.replace(/\/$/, '')
+  const absoluteImageUrl =
+    /^https?:\/\//i.test(image) ? image : `${siteOrigin}${image.startsWith('/') ? image : `/${image}`}`
 
   return (
     <Helmet>
@@ -45,7 +49,7 @@ function SEO({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
+      <meta property="og:image" content={absoluteImageUrl} />
       <meta property="og:site_name" content="GeoDesign" />
       <meta property="og:locale" content="en_IN" />
       
@@ -54,7 +58,7 @@ function SEO({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image" content={absoluteImageUrl} />
       
       {/* Structured Data (JSON-LD) */}
       <script type="application/ld+json">

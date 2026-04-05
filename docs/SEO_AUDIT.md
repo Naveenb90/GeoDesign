@@ -1,9 +1,10 @@
 # SEO Audit Report - GeoDesign React Website
 
-**Date:** January 27, 2025  
-**Website:** https://geodesign.in  
+**Original audit date:** January 27, 2025  
+**Last doc refresh:** April 2026 (metadata only — re-verify findings against the live app)  
+**Canonical site:** https://geodesign.co.in  
 **Framework:** React 18 with Vite  
-**Audit Type:** Comprehensive SEO Analysis
+**Audit type:** Comprehensive SEO analysis (historical snapshot; scores are not auto-updated)
 
 ---
 

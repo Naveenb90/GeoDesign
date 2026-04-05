@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import ErrorBoundary from './components/ErrorBoundary.jsx'
 import './styles/index.css'
 
 /**
@@ -10,16 +9,15 @@ import './styles/index.css'
  * This is the main entry point for the React application.
  * It renders the root App component into the DOM.
  * 
- * ErrorBoundary wraps the app to catch and handle React errors gracefully.
+ * Note: ErrorBoundary is implemented in App.jsx to catch React errors gracefully.
+ * Having it there (closer to the router) allows for better error handling context.
  * 
  * @module main
  */
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
+    <App />
   </React.StrictMode>,
 )
 
