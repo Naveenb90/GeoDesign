@@ -1,75 +1,63 @@
-# GeoDesign React Application
+# GeoDesign — web repository
 
-A modern React application for GeoDesign - Expert Soil Testing Services in India.
+Marketing site for **GeoDesign** ([geodesign.co.in](https://geodesign.co.in)). This repo contains **two** apps:
 
-**Production:** [https://geodesign.co.in](https://geodesign.co.in) — inner pages use a white `page-shell` + `max-w-7xl` layout, sky card tokens, and typography (Inter, Montserrat). See [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md) and the [docs index](docs/README.md). Service routes: [docs/SERVICES_PAGES.md](docs/SERVICES_PAGES.md). Git workflow template: [docs/git-local.example.md](docs/git-local.example.md) (copy to `docs/git-local.md`, gitignored).
+| App | Path | Stack | When to use |
+|-----|------|--------|-------------|
+| **Astro (target)** | [`astro/`](./astro/) | Astro 6, static output, Tailwind v4, React islands | **New work** on branch `feat/astro-netlify` — SEO-first HTML, Netlify publishes `astro/dist` |
+| **Legacy React SPA** | [`src/`](./src/) | React 18, Vite, React Router, `react-helmet-async` | Reference until routes are migrated; `npm run build` → `dist/` |
 
-## Features
+**Docs:** [docs/README.md](./docs/README.md) — start with [docs/ASTRO_MIGRATION.md](./docs/ASTRO_MIGRATION.md) for the Astro branch and Netlify.
 
-- ⚛️ Built with React 18 and Vite
-- 🎨 Modern UI with Tailwind CSS
-- 📱 Fully responsive design
-- 🚀 Optimized performance with code splitting
-- ♿ Accessibility features
-- 🔒 Security best practices
+---
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- npm or yarn
-
-### Installation
+## Astro site (recommended)
 
 ```bash
+cd astro
 npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-The application will be available at `http://localhost:3000`
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-### Preview Production Build
-
-```bash
+npm run dev          # http://localhost:4321
+npm run build        # astro/dist
 npm run preview
 ```
 
-## Project Structure
+**Netlify (this branch):** [`netlify.toml`](./netlify.toml) runs `cd astro && npm ci && npm run build` and publishes **`astro/dist`**. No SPA catch-all redirect.
+
+---
+
+## Legacy Vite + React app
+
+```bash
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # dist/
+npm run preview
+npm run lint
+```
+
+Used for production until Astro migration is complete. See [docs/PROJECT_SUMMARY.md](./docs/PROJECT_SUMMARY.md).
+
+---
+
+## Project structure (high level)
 
 ```
 do_react/
-├── public/
-│   └── assets/          # Static assets (images, etc.)
-├── src/
-│   ├── components/      # React components
-│   ├── hooks/          # Custom React hooks
-│   ├── styles/         # Global styles
-│   ├── App.jsx         # Main App component
-│   └── main.jsx        # Entry point
-├── index.html
-├── package.json
-└── vite.config.js
+├── astro/                 # Astro app (static SEO site)
+├── src/                   # Legacy React SPA
+├── public/                # Legacy Vite public assets
+├── docs/                  # Design system, migration, SEO audit
+├── netlify.toml           # Build: Astro on feat/astro-netlify
+└── package.json           # Root = legacy app
 ```
 
-## Best Practices Implemented
+## Features (directional)
 
-- Component-based architecture
-- Custom hooks for reusable logic
-- Performance optimization (lazy loading, code splitting)
-- Accessibility (ARIA labels, semantic HTML)
-- Security (form validation, XSS prevention)
-- SEO optimization (meta tags, semantic structure)
+- Static HTML per route (Astro) for crawlers and social previews
+- Tailwind CSS; design tokens aligned with [docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md)
+- Netlify Forms (contact) — wire in Astro when porting `/contact`
+- Accessibility and semantic HTML (WCAG-oriented rules in `.cursor/rules/`)
 
+## Git workflow
 
+Template: [docs/git-local.example.md](./docs/git-local.example.md) (copy to `docs/git-local.md`, gitignored).

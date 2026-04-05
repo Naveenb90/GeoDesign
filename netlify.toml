@@ -1,12 +1,11 @@
+# GeoDesign — this branch builds the Astro app under astro/ (static, SEO-first).
+# Legacy Vite SPA at repo root is not the Netlify publish target on feat/astro-netlify.
+
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "cd astro && npm ci && npm run build"
+  publish = "astro/dist"
 
 [build.environment]
   NODE_VERSION = "20"
 
-# SPA fallback — client-side routes work on refresh
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# No SPA catch-all — Astro emits real HTML per path; Netlify serves 404.html for missing routes.

@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description?: string;
+  /** Path only, e.g. `/about` — used with site for canonical and og:url */
+  canonicalPath?: string;
+  ogImagePath?: string;
+  /** Set for error pages so search engines do not index soft 404 */
+  robotsNoindex?: boolean;
+}
+
+const {
+  title,
+  description = 'GeoDesign reduces construction risk using scientific geotechnical expertise — soil investigation, testing, and foundation insight across Tamil Nadu, Coimbatore & Chennai.',
+  canonicalPath,
+  ogImagePath = '/assets/web/hero-site.jpg',
+  robotsNoindex = false,
+} = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://geodesign.co.in';
+const path = canonicalPath ?? Astro.url.pathname;
+const canonical = new URL(path, site + '/').href;
+const ogImage = ogImagePath.startsWith('http') ? ogImagePath : `${site}${ogImagePath.startsWith('/') ? '' : '/'}${ogImagePath}`;
+
+const fullTitle = title.includes('GeoDesign') ? title : `${title} | GeoDesign`;
+
+const orgJsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'GeoDesign India Private Limited',
+  url: site,
+  logo: `${site}/assets/web/logo.png`,
+  description,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Old No. 40, New No. 29, 8th Street, K.K.Pudur',
+    addressLocality: 'Coimbatore',
+    postalCode: '641038',
+    addressCountry: 'IN',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+91-9043344488',
+      contactType: 'customer service',
+      areaServed: 'Coimbatore',
+      email: 'geodesign123@gmail.com',
+    },
+    {
+      '@type': 'ContactPoint',
+      telephone: '+91-9043344088',
+      contactType: 'customer service',
+      areaServed: 'Chennai',
+      email: 'geodesign123@gmail.com',
+    },
+  ],
+});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robotsNoindex ? 'noindex, nofollow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} />
+    <title>{fullTitle}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="GeoDesign" />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={orgJsonLd} />
+
+    <link rel="icon" type="image/png" href="/favicon.ico" />
+  </head>
+  <body class="min-h-screen bg-white font-sans text-slate-800 antialiased">
+    <slot />
+  </body>
+</html>

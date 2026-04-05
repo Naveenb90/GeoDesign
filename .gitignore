@@ -147,7 +147,10 @@ test-results/
 
 # Cursor AI editor
 # NOTE: .cursorrules IS committed (it's project config, not personal)
-.cursor/
+# Track shared rules/skills; ignore other local Cursor data
+.cursor/*
+!.cursor/rules/
+!.cursor/skills/
 .cursor-tutor/
 
 # VS Code personal settings (share extensions.json, not settings.json)

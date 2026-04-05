@@ -154,6 +154,13 @@ All listed pages use **`src/components/SEO.jsx`** with route-specific props.
 
 ---
 
+## Addendum — Astro static site (`feat/astro-netlify`)
+
+The **Astro** app under **`astro/`** ships per-route **HTML with meta and canonical in the first response** via [`astro/src/layouts/BaseLayout.astro`](../astro/src/layouts/BaseLayout.astro). This addresses the SPA limitations called out in **§ SPA considerations** and **Executive summary** for crawlers that do not execute JavaScript. **`@astrojs/sitemap`** generates **`sitemap-index.xml`** at build time; [`astro/public/robots.txt`](../astro/public/robots.txt) references **`https://geodesign.co.in/sitemap-index.xml`**. Re-run Lighthouse and Rich Results after each batch of migrated routes.
+
+---
+
 ## Changelog
 
+- **2026-04-05:** Addendum for Astro migration branch and static HTML SEO.
 - **2026-04-04:** Full rewrite from codebase audit; aligned **robots.txt** / **sitemap.xml** to **https://geodesign.co.in**; updated sitemap **lastmod**; removed obsolete / corrupted table fragments from prior version.

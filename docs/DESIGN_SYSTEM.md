@@ -1,8 +1,18 @@
-# Design system — GeoDesign React
+# Design system — GeoDesign web
 
 This project aligns with the live marketing site at [https://geodesign.co.in](https://geodesign.co.in) (tone, offices, contact).
 
-## Typography
+## Astro app (`astro/`)
+
+**Branch `feat/astro-netlify`.** Static pages use **`astro/src/layouts/BaseLayout.astro`** for document shell and SEO (replacing `react-helmet-async` for migrated routes).
+
+- **Page body:** Prefer `.astro` sections for static content; use **React islands** (`@astrojs/react` + `client:*`) only for interactive blocks (nav, forms, galleries).
+- **Layout parity:** Reproduce **`page-shell`** spacing and **sky tiles** via shared Astro components or Tailwind classes aligned with [`src/constants/skyTileClasses.js`](../src/constants/skyTileClasses.js) tokens.
+- **Typography:** Tailwind v4 in [`astro/src/styles/global.css`](../astro/src/styles/global.css); align Inter / Montserrat with the legacy [`index.html`](../index.html) loading pattern when porting fonts.
+- **Images:** Prefer Astro **`Image`** (or optimized assets) when migrating hero and galleries.
+- **Maps / offices:** Port [`OfficeMapEmbed`](../src/components/OfficeMapEmbed.jsx) patterns into `.astro` or a small island.
+
+## Legacy React SPA — Typography
 
 - **Body:** Inter — Tailwind `font-sans`, CSS `--font-sans`.
 - **Headings / display:** Montserrat — Tailwind `font-display`, CSS `--font-display` (used on Hero and some headings; many inner pages use bold sans only for H1).
@@ -46,13 +56,14 @@ Embed URLs: `src/constants/data.js` → **`mapEmbedUrls`** (`headOffice`, `branc
 
 ## SEO base URL
 
-**`src/components/SEO.jsx`** defaults `url` to **`https://geodesign.co.in`** for canonical, Open Graph, and JSON-LD.
+- **Astro:** `site` in [`astro/astro.config.mjs`](../astro/astro.config.mjs) is **`https://geodesign.co.in`**; canonicals and OG in [`BaseLayout.astro`](../astro/src/layouts/BaseLayout.astro).
+- **Legacy SPA:** **`src/components/SEO.jsx`** defaults `url` to **`https://geodesign.co.in`** for canonical, Open Graph, and JSON-LD.
 
 ## Netlify
 
-- Build: `npm run build`, publish **`dist/`** (`netlify.toml`).
-- SPA fallback redirects to `index.html`.
-- Contact form: Netlify Forms (`ContactSection.jsx`).
+- **Astro migration branch:** `cd astro && npm ci && npm run build`, publish **`astro/dist`** — see root [`netlify.toml`](../netlify.toml). No SPA catch-all for static routes.
+- **Legacy:** `npm run build`, publish **`dist/`**; SPA fallback `/* → /index.html` in [`public/_redirects`](../public/_redirects) (not used when Astro is the publish root).
+- **Forms:** Netlify Forms (`ContactSection.jsx` in legacy; port attributes to Astro when migrating `/contact`).
 
 ## Scroll
 

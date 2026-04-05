@@ -1,8 +1,12 @@
-# Project summary — GeoDesign React
+# Project summary — GeoDesign web
 
 ## Overview
 
-Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu): React 18 SPA built with **Vite**, **Tailwind CSS**, **React Router**, **`react-helmet-async`**. Content is largely static modules under **`src/constants/`**.
+Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu).
+
+**Astro (in progress, branch `feat/astro-netlify`):** Static site under **`astro/`** — file-based routes, **`BaseLayout.astro`** for meta/OG/JSON-LD, Tailwind v4, `@astrojs/sitemap`. Netlify build: see root **`netlify.toml`** → publish **`astro/dist`**. See **[ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md)**.
+
+**Legacy SPA (repo root):** React 18 app with **Vite**, **Tailwind CSS**, **React Router**, **`react-helmet-async`**. Content is largely static modules under **`src/constants/`** until pages are ported.
 
 **Production reference:** [https://geodesign.co.in](https://geodesign.co.in)
 
@@ -59,7 +63,9 @@ npm run lint
 
 ## Deployment
 
-**Netlify:** `npm run build`, publish **`dist`**, Node 20 (`netlify.toml`). Forms require Netlify-hosted build.
+**Netlify (branch `feat/astro-netlify`):** `cd astro && npm ci && npm run build`, publish **`astro/dist`**, Node 20 — see **`netlify.toml`**. No SPA `/* → /index.html` redirect; static HTML per path.
+
+**Legacy Netlify (default branch / pre-migration):** `npm run build`, publish **`dist`**, Node 20. Forms require Netlify-hosted build.
 
 ## Documentation index
 
@@ -69,13 +75,14 @@ npm run lint
 | [SERVICES_PAGES.md](./SERVICES_PAGES.md) | `/services` hub and PDF-aligned slugs |
 | [TECH_DEBT.md](./TECH_DEBT.md) | Improvements backlog, notes |
 | [SEO_AUDIT.md](./SEO_AUDIT.md) | Historical SEO checklist (verify dates/domains) |
+| [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md) | Astro stack, Netlify, route parity |
 | [git-local.example.md](./git-local.example.md) | Git commands template; copy to `git-local.md` (gitignored) |
 
 ## Tech stack
 
-- React 18, react-router-dom 6, react-helmet-async  
-- Vite 7, Tailwind 3, ESLint  
-- Fancybox (CDN) for project gallery  
+**Astro app (`astro/`):** Astro 6, Tailwind v4, `@astrojs/react`, `@astrojs/sitemap`, TypeScript strict.
+
+**Legacy SPA:** React 18, react-router-dom 6, react-helmet-async, Vite 7, Tailwind 3, ESLint, Fancybox (CDN) for project gallery.
 
 ## Future ideas (non-blocking)
 

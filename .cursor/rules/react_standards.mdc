@@ -1,0 +1,317 @@
+---
+alwaysApply: true
+---
+# ============================================================
+# .cursorrules — React Website Project
+# Standards: W3C, React Community, Accessibility, Performance
+# ============================================================
+# This file governs AI-assisted code generation for this project.
+# All generated code must comply with these rules before output.
+# ============================================================
+
+**Migration note:** New marketing-site work targets **Astro** under `astro/` (static SEO-first build). For Astro pages, layouts, and file-based routes, follow **[astro_standards.mdc](./astro_standards.mdc)** and **[.cursor/skills/geodesign-astro/SKILL.md](../skills/geodesign-astro/SKILL.md)**. This React document still applies to **legacy** `src/` and to **React islands** inside Astro.
+
+## ─────────────────────────────────────────────
+## 1. PROJECT IDENTITY
+## ─────────────────────────────────────────────
+
+project:
+  type: react-website
+  framework: React 18+
+  language: JavaScript (JSX) or TypeScript (TSX)
+  styling: CSS Modules | Tailwind CSS | Styled Components (project-configured)
+  node_version: ">=18.0.0"
+
+## ─────────────────────────────────────────────
+## 2. GENERAL CODING PHILOSOPHY
+## ─────────────────────────────────────────────
+
+philosophy:
+  - Write code for humans first, machines second
+  - Prefer clarity over cleverness
+  - Every file, function, and component must have a clear single responsibility
+  - DRY (Don't Repeat Yourself) — abstract reusable logic
+  - SOLID principles apply to component architecture
+  - Fail loudly in development, gracefully in production
+
+## ─────────────────────────────────────────────
+## 3. REACT COMPONENT STANDARDS
+## ─────────────────────────────────────────────
+
+react:
+  component_style: functional  # No class components unless legacy
+  hooks_only: true
+
+  naming:
+    components: PascalCase          # e.g., UserProfileCard
+    hooks: camelCase with 'use'     # e.g., useAuthState
+    utilities: camelCase            # e.g., formatCurrency
+    constants: UPPER_SNAKE_CASE     # e.g., MAX_RETRY_COUNT
+    css_classes: kebab-case         # e.g., .hero-section
+    files_components: PascalCase    # UserCard.jsx
+    files_hooks: camelCase          # useDebounce.js
+    files_utils: camelCase          # formatDate.js
+
+  component_structure: |
+    /**
+     * @component ComponentName
+     * @description Brief description of what this component does.
+     * @param {Type} propName - Description of prop.
+     * @returns {JSX.Element}
+     */
+
+    // 1. Imports (external libs → internal modules → styles)
+    // 2. Constants / config
+    // 3. PropTypes or TypeScript interface
+    // 4. Component definition
+    // 5. Sub-components (if small and tightly coupled)
+    // 6. Default export
+
+  rules:
+    - Always define PropTypes or TypeScript interfaces
+    - Never use index as key in dynamic lists unless list is static
+    - Avoid inline functions in JSX render (extract to named handlers)
+    - Memoize expensive computations with useMemo
+    - Memoize callbacks passed to children with useCallback
+    - Use React.memo for pure presentational components
+    - Co-locate state as close to where it's used as possible
+    - Extract business logic into custom hooks
+    - Never mutate state directly — always use setState pattern
+
+## ─────────────────────────────────────────────
+## 4. FILE & FOLDER STRUCTURE
+## ─────────────────────────────────────────────
+
+structure:
+  src/:
+    components/:
+      - "Shared/reusable components only"
+      - "Each component in its own folder: ComponentName/index.jsx"
+      - "Co-locate: index.jsx, ComponentName.module.css, ComponentName.test.jsx"
+    pages/:
+      - "Route-level page components"
+      - "Thin — delegate to feature components"
+    hooks/:
+      - "Custom React hooks (useXxx.js)"
+    utils/:
+      - "Pure utility functions (no side effects)"
+    services/:
+      - "API calls, data fetching abstractions"
+    context/:
+      - "React Context providers and consumers"
+    constants/:
+      - "App-wide constants and enums"
+    assets/:
+      - "Images, fonts, SVGs"
+    styles/:
+      - "Global CSS, theme variables, resets"
+
+## ─────────────────────────────────────────────
+## 5. ACCESSIBILITY (W3C / WCAG 2.1 AA)
+## ─────────────────────────────────────────────
+
+accessibility:
+  standard: WCAG 2.1 Level AA
+  rules:
+    - Every <img> must have a meaningful alt attribute (or alt="" if decorative)
+    - Interactive elements must be keyboard-navigable (tabIndex, onKeyDown)
+    - Use semantic HTML elements: <header>, <nav>, <main>, <section>, <article>, <footer>
+    - Never use <div> or <span> for clickable elements — use <button> or <a>
+    - Form inputs must have associated <label> (via htmlFor or aria-label)
+    - Maintain color contrast ratio ≥ 4.5:1 for text, ≥ 3:1 for large text
+    - Use ARIA attributes only when semantic HTML is insufficient
+    - Provide visible focus indicators — never suppress outline without replacement
+    - Headings must follow logical hierarchy: h1 → h2 → h3
+    - Dynamic content changes must be announced via aria-live regions
+    - All modals/dialogs must trap focus and support Escape key dismissal
+
+## ─────────────────────────────────────────────
+## 6. HTML / JSX BEST PRACTICES (W3C Standards)
+## ─────────────────────────────────────────────
+
+html_jsx:
+  - Use self-closing tags for void elements: <img />, <input />, <br />
+  - lang attribute must be set on <html> element
+  - <title> and <meta description> must be present on every page
+  - Use <link rel="preload"> for critical assets
+  - Prefer semantic landmark roles over generic divs
+  - Never use deprecated HTML attributes (align, border, bgcolor, etc.)
+  - Validate HTML output — aim for zero W3C validator errors
+
+## ─────────────────────────────────────────────
+## 7. CSS & STYLING STANDARDS
+## ─────────────────────────────────────────────
+
+css:
+  methodology: BEM or CSS Modules (project-configured)
+  rules:
+    - Define design tokens as CSS custom properties (--color-primary, --spacing-md)
+    - Mobile-first responsive design (min-width media queries)
+    - No magic numbers — use variables or named constants
+    - Avoid !important — refactor specificity instead
+    - Group properties: positioning → display/box → typography → visual → animation
+    - Use logical properties (margin-inline, padding-block) for i18n readiness
+    - Animations must respect prefers-reduced-motion media query
+    - Use rem/em for font sizes, spacing; px only for borders and shadows
+    - Avoid deeply nested selectors (max 3 levels)
+
+## ─────────────────────────────────────────────
+## 8. PERFORMANCE STANDARDS
+## ─────────────────────────────────────────────
+
+performance:
+  targets:
+    LCP: "<2.5s"
+    FID: "<100ms"
+    CLS: "<0.1"
+    TTI: "<3.5s"
+  rules:
+    - Lazy load routes with React.lazy() and Suspense
+    - Lazy load images with loading="lazy" attribute
+    - Use next-gen image formats (WebP, AVIF) with fallbacks
+    - Code-split at the route level minimum
+    - Avoid large re-renders — profile with React DevTools before optimizing
+    - Debounce/throttle scroll, resize, and input event handlers
+    - Minimize bundle size — audit with source-map-explorer
+    - Prefer CSS animations over JavaScript animations for UI transitions
+    - Never block the main thread with synchronous heavy computation
+
+## ─────────────────────────────────────────────
+## 9. COMMENTING STANDARDS
+## ─────────────────────────────────────────────
+
+comments:
+  philosophy: |
+    Comments explain WHY, not WHAT.
+    The code explains WHAT — comments explain intent, gotchas, and business logic.
+
+  required:
+    - JSDoc block for every exported component, hook, and utility function
+    - Inline comment for any non-obvious logic, regex, or algorithm
+    - TODO comments must include: // TODO(author): description — and be tracked in issues
+    - FIXME comments must include: // FIXME: description — treated as bugs
+
+  forbidden:
+    - Commented-out code (use git history instead)
+    - Obvious comments: "// increment i" above i++
+    - Stale comments that don't match the code
+
+  jsdoc_template: |
+    /**
+     * @function functionName
+     * @description What this function does and why it exists.
+     * @param {string} paramName - What this param represents.
+     * @param {boolean} [optionalParam=false] - Optional param with default.
+     * @returns {Promise<Object>} Description of return value.
+     * @throws {Error} When and why this throws.
+     * @example
+     * const result = functionName('value', true);
+     */
+
+## ─────────────────────────────────────────────
+## 10. CODE FORMATTING (Prettier-aligned)
+## ─────────────────────────────────────────────
+
+formatting:
+  indent: 2 spaces
+  quotes: single (JS/JSX), double (HTML attributes)
+  semicolons: true
+  trailing_comma: es5
+  line_length: 100
+  jsx_single_quote: false
+  bracket_spacing: true
+  arrow_function_parens: always
+
+## ─────────────────────────────────────────────
+## 11. IMPORTS ORDER
+## ─────────────────────────────────────────────
+
+imports_order:
+  1: "React and React-related (react, react-dom, react-router-dom)"
+  2: "Third-party libraries (alphabetical)"
+  3: "Internal absolute imports (@/components, @/hooks)"
+  4: "Relative imports (../sibling, ./child)"
+  5: "Type imports (TypeScript only)"
+  6: "CSS/SCSS/module imports"
+  rule: "Separate each group with a blank line"
+
+## ─────────────────────────────────────────────
+## 12. ERROR HANDLING
+## ─────────────────────────────────────────────
+
+error_handling:
+  - Wrap route-level components in Error Boundaries
+  - Never swallow errors silently (no empty catch blocks)
+  - Log errors with context: console.error('[ComponentName]:', error)
+  - Show user-friendly fallback UI on error (never raw error messages)
+  - Validate all external data (API responses) before rendering
+
+## ─────────────────────────────────────────────
+## 13. TESTING STANDARDS
+## ─────────────────────────────────────────────
+
+testing:
+  framework: Jest + React Testing Library
+  philosophy: "Test behavior, not implementation"
+  rules:
+    - Every component must have at least one render test
+    - Test user interactions (click, type, submit) not internal state
+    - Mock network calls — never hit real APIs in tests
+    - Use data-testid sparingly — prefer accessible queries (getByRole, getByLabelText)
+    - Aim for ≥80% coverage on utility functions and hooks
+    - Snapshot tests only for stable, rarely-changing UI
+
+## ─────────────────────────────────────────────
+## 14. SECURITY STANDARDS
+## ─────────────────────────────────────────────
+
+security:
+  - Never use dangerouslySetInnerHTML unless absolutely necessary and sanitized
+  - Sanitize all user-generated content before rendering
+  - Never store sensitive data (tokens, passwords) in localStorage or sessionStorage
+  - Use HttpOnly cookies for auth tokens
+  - Validate and sanitize all form inputs client-side AND server-side
+  - Keep dependencies updated — audit with npm audit regularly
+  - Never expose API keys in frontend code — use environment variables
+
+## ─────────────────────────────────────────────
+## 15. GIT COMMIT STANDARDS
+## ─────────────────────────────────────────────
+
+git:
+  convention: Conventional Commits
+  format: "<type>(<scope>): <short description>"
+  types:
+    feat: New feature
+    fix: Bug fix
+    docs: Documentation changes
+    style: Formatting, no logic change
+    refactor: Code restructure, no feature/fix
+    perf: Performance improvement
+    test: Adding/updating tests
+    chore: Build process, dependency updates
+  rules:
+    - Subject line ≤72 characters
+    - Use imperative mood ("add feature" not "added feature")
+    - Reference issue numbers when applicable
+
+## ─────────────────────────────────────────────
+## 16. AI ASSISTANT BEHAVIOR (Cursor-specific)
+## ─────────────────────────────────────────────
+
+ai_rules:
+  - NEVER modify existing files unless explicitly asked
+  - ALWAYS follow the component structure template defined above
+  - ALWAYS include JSDoc comments on new exports
+  - ALWAYS include PropTypes or TypeScript interfaces
+  - ALWAYS add accessibility attributes to interactive elements
+  - NEVER generate commented-out code
+  - NEVER use deprecated React patterns (componentDidMount, etc.)
+  - ALWAYS use named exports alongside default exports for testability
+  - When in doubt about where a file belongs — follow the folder structure above
+  - Prefer composition over inheritance in all component design
+  - When generating CSS — always use the project's existing CSS variables
+
+# ============================================================
+# END OF .cursorrules
+# ============================================================
