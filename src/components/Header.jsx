@@ -78,7 +78,7 @@ function Header() {
               Geo Design
             </span>
             <span className="text-[0.6875rem] sm:text-xs text-slate-500 leading-snug mt-0.5 line-clamp-2 sm:line-clamp-none">
-              Science-led insight for safer builds
+              We care for your Safety and Investment
             </span>
           </div>
         </Link>

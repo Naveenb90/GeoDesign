@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import OfficeContactTile from '../components/OfficeContactTile'
 import OfficeMapEmbed from '../components/OfficeMapEmbed'
 import SEO from '../components/SEO'
 import { contactInfo, mapEmbedUrls } from '../constants/data'
 import { SKY_OUTCOME_TILE_CLASS } from '../constants/skyTileClasses'
 
 /**
- * Office locations: address column on the left, map on the right (desktop); stacked on small screens.
- * Page shell and tiles align with About / Contact (white canvas, sky-gradient panels).
+ * Office locations: details + map per location; tiles use shared OfficeContactTile styling.
  *
  * @returns {JSX.Element}
  */
@@ -21,7 +21,7 @@ function OurOfficesPage() {
       />
       <div className="page-shell bg-white !pb-6 sm:!pb-8">
         <div className="max-w-7xl mx-auto w-full">
-          <section className="w-full min-w-0 py-8 md:py-10 space-y-10 md:space-y-12">
+          <section className="w-full min-w-0 space-y-8 py-8 md:space-y-10 md:py-10">
             <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-5 md:mb-6">
                 Our Offices
@@ -32,79 +32,34 @@ function OurOfficesPage() {
               </p>
             </div>
 
-            {/* Head Office — details left, map right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-              <div className={`${SKY_OUTCOME_TILE_CLASS} flex flex-col justify-center text-left`}>
-                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
-                  Head Office
-                </h2>
-                <p className="text-sm text-slate-500 mb-5">{contactInfo.headOffice.regionLabel}</p>
-                <address className="not-italic space-y-3 text-slate-600 text-base leading-relaxed">
-                  <p>
-                    <span aria-hidden="true">📍</span> {contactInfo.headOffice.address}
-                  </p>
-                  <p>
-                    <span aria-hidden="true">📞</span> {contactInfo.phone.landline}
-                  </p>
-                  <p>
-                    <a
-                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`}
-                      className="text-sky-700 hover:text-sky-800 hover:underline"
-                    >
-                      📱 {contactInfo.phone.mobile}
-                    </a>
-                  </p>
-                  <p>
-                    <a href={`mailto:${contactInfo.email}`} className="text-sky-700 hover:text-sky-800 hover:underline">
-                      ✉️ {contactInfo.email}
-                    </a>
-                  </p>
-                </address>
-              </div>
-              <div className="min-h-0">
-                <OfficeMapEmbed
-                  title="Head Office — Coimbatore"
-                  subtitle={contactInfo.headOffice.address}
-                  embedUrl={mapEmbedUrls.headOffice}
-                />
+            {/* Head Office — contact tile + map */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-stretch">
+              <OfficeContactTile
+                heading="Head Office"
+                regionLabel={contactInfo.headOffice.regionLabel}
+                address={contactInfo.headOffice.address}
+                landline={contactInfo.phone.landline}
+                mobile={contactInfo.headOffice.mobile}
+                email={contactInfo.email}
+                officeLabel="Coimbatore office"
+              />
+              <div className="flex min-h-[320px] flex-col lg:h-full lg:min-h-0">
+                <OfficeMapEmbed title="Coimbatore" embedUrl={mapEmbedUrls.headOffice} />
               </div>
             </div>
 
-            {/* Branch Office — details left, map right */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-              <div className={`${SKY_OUTCOME_TILE_CLASS} flex flex-col justify-center text-left`}>
-                <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-1">
-                  Branch Office
-                </h2>
-                <p className="text-sm text-slate-500 mb-5">{contactInfo.branchOffice.regionLabel}</p>
-                <address className="not-italic space-y-3 text-slate-600 text-base leading-relaxed">
-                  <p>
-                    <span aria-hidden="true">📍</span> {contactInfo.branchOffice.address}
-                  </p>
-                  <p>
-                    <span aria-hidden="true">📞</span> {contactInfo.phone.landline}
-                  </p>
-                  <p>
-                    <a
-                      href={`tel:${contactInfo.phone.mobile.replace(/\s/g, '')}`}
-                      className="text-sky-700 hover:text-sky-800 hover:underline"
-                    >
-                      📱 {contactInfo.phone.mobile}
-                    </a>
-                  </p>
-                  <p>
-                    <a href={`mailto:${contactInfo.email}`} className="text-sky-700 hover:text-sky-800 hover:underline">
-                      ✉️ {contactInfo.email}
-                    </a>
-                  </p>
-                </address>
-              </div>
-              <div className="min-h-0">
-                <OfficeMapEmbed
-                  title="Branch Office — Chennai"
-                  subtitle={contactInfo.branchOffice.address}
-                  embedUrl={mapEmbedUrls.branchOffice}
-                />
+            {/* Branch Office — contact tile + map */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 lg:items-stretch">
+              <OfficeContactTile
+                heading="Branch Office"
+                regionLabel={contactInfo.branchOffice.regionLabel}
+                address={contactInfo.branchOffice.address}
+                mobile={contactInfo.branchOffice.mobile}
+                email={contactInfo.email}
+                officeLabel="Chennai branch office"
+              />
+              <div className="flex min-h-[320px] flex-col lg:h-full lg:min-h-0">
+                <OfficeMapEmbed title="Chennai" embedUrl={mapEmbedUrls.branchOffice} />
               </div>
             </div>
 

@@ -42,7 +42,7 @@ function Hero() {
 
         <p className="mb-6 text-[0.9375rem] sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
           We reduce risk in construction using scientific expertise — geotechnical investigation and testing
-          across Tamil Nadu for residential, commercial, and government projects.
+          across South India for residential, commercial, and government projects.
         </p>
 
         {/* Trust line — trophy + number emphasized */}

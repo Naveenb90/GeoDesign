@@ -36,13 +36,6 @@ function ServicesPage() {
               topic for full scope and methodology.
             </p>
 
-            <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-900 mb-2">
-              How we help
-            </h2>
-            <p className="text-center text-slate-600 text-sm md:text-base max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
-              Each topic below describes how we apply science to ground conditions and design decisions.
-            </p>
-
             <ul className="grid gap-4 md:gap-5 sm:grid-cols-2 list-none p-0 m-0">
               {geotechnicalServicePages.map((svc, index) => {
                 const isPrimary = index === 0

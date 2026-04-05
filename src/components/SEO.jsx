@@ -77,12 +77,22 @@ function SEO({
             "postalCode": "641038",
             "addressCountry": "IN"
           },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+91-9043344488",
-            "contactType": "customer service",
-            "email": "geodesign123@gmail.com"
-          }
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+91-9043344488",
+              "contactType": "customer service",
+              "areaServed": "Coimbatore",
+              "email": "geodesign123@gmail.com"
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+91-9043344088",
+              "contactType": "customer service",
+              "areaServed": "Chennai",
+              "email": "geodesign123@gmail.com"
+            }
+          ]
         })}
       </script>
     </Helmet>

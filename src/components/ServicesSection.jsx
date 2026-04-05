@@ -30,7 +30,7 @@ function ServicesSection() {
           </h2>
           <p className="text-lg text-slate-600 mb-14 max-w-3xl mx-auto">
             We reduce construction risk using scientific expertise — geotechnical investigation, testing, and
-            foundation insight for safer builds.
+            foundation insight for your safety and investment.
           </p>
         </div>
 

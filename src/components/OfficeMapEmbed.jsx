@@ -1,32 +1,30 @@
 import React from 'react'
 
 /**
- * Embedded Google Map for an office location.
+ * Embedded Google Map — city name only (title) above the iframe.
  *
  * @param {Object} props
- * @param {string} props.title - Accessible map title and visible heading
+ * @param {string} props.title - City label (e.g. Coimbatore, Chennai); used for heading and iframe title.
  * @param {string} props.embedUrl - Google Maps embed iframe src (Share → Embed a map)
- * @param {string} [props.subtitle] - Optional line under heading
  * @returns {JSX.Element}
  */
-function OfficeMapEmbed({ title, embedUrl, subtitle }) {
+function OfficeMapEmbed({ title, embedUrl }) {
   return (
-    <div className="h-full min-h-0 overflow-hidden rounded-2xl border border-sky-200/70 bg-white shadow-sm ring-1 ring-sky-100/80">
-      <div className="border-b border-sky-100/80 px-4 pt-4 pb-2 md:px-5 md:pt-5">
-        <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
-        {subtitle ? <p className="text-sm text-slate-600 mt-0.5">{subtitle}</p> : null}
+    <div className="flex h-full min-h-[280px] flex-col overflow-hidden rounded-2xl border border-sky-200/70 bg-white shadow-sm ring-1 ring-sky-100/80">
+      <div className="shrink-0 border-b border-sky-100/80 px-4 py-2.5 md:px-5 md:py-3">
+        <h3 className="text-base font-semibold text-slate-900 md:text-lg">{title}</h3>
       </div>
-      <div className="w-full min-h-[280px] md:min-h-[320px]">
+      <div className="min-h-0 flex-1 w-full">
         <iframe
           src={embedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0, minHeight: '280px' }}
+          style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
           title={title}
-          className="w-full h-full min-h-[280px]"
+          className="block h-full min-h-[260px] w-full md:min-h-[300px] lg:min-h-0"
         />
       </div>
     </div>

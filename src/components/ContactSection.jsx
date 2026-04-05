@@ -89,7 +89,7 @@ function ContactSection() {
   }
 
   const highlightItems = [
-    'Science-led ground insight before you build',
+    'We care for your Safety and Investment',
     'Clear reports that support safer design decisions',
     'Trusted by 5,000+ projects across Tamil Nadu',
   ]

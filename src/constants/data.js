@@ -278,13 +278,18 @@ export const contactInfo = {
   headOffice: {
     address: 'Old No. 40, New No. 29, 8th Street, K.K.Pudur, Coimbatore - 641038',
     regionLabel: 'Coimbatore, Tamil Nadu',
+    /** Mobile & WhatsApp — Coimbatore (head office) */
+    mobile: '+91 9043344488',
   },
   branchOffice: {
     address: 'No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094',
     regionLabel: 'Chennai, Tamil Nadu',
+    /** Mobile & WhatsApp — Chennai branch */
+    mobile: '+91 9043344088',
   },
   phone: {
     landline: '0422 - 4202452',
+    /** Primary mobile (Coimbatore); use headOffice.mobile for office-specific UIs */
     mobile: '+91 9043344488',
   },
   email: 'geodesign123@gmail.com',
