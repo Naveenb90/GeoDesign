@@ -12,6 +12,10 @@ const site = 'https://geodesign.co.in';
 export default defineConfig({
   site,
   output: 'static',
+  /** Hide Astro dev toolbar (inspect / dev overlay) in local dev — not shown in production builds. */
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [react(), sitemap()],
 
   vite: {

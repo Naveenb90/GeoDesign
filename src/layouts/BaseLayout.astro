@@ -64,7 +64,6 @@ const orgJsonLd = JSON.stringify({
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <meta name="robots" content={robotsNoindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="canonical" href={canonical} />
@@ -95,7 +94,9 @@ const orgJsonLd = JSON.stringify({
 
     <slot name="head" />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Same logo as header: place file at `public/assets/web/logo.png` -->
+    <link rel="icon" type="image/png" href="/assets/web/logo.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/web/logo.png" />
   </head>
   <body class="flex min-h-screen min-w-0 flex-col overflow-x-hidden bg-white font-sans text-slate-800 antialiased">
     <slot />
