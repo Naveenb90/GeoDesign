@@ -9,7 +9,7 @@ alwaysApply: true
 # All generated code must comply with these rules before output.
 # ============================================================
 
-**Migration note:** New marketing-site work targets **Astro** under `astro/` (static SEO-first build). For Astro pages, layouts, and file-based routes, follow **[astro_standards.mdc](./astro_standards.mdc)** and **[.cursor/skills/geodesign-astro/SKILL.md](../skills/geodesign-astro/SKILL.md)**. This React document still applies to **legacy** `src/` and to **React islands** inside Astro.
+**Migration note:** The marketing site is **Astro at the repo root**. For pages, layouts, and routes follow **[astro_standards.mdc](./astro_standards.mdc)** and **[geodesign-astro](../skills/geodesign-astro/SKILL.md)**. This React document applies to **React islands** under `src/components/*.jsx` only.
 
 ## ─────────────────────────────────────────────
 ## 1. PROJECT IDENTITY

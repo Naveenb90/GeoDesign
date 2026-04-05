@@ -1,9 +1,8 @@
-# GeoDesign — this branch builds the Astro app under astro/ (static, SEO-first).
-# Legacy Vite SPA at repo root is not the Netlify publish target on feat/astro-netlify.
+# GeoDesign — Astro static site at repository root.
 
 [build]
-  command = "cd astro && npm ci && npm run build"
-  publish = "astro/dist"
+  command = "npm ci && npm run build"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"

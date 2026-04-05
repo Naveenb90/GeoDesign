@@ -1,48 +1,13 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
 # ============================================================
-# .gitignore — React Website Project
-# Standards: Node.js, React, Vite/CRA, AWS, Cursor, OS files
+# GeoDesign site — Astro (repo root)
+# Node.js, Astro, Netlify, Cursor, OS files
 # ============================================================
-# Structure:
-#   1. Dependencies
-#   2. Build & Output
-#   3. Environment & Secrets
-#   4. Testing & Coverage
-#   5. Editor & IDE
-#   6. OS Files
-#   7. Logging & Debug
-#   8. Cloud & Deployment
-#   9. Miscellaneous
+# Sections: Dependencies · Build · Env · Test · Editor · OS ·
+#           Logs · Cloud · Misc · Commit hints
 # ============================================================
-
 
 # ─────────────────────────────────────────────────────────────
-# 1. DEPENDENCIES
-# Node modules — never commit, always install fresh
+# Dependencies
 # ─────────────────────────────────────────────────────────────
 
 node_modules/
@@ -54,58 +19,45 @@ node_modules/
 .yarn/install-state.gz
 .pnpm-store/
 
-
 # ─────────────────────────────────────────────────────────────
-# 2. BUILD & OUTPUT
-# Compiled assets and generated files
+# Build & generated output
 # ─────────────────────────────────────────────────────────────
 
-# Create React App build output
-build/
-
-# Vite build output
 dist/
 dist-ssr/
-
-# Next.js build output (if applicable)
+build/
 .next/
 out/
 
-# Static site generator output
+# Astro — local cache + generated types (recreated on `astro dev` / `astro build`)
+.astro/
+
+# Static site / bundler caches
 public/build/
 .cache/
-
-# Parcel build output
 .parcel-cache/
 
-# Bundle analyzer output
 bundle-analyzer-report.html
 stats.json
-
-# Storybook build
 storybook-static/
 
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
 
 # ─────────────────────────────────────────────────────────────
-# 3. ENVIRONMENT & SECRETS
-# CRITICAL: Never commit secrets, tokens, or local env values
+# Environment & secrets
 # ─────────────────────────────────────────────────────────────
 
-# Local environment overrides
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 .env.staging.local
-
-# General .env files with real values
-# NOTE: .env (defaults, non-sensitive) and .env.example ARE committed
-# NOTE: .env.development and .env.test may be committed if non-sensitive
 .env.production
 .env.staging
 *.env.secret
 
-# Secrets and credential files
 *.pem
 *.key
 *.cert
@@ -117,49 +69,34 @@ service-account.json
 gcp-credentials.json
 firebase-adminsdk*.json
 
-
 # ─────────────────────────────────────────────────────────────
-# 4. TESTING & COVERAGE
-# Generated test reports and coverage data
+# Testing & coverage
 # ─────────────────────────────────────────────────────────────
 
-# Jest coverage output
 coverage/
 .nyc_output/
-
-# Test results (generated reports — source tests ARE committed)
 test-results/
 junit.xml
 test-report.html
-
-# Playwright / Cypress E2E
 cypress/screenshots/
 cypress/videos/
 playwright-report/
-test-results/
 .playwright/
 
-
 # ─────────────────────────────────────────────────────────────
-# 5. EDITOR & IDE
-# Local IDE configuration — not project-wide
+# Editor & IDE
 # ─────────────────────────────────────────────────────────────
 
-# Cursor AI editor
-# NOTE: .cursorrules IS committed (it's project config, not personal)
-# Track shared rules/skills; ignore other local Cursor data
+# Cursor — track shared rules/skills only
 .cursor/*
 !.cursor/rules/
 !.cursor/skills/
 .cursor-tutor/
 
-# VS Code personal settings (share extensions.json, not settings.json)
-.vscode/settings.json
-.vscode/launch.json
-.vscode/*.code-workspace
-# Commit: .vscode/extensions.json (team extension recommendations)
+# VS Code — share extensions.json only (un-ignore below)
+.vscode/*
+!.vscode/extensions.json
 
-# JetBrains (WebStorm, IntelliJ)
 .idea/
 *.iml
 *.iws
@@ -167,33 +104,23 @@ test-results/
 .idea/workspace.xml
 .idea/tasks.xml
 
-# Sublime Text
 *.sublime-project
 *.sublime-workspace
-
-# Vim / NeoVim
 *.swp
 *.swo
 *~
 Session.vim
 .netrwhist
-
-# Emacs
 \#*\#
 .\#*
-
-# Eclipse
 .classpath
 .project
 .settings/
 
-
 # ─────────────────────────────────────────────────────────────
-# 6. OPERATING SYSTEM FILES
-# Auto-generated OS artifacts — never project-relevant
+# OS files
 # ─────────────────────────────────────────────────────────────
 
-# macOS
 .DS_Store
 .DS_Store?
 ._*
@@ -203,8 +130,6 @@ Session.vim
 .LSOverride
 Icon?
 *.dmg
-
-# Windows
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
@@ -217,155 +142,79 @@ $RECYCLE.BIN/
 *.msix
 *.msm
 *.msp
-
-# Linux
-*~
 .fuse_hidden*
 .directory
 .Trash-*
 .nfs*
 
-
 # ─────────────────────────────────────────────────────────────
-# 7. LOGGING & DEBUG
-# Runtime logs and debug output
+# Logs & debug
 # ─────────────────────────────────────────────────────────────
 
-# NPM/Yarn logs
+logs/
+*.log
+log/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .npm
-
-# Application logs
-logs/
-*.log
-log/
-
-# Runtime data
 pids/
 *.pid
 *.seed
 *.pid.lock
-
-# Source map files (if not needed in repo)
-# Uncomment if you don't want to commit source maps:
-# *.map
-
+.node_repl_history
 
 # ─────────────────────────────────────────────────────────────
-# 8. CLOUD & DEPLOYMENT
-# AWS, Firebase, Vercel, Netlify local config and caches
+# Cloud & deployment (local only)
 # ─────────────────────────────────────────────────────────────
 
-# AWS Amplify
 amplify/
 .amplify/
-
-# AWS SAM
 .aws-sam/
-samconfig.toml   # Contains region/account info
-
-# AWS CDK
+samconfig.toml
 cdk.out/
-
-# Firebase
 .firebase/
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
-
-# Vercel
 .vercel/
-
-# Netlify
 .netlify/
-
-# Serverless Framework
 .serverless/
-
-# Terraform state (if infrastructure as code is in repo)
 *.tfstate
 *.tfstate.*
 .terraform/
-terraform.tfvars    # May contain secrets
-
+terraform.tfvars
 
 # ─────────────────────────────────────────────────────────────
-# 9. MISCELLANEOUS
-# Other generated or transient files
+# Miscellaneous
 # ─────────────────────────────────────────────────────────────
 
-# TypeScript compiled output (if not using build dir)
-*.tsbuildinfo
-tsconfig.tsbuildinfo
-
-# Optional npm cache directory
-.npm/
-
-# ESLint cache
 .eslintcache
-
-# Stylelint cache
 .stylelintcache
-
-# Prettier cache
 .prettiercache
-
-# Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/
 .rts2_cache_es/
 .rts2_cache_umd/
-
-# REPL history
-.node_repl_history
-
-# Output of 'npm pack'
 *.tgz
-
-# Yarn Integrity file
 .yarn-integrity
-
-# Stores JSDoc-generated documentation
 docs/jsdoc/
-
-# Personal git notes (copy from docs/git-local.example.md)
 docs/git-local.md
-
-# Temporary folders
 tmp/
 temp/
 .tmp/
 .temp/
 
-# Lock files (choose ONE to commit — don't mix)
-# If using npm:  commit package-lock.json, ignore yarn.lock
-# If using yarn: commit yarn.lock, ignore package-lock.json
-# If using pnpm: commit pnpm-lock.yaml, ignore others
-# Uncomment the ones you want to ignore:
+# Optional: ignore yarn.lock or pnpm-lock if you standardize on npm only
 # yarn.lock
-# package-lock.json
+# pnpm-lock.yaml
 
-
-# ─────────────────────────────────────────────────────────────
-# WHAT IS INTENTIONALLY COMMITTED (not ignored)
-# ─────────────────────────────────────────────────────────────
-#
-# ✅ .cursor/rules/       — AI assistant rules (project-wide)
-# ✅ docs/README.md       — Documentation index
-# ✅ docs/git-local.example.md — Git workflow template (copy to docs/git-local.md)
-# ✅ .env                 — Non-sensitive default values
-# ✅ .env.example         — Template showing all required env vars
-# ✅ .env.development     — Non-sensitive dev config
-# ✅ .env.test            — Non-sensitive test config
-# ✅ .eslintrc.js         — Linting rules (shared by team)
-# ✅ .prettierrc          — Formatting rules (shared by team)
-# ✅ .stylelintrc         — CSS linting (shared by team)
-# ✅ jest.config.js       — Test configuration
-# ✅ .vscode/extensions.json — Recommended extensions for team
-#
 # ============================================================
-
+# Intentionally committed (examples)
+# ============================================================
+# .cursor/rules/  .cursor/skills/  docs/README.md
+# package-lock.json  public/  src/  astro.config.mjs
+# .vscode/extensions.json
+# ============================================================

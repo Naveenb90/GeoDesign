@@ -2,69 +2,52 @@
 
 This project aligns with the live marketing site at [https://geodesign.co.in](https://geodesign.co.in) (tone, offices, contact).
 
-## Astro app (`astro/`)
+## Astro site (repo root)
 
-**Branch `feat/astro-netlify`.** Static pages use **`astro/src/layouts/BaseLayout.astro`** for document shell and SEO (replacing `react-helmet-async` for migrated routes).
+Static pages use **`src/layouts/BaseLayout.astro`** for document shell and SEO.
 
-- **Page body:** Prefer `.astro` sections for static content; use **React islands** (`@astrojs/react` + `client:*`) only for interactive blocks (nav, forms, galleries).
-- **Layout parity:** Reproduce **`page-shell`** spacing and **sky tiles** via shared Astro components or Tailwind classes aligned with [`src/constants/skyTileClasses.js`](../src/constants/skyTileClasses.js) tokens.
-- **Typography:** Tailwind v4 in [`astro/src/styles/global.css`](../astro/src/styles/global.css); align Inter / Montserrat with the legacy [`index.html`](../index.html) loading pattern when porting fonts.
-- **Images:** Prefer Astro **`Image`** (or optimized assets) when migrating hero and galleries.
-- **Maps / offices:** Port [`OfficeMapEmbed`](../src/components/OfficeMapEmbed.jsx) patterns into `.astro` or a small island.
+- **Page body:** Prefer `.astro` sections for static content; use **React islands** (`@astrojs/react` + `client:*`) only for interactive blocks (contact form, projects gallery).
+- **Layout parity:** Reproduce **`page-shell`** spacing and **sky tiles** via Tailwind classes aligned with [`src/data/skyTileClasses.js`](../src/data/skyTileClasses.js) tokens.
+- **Typography:** Tailwind v4 in [`src/styles/global.css`](../src/styles/global.css); Inter + Montserrat via Google Fonts in `BaseLayout.astro`.
+- **Maps / offices:** [`OfficeMapEmbed.astro`](../src/components/OfficeMapEmbed.astro) and contact tiles.
 
-## Legacy React SPA — Typography
+## Typography
 
-- **Body:** Inter — Tailwind `font-sans`, CSS `--font-sans`.
-- **Headings / display:** Montserrat — Tailwind `font-display`, CSS `--font-display` (used on Hero and some headings; many inner pages use bold sans only for H1).
-- **Serif accent:** Playfair may appear in CSS tokens; **`index.html` loads Inter + Montserrat** — keep `index.html`, `tailwind.config.js`, and `src/styles/index.css` in sync if you add or remove families.
+- **Body:** Inter — Tailwind `font-sans`, `@theme` in `global.css`.
+- **Headings / display:** Montserrat — Tailwind `font-display`.
 
 ## Page layout
 
-### `page-shell` (global)
+### `page-shell` / `page-shell-white` (global)
 
-Defined in `src/styles/index.css`:
+Defined in [`src/styles/global.css`](../src/styles/global.css):
 
 - Top padding clears the fixed header (`pt-28`).
-- Default background: `bg-stone-50`.
+- Default inner pages: `page-shell-white` (white canvas, tighter bottom padding) or `page-shell` (stone background).
 
-### Marketing pages (About, Why It Matters, What We Do, Projects, Contact, Our Offices, service hub/detail)
+### Marketing pages
 
-These routes **override** the shell for a consistent look:
-
-- **`page-shell bg-white !pb-6 sm:!pb-8`** — white canvas, tighter bottom gap above the footer.
-- Inner wrapper: **`max-w-7xl mx-auto w-full`**.
-- Section content often uses **`py-8 md:py-10`** on the inner `<section>`.
-
-**Home** uses the hero inside `page-shell` with a full-bleed background image.
-
-**Video** (`VideoPage`) may still use the default `page-shell` only — align with the white shell when polishing parity.
+Inner wrapper: **`max-w-7xl mx-auto w-full`** (`page-shell-inner`). Section content often uses **`py-8 md:py-10`**.
 
 ## Sky tiles (cards)
 
-Shared classes live in **`src/constants/skyTileClasses.js`**:
+Shared classes live in **`src/data/skyTileClasses.js`**:
 
-- **`SKY_OUTCOME_TILE_CLASS`** — large cards (e.g. “Protect Your Investment”, service detail topics, office panels, projects gallery panels).
-- **`SKY_FACTOR_TILE_CLASS`** — compact cards (Why It Matters factor grid, What We Do hub links).
-
-Issue Section factor tiles use **hover** lift/scale and border/shadow (see `IssueSection.jsx`); respect `prefers-reduced-motion`.
+- **`SKY_OUTCOME_TILE_CLASS`** — large cards.
+- **`SKY_FACTOR_TILE_CLASS`** — compact cards (Why It Matters, services hub).
 
 ## Google Maps
 
-Embed URLs: `src/constants/data.js` → **`mapEmbedUrls`** (`headOffice`, `branchOffice`). Prefer **Share → Embed a map** from Google Maps for accurate pins.
-
-**`OfficeMapEmbed.jsx`** — sky-styled chrome (`rounded-2xl`, `border-sky-200/70`, ring). Used on **Our Offices** (and anywhere else maps appear).
+Embed URLs: `src/data/data.js` → **`mapEmbedUrls`**. Prefer **Share → Embed a map** from Google Maps.
 
 ## SEO base URL
 
-- **Astro:** `site` in [`astro/astro.config.mjs`](../astro/astro.config.mjs) is **`https://geodesign.co.in`**; canonicals and OG in [`BaseLayout.astro`](../astro/src/layouts/BaseLayout.astro).
-- **Legacy SPA:** **`src/components/SEO.jsx`** defaults `url` to **`https://geodesign.co.in`** for canonical, Open Graph, and JSON-LD.
+- **`site`** in [`astro.config.mjs`](../astro.config.mjs) is **`https://geodesign.co.in`**; canonicals and OG in [`BaseLayout.astro`](../src/layouts/BaseLayout.astro).
 
 ## Netlify
 
-- **Astro migration branch:** `cd astro && npm ci && npm run build`, publish **`astro/dist`** — see root [`netlify.toml`](../netlify.toml). No SPA catch-all for static routes.
-- **Legacy:** `npm run build`, publish **`dist/`**; SPA fallback `/* → /index.html` in [`public/_redirects`](../public/_redirects) (not used when Astro is the publish root).
-- **Forms:** Netlify Forms (`ContactSection.jsx` in legacy; port attributes to Astro when migrating `/contact`).
+- **`npm ci && npm run build`**, publish **`dist/`** — see [`netlify.toml`](../netlify.toml).
 
 ## Scroll
 
-**`ScrollToTop`** in `App.jsx` scrolls to `(0,0)` on route changes (`pathname` / `search`).
+Astro performs full page navigations; the browser handles scroll position. No SPA `ScrollToTop` helper.

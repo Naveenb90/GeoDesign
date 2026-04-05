@@ -1,57 +1,32 @@
-# Astro migration (`feat/astro-netlify`)
+# Astro site (repository root)
 
-**Goals:** SEO-first static HTML per URL, smaller client JS (React only as islands), Netlify deploy from `astro/dist`.
+**Goals:** SEO-first static HTML per URL, React only as islands, Netlify deploy from `dist/`.
 
-**Branch:** `feat/astro-netlify`  
-**Legacy app:** Vite + React SPA at repo root (`src/`, `npm run build` → `dist/`) — unchanged until cutover.
+The **Vite + React SPA** at the former repo root has been **removed**; this repository is **Astro-only**.
 
 ## Layout
 
 | Path | Role |
 |------|------|
-| [`astro/`](../astro/) | Astro 6 app — **this** is what Netlify builds on this branch |
-| [`astro/src/layouts/BaseLayout.astro`](../astro/src/layouts/BaseLayout.astro) | Shared `<head>`: title, meta, canonical, OG/Twitter, Organization JSON-LD |
-| [`astro/src/pages/`](../astro/src/pages/) | File-based routes |
-| [`astro/public/`](../astro/public/) | Static files (trimmed `assets/web/` for hero/logo; add `clients/` / `gallery/` when porting Projects/Home) |
-| [`netlify.toml`](../netlify.toml) | `command = "cd astro && npm ci && npm run build"`, `publish = "astro/dist"` |
+| [`astro.config.mjs`](../astro.config.mjs) | Astro 6 config, `site`, integrations |
+| [`src/layouts/BaseLayout.astro`](../src/layouts/BaseLayout.astro) | Shared `<head>`: title, meta, canonical, OG/Twitter, Organization JSON-LD |
+| [`src/pages/`](../src/pages/) | File-based routes |
+| [`public/`](../public/) | Static assets (`assets/web/`, `assets/clients/`, `assets/gallery/`, etc.) |
+| [`netlify.toml`](../netlify.toml) | `npm ci && npm run build`, `publish = "dist"` |
 | [`.cursor/skills/geodesign-astro/SKILL.md`](../.cursor/skills/geodesign-astro/SKILL.md) | Agent conventions |
 | [`.cursor/rules/astro_standards.mdc`](../.cursor/rules/astro_standards.mdc) | Astro + island standards |
 
 ## Netlify
 
-1. Connect the repo; set **production branch** or use **Deploy Previews** for `feat/astro-netlify`.
-2. Build settings are read from **`netlify.toml`** (no SPA `/* → /index.html` redirect — Astro emits real HTML per path).
-3. **Node:** 20 (`[build.environment]`).
-4. After deploy, confirm:
-   - `/` returns static HTML with correct `<title>`.
-   - `/sitemap-index.xml` exists.
-   - `robots.txt` references `https://geodesign.co.in/sitemap-index.xml`.
+1. Build settings: **`netlify.toml`** (no SPA `/* → /index.html` redirect).
+2. **Node:** 20 (`[build.environment]`).
+3. After deploy, confirm `/`, `/sitemap-index.xml`, and `robots.txt` → `https://geodesign.co.in/sitemap-index.xml`.
 
-## Route parity (checklist)
+## Route parity
 
-Mirror [`App.jsx`](../src/App.jsx) and [PROJECT_SUMMARY](./PROJECT_SUMMARY.md):
-
-| Path | Status |
-|------|--------|
-| `/` | Scaffold (placeholder copy) |
-| `/why-it-matters` | Pending |
-| `/about` | Pending |
-| `/services` | Pending |
-| `/services/:slug` | Pending (dynamic segments → `getStaticPaths` or file tree) |
-| `/projects` | Pending |
-| `/contact` | Pending (Netlify form in `.astro` or island) |
-| `/video` | Pending |
-| `/our-offices` | Pending |
-| 404 | [`astro/src/pages/404.astro`](../astro/src/pages/404.astro) |
-
-## Cutover (when ready)
-
-1. QA Deploy Preview on Netlify (all routes, forms, maps, analytics).
-2. Point production domain to the new deploy or merge to default branch after updating `netlify.toml` on `master`.
-3. Remove or archive root Vite app if no longer needed.
-4. Update internal links and any hard-coded `dist/` references.
+Routes mirror the former React Router app (removed). All primary paths are implemented under `src/pages/`.
 
 ## Effort notes
 
-- **Incremental:** Port one route at a time; copy constants from `src/constants/` into `astro/src/` as you go.
-- **Assets:** Copy additional folders under `public/assets/` as pages require them (see trim note in [`astro/README.md`](../astro/README.md)).
+- Shared copy lives in [`src/data/`](../src/data/).
+- Add assets under `public/assets/` as needed.

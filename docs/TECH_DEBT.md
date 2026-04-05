@@ -1,13 +1,13 @@
 # Code Validation, Best Practices, and Improvements
 
-This document outlines the validation, improvements, and best practices implemented in the GeoDesign website (legacy React SPA and Astro migration).
+This document outlines validation, improvements, and best practices for the GeoDesign **Astro** site at the repo root.
 
-## Astro migration (`feat/astro-netlify`)
+## Astro site
 
-- **Routes:** Port each React Router path to `astro/src/pages/` (see [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md)); use `getStaticPaths` for `/services/:slug` equivalents.
-- **Netlify:** Root `netlify.toml` targets `astro/dist` on the migration branch — remove legacy SPA `/* → /index.html` for that deploy; restore or split contexts if default branch still ships Vite `dist/` until cutover.
-- **Assets:** Add `public/assets/clients`, `gallery`, etc. under `astro/public/` when porting Home and Projects.
-- **Tests:** Add smoke tests for Astro build and critical routes when CI is introduced.
+- **Routes:** Implemented under `src/pages/` (see [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md)); dynamic services use `getStaticPaths` in `src/pages/services/[slug].astro`.
+- **Netlify:** `netlify.toml` publishes **`dist/`** (no SPA catch-all).
+- **Assets:** Static files live under **`public/`** (e.g. `public/assets/...`).
+- **Tests:** Add smoke tests for `npm run build` and critical routes when CI is introduced.
 
 ## ✅ Code Correctness & Reliability
 

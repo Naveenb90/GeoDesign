@@ -4,7 +4,7 @@ alwaysApply: true
 
 # GeoDesign Astro — standards (marketing site)
 
-Use this file for **page-level and layout work** under `astro/`. For **React island** components, also follow [.cursor/rules/react_standards.mdc](./react_standards.mdc) where applicable.
+Use this file for **page-level and layout work** at the repo root (`src/pages`, `src/layouts`). For **React island** components, also follow [.cursor/rules/react_standards.mdc](./react_standards.mdc) where applicable.
 
 ## Goals
 
@@ -13,9 +13,9 @@ Use this file for **page-level and layout work** under `astro/`. For **React isl
 
 ## Structure
 
-- **Layouts:** Shared head + chrome in `astro/src/layouts/` (e.g. `BaseLayout.astro`).
-- **Routes:** File-based under `astro/src/pages/`; use `404.astro` for not-found.
-- **Styling:** Tailwind v4 via `@import "tailwindcss"` in `astro/src/styles/global.css`.
+- **Layouts:** Shared head + chrome in `src/layouts/` (e.g. `BaseLayout.astro`).
+- **Routes:** File-based under `src/pages/`; use `404.astro` for not-found.
+- **Styling:** Tailwind v4 via `@import "tailwindcss"` in `src/styles/global.css`.
 
 ## Astro patterns
 

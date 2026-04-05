@@ -27,4 +27,4 @@ Source: `public/assets/services/Geotechnical Investigation - SEO.pdf`. Plain-tex
 
 ## Sitemap
 
-Service URLs are listed in `public/sitemap.xml` under **`https://geodesign.co.in`** (keep in sync with `SEO.jsx` and Search Console).
+Service URLs are included in the Astro build sitemap (`sitemap-index.xml`) under **`https://geodesign.co.in`** (keep Search Console in sync after route changes).

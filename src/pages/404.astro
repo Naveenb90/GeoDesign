@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+---
+
+<SiteLayout
+  title="404 — Page Not Found | GeoDesign"
+  description="The page you requested could not be found."
+  canonicalPath="/404"
+  robotsNoindex={true}
+>
+  <div class="page-shell-white">
+    <div class="page-shell-inner mx-auto flex min-h-[50vh] max-w-lg flex-col items-center justify-center px-4 py-20 text-center">
+      <h1 class="mb-4 text-4xl font-semibold text-slate-900">404 — Page Not Found</h1>
+      <p class="mb-8 text-slate-600">The page you&apos;re looking for doesn&apos;t exist.</p>
+      <a
+        href="/"
+        class="inline-block rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-semibold text-white shadow-md hover:from-sky-700 hover:to-sky-800"
+      >
+        Go home
+      </a>
+    </div>
+  </div>
+</SiteLayout>

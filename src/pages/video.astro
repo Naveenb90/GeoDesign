@@ -1,0 +1,29 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { videoConfig } from '../data/data.js';
+---
+
+<SiteLayout
+  title="Watch Our Video - GeoDesign"
+  description="Watch how scientific ground investigation helps reduce construction risk — geotechnical insight for your project."
+  canonicalPath="/video"
+>
+  <div class="page-shell flex-1 bg-stone-50">
+    <section
+      id="video"
+      class="relative flex min-h-screen w-full min-w-0 items-center justify-center bg-gray-100 px-2 pb-16 pt-20 sm:px-3 md:px-5"
+      aria-label="Video section"
+    >
+      <div class="relative h-[70vh] w-11/12 overflow-hidden rounded-xl bg-gray-300 shadow-lg md:w-4/5">
+        <iframe
+          class="h-full w-full border-0"
+          src={videoConfig.embedUrl}
+          title="YouTube video player"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+  </div>
+</SiteLayout>

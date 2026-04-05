@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Match legacy site: Inter body + Montserrat display (see root index.html) */
+@theme {
+  --font-family-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-display: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer components {
+  /** Inner pages: sticky header offset + horizontal rhythm (matches React `page-shell`) */
+  .page-shell {
+    @apply flex-1 min-h-0 min-w-0 w-full px-3 pt-28 pb-14 sm:px-4 sm:pb-16 md:px-6 lg:px-8 bg-stone-50;
+  }
+
+  .page-shell-white {
+    @apply flex-1 min-h-0 min-w-0 w-full px-3 pt-28 pb-6 sm:px-4 sm:pb-8 md:px-6 lg:px-8 bg-white;
+  }
+
+  .page-shell-inner {
+    @apply mx-auto w-full max-w-7xl;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  z-index: 9999;
+  background-color: #0ea5e9;
+  color: #fff;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}

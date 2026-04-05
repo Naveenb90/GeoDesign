@@ -12,7 +12,7 @@
 
 | Area | Rating | Notes |
 |------|--------|--------|
-| Technical (robots, sitemap, URLs) | **Strong** | `robots.txt` + `sitemap.xml` present; URLs aligned to **geodesign.co.in** (updated this audit). |
+| Technical (robots, sitemap, URLs) | **Strong** | `robots.txt` + `@astrojs/sitemap` (`sitemap-index.xml`); URLs aligned to **geodesign.co.in** (updated this audit). |
 | On-page (titles, descriptions) | **Strong** | Every route renders `<SEO />` with unique `title` / `description` / `keywords`. |
 | Structured data | **Good** | Organization JSON-LD on all pages; room to add `WebPage` / `LocalBusiness` refinement. |
 | Content & headings | **Good** | Clear H1 on most routes; **Video** page lacks a visible H1 (see below). |
@@ -28,8 +28,8 @@
 
 | Item | Location | Status |
 |------|----------|--------|
-| **robots.txt** | `public/robots.txt` | `Allow: /`; **Sitemap** points to `https://geodesign.co.in/sitemap.xml` |
-| **sitemap.xml** | `public/sitemap.xml` | **14 URLs**: home, about, `/services`, 5× `/services/:slug`, projects, contact, video, why-it-matters, our-offices |
+| **robots.txt** | `public/robots.txt` | `Allow: /`; **Sitemap** points to `https://geodesign.co.in/sitemap-index.xml` |
+| **Sitemap** | Build output | **`@astrojs/sitemap`** emits **`sitemap-index.xml`** (and chunks) at `npm run build` |
 | **Clean URLs** | React Router | Kebab-case paths; service slugs match catalog |
 | **404** | `App.jsx` | Friendly message + link home (not in sitemap — correct) |
 | **lang** | `index.html` | `<html lang="en">` |
@@ -135,7 +135,7 @@ All listed pages use **`src/components/SEO.jsx`** with route-specific props.
 
 ## 9. Verification checklist (post-deploy)
 
-- [ ] **Search Console** property for **geodesign.co.in**, submit sitemap `https://geodesign.co.in/sitemap.xml`
+- [ ] **Search Console** property for **geodesign.co.in**, submit sitemap `https://geodesign.co.in/sitemap-index.xml`
 - [ ] **URL Inspection** on `/`, `/services`, one service detail
 - [ ] **Rich Results Test** on a page with JSON-LD
 - [ ] **Lighthouse** SEO category on key routes
@@ -149,14 +149,14 @@ All listed pages use **`src/components/SEO.jsx`** with route-specific props.
 |---------|------|
 | Meta, canonical, OG, JSON-LD | `src/components/SEO.jsx` |
 | Per-route titles/descriptions | `src/pages/*.jsx`, `src/constants/servicesCatalog.js` |
-| Crawlers | `public/robots.txt`, `public/sitemap.xml` |
+| Crawlers | `public/robots.txt`, build-generated `sitemap-index.xml` |
 | Shell document | `index.html` |
 
 ---
 
-## Addendum — Astro static site (`feat/astro-netlify`)
+## Addendum — Astro static site (repo root)
 
-The **Astro** app under **`astro/`** ships per-route **HTML with meta and canonical in the first response** via [`astro/src/layouts/BaseLayout.astro`](../astro/src/layouts/BaseLayout.astro). This addresses the SPA limitations called out in **§ SPA considerations** and **Executive summary** for crawlers that do not execute JavaScript. **`@astrojs/sitemap`** generates **`sitemap-index.xml`** at build time; [`astro/public/robots.txt`](../astro/public/robots.txt) references **`https://geodesign.co.in/sitemap-index.xml`**. Re-run Lighthouse and Rich Results after each batch of migrated routes.
+The **Astro** app ships per-route **HTML with meta and canonical in the first response** via [`src/layouts/BaseLayout.astro`](../src/layouts/BaseLayout.astro). **`@astrojs/sitemap`** generates **`sitemap-index.xml`** at build time; [`public/robots.txt`](../public/robots.txt) references **`https://geodesign.co.in/sitemap-index.xml`**. Re-run Lighthouse and Rich Results after substantive content changes.
 
 ---
 
