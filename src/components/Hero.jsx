@@ -34,15 +34,16 @@ function Hero() {
       }`}>
         <div className="bg-white/30 rounded-3xl shadow-lg backdrop-blur-md p-8">
 
-        {/* Main headline — benefit-led, geotechnical authority */}
+        {/* Positioning: risk reduction through science, not “we sell services” */}
         <h1 className="text-3xl sm:text-4xl md:text-[2.25rem] lg:text-4xl font-bold mb-4 text-slate-900 leading-[1.2] hero-title font-display tracking-tight">
           Know Your Ground.
           <span className="block mt-1 text-sky-800">Build With Confidence.</span>
         </h1>
 
-        {/* Subheading — scope + geography */}
         <p className="mb-6 text-base sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
-        Expert soil testing for residential, commercial, and government projects</p>
+          We reduce risk in construction using scientific expertise — geotechnical investigation and testing
+          across Tamil Nadu for residential, commercial, and government projects.
+        </p>
 
         {/* Trust line — trophy + number emphasized */}
         <p className="mb-4 text-sm sm:text-base font-display tracking-wide flex flex-wrap items-center justify-center gap-x-2 gap-y-1 w-full">
@@ -60,7 +61,7 @@ function Hero() {
           <Link
             to="/contact"
             className="inline-flex items-center justify-center px-8 py-3 min-w-[200px] bg-gradient-to-r from-sky-600 to-sky-700 text-white font-semibold rounded-xl shadow-md hover:from-sky-700 hover:to-sky-800 transition focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"
-            aria-label="Get a quote for soil testing services"
+            aria-label="Get a quote for geotechnical investigation"
           >
             Get a Quote
           </Link>

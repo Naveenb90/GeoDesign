@@ -15,8 +15,8 @@ function ServicesPage() {
     <>
       <SEO
         title="What We Do — Geotechnical Services"
-        description="Explore GeoDesign geotechnical services: drilling & sampling, foundations, field testing, laboratory tests, and rock testing — Coimbatore, Chennai, Tamil Nadu."
-        keywords="geotechnical services, soil investigation, laboratory testing, foundation design, GeoDesign Tamil Nadu"
+        description="How we reduce construction risk: structured geotechnical investigation — drilling, testing, lab analysis, and foundation recommendations — Coimbatore, Chennai, Tamil Nadu."
+        keywords="geotechnical investigation, construction risk, soil testing, foundation design, Tamil Nadu"
       />
       <div className="page-shell bg-white !pb-6 sm:!pb-8">
         <div className="max-w-7xl mx-auto w-full">
@@ -31,16 +31,16 @@ function ServicesPage() {
               What We Do
             </h1>
             <p className="text-slate-600 text-base md:text-lg leading-relaxed text-center max-w-3xl mx-auto mb-10 md:mb-12">
-              Our services follow structured geotechnical investigation practice — from field drilling and
-              specialised testing through laboratory analysis and foundation recommendations. Open a topic for
-              full detail.
+              We reduce risk in construction using scientific expertise — structured investigation from field
+              drilling and specialised testing through laboratory analysis and foundation recommendations. Open a
+              topic for full scope and methodology.
             </p>
 
             <h2 className="text-2xl md:text-3xl font-bold text-center text-slate-900 mb-2">
-              Our services
+              How we help
             </h2>
             <p className="text-center text-slate-600 text-sm md:text-base max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed">
-              Choose a topic below for scope and methodology aligned to our geotechnical practice.
+              Each topic below describes how we apply science to ground conditions and design decisions.
             </p>
 
             <ul className="grid gap-4 md:gap-5 sm:grid-cols-2 list-none p-0 m-0">

@@ -27,7 +27,7 @@ export const navLinks = [
  * Short intro for the Why It Matters page (shown under the H1).
  */
 export const whyItMattersIntro =
-  'Every site is different. Soil type, rock, groundwater, and past fill all affect how loads are carried and how structures settle over time. Mapping these factors early supports safer design and fewer costly surprises.'
+  'Construction risk often starts underground. Every site is different — soil, rock, groundwater, and fill affect how loads are carried and how structures settle. Scientific investigation maps these factors early so design can reduce surprises and costly rework.'
 
 /**
  * Soil and site factors grouped by theme for the Why It Matters page.

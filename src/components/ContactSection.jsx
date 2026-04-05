@@ -89,9 +89,9 @@ function ContactSection() {
   }
 
   const highlightItems = [
-    'Fast and Reliable Testing',
-    'Detailed Reports & Recommendations',
-    'Trusted by 5,000+ Projects Across Tamil Nadu',
+    'Science-led ground insight before you build',
+    'Clear reports that support safer design decisions',
+    'Trusted by 5,000+ projects across Tamil Nadu',
   ]
 
   return (
@@ -122,11 +122,12 @@ function ContactSection() {
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed text-base">
                 <p>
-                  Every great project begins with the right foundation. With our expert soil testing,
-                  your construction is built on safety, stability, and confidence.
+                  We reduce risk in construction using scientific expertise — investigation and testing that
+                  turn ground conditions into clear design inputs, not guesswork.
                 </p>
                 <p>
-                  The first step to your dream starts here — make sure it stands strong for a lifetime.
+                  Share your site and timeline; we&apos;ll respond with practical next steps so your build starts
+                  on solid ground.
                 </p>
               </div>
               <ul className="mt-8 space-y-3 border-t border-sky-200/60 pt-6" role="list">

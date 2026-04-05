@@ -92,8 +92,8 @@ function ProjectsSection() {
         Who We Work With
       </h1>
       <p className="text-slate-600 text-base md:text-lg leading-relaxed text-center max-w-3xl mx-auto mb-10 md:mb-12">
-        A snapshot of our geotechnical work and the organisations that rely on GeoDesign for soil
-        investigation, testing, and foundation-related insight across Tamil Nadu and South India.
+        Organisations that rely on GeoDesign to reduce construction risk — scientific ground investigation,
+        testing, and foundation-related insight across Tamil Nadu and South India.
       </p>
 
       <div

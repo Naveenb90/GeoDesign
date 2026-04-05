@@ -15,8 +15,9 @@ import { Helmet } from 'react-helmet-async'
  * @param {string} props.type - OG type (website, article, etc.)
  */
 function SEO({ 
-  title = 'GeoDesign - Expert Soil Testing Services in India',
-  description = 'GeoDesign provides reliable soil testing services for residential, commercial, and government projects in Tamil Nadu. Contact us today!',
+  title = 'GeoDesign - Reduce Construction Risk in India',
+  description =
+    'GeoDesign reduces construction risk using scientific geotechnical expertise — soil investigation, testing, and foundation insight across Tamil Nadu, Coimbatore & Chennai.',
   keywords = 'soil testing, geotechnical services, borehole test, soil mechanics, Coimbatore, Chennai, Geo Design',
   image = '/assets/web/hero-site.jpg',
   url = 'https://geodesign.co.in',

@@ -7,8 +7,8 @@ function VideoPage() {
     <>
       <SEO
         title="Watch Our Video - GeoDesign"
-        description="Watch our informative video about soil testing and geotechnical services. Learn why soil testing matters for your construction project."
-        keywords="soil testing video, geotechnical video, construction video"
+        description="Watch how scientific ground investigation helps reduce construction risk — geotechnical insight for your project."
+        keywords="geotechnical video, construction risk, soil investigation"
       />
       <div className="page-shell">
         <VideoSection />

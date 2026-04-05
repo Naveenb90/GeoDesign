@@ -16,7 +16,7 @@ function OurOfficesPage() {
     <>
       <SEO
         title="Our Offices - GeoDesign"
-        description="Visit GeoDesign offices in Coimbatore and Chennai. Contact us for expert soil testing services across Tamil Nadu."
+        description="Visit GeoDesign in Coimbatore and Chennai — geotechnical expertise that helps reduce construction risk across Tamil Nadu."
         keywords="geodesign offices, Coimbatore office, Chennai office, contact address"
       />
       <div className="page-shell bg-white !pb-6 sm:!pb-8">
@@ -27,7 +27,8 @@ function OurOfficesPage() {
                 Our Offices
               </h1>
               <p className="text-slate-600 text-base md:text-lg leading-relaxed">
-                Visit us in Coimbatore or Chennai for expert geotechnical consulting across Tamil Nadu.
+                Visit us in Coimbatore or Chennai — discuss your site and how scientific ground insight can
+                reduce risk before you build.
               </p>
             </div>
 

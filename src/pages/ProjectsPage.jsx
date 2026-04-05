@@ -12,8 +12,8 @@ function ProjectsPage() {
     <>
       <SEO
         title="Our Projects - GeoDesign Portfolio"
-        description="View our portfolio of 5000+ successful geotechnical projects across Tamil Nadu. Trusted by leading developers and construction companies."
-        keywords="geodesign projects, soil testing projects, Tamil Nadu projects, construction projects"
+        description="Who we work with — 5,000+ geotechnical projects across Tamil Nadu. Partners who rely on science-led ground insight to reduce construction risk."
+        keywords="geodesign projects, geotechnical portfolio, Tamil Nadu, construction"
       />
       <div className="page-shell bg-white !pb-6 sm:!pb-8">
         <div className="max-w-7xl mx-auto w-full">

@@ -23,13 +23,14 @@ function ServicesSection() {
         {/* Section Header - Enhanced */}
         <div className="text-center mb-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-2 bg-sky-100 rounded-full">
-            <span className="text-sky-600 font-semibold text-xs">Our Expertise</span>
+            <span className="text-sky-600 font-semibold text-xs">What we do</span>
           </div>
           <h2 id="services-heading" className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-12">
-            Our Services
+            What We Do
           </h2>
           <p className="text-lg text-slate-600 mb-14 max-w-3xl mx-auto">
-            Delivering reliable soil testing & foundation solutions to build with confidence
+            We reduce construction risk using scientific expertise — geotechnical investigation, testing, and
+            foundation insight for safer builds.
           </p>
         </div>
 

@@ -6,9 +6,9 @@ function HomePage() {
   return (
     <>
       <SEO
-        title="GeoDesign - Expert Soil Testing Services in India"
-        description="Know your ground — geotechnical soil testing and foundation engineering across Tamil Nadu. 5,000+ projects completed. GeoDesign India."
-        keywords="soil testing, geotechnical services, Coimbatore, Chennai, foundation testing"
+        title="GeoDesign - Reduce Construction Risk in India"
+        description="We reduce construction risk using scientific expertise — geotechnical investigation and testing across Tamil Nadu. 5,000+ projects. Coimbatore & Chennai."
+        keywords="construction risk, geotechnical engineering, soil investigation, Tamil Nadu, Coimbatore, Chennai"
       />
       {/* Flex child fills main so hero + footer fit one viewport without redundant scroll */}
       <div className="flex flex-1 flex-col min-h-0 w-full">

@@ -7,8 +7,8 @@ function WhyItMattersPage() {
     <>
       <SEO
         title="Why Soil Testing Matters - GeoDesign"
-        description="Learn why soil testing is crucial for construction projects. Discover the importance of proper soil analysis for building safety and stability."
-        keywords="why soil testing matters, importance of soil testing, soil testing benefits, construction safety"
+        description="Why ground investigation matters: reducing construction risk with scientific soil and site analysis before design and build."
+        keywords="construction risk, soil investigation, geotechnical testing, building safety, Tamil Nadu"
       />
       <div className="page-shell bg-white !pb-6 sm:!pb-8">
         <div className="max-w-7xl mx-auto w-full">
