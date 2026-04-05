@@ -1,0 +1,87 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ContactForm from '../components/ContactForm.jsx';
+import { SKY_OUTCOME_TILE_CLASS } from '../data/skyTileClasses.js';
+
+const skyTile = `${SKY_OUTCOME_TILE_CLASS} text-left`;
+
+const highlightItems = [
+  'We care for your Safety and Investment',
+  'Clear reports that support safer design decisions',
+  'Trusted by 5,000+ projects across Tamil Nadu',
+];
+---
+
+<SiteLayout
+  title="Get Started - Contact GeoDesign"
+  description="Contact GeoDesign — reduce construction risk with scientific geotechnical expertise. Inquiry, quote, or site discussion across Tamil Nadu."
+  canonicalPath="/contact"
+>
+  <div class="page-shell-white">
+    <div class="page-shell-inner">
+      <section id="contact" class="w-full min-w-0 py-8 md:py-10" aria-labelledby="contact-heading">
+        <div class="grid grid-cols-1 items-start gap-10 xl:gap-14 lg:grid-cols-2">
+          <div class="max-w-xl space-y-8 lg:max-w-none">
+            <div>
+              <h1 id="contact-heading" class="mb-3 text-3xl font-bold text-slate-900 md:mb-4 sm:text-4xl">
+                Get Started Today
+              </h1>
+              <p class="text-base leading-relaxed text-slate-600 md:text-lg">
+                Tell us about your project — we&apos;ll respond with clear next steps and timelines.
+              </p>
+            </div>
+
+            <div class={skyTile}>
+              <h2 class="mb-5 text-xl font-bold text-slate-900 md:text-2xl">You Are in Safe Hands</h2>
+              <div class="space-y-4 text-base leading-relaxed text-slate-600">
+                <p>
+                  We reduce risk in construction using scientific expertise — investigation and testing that turn
+                  ground conditions into clear design inputs, not guesswork.
+                </p>
+                <p>
+                  Share your site and timeline; we&apos;ll respond with practical next steps so your build starts on
+                  solid ground.
+                </p>
+              </div>
+              <ul class="mt-8 space-y-3 border-t border-sky-200/60 pt-6" role="list">
+                {
+                  highlightItems.map((item) => (
+                    <li class="flex gap-3 text-slate-800">
+                      <span class="shrink-0 font-bold text-sky-600" aria-hidden="true">
+                        ✔️
+                      </span>
+                      <span class="leading-snug">{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            <p class="text-sm text-slate-600">
+              Need addresses or directions?{' '}
+              <a
+                href="/our-offices"
+                class="rounded font-semibold text-sky-700 underline underline-offset-2 hover:text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
+              >
+                View our offices
+              </a>
+            </p>
+          </div>
+
+          <ContactForm client:load />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Netlify form detection — field names must match ContactForm.jsx -->
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden aria-hidden="true">
+    <input type="hidden" name="form-name" value="contact" />
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="tel" name="phone" />
+    <input type="text" name="service" />
+    <textarea name="message"></textarea>
+    <input name="bot-field" />
+  </form>
+</SiteLayout>

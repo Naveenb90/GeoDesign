@@ -1,0 +1,71 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import OfficeContactTile from '../components/OfficeContactTile.astro';
+import OfficeMapEmbed from '../components/OfficeMapEmbed.astro';
+import { contactInfo, mapEmbedUrls } from '../data/data.js';
+import { SKY_OUTCOME_TILE_CLASS } from '../data/skyTileClasses.js';
+
+const ctaTile = `${SKY_OUTCOME_TILE_CLASS} text-center`;
+---
+
+<SiteLayout
+  title="Our Offices - GeoDesign"
+  description="Visit GeoDesign in Coimbatore and Chennai — geotechnical expertise that helps reduce construction risk across Tamil Nadu."
+  canonicalPath="/our-offices"
+>
+  <div class="page-shell-white">
+    <div class="page-shell-inner">
+      <section class="w-full min-w-0 space-y-8 py-8 md:space-y-10 md:py-10">
+        <div class="mx-auto max-w-3xl text-center">
+          <h1 class="mb-5 text-3xl font-bold text-slate-900 md:mb-6 sm:text-4xl">Our Offices</h1>
+          <p class="text-base leading-relaxed text-slate-600 md:text-lg">
+            Visit us in Coimbatore or Chennai — discuss your site and how scientific ground insight can reduce risk
+            before you build.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+          <OfficeContactTile
+            heading="Head Office"
+            regionLabel={contactInfo.headOffice.regionLabel}
+            address={contactInfo.headOffice.address}
+            landline={contactInfo.phone.landline}
+            mobile={contactInfo.headOffice.mobile}
+            email={contactInfo.email}
+            officeLabel="Coimbatore office"
+          />
+          <div class="flex min-h-[320px] flex-col lg:h-full lg:min-h-0">
+            <OfficeMapEmbed title="Coimbatore" embedUrl={mapEmbedUrls.headOffice} />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-stretch lg:gap-10">
+          <OfficeContactTile
+            heading="Branch Office"
+            regionLabel={contactInfo.branchOffice.regionLabel}
+            address={contactInfo.branchOffice.address}
+            mobile={contactInfo.branchOffice.mobile}
+            email={contactInfo.email}
+            officeLabel="Chennai branch office"
+          />
+          <div class="flex min-h-[320px] flex-col lg:h-full lg:min-h-0">
+            <OfficeMapEmbed title="Chennai" embedUrl={mapEmbedUrls.branchOffice} />
+          </div>
+        </div>
+
+        <div class={ctaTile}>
+          <h2 class="mb-2 text-xl font-bold text-slate-900 md:text-2xl">Submit an inquiry</h2>
+          <p class="mx-auto mb-6 max-w-xl text-sm text-slate-600 md:text-base">
+            Request a quote or ask a question on our dedicated inquiry page.
+          </p>
+          <a
+            href="/contact"
+            class="inline-block rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-8 py-3 font-semibold text-white shadow-md transition-colors hover:from-sky-700 hover:to-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-white"
+          >
+            Go to inquiry form
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</SiteLayout>

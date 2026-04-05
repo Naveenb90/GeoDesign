@@ -1,0 +1,31 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImagePath?: string;
+  robotsNoindex?: boolean;
+}
+
+const { title, description, canonicalPath, ogImagePath, robotsNoindex } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  ogImagePath={ogImagePath}
+  robotsNoindex={robotsNoindex}
+>
+  <slot name="head" slot="head" />
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <Header currentPath={Astro.url.pathname} />
+  <main id="main-content" class="flex min-h-0 w-full min-w-0 flex-1 flex-col bg-white">
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

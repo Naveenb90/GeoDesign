@@ -1,0 +1,187 @@
+---
+import { navLinks } from '../data/data.js';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const linkClass = (href: string) => {
+  const active = currentPath === href;
+  return active
+    ? 'text-sky-600 bg-sky-50'
+    : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50';
+};
+---
+
+<header
+  id="site-header"
+  class="header-site fixed left-0 top-0 z-50 w-full bg-white/80 py-3 shadow-md backdrop-blur-md transition-all duration-300 sm:py-4"
+  role="banner"
+>
+  <div class="mx-auto flex w-full min-w-0 max-w-7xl items-center justify-between gap-2 px-3 sm:px-4 lg:px-6">
+    <a href="/" class="group flex min-w-0 items-center gap-2 sm:gap-3">
+      <div class="relative shrink-0">
+        <img
+          src="/assets/web/logo.png"
+          alt="GeoDesign Logo"
+          class="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110 sm:h-16 sm:w-16 lg:h-20 lg:w-20"
+          width="80"
+          height="80"
+          loading="eager"
+        />
+      </div>
+      <div class="flex min-w-0 flex-col justify-center">
+        <span
+          class="font-sans text-[1.0625rem] font-semibold leading-snug tracking-normal text-slate-900 transition-colors group-hover:text-sky-700 sm:font-display sm:text-xl sm:tracking-tight"
+        >
+          Geo Design
+        </span>
+        <span
+          class="mt-0.5 line-clamp-2 text-[0.6875rem] leading-snug text-slate-500 sm:line-clamp-none sm:text-xs"
+        >
+          We care for your Safety and Investment
+        </span>
+      </div>
+    </a>
+
+    <nav class="hidden items-center space-x-1 lg:flex" role="navigation" aria-label="Main navigation">
+      <a
+        href="/"
+        class={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${linkClass('/')}`}
+      >
+        Home
+      </a>
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${linkClass(link.href)}`}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        class="ml-2 transform rounded-lg bg-gradient-to-r from-sky-500 to-sky-600 px-5 py-2 text-sm font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:from-sky-600 hover:to-sky-700 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-sky-300"
+      >
+        Get in Touch
+      </a>
+    </nav>
+
+    <button
+      id="menu-btn"
+      type="button"
+      class="shrink-0 rounded-lg p-2 text-slate-700 transition-colors hover:bg-sky-50 hover:text-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 lg:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path id="menu-icon-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <path
+          id="menu-icon-close"
+          class="hidden"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu-wrap" class="lg:hidden" hidden>
+    <nav
+      id="mobile-menu"
+      class="flex max-h-[min(85vh,28rem)] flex-col space-y-0.5 overflow-y-auto overscroll-contain border-t border-gray-200 bg-white px-3 pb-4 pt-2 sm:px-4"
+      role="navigation"
+      aria-label="Mobile navigation"
+    >
+      <a
+        href="/"
+        class={`rounded-lg px-4 py-3.5 font-sans text-[0.9375rem] font-medium leading-snug transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${linkClass('/')}`}
+      >
+        Home
+      </a>
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`rounded-lg px-4 py-3.5 font-sans text-[0.9375rem] font-medium leading-snug transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${linkClass(link.href)}`}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+      <a
+        href="/contact"
+        class="mt-2 rounded-lg bg-gradient-to-r from-sky-500 to-sky-600 px-4 py-3.5 text-center font-sans text-[0.9375rem] font-semibold text-white shadow-md transition-all duration-200 hover:from-sky-600 hover:to-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300"
+      >
+        Get in Touch
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var header = document.getElementById('site-header');
+    var btn = document.getElementById('menu-btn');
+    var wrap = document.getElementById('mobile-menu-wrap');
+    var iconOpen = document.getElementById('menu-icon-open');
+    var iconClose = document.getElementById('menu-icon-close');
+    if (!header || !btn || !wrap) return;
+
+    function setMenuOpen(open) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) {
+        wrap.removeAttribute('hidden');
+      } else {
+        wrap.setAttribute('hidden', '');
+      }
+      if (iconOpen && iconClose) {
+        iconOpen.classList.toggle('hidden', open);
+        iconClose.classList.toggle('hidden', !open);
+      }
+    }
+
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      setMenuOpen(!open);
+    });
+
+    wrap.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 20) {
+        header.classList.add('header-site--scrolled');
+      } else {
+        header.classList.remove('header-site--scrolled');
+      }
+    });
+  })();
+</script>
+
+<style>
+  .header-site.header-site--scrolled {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+    box-shadow:
+      0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  @media (min-width: 640px) {
+    .header-site.header-site--scrolled {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+  }
+</style>

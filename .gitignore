@@ -1,26 +1,220 @@
-# Logs
-logs
+# ============================================================
+# GeoDesign site — Astro (repo root)
+# Node.js, Astro, Netlify, Cursor, OS files
+# ============================================================
+# Sections: Dependencies · Build · Env · Test · Editor · OS ·
+#           Logs · Cloud · Misc · Commit hints
+# ============================================================
+
+# ─────────────────────────────────────────────────────────────
+# Dependencies
+# ─────────────────────────────────────────────────────────────
+
+node_modules/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnpm-store/
+
+# ─────────────────────────────────────────────────────────────
+# Build & generated output
+# ─────────────────────────────────────────────────────────────
+
+dist/
+dist-ssr/
+build/
+.next/
+out/
+
+# Astro — local cache + generated types (recreated on `astro dev` / `astro build`)
+.astro/
+
+# Static site / bundler caches
+public/build/
+.cache/
+.parcel-cache/
+
+bundle-analyzer-report.html
+stats.json
+storybook-static/
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# ─────────────────────────────────────────────────────────────
+# Environment & secrets
+# ─────────────────────────────────────────────────────────────
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.staging.local
+.env.production
+.env.staging
+*.env.secret
+
+*.pem
+*.key
+*.cert
+*.p12
+*.pfx
+secrets/
+credentials/
+service-account.json
+gcp-credentials.json
+firebase-adminsdk*.json
+
+# ─────────────────────────────────────────────────────────────
+# Testing & coverage
+# ─────────────────────────────────────────────────────────────
+
+coverage/
+.nyc_output/
+test-results/
+junit.xml
+test-report.html
+cypress/screenshots/
+cypress/videos/
+playwright-report/
+.playwright/
+
+# ─────────────────────────────────────────────────────────────
+# Editor & IDE
+# ─────────────────────────────────────────────────────────────
+
+# Cursor — track shared rules/skills only
+.cursor/*
+!.cursor/rules/
+!.cursor/skills/
+.cursor-tutor/
+
+# VS Code — share extensions.json only (un-ignore below)
+.vscode/*
+!.vscode/extensions.json
+
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea/workspace.xml
+.idea/tasks.xml
+
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+\#*\#
+.\#*
+.classpath
+.project
+.settings/
+
+# ─────────────────────────────────────────────────────────────
+# OS files
+# ─────────────────────────────────────────────────────────────
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+.AppleDouble
+.LSOverride
+Icon?
+*.dmg
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ─────────────────────────────────────────────────────────────
+# Logs & debug
+# ─────────────────────────────────────────────────────────────
+
+logs/
 *.log
+log/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.npm
+pids/
+*.pid
+*.seed
+*.pid.lock
+.node_repl_history
 
-node_modules
-dist
-dist-ssr
-*.local
+# ─────────────────────────────────────────────────────────────
+# Cloud & deployment (local only)
+# ─────────────────────────────────────────────────────────────
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+amplify/
+.amplify/
+.aws-sam/
+samconfig.toml
+cdk.out/
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+.vercel/
+.netlify/
+.serverless/
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
 
+# ─────────────────────────────────────────────────────────────
+# Miscellaneous
+# ─────────────────────────────────────────────────────────────
 
+.eslintcache
+.stylelintcache
+.prettiercache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+*.tgz
+.yarn-integrity
+docs/jsdoc/
+docs/git-local.md
+tmp/
+temp/
+.tmp/
+.temp/
+
+# Optional: ignore yarn.lock or pnpm-lock if you standardize on npm only
+# yarn.lock
+# pnpm-lock.yaml
+
+# ============================================================
+# Intentionally committed (examples)
+# ============================================================
+# .cursor/rules/  .cursor/skills/  docs/README.md
+# package-lock.json  public/  src/  astro.config.mjs
+# .vscode/extensions.json
+# ============================================================

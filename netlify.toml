@@ -1,25 +1,10 @@
-# Netlify Configuration for GeoDesign React App
-# This file should be in the do_react folder (repository root)
+# GeoDesign — Astro static site at repository root.
 
 [build]
-  # Build command
-  command = "npm run build"
-  
-  # Publish directory (relative to this file)
+  command = "npm ci && npm run build"
   publish = "dist"
 
-# Environment variables
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 
-# Headers for security
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "no-referrer-when-downgrade"
-    X-XSS-Protection = "1; mode=block"
-
-# Redirects for React Router (handled by _redirects file in public folder)
-# The _redirects file will be copied to dist during build
+# No SPA catch-all — Astro emits real HTML per path; Netlify serves 404.html for missing routes.

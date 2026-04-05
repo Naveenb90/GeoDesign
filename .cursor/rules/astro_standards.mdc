@@ -1,0 +1,37 @@
+---
+alwaysApply: true
+---
+
+# GeoDesign Astro — standards (marketing site)
+
+Use this file for **page-level and layout work** at the repo root (`src/pages`, `src/layouts`). For **React island** components, also follow [.cursor/rules/react_standards.mdc](./react_standards.mdc) where applicable.
+
+## Goals
+
+- **SEO:** Ship correct `<title>`, description, canonical, Open Graph, and structured data in the **initial HTML** for each route.
+- **Lightweight:** Default to zero client JS; add React islands only with explicit `client:*` directives.
+
+## Structure
+
+- **Layouts:** Shared head + chrome in `src/layouts/` (e.g. `BaseLayout.astro`).
+- **Routes:** File-based under `src/pages/`; use `404.astro` for not-found.
+- **Styling:** Tailwind v4 via `@import "tailwindcss"` in `src/styles/global.css`.
+
+## Astro patterns
+
+- Use `Astro.site` and `Astro.url` for canonical and absolute OG image URLs.
+- Prefer **`.astro` components** for static sections; **React** only for interactivity.
+- Do not add unnecessary `client:load` — prefer `client:visible` or `client:idle` for below-the-fold widgets.
+
+## Accessibility
+
+- Semantic landmarks (`header`, `main`, `nav`, `footer`), skip link, visible focus — align with WCAG 2.1 AA goals from the React standards doc.
+
+## Security
+
+- No `dangerouslySetInnerHTML` unless sanitized; prefer Astro-native content.
+- External iframes (maps, video): `title` attribute and conservative `referrerpolicy` where relevant.
+
+## Configuration
+
+- **`site`** in `astro.config.mjs` must match production (`https://geodesign.co.in`) for sitemap and absolute URLs.

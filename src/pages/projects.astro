@@ -1,0 +1,16 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectsGallery from '../components/ProjectsGallery.jsx';
+---
+
+<SiteLayout
+  title="Our Projects - GeoDesign Portfolio"
+  description="Who we work with — 5,000+ geotechnical projects across Tamil Nadu. Partners who rely on science-led ground insight to reduce construction risk."
+  canonicalPath="/projects"
+>
+  <div class="page-shell-white">
+    <div class="page-shell-inner">
+      <ProjectsGallery client:load />
+    </div>
+  </div>
+</SiteLayout>

@@ -1,0 +1,99 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import {
+  geotechnicalServicePages,
+  getSectionIcon,
+  getServiceBySlug,
+} from '../../data/servicesCatalog.js';
+import { SKY_OUTCOME_TILE_CLASS } from '../../data/skyTileClasses.js';
+
+export function getStaticPaths() {
+  return geotechnicalServicePages.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const service = getServiceBySlug(slug ?? '');
+
+if (!service) {
+  return Astro.redirect('/404');
+}
+
+const outcomeTile = `${SKY_OUTCOME_TILE_CLASS} flex h-full flex-col scroll-mt-28 text-left`;
+---
+
+<SiteLayout title={service.metaTitle} description={service.metaDescription} canonicalPath={`/services/${slug}`}>
+  <div class="page-shell-white">
+    <div class="page-shell-inner">
+      <section class="w-full min-w-0 py-8 md:py-10" aria-labelledby="service-detail-heading">
+        <nav class="mb-8 text-sm text-slate-600 md:mb-10" aria-label="Breadcrumb">
+          <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+            <li>
+              <a
+                href="/"
+                class="rounded hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+              >
+                Home
+              </a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li>
+              <a
+                href="/services"
+                class="rounded hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+              >
+                What We Do
+              </a>
+            </li>
+            <li aria-hidden="true">/</li>
+            <li class="font-medium text-slate-900" aria-current="page">
+              {service.title}
+            </li>
+          </ol>
+        </nav>
+
+        <article class="w-full" aria-labelledby="service-detail-heading">
+          <header class="mx-auto mb-10 max-w-3xl text-center md:mb-12">
+            <span class="mb-4 block text-5xl text-sky-600" aria-hidden="true">{service.icon}</span>
+            <h1 id="service-detail-heading" class="mb-4 text-3xl font-bold text-slate-900 md:mb-6 sm:text-4xl">
+              {service.title}
+            </h1>
+            <p class="text-base leading-relaxed text-slate-600 md:text-lg">{service.shortDescription}</p>
+          </header>
+
+          <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 md:gap-8">
+            {
+              service.sections.map((sec, index) => (
+                <li class="min-w-0">
+                  <section
+                    class={outcomeTile}
+                    aria-labelledby={`service-section-${slug}-${index}`}
+                  >
+                    <span class="mb-4 block text-center text-5xl text-sky-600" aria-hidden="true">
+                      {getSectionIcon(index)}
+                    </span>
+                    <h3
+                      id={`service-section-${slug}-${index}`}
+                      class="mb-3 text-center text-xl font-bold text-slate-900 md:text-2xl"
+                    >
+                      {sec.title}
+                    </h3>
+                    <p class="flex-1 text-base leading-relaxed text-slate-600">{sec.body}</p>
+                  </section>
+                </li>
+              ))
+            }
+          </ul>
+
+          <footer class="mt-10 border-t border-stone-200/80 pt-8 md:mt-12">
+            <a
+              href="/services"
+              class="rounded font-semibold text-sky-700 hover:text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+            >
+              ← All services
+            </a>
+          </footer>
+        </article>
+      </section>
+    </div>
+  </div>
+</SiteLayout>
