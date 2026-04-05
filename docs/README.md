@@ -6,7 +6,7 @@
 | **[DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md)** | Typography, `page-shell`, sky tiles, maps, SEO base URL |
 | **[SERVICES_PAGES.md](./SERVICES_PAGES.md)** | `/services` hub and PDF-aligned service slugs |
 | **[TECH_DEBT.md](./TECH_DEBT.md)** | Improvements, practices, backlog notes |
-| **[SEO_AUDIT.md](./SEO_AUDIT.md)** | SEO checklist (historical — confirm domain and dates) |
+| **[SEO_AUDIT.md](./SEO_AUDIT.md)** | Codebase SEO audit (2026); robots/sitemap aligned to geodesign.co.in |
 | **[git-local.example.md](./git-local.example.md)** | Git clone / pull / push / branch commands |
 
 ## Personal git notes (not committed)

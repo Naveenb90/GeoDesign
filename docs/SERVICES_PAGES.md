@@ -27,4 +27,4 @@ Source: `public/assets/services/Geotechnical Investigation - SEO.pdf`. Plain-tex
 
 ## Sitemap
 
-Service URLs are included in `public/sitemap.xml` (update domain to match production canonical).
+Service URLs are listed in `public/sitemap.xml` under **`https://geodesign.co.in`** (keep in sync with `SEO.jsx` and Search Console).
