@@ -165,6 +165,22 @@ p {
   line-height: 1.7;
 }
 
+/* Phones: slightly looser line height; Montserrat tight tracking is hard to scan on narrow screens */
+@media (max-width: 639px) {
+  body {
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: -0.012em;
+  }
+}
+
 /* ============================================
    ANIMATIONS
    ============================================ */

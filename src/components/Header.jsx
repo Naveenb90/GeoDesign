@@ -55,30 +55,30 @@ function Header() {
 
   return (
     <header 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/80 backdrop-blur-md shadow-lg py-3' 
-          : 'bg-white/80 backdrop-blur-md shadow-md py-4'
+          ? 'bg-white/80 backdrop-blur-md shadow-lg py-2.5 sm:py-3' 
+          : 'bg-white/80 backdrop-blur-md shadow-md py-3 sm:py-4'
       }`}
       role="banner"
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-2 sm:px-4 lg:px-6 w-full">
-        {/* Logo Section - Enhanced */}
-        <Link to="/" className="flex items-center space-x-3 group">
-          <div className="relative">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 px-3 sm:px-4 lg:px-6 w-full min-w-0">
+        {/* Logo: smaller on phones so title stays readable; Montserrat on sm+ only */}
+        <Link to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+          <div className="relative shrink-0">
             <img 
               src="/assets/web/logo.png" 
               alt="GeoDesign Logo" 
-              className="h-16 w-16 sm:h-20 sm:w-20 object-contain transition-transform duration-300 group-hover:scale-110"
+              className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 object-contain transition-transform duration-300 group-hover:scale-110"
               loading="eager"
             />
           </div>
-          <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-semibold text-slate-900 group-hover:text-sky-700 transition-colors font-display tracking-tight">
+          <div className="flex flex-col min-w-0 justify-center">
+            <span className="text-[1.0625rem] leading-snug sm:text-xl font-semibold text-slate-900 group-hover:text-sky-700 transition-colors font-sans tracking-normal sm:font-display sm:tracking-tight">
               Geo Design
             </span>
-            <span className="text-xs text-slate-500 hidden sm:block">
-              We care for your Safety & Investment
+            <span className="text-[0.6875rem] sm:text-xs text-slate-500 leading-snug mt-0.5 line-clamp-2 sm:line-clamp-none">
+              Science-led insight for safer builds
             </span>
           </div>
         </Link>
@@ -128,7 +128,7 @@ function Header() {
           aria-expanded={isMenuOpen}
           aria-controls="mobile-menu"
           onClick={toggleMenu}
-          className="lg:hidden p-2 text-slate-700 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
+          className="lg:hidden shrink-0 p-2 text-slate-700 hover:text-sky-600 hover:bg-sky-50 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500"
         >
           <svg 
             className="w-6 h-6" 
@@ -149,19 +149,19 @@ function Header() {
       {/* Mobile Navigation Menu - Enhanced with Animation */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isMenuOpen ? 'max-h-[min(85vh,28rem)] opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <nav
           id="mobile-menu"
-          className="flex flex-col space-y-1 px-4 pb-4 pt-2 bg-white border-t border-gray-200"
+          className="flex flex-col space-y-0.5 px-3 sm:px-4 pb-4 pt-2 bg-white border-t border-gray-200 max-h-[min(85vh,28rem)] overflow-y-auto overscroll-contain"
           role="navigation"
           aria-label="Mobile navigation"
         >
           <Link
             to="/"
             onClick={handleNavClick}
-            className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
+            className={`px-4 py-3.5 text-[0.9375rem] leading-snug font-medium font-sans rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
               location.pathname === '/'
                 ? 'text-sky-600 bg-sky-50'
                 : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
@@ -174,7 +174,7 @@ function Header() {
               key={link.href}
               to={link.href}
               onClick={handleNavClick}
-              className={`px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
+              className={`px-4 py-3.5 text-[0.9375rem] leading-snug font-medium font-sans rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-sky-500 ${
                 location.pathname === link.href
                   ? 'text-sky-600 bg-sky-50'
                   : 'text-slate-700 hover:text-sky-600 hover:bg-sky-50'
@@ -187,7 +187,7 @@ function Header() {
           <Link
             to="/contact"
             onClick={handleNavClick}
-            className="mt-2 px-4 py-3 text-base font-semibold text-center text-white bg-gradient-to-r from-sky-500 to-sky-600 rounded-lg hover:from-sky-600 hover:to-sky-700 shadow-md transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-sky-300"
+            className="mt-2 px-4 py-3.5 text-[0.9375rem] font-semibold font-sans text-center text-white bg-gradient-to-r from-sky-500 to-sky-600 rounded-lg hover:from-sky-600 hover:to-sky-700 shadow-md transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-sky-300"
           >
             Get in Touch
           </Link>

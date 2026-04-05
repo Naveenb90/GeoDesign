@@ -29,29 +29,29 @@ function Hero() {
     >
       
       {/* Content Container with Enhanced Design */}
-      <div className={`relative z-10 w-full max-w-5xl mx-auto px-3 sm:px-5 md:px-6 py-8 text-center transition-all duration-1000 ${
+      <div className={`relative z-10 w-full max-w-5xl mx-auto px-3 sm:px-5 md:px-6 py-6 sm:py-8 text-center transition-all duration-1000 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}>
-        <div className="bg-white/30 rounded-3xl shadow-lg backdrop-blur-md p-8">
+        <div className="bg-white/30 rounded-2xl sm:rounded-3xl shadow-lg backdrop-blur-md p-5 sm:p-8">
 
-        {/* Positioning: risk reduction through science, not “we sell services” */}
-        <h1 className="text-3xl sm:text-4xl md:text-[2.25rem] lg:text-4xl font-bold mb-4 text-slate-900 leading-[1.2] hero-title font-display tracking-tight">
+        {/* Inter on narrow phones reads cleaner than Montserrat at display sizes */}
+        <h1 className="text-[1.65rem] leading-tight sm:text-3xl sm:leading-[1.2] md:text-4xl lg:text-4xl font-bold mb-3 sm:mb-4 text-slate-900 hero-title font-sans tracking-normal sm:font-display sm:tracking-tight">
           Know Your Ground.
           <span className="block mt-1 text-sky-800">Build With Confidence.</span>
         </h1>
 
-        <p className="mb-6 text-base sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
+        <p className="mb-6 text-[0.9375rem] sm:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
           We reduce risk in construction using scientific expertise — geotechnical investigation and testing
           across Tamil Nadu for residential, commercial, and government projects.
         </p>
 
         {/* Trust line — trophy + number emphasized */}
-        <p className="mb-4 text-sm sm:text-base font-display tracking-wide flex flex-wrap items-center justify-center gap-x-2 gap-y-1 w-full">
+        <p className="mb-4 text-sm sm:text-base font-sans sm:font-display tracking-wide flex flex-wrap items-center justify-center gap-x-2 gap-y-1 w-full">
           <span className="text-base sm:text-lg leading-none select-none" aria-hidden="true">
             🏆
           </span>
-          <span className="text-sky-600 text-lg sm:text-2xl font-extrabold tabular-nums">5,000+</span>
-          <span className="font-semibold text-slate-800 uppercase tracking-wide">
+          <span className="text-sky-600 text-base sm:text-2xl font-extrabold tabular-nums">5,000+</span>
+          <span className="font-semibold text-slate-800 uppercase tracking-wide text-[0.8125rem] sm:text-base">
             Projects Completed
           </span>
         </p>
