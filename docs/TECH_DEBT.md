@@ -1,6 +1,6 @@
 # Code Validation, Best Practices, and Improvements
 
-This document outlines validation, improvements, and best practices for the GeoDesign **Astro** site at the repo root.
+This document outlines validation, improvements, and best practices for the GeoDesign **Astro** site at the repo root. Older sections may still mention legacy patterns; trim or update when you touch related areas.
 
 ## Astro site
 

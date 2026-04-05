@@ -1,5 +1,7 @@
 # Project summary — GeoDesign web
 
+> **Start here:** [README.md](../README.md)
+
 ## Overview
 
 Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu).
@@ -40,17 +42,7 @@ npm run preview
 
 ## Deployment
 
-**Netlify:** `npm ci && npm run build`, publish **`dist/`**, Node 20 — see **`netlify.toml`**.
-
-## Documentation index
-
-| Doc | Purpose |
-|-----|---------|
-| [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) | Layout, tiles, typography, maps, SEO URL |
-| [SERVICES_PAGES.md](./SERVICES_PAGES.md) | `/services` hub and PDF-aligned slugs |
-| [TECH_DEBT.md](./TECH_DEBT.md) | Improvements backlog |
-| [SEO_AUDIT.md](./SEO_AUDIT.md) | SEO checklist |
-| [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md) | Stack and layout map |
+**Netlify:** `npm ci && npm run build`, publish **`dist/`**, Node **22.12.0** — see **`netlify.toml`** and **`.nvmrc`**.
 
 ## Tech stack
 

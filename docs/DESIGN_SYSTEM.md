@@ -46,7 +46,7 @@ Embed URLs: `src/data/data.js` → **`mapEmbedUrls`**. Prefer **Share → Embed 
 
 ## Netlify
 
-- **`npm ci && npm run build`**, publish **`dist/`** — see [`netlify.toml`](../netlify.toml).
+- **`npm ci && npm run build`**, publish **`dist/`**, Node **22.12.0** — see [`netlify.toml`](../netlify.toml) and **`.nvmrc`**.
 
 ## Scroll
 

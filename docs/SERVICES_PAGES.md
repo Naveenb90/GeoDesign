@@ -17,13 +17,13 @@ Source: `public/assets/services/Geotechnical Investigation - SEO.pdf`. Plain-tex
 
 - **Hub** (`/services`): Lists all five services; **Drilling & Sampling** is visually marked **Start here** (default entry for investigation scope). Uses compact sky tiles (`SKY_FACTOR_TILE_CLASS`).
 - **Detail** (`/services/:slug`): One H1, intro, breadcrumb (Home → What We Do → topic), **topic cards** in a grid (large sky tiles — `SKY_OUTCOME_TILE_CLASS`). No separate “Topics covered” heading — cards follow the intro.
-- **SEO**: Per-page `metaTitle`, `metaDescription`, `keywords` in `src/constants/servicesCatalog.js`; `<SEO />` on each route.
+- **SEO**: Per-page `metaTitle`, `metaDescription`, `keywords` in [`src/data/servicesCatalog.js`](../src/data/servicesCatalog.js); wired through `SiteLayout` / `BaseLayout` per route.
 
 ## Code
 
-- Catalog: `src/constants/servicesCatalog.js`
-- Hub: `src/pages/ServicesPage.jsx`
-- Detail: `src/pages/ServiceDetailPage.jsx`
+- Catalog: [`src/data/servicesCatalog.js`](../src/data/servicesCatalog.js)
+- Hub: [`src/pages/services/index.astro`](../src/pages/services/index.astro)
+- Detail: [`src/pages/services/[slug].astro`](../src/pages/services/[slug].astro)
 
 ## Sitemap
 
