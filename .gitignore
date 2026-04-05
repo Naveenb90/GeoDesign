@@ -84,18 +84,12 @@ playwright-report/
 .playwright/
 
 # ─────────────────────────────────────────────────────────────
-# Editor & IDE
+# Editor & IDE (local only — not required for the site build)
 # ─────────────────────────────────────────────────────────────
 
-# Cursor — track shared rules/skills only
-.cursor/*
-!.cursor/rules/
-!.cursor/skills/
+.cursor/
 .cursor-tutor/
-
-# VS Code — share extensions.json only (un-ignore below)
-.vscode/*
-!.vscode/extensions.json
+.vscode/
 
 .idea/
 *.iml
@@ -214,7 +208,7 @@ temp/
 # ============================================================
 # Intentionally committed (examples)
 # ============================================================
-# .cursor/rules/  .cursor/skills/  docs/README.md
-# package-lock.json  public/  src/  astro.config.mjs
-# .vscode/extensions.json
+# package-lock.json  public/  src/  astro.config.mjs  docs/
+# To share Cursor rules or VS Code extensions via git again, stop ignoring
+# .cursor/rules/ or .vscode/extensions.json (see Git history for old patterns).
 # ============================================================
