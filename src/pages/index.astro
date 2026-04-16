@@ -1,26 +1,36 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import { HeroGalleryBackground } from '../components/HeroGalleryBackground.jsx';
+import { homeHeroImages } from '../data/homeHeroImages.js';
+
+/** Order and files: `src/data/homeHeroImages.js` → `public/assets/home/` (20s rotation). */
+const heroGalleryImages = homeHeroImages;
 ---
 
 <SiteLayout
   title="GeoDesign — Reduce Construction Risk in India"
   description="We reduce risk in construction using scientific expertise — geotechnical investigation and testing across South India for residential, commercial, and government projects."
   canonicalPath="/"
+  ogImagePath={heroGalleryImages[0]?.src ?? '/assets/home/hero-site.jpg'}
 >
   <section
     id="hero"
-    class="relative flex min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-slate-200 via-slate-100 to-white pb-12 pt-20 sm:pb-16"
-    style="background-image: url('/assets/web/hero-site.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;"
+    class="relative flex min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden pb-12 pt-20 sm:pb-16"
     role="banner"
     aria-label="Hero section"
   >
+    <HeroGalleryBackground client:load images={heroGalleryImages} />
+    <div
+      class="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-slate-50/25 via-transparent to-white/55"
+      aria-hidden="true"
+    ></div>
     <div class="relative z-10 mx-auto w-full max-w-5xl px-3 py-6 text-center sm:px-5 sm:py-8 md:px-6">
-      <div class="rounded-2xl bg-white/30 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-8">
+      <div class="rounded-2xl border border-white/40 bg-white/82 p-5 shadow-lg sm:rounded-3xl sm:p-8">
         <h1
-          class="mb-3 font-sans text-[1.65rem] font-bold leading-tight tracking-normal text-slate-900 sm:mb-4 sm:font-display sm:text-3xl sm:leading-[1.2] sm:tracking-tight md:text-4xl lg:text-4xl"
+          class="mb-3 font-sans text-[1.65rem] font-bold leading-tight tracking-normal text-slate-900 sm:mb-4 sm:font-display sm:text-3xl sm:leading-[1.25] sm:tracking-tight md:text-4xl lg:text-4xl"
         >
-          Know Your Ground.
-          <span class="mt-1 block text-sky-800">Build With Confidence.</span>
+          <span class="block text-slate-900">Know your ground &amp;</span>
+          <span class="mt-1 block text-sky-800 sm:mt-1.5">Build with confidence.</span>
         </h1>
 
         <p class="mx-auto mb-6 max-w-2xl text-[0.9375rem] leading-relaxed text-slate-700 sm:text-lg">

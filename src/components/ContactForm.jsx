@@ -89,10 +89,11 @@ export function ContactForm() {
         <h2 className="mb-6 text-xl font-semibold text-slate-900 md:text-2xl">Send Us a Message</h2>
 
         <form
-          name="contact"
+          id="contact-intake-form"
           method="POST"
+          action="/"
           data-netlify="true"
-          netlify-honeypot="bot-field"
+          {...{ 'netlify-honeypot': 'bot-field' }}
           onSubmit={handleSubmit}
           className="space-y-4"
           aria-label="Contact form"

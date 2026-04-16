@@ -16,9 +16,9 @@
  * Updated for React Router navigation
  */
 export const navLinks = [
-  { href: '/why-it-matters', label: 'Why It Matters' },
   { href: '/about', label: 'Who We Are' },
   { href: '/services', label: 'What We Do' },
+  { href: '/why-it-matters', label: 'Why It Matters' },
   { href: '/projects', label: 'Who We Work With' },
   { href: '/our-offices', label: 'Our Offices' },
 ]

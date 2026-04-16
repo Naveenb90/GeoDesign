@@ -8,22 +8,37 @@ import { videoConfig } from '../data/data.js';
   description="Watch how scientific ground investigation helps reduce construction risk — geotechnical insight for your project."
   canonicalPath="/video"
 >
-  <div class="page-shell flex-1 bg-stone-50">
-    <section
-      id="video"
-      class="relative flex min-h-screen w-full min-w-0 items-center justify-center bg-gray-100 px-2 pb-16 pt-20 sm:px-3 md:px-5"
-      aria-label="Video section"
-    >
-      <div class="relative h-[70vh] w-11/12 overflow-hidden rounded-xl bg-gray-300 shadow-lg md:w-4/5">
-        <iframe
-          class="h-full w-full border-0"
-          src={videoConfig.embedUrl}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-    </section>
+  <div class="page-shell-white">
+    <div class="page-shell-inner">
+      <section
+        id="video"
+        class="w-full min-w-0 py-8 md:py-10"
+        aria-labelledby="video-heading"
+      >
+        <header class="mx-auto mb-8 max-w-3xl text-center md:mb-10">
+          <h1
+            id="video-heading"
+            class="font-display text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
+          >
+            Watch Our Video
+          </h1>
+          <p class="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
+            See how scientific ground investigation supports safer design decisions.
+          </p>
+        </header>
+        <div
+          class="relative mx-auto aspect-video w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-lg ring-1 ring-slate-200/60"
+        >
+          <iframe
+            class="absolute inset-0 h-full w-full border-0"
+            src={videoConfig.embedUrl}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </section>
+    </div>
   </div>
 </SiteLayout>

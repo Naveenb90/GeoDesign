@@ -11,7 +11,9 @@ The **Vite + React SPA** at the former repo root has been **removed**; this repo
 | [`astro.config.mjs`](../astro.config.mjs) | Astro 6 config, `site`, integrations |
 | [`src/layouts/BaseLayout.astro`](../src/layouts/BaseLayout.astro) | Shared `<head>`: title, meta, canonical, OG/Twitter, Organization JSON-LD |
 | [`src/pages/`](../src/pages/) | File-based routes |
-| [`public/`](../public/) | Static assets (`assets/web/`, `assets/clients/`, `assets/gallery/`, etc.) |
+| [`public/`](../public/) | Static assets (`assets/home/` home hero rotation, `assets/web/` branding + pages, `assets/clients/`, `assets/gallery/`, etc.) |
+| [`src/components/Header.astro`](../src/components/Header.astro), [`Footer.astro`](../src/components/Footer.astro) | Site chrome (slate-100, matched borders) |
+| [`HeroGalleryBackground.jsx`](../src/components/HeroGalleryBackground.jsx) | Home-only: cycles hero images from `index.astro` |
 | [`netlify.toml`](../netlify.toml) | `npm ci && npm run build`, `publish = "dist"` |
 
 Optional (local only, often gitignored): Cursor rules under `.cursor/` if your clone tracks them.

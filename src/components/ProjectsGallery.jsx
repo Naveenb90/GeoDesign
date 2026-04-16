@@ -3,64 +3,37 @@ import React, { useEffect, useState } from 'react';
 import { previewImages, getGalleryImages, clientLogos } from '../data/data.js';
 import { SKY_OUTCOME_TILE_CLASS } from '../data/skyTileClasses.js';
 
-const FANCYBOX_VERSION = '5.0.36';
-const FANCYBOX_SCRIPT_URL = `https://cdn.jsdelivr.net/npm/@fancyapps/ui@${FANCYBOX_VERSION}/dist/fancybox/fancybox.umd.js`;
-const FANCYBOX_CSS_URL = `https://cdn.jsdelivr.net/npm/@fancyapps/ui@${FANCYBOX_VERSION}/dist/fancybox/fancybox.css`;
-
 /**
- * Gallery + client marquee — Fancybox loaded on demand (matches legacy React).
+ * Gallery + client marquee — Fancybox loaded from npm (no CDN dependency).
  * @returns {JSX.Element}
  */
 export function ProjectsGallery() {
   const galleryImages = getGalleryImages();
-  const [fancyboxStatus, setFancyboxStatus] = useState('idle');
+  const fancyboxRef = React.useRef(null);
+  const [fancyboxStatus, setFancyboxStatus] = useState('loading');
 
   useEffect(() => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = FANCYBOX_CSS_URL;
-    document.head.appendChild(link);
+    let cancelled = false;
 
-    return () => {
-      if (document.head.contains(link)) {
-        document.head.removeChild(link);
+    async function loadFancybox() {
+      try {
+        await import('@fancyapps/ui/dist/fancybox/fancybox.css');
+        const mod = await import('@fancyapps/ui');
+        if (cancelled) return;
+        const FB = mod.Fancybox ?? mod.default?.Fancybox;
+        if (!FB) throw new Error('Fancybox export missing');
+        fancyboxRef.current = FB;
+        setFancyboxStatus('loaded');
+      } catch (error) {
+        console.error('Failed to load Fancybox:', error);
+        if (!cancelled) setFancyboxStatus('error');
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.Fancybox) {
-      setFancyboxStatus('loaded');
-      return;
     }
 
-    setFancyboxStatus('loading');
-
-    const script = document.createElement('script');
-    script.src = FANCYBOX_SCRIPT_URL;
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-
-    script.onload = () => {
-      if (window.Fancybox) {
-        setFancyboxStatus('loaded');
-      } else {
-        console.error('Fancybox script loaded but Fancybox object not available');
-        setFancyboxStatus('error');
-      }
-    };
-
-    script.onerror = (error) => {
-      console.error('Failed to load Fancybox library:', error);
-      setFancyboxStatus('error');
-    };
-
-    document.body.appendChild(script);
+    loadFancybox();
 
     return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
+      cancelled = true;
     };
   }, []);
 
@@ -69,13 +42,13 @@ export function ProjectsGallery() {
       return;
     }
 
-    if (fancyboxStatus === 'error' || !window.Fancybox) {
+    const Fancybox = fancyboxRef.current;
+    if (fancyboxStatus === 'error' || !Fancybox) {
       window.alert('Gallery is temporarily unavailable. Please refresh the page and try again.');
-      console.error('Fancybox is not available');
       return;
     }
 
-    window.Fancybox.show(galleryImages, {
+    Fancybox.show(galleryImages, {
       Thumbs: false,
       Toolbar: true,
       Carousel: {
@@ -89,19 +62,24 @@ export function ProjectsGallery() {
 
   return (
     <section id="projects" className="w-full min-w-0 py-8 md:py-10" aria-labelledby="projects-heading">
-      <h1 id="projects-heading" className="mb-5 text-center text-3xl font-bold text-slate-900 sm:mb-6 sm:text-4xl">
-        Who We Work With
-      </h1>
-      <p className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-slate-600 md:mb-12 md:text-lg">
-        Organisations that rely on GeoDesign to reduce construction risk — scientific ground investigation,
-        testing, and foundation-related insight across Tamil Nadu and South India.
-      </p>
+      <div className="mb-8 text-center md:mb-10">
+        <h1
+          id="projects-heading"
+          className="font-display mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
+        >
+          Who We Work With
+        </h1>
+        <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
+          Organisations that rely on GeoDesign to reduce construction risk — scientific ground investigation, testing,
+          and foundation-related insight across Tamil Nadu and South India.
+        </p>
+      </div>
 
       <div className={tile}>
         <div className="mb-8 grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-7">
           {previewImages.map((image, index) => (
             <img
-              key={index}
+              key={image.src}
               src={image.src}
               alt={image.alt}
               className="w-full rounded-lg shadow-md transition hover:scale-105"
@@ -149,8 +127,8 @@ export function ProjectsGallery() {
         </button>
       </div>
 
-      <h2 className="mb-2 text-center text-2xl font-bold text-slate-900 md:text-3xl">Trusted By</h2>
-      <p className="mx-auto mb-8 max-w-2xl text-center text-sm leading-relaxed text-slate-600 md:mb-10 md:text-base">
+      <h2 className="mb-3 text-center text-2xl font-bold text-slate-900 md:mb-4 md:text-3xl">Trusted By</h2>
+      <p className="mx-auto mb-8 max-w-2xl text-center text-lg leading-relaxed text-slate-600 md:mb-10">
         Developers, contractors, and institutions we&apos;ve supported on geotechnical assignments.
       </p>
 
@@ -159,7 +137,7 @@ export function ProjectsGallery() {
           <div className="animate-marquee flex space-x-12">
             {[...clientLogos, ...clientLogos].map((logo, index) => (
               <div
-                key={index}
+                key={`${logo}-${index}`}
                 className="flex flex-shrink-0 items-center justify-center rounded-xl border border-sky-200/50 bg-white/90 p-4 shadow-sm"
               >
                 <img src={logo} alt={`Client ${index + 1}`} className="h-16 object-contain" loading="lazy" />

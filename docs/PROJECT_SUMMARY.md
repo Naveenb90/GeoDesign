@@ -14,14 +14,14 @@ Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu).
 
 | Path | Notes |
 |------|--------|
-| `/` | Home hero |
+| `/` | Home hero; rotating background images (3 assets, 20s) via `HeroGalleryBackground.jsx` |
 | `/why-it-matters` | Issue factors + importance cards |
 | `/about` | About / vision / mission |
 | `/services` | Services hub |
 | `/services/:slug` | Service detail (`getStaticPaths`) |
 | `/projects` | Gallery + clients (Fancybox island) |
 | `/contact` | Netlify form island |
-| `/video` | YouTube embed |
+| `/video` | YouTube embed (page-shell-white + title) |
 | `/our-offices` | Maps + addresses |
 | `/404` | 404 page |
 
@@ -29,7 +29,9 @@ Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu).
 
 - **`astro.config.mjs`** — `site`, integrations, Vite + Tailwind.
 - **`src/layouts/BaseLayout.astro`**, **`SiteLayout.astro`** — Meta, shell, header/footer.
-- **`src/data/data.js`**, **`servicesCatalog.js`**, **`skyTileClasses.js`** — Content and card tokens.
+- **`src/components/Header.astro`**, **`Footer.astro`** — Shared chrome (`bg-slate-100`, nav pill + CTA).
+- **`src/components/HeroGalleryBackground.jsx`** — Home hero image rotation.
+- **`src/data/data.js`**, **`servicesCatalog.js`**, **`skyTileClasses.js`**, **`homeHeroImages.js`** — Content and card tokens; home hero asset list (`public/assets/home/`).
 
 ## Scripts
 

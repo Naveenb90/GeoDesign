@@ -90,7 +90,7 @@ All listed pages use **`src/components/SEO.jsx`** with route-specific props.
 
 - **og:title, og:description, og:image, og:url** — set.
 - **twitter:card** — `summary_large_image`.
-- **Default image:** `/assets/web/hero-site.jpg` (absolute URL resolved against site origin).
+- **Default image:** `/assets/home/hero-site.jpg` (absolute URL resolved against site origin).
 - **Locale:** `og:locale` = `en_IN`.
 
 ---

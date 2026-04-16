@@ -1,11 +1,9 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { importanceCards, soilIssueGroups, whyItMattersIntro } from '../data/data.js';
-import { SKY_FACTOR_TILE_CLASS, SKY_OUTCOME_TILE_CLASS } from '../data/skyTileClasses.js';
 
-const factorTile = `${SKY_FACTOR_TILE_CLASS} transition-all duration-200 ease-out motion-reduce:transition-none hover:-translate-y-1 hover:scale-[1.02] hover:border-sky-400 hover:shadow-lg hover:from-sky-100/90 hover:to-white motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:shadow-sm group`;
-
-const outcomeTile = `${SKY_OUTCOME_TILE_CLASS} transition-all duration-200 ease-out motion-reduce:transition-none hover:-translate-y-0.5 hover:scale-[1.015] hover:border-sky-400 hover:shadow-lg hover:from-sky-100/90 hover:to-white motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100 motion-reduce:hover:shadow-sm group`;
+const factorCardClass =
+  'rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md motion-reduce:transition-none';
 ---
 
 <SiteLayout
@@ -16,74 +14,195 @@ const outcomeTile = `${SKY_OUTCOME_TILE_CLASS} transition-all duration-200 ease-
   <div class="page-shell-white">
     <div class="page-shell-inner">
       <section id="issue" class="w-full min-w-0 py-8 md:py-10" aria-labelledby="issue-heading">
-        <h1
-          id="issue-heading"
-          class="mb-5 text-center text-3xl font-bold text-slate-900 md:mb-6 sm:text-4xl"
+        <!-- Split hero: left title, right intro panel (distinct from old all-centered layout) -->
+        <div
+          class="mb-12 flex flex-col gap-8 border-b border-slate-200/90 pb-10 md:mb-14 md:gap-10 md:pb-12 lg:flex-row lg:items-stretch lg:justify-between lg:gap-12"
         >
-          Why Soil Testing Matters?
-        </h1>
-        <p class="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-slate-600 md:mb-12 md:text-lg">
-          {whyItMattersIntro}
-        </p>
-
-        <h2 id="site-factors-heading" class="mb-2 text-center text-2xl font-bold text-slate-900 md:text-3xl">
-          What affects your site
-        </h2>
-        <p class="mx-auto mb-8 max-w-2xl text-center text-sm text-slate-600 md:mb-10 md:text-base">
-          Ground conditions, water, earthworks, and land use — each plays a role in safe foundation design.
-        </p>
-
-        <div class="mb-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mb-12 md:gap-5 lg:grid-cols-3">
-          {
-            soilIssueGroups.flatMap((group) =>
-              group.items.map((issue, itemIndex) => {
-                const issueId = `issue-${group.id}-${itemIndex}`;
-                return (
-                  <div class={factorTile} role="article" aria-labelledby={issueId}>
-                    <span
-                      class="mb-2 block text-4xl text-sky-600 transition-colors duration-200 group-hover:text-sky-700"
-                      aria-hidden="true"
-                    >
-                      {issue.icon}
-                    </span>
-                    <h3 id={issueId} class="mb-1.5 text-base font-bold text-slate-900 md:text-lg">
-                      {issue.title}
-                    </h3>
-                    <p class="text-sm leading-snug text-slate-600">{issue.description}</p>
-                  </div>
-                );
-              })
-            )
-          }
+          <div class="max-w-xl lg:shrink-0">
+            <p class="mb-2 font-sans text-xs font-semibold uppercase tracking-wider text-sky-700">Understanding site risk</p>
+            <h1
+              id="issue-heading"
+              class="font-display text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-[2.5rem] md:leading-[1.15]"
+            >
+              Why Soil Testing Matters?
+            </h1>
+          </div>
+          <div
+            class="min-w-0 flex-1 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-sky-50/90 p-6 shadow-sm ring-1 ring-slate-200/80 md:p-8 lg:max-w-2xl"
+          >
+            <p class="text-base leading-relaxed text-slate-700 md:text-lg">{whyItMattersIntro}</p>
+          </div>
         </div>
 
-        <div class="border-t border-stone-200/80 pt-10 md:pt-12" aria-labelledby="outcomes-heading">
-          <h2 id="outcomes-heading" class="mb-2 text-center text-2xl font-bold text-slate-900 md:text-3xl">
-            What you gain from testing
-          </h2>
-          <p class="mx-auto mb-8 max-w-2xl text-center text-sm text-slate-600 md:mb-10 md:text-base">
-            Clear data supports better decisions before you build — not after problems appear.
-          </p>
-          <div class="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        <!-- Grouped factors: sticky TOC (lg+) + anchor regions -->
+        <div class="mb-14 md:mb-16">
+          <div class="mb-8 max-w-3xl md:mb-10">
+            <h2 id="site-factors-heading" class="font-display text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
+              What affects your site
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
+              Ground conditions, water, earthworks, and land use — each plays a role in safe foundation design.
+            </p>
+          </div>
+
+          <div
+            class="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-10 xl:gap-12"
+          >
+            <aside
+              class="lg:sticky lg:top-28 lg:z-10 lg:w-[min(100%,13.5rem)] lg:shrink-0"
+              aria-label="Topics in this section"
+            >
+              <nav
+                class="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm ring-1 ring-slate-100"
+                aria-labelledby="why-toc-heading"
+              >
+                <p id="why-toc-heading" class="mb-3 font-sans text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  On this page
+                </p>
+                <ul class="flex flex-col gap-0.5" role="list">
+                  {
+                    soilIssueGroups.map((group) => (
+                      <li>
+                        <a
+                          href={`#factor-${group.id}`}
+                          class="why-toc-link block rounded-lg border border-transparent px-2 py-2 text-sm leading-snug text-slate-700 transition-colors hover:border-sky-200 hover:bg-sky-50/80 hover:text-sky-900 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 data-[active=true]:border-sky-300 data-[active=true]:bg-sky-50 data-[active=true]:font-semibold data-[active=true]:text-sky-900"
+                          data-toc-for={`factor-${group.id}`}
+                        >
+                          {group.title}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </nav>
+            </aside>
+
+            <div class="min-w-0 flex-1 space-y-10 md:space-y-12">
+              {
+                soilIssueGroups.map((group, groupIndex) => (
+                  <div
+                    id={`factor-${group.id}`}
+                    data-toc-section
+                    class:list={[
+                      'scroll-mt-28 rounded-2xl p-5 sm:p-6 md:p-8',
+                      groupIndex % 2 === 0 ? 'bg-white ring-1 ring-slate-200/80' : 'bg-stone-50/80 ring-1 ring-stone-200/60',
+                    ]}
+                    role="region"
+                    aria-labelledby={`group-${group.id}-title`}
+                  >
+                    <div class="mb-5 flex flex-col gap-1 border-b border-slate-200/70 pb-4 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+                      <h3
+                        id={`group-${group.id}-title`}
+                        class="font-display text-lg font-bold leading-snug text-slate-900 md:text-xl"
+                      >
+                        {group.title}
+                      </h3>
+                      <p class="max-w-xl text-sm text-slate-600 md:text-[0.9375rem]">{group.blurb}</p>
+                    </div>
+                    <ul
+                      class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3"
+                      role="list"
+                    >
+                      {group.items.map((issue) => (
+                        <li class={factorCardClass}>
+                          <div class="flex gap-3">
+                            <span class="shrink-0 text-2xl leading-none text-sky-600" aria-hidden="true">
+                              {issue.icon}
+                            </span>
+                            <div class="min-w-0">
+                              <p class="font-semibold text-slate-900">{issue.title}</p>
+                              <p class="mt-1 text-sm leading-snug text-slate-600">{issue.description}</p>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Outcomes: vertical editorial list (replaces 3-column tile grid) -->
+        <div class="border-t border-slate-200/90 pt-10 md:pt-12" aria-labelledby="outcomes-heading">
+          <div class="mb-8 max-w-3xl md:mb-10">
+            <h2 id="outcomes-heading" class="font-display text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
+              What you gain from testing
+            </h2>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 md:text-base">
+              Clear data supports better decisions before you build — not after problems appear.
+            </p>
+          </div>
+
+          <ol class="mx-auto max-w-3xl list-none space-y-0 divide-y divide-slate-200/90" role="list">
             {
               importanceCards.map((card, index) => (
-                <div class={outcomeTile} role="article" aria-labelledby={`importance-${index}`}>
-                  <span
-                    class="mb-4 block text-5xl text-sky-600 transition-colors duration-200 group-hover:text-sky-700"
+                <li class="flex flex-col gap-4 py-8 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:gap-6">
+                  <div
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-2xl text-sky-800 shadow-inner ring-1 ring-sky-200/80"
                     aria-hidden="true"
                   >
                     {card.icon}
-                  </span>
-                  <h3 id={`importance-${index}`} class="mb-3 text-xl font-bold text-slate-900 md:text-2xl">
-                    {card.title}
-                  </h3>
-                  <p class="text-base leading-relaxed text-slate-600">{card.description}</p>
-                </div>
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <div class="mb-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <span class="font-sans text-xs font-semibold uppercase tracking-wide text-sky-700">
+                        Step {index + 1}
+                      </span>
+                    </div>
+                    <h3 class="font-display text-xl font-bold leading-snug text-slate-900 md:text-2xl">{card.title}</h3>
+                    <p class="mt-2 text-base leading-relaxed text-slate-600">{card.description}</p>
+                  </div>
+                </li>
               ))
             }
-          </div>
+          </ol>
         </div>
       </section>
     </div>
   </div>
 </SiteLayout>
+
+<script is:inline>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll('[data-toc-section]'));
+    var links = document.querySelectorAll('a[data-toc-for]');
+    if (!sections.length || !links.length) return;
+
+    /** Aligns with fixed header + padding (~pt-28 + buffer). */
+    var scrollOffsetPx = 120;
+
+    function syncActiveFromScroll() {
+      var y = window.scrollY + scrollOffsetPx;
+      var id = sections[0].id;
+      for (var i = 0; i < sections.length; i++) {
+        var s = sections[i];
+        if (s.offsetTop <= y) id = s.id;
+      }
+      links.forEach(function (a) {
+        var match = a.getAttribute('data-toc-for') === id;
+        a.setAttribute('data-active', match ? 'true' : 'false');
+        if (match) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (!ticking) {
+          window.requestAnimationFrame(function () {
+            syncActiveFromScroll();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+    window.addEventListener('hashchange', syncActiveFromScroll);
+    syncActiveFromScroll();
+  })();
+</script>

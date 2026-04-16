@@ -54,7 +54,7 @@ npm run preview  # test production build locally
 
 | Path | Content |
 |------|---------|
-| `/` | Home hero |
+| `/` | Home hero (rotating images from `public/assets/home/`, 20s — [`src/data/homeHeroImages.js`](src/data/homeHeroImages.js)) |
 | `/why-it-matters`, `/about`, `/services`, `/services/:slug` | Marketing + service catalog |
 | `/projects`, `/contact`, `/video`, `/our-offices` | Portfolio, Netlify form, video, offices |
 | `/404` | Not found |
