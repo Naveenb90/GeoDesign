@@ -77,7 +77,7 @@ export function ProjectsGallery() {
 
       <div className={tile}>
         <div className="mb-8 grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-7">
-          {previewImages.map((image, index) => (
+          {previewImages.map((image) => (
             <img
               key={image.src}
               src={image.src}

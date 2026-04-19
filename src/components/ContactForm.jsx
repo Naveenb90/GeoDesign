@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 /**
  * Netlify contact form — client-side validation and fetch POST (same as legacy React app).

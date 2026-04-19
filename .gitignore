@@ -196,6 +196,7 @@ terraform.tfvars
 .yarn-integrity
 docs/jsdoc/
 docs/git-local.md
+docs/*.pdf
 tmp/
 temp/
 .tmp/
