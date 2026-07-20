@@ -6,15 +6,41 @@
  * @typedef {{ slug: string, title: string, shortDescription: string, icon: string, metaTitle: string, metaDescription: string, keywords: string, sections: { title: string, body: string }[] }} GeotechnicalServicePage
  */
 
-/** Emoji icons cycled for subsection cards on service detail pages (matches IssueSection importance-card style). */
-export const SERVICE_SECTION_ICONS = ['📋', '🔬', '⚙️', '📐', '🏗️', '💧', '🌡️', '📊']
+/**
+ * Section icons, matched to the subject of the section.
+ *
+ * These were previously emoji cycled by array index, so the icon above
+ * "Specific gravity" was whatever happened to land there. Now each section
+ * resolves an icon from keywords in its title, falling back to a neutral one.
+ */
+const SECTION_ICON_RULES = [
+  // Order matters — first match wins, so specific rules precede general ones.
+  [/\b(rqd|core recovery|point load|rock|boulder)\b/i, 'rock'],
+  [/\b(resistivity|electric)\b/i, 'resistivity'],
+  [/\b(plate load|bearing|sbc|subgrade)\b/i, 'plate'],
+  [/\b(pull ?out|uplift|tension)\b/i, 'uplift'],
+  [/\b(pile|deep foundation)\b/i, 'pile'],
+  [/\b(shallow|ground improvement|footing)\b/i, 'foundation'],
+  [/\b(drill|boring|bore|auger|core drilling)\b/i, 'drill'],
+  [/\b(trial pit|disturbed|undisturbed|sampl)\b/i, 'inspect'],
+  [/\b(permeab|groundwater|water|moisture|swell|hydrometer)\b/i, 'water'],
+  [/\b(sieve|grain size|gradation|consolidation|strata|layer)\b/i, 'strata'],
+  [/\b(density|specific gravity|compaction|proctor|sand replacement|core cutter)\b/i, 'plate'],
+  [/\b(shear|triaxial|compression|cbr|penetration|spt|dcpt|cpt|vane|elasticity|modulus)\b/i, 'gauge'],
+  [/\b(chemical|atterberg|limits)\b/i, 'flask'],
+  [/\b(survey|contour|topograph)\b/i, 'contour'],
+  [/\b(report|documentation|consultation)\b/i, 'report'],
+]
 
 /**
- * @param {number} sectionIndex
- * @returns {string}
+ * @param {string} title
+ * @returns {string} icon key for `Icon.astro`
  */
-export function getSectionIcon(sectionIndex) {
-  return SERVICE_SECTION_ICONS[sectionIndex % SERVICE_SECTION_ICONS.length]
+export function getSectionIcon(title) {
+  for (const [re, key] of SECTION_ICON_RULES) {
+    if (re.test(title)) return key
+  }
+  return 'report'
 }
 
 /** @type {GeotechnicalServicePage[]} */
@@ -23,6 +49,7 @@ export const geotechnicalServicePages = [
     slug: 'drilling-sampling',
     title: 'Drilling & Sampling',
     icon: '🏗️',
+    iconKey: 'drill',
     shortDescription:
       'Boreholes, sampling, in-situ tests, and bearing capacity — core methods for subsurface investigation.',
     metaTitle: 'Drilling & Sampling | Geotechnical Investigation',
@@ -44,7 +71,7 @@ export const geotechnicalServicePages = [
       {
         title: 'Core drilling',
         body:
-          'Core drilling is a specialized rotary drilling technique that uses a hollow, diamond-tipped or carbide bit to cut a perfectly cylindrical hole, extracting a solid “core” sample of material rather than grinding it into dust.',
+          'Core drilling is a specialised rotary drilling technique that uses a hollow, diamond-tipped or carbide bit to cut a perfectly cylindrical hole, extracting a solid “core” sample of material rather than grinding it into dust.',
       },
       {
         title: 'Standard Penetration Test (SPT)',
@@ -59,7 +86,7 @@ export const geotechnicalServicePages = [
       {
         title: 'Disturbed and undisturbed samples',
         body:
-          'Collecting disturbed and undisturbed soil samples is a fundamental aspect of geotechnical engineering investigations, designed to assess the engineering properties of soil layers at different depths for construction design. Disturbed samples are used to classify soil and identify its grain properties, while undisturbed samples are critical for determining the in-situ structure, strength, and settlement behavior of the soil.',
+          'Collecting disturbed and undisturbed soil samples is a fundamental aspect of geotechnical engineering investigations, designed to assess the engineering properties of soil layers at different depths for construction design. Disturbed samples are used to classify soil and identify its grain properties, while undisturbed samples are critical for determining the in-situ structure, strength, and settlement behaviour of the soil.',
       },
       {
         title: 'Safe Bearing Capacity (SBC)',
@@ -79,7 +106,7 @@ export const geotechnicalServicePages = [
       {
         title: 'Trial pits',
         body:
-          'A trial pit (or test pit) is a shallow, excavated hole—typically 1–5 meters deep—used to directly observe, sample, and log subsurface soil, rock, and groundwater conditions before construction.',
+          'A trial pit (or test pit) is a shallow, excavated hole — typically 1–5 metres deep — used to directly observe, sample, and log subsurface soil, rock, and groundwater conditions before construction.',
       },
     ],
   },
@@ -87,6 +114,7 @@ export const geotechnicalServicePages = [
     slug: 'foundation-recommendations',
     title: 'Foundation Recommendations',
     icon: '🏛️',
+    iconKey: 'foundation',
     shortDescription:
       'Shallow foundations, ground improvement, and deep pile foundations — recommendations aligned to your site data.',
     metaTitle: 'Foundation Recommendations | Shallow, Ground Improvement & Piles',
@@ -108,7 +136,8 @@ export const geotechnicalServicePages = [
       {
         title: 'Deep foundations — pile foundations',
         body:
-          'Deep foundations (including piles) transfer loads through weak or compressible strata to competent soil or rock. Design integrates structural loads, geotechnical parameters, and installation feasibility.',
+          'Deep foundations transfer load through weak or compressible strata to competent soil or rock. Design integrates structural loads, geotechnical parameters, and installation feasibility.',
+        promotedTo: { slug: 'pile-foundation', label: 'Pile Foundation & Foundation Design' },
       },
     ],
   },
@@ -116,6 +145,7 @@ export const geotechnicalServicePages = [
     slug: 'specialised-field-testing',
     title: 'Specialised Field Testing',
     icon: '📐',
+    iconKey: 'calipers',
     shortDescription:
       'Resistivity, vane shear, permeability, compaction checks, plate load tests, and water/soil chemical analysis.',
     metaTitle: 'Specialised Field Testing | GeoDesign Geotechnical Services',
@@ -127,7 +157,8 @@ export const geotechnicalServicePages = [
       {
         title: 'Electric resistivity / soil resistivity test',
         body:
-          'An electrical resistivity test of soil measures how strongly soil resists the flow of electric current. It is a critical, non-destructive geotechnical method used to evaluate soil composition, moisture content, and compaction, mainly for designing electrical grounding systems.',
+          'A non-destructive geophysical method that measures how strongly soil resists electric current, used to map soil layers, rock depth, and groundwater — and to design electrical earthing systems.',
+        promotedTo: { slug: 'electrical-resistivity-test', label: 'Electrical Resistivity Test' },
       },
       {
         title: 'Vane shear test',
@@ -167,7 +198,8 @@ export const geotechnicalServicePages = [
       {
         title: 'Plate load test',
         body:
-          'The plate load test is a field method to determine a soil’s ultimate bearing capacity and settlement behaviour under a given load. The modulus of subgrade reaction (K value) can be determined by conducting a plate load test.',
+          'A field method that determines bearing capacity and settlement behaviour by loading a rigid plate at foundation level. The modulus of subgrade reaction (k value) is derived from the same test.',
+        promotedTo: { slug: 'plate-load-test', label: 'Plate Load Test' },
       },
     ],
   },
@@ -175,6 +207,7 @@ export const geotechnicalServicePages = [
     slug: 'laboratory-tests',
     title: 'Laboratory Tests',
     icon: '🧪',
+    iconKey: 'flask',
     shortDescription:
       'Grain size, Atterberg limits, shear strength, consolidation, compaction, CBR, and fine-soil gradation.',
     metaTitle: 'Soil Laboratory Tests | GeoDesign Coimbatore & Chennai',
@@ -196,7 +229,7 @@ export const geotechnicalServicePages = [
       {
         title: 'Sieve analysis — wet',
         body:
-          'Wet sieve analysis is a laboratory technique used to accurately determine the particle size distribution of materials—particularly soils, aggregates, or powders containing significant fines (clay/silt) or that are sticky.',
+          'Wet sieve analysis is a laboratory technique used to accurately determine the particle size distribution of materials — particularly soils, aggregates, or powders containing significant fines (clay/silt) or that are sticky.',
       },
       {
         title: 'Atterberg limits',
@@ -211,12 +244,12 @@ export const geotechnicalServicePages = [
       {
         title: 'Direct shear test',
         body:
-          'The direct shear test is a laboratory method used to determine the shear strength parameters—cohesion (c) and angle of internal friction (φ)—of soil by forcing a specimen to fail along a horizontal plane. It is particularly effective for testing granular, non-cohesive soils and provides quick results for geotechnical design applications.',
+          'The direct shear test is a laboratory method used to determine the shear strength parameters — cohesion (c) and angle of internal friction (φ) — of soil by forcing a specimen to fail along a horizontal plane. It is particularly effective for testing granular, non-cohesive soils and provides quick results for geotechnical design applications.',
       },
       {
         title: 'Triaxial test',
         body:
-          'A triaxial test is a common geotechnical laboratory test used to determine the shear strength parameters (cohesion and internal friction angle) of soil—essential for designing foundations, slopes, and tunnels.',
+          'A triaxial test is a common geotechnical laboratory test used to determine the shear strength parameters (cohesion and internal friction angle) of soil — essential for designing foundations, slopes, and tunnels.',
       },
       {
         title: 'Consolidation test',
@@ -249,6 +282,7 @@ export const geotechnicalServicePages = [
     slug: 'tests-on-rock',
     title: 'Tests On Rock',
     icon: '⛰️',
+    iconKey: 'rock',
     shortDescription:
       'Elastic modulus, core recovery, RQD, point load, density, specific gravity, bearing pressure, and UCS.',
     metaTitle: 'Rock Testing | Modulus, RQD, Point Load & UCS | GeoDesign',

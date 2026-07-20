@@ -1,15 +1,200 @@
 ---
+import { navLinks, contactInfo } from '../data/data.js';
+import { geotechnicalServicePages } from '../data/servicesCatalog.js';
+import { commercialServices } from '../data/commercialServices.js';
+
+/**
+ * Site footer.
+ *
+ * Previously a single centred copyright line. The audit found this to be the site's
+ * biggest wasted asset: with zero footer links, service pages were reachable only
+ * via the hub, and the business NAP (name / address / phone) — the standard local
+ * SEO signal — appeared on exactly one page.
+ *
+ * This version puts a link to every service, and both office addresses, on every
+ * page. Column layout is adapted from the sample design's footer, restyled to the
+ * existing slate-100 chrome so header and footer still match.
+ */
 const year = new Date().getFullYear();
+
+/** Commercial services lead — these are what customers actually search for. */
+const serviceLinks = commercialServices.map((s) => ({
+  href: `/services/${s.slug}`,
+  label: s.navLabel ?? s.title,
+}));
+
+/** Technical discipline pages, kept as the second tier. */
+const technicalLinks = geotechnicalServicePages.map((s) => ({
+  href: `/services/${s.slug}`,
+  label: s.title,
+}));
+
+const offices = [
+  {
+    heading: 'Head Office',
+    region: contactInfo.headOffice.regionLabel,
+    address: contactInfo.headOffice.address,
+    landline: contactInfo.phone.landline,
+    mobile: contactInfo.headOffice.mobile,
+  },
+  {
+    heading: 'Branch Office',
+    region: contactInfo.branchOffice.regionLabel,
+    address: contactInfo.branchOffice.address,
+    landline: null,
+    mobile: contactInfo.branchOffice.mobile,
+  },
+];
+
+const linkClass =
+  'block rounded py-1 text-sm leading-snug text-slate-600 transition-colors hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500';
+const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-wider text-slate-900';
 ---
 
 <footer
-  class="shrink-0 border-t border-slate-200 bg-slate-100 py-3 text-slate-800 sm:py-4"
+  class="shrink-0 border-t border-slate-200 bg-slate-100 text-slate-800"
   role="contentinfo"
   aria-label="Site footer"
 >
-  <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-6">
-    <div class="text-center text-sm text-slate-600">
-      <p>© {year} GEODESIGN INDIA PRIVATE LIMITED&reg;. All Rights Reserved.</p>
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+      <!-- Brand -->
+      <div class="lg:col-span-4">
+        <a
+          href="/"
+          class="inline-flex items-center gap-3 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+        >
+          <img
+            src="/assets/web/logo-256.png"
+            alt=""
+            class="h-12 w-12 shrink-0 object-contain"
+            width="256"
+            height="384"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="min-w-0">
+            <span
+              class="font-display block text-sm font-semibold uppercase leading-tight tracking-[0.04em] text-slate-900"
+            >
+              GeoDesign India Private Limited<span class="align-super text-[0.6em]">&reg;</span>
+            </span>
+            <span class="mt-0.5 block text-xs text-slate-600">A Unit of Geotechnical Engineers</span>
+          </span>
+        </a>
+
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-slate-600">
+          Reducing construction risk with scientific geotechnical expertise — soil investigation,
+          testing, and foundation insight across Tamil Nadu and South India.
+        </p>
+
+        <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-sky-800">
+          DTCP &amp; CMDA Chennai — Registered Engineers
+        </p>
+      </div>
+
+      <!-- Services -->
+      <nav class="lg:col-span-3" aria-labelledby="footer-services-heading">
+        <h2 id="footer-services-heading" class={colHeadingClass}>Services</h2>
+        <ul class="m-0 list-none p-0" role="list">
+          {
+            serviceLinks.map((link) => (
+              <li>
+                <a href={link.href} class={linkClass}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class:list={[colHeadingClass, 'mt-6']}>Technical reference</h2>
+        <ul class="m-0 list-none p-0" role="list">
+          {
+            technicalLinks.map((link) => (
+              <li>
+                <a href={link.href} class={linkClass}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Company -->
+      <nav class="lg:col-span-2" aria-labelledby="footer-company-heading">
+        <h2 id="footer-company-heading" class={colHeadingClass}>Company</h2>
+        <ul class="m-0 list-none p-0" role="list">
+          <li><a href="/" class={linkClass}>Home</a></li>
+          {
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href} class={linkClass}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+          <li><a href="/video" class={linkClass}>Watch Our Video</a></li>
+          <li><a href="/contact" class={linkClass}>Get in Touch</a></li>
+        </ul>
+      </nav>
+
+      <!-- NAP: name, address, phone — the standard local signal, now on every page -->
+      <div class="lg:col-span-3">
+        <h2 class={colHeadingClass}>Contact</h2>
+        <div class="space-y-5">
+          {
+            offices.map((office) => (
+              <address class="not-italic">
+                <p class="text-xs font-semibold uppercase tracking-wide text-slate-900">
+                  {office.heading} — {office.region}
+                </p>
+                <p class="mt-1 text-sm leading-relaxed text-slate-600">{office.address}</p>
+                {office.landline ? (
+                  <a
+                    href={`tel:${office.landline.replace(/\D/g, '')}`}
+                    class:list={[linkClass, 'tabular-nums']}
+                  >
+                    {office.landline}
+                  </a>
+                ) : null}
+                <a
+                  href={`tel:${office.mobile.replace(/\D/g, '')}`}
+                  class:list={[linkClass, 'tabular-nums']}
+                >
+                  {office.mobile}
+                </a>
+              </address>
+            ))
+          }
+          <a href={`mailto:${contactInfo.email}`} class:list={[linkClass, 'break-all']}>
+            {contactInfo.email}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-10 flex flex-col gap-2 border-t border-slate-200 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="m-0">© {year} GEODESIGN INDIA PRIVATE LIMITED&reg;. All Rights Reserved.</p>
+      <p class="m-0">
+        <a
+          href="/our-offices"
+          class="rounded hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+        >
+          Coimbatore
+        </a>
+        <span aria-hidden="true"> · </span>
+        <a
+          href="/our-offices"
+          class="rounded hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+        >
+          Chennai
+        </a>
+      </p>
     </div>
   </div>
 </footer>

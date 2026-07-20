@@ -2,22 +2,41 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import { HeroGalleryBackground } from '../components/HeroGalleryBackground.jsx';
 import { homeHeroImages } from '../data/homeHeroImages.js';
+import Icon from '../components/Icon.astro';
 
-/** Order and files: `src/data/homeHeroImages.js` → `public/assets/home/` (20s rotation). */
+/** Order and files: `src/data/homeHeroImages.js` → `public/assets/home/` (see ROTATE_MS). */
 const heroGalleryImages = homeHeroImages;
+
+/**
+ * Home page is hero-only, by decision.
+ *
+ * A credentials band, services grid, why-it-matters teaser, and CTA were trialled
+ * below the hero and removed at Naveen's direction. The footer already carries
+ * every service link plus the office NAP on every page, so the section duplicated
+ * links a short scroll further down without extending reach.
+ *
+ * If anything is added back here later, note the SEO trade-off recorded in
+ * `req/IMPLEMENTATION_RECORD.md`: this page carries little body copy, so it leans
+ * on the hero text, title, and description for topical relevance.
+ */
 ---
 
 <SiteLayout
   title="GeoDesign — Reduce Construction Risk in India"
   description="We reduce risk in construction using scientific expertise — geotechnical investigation and testing across South India for residential, commercial, and government projects."
   canonicalPath="/"
-  ogImagePath={heroGalleryImages[0]?.src ?? '/assets/home/hero-site.jpg'}
->
+><!--
+  ogImagePath intentionally omitted so the page uses the purpose-built 1200×630
+  `og-image.jpg` from BaseLayout. It previously passed `heroGalleryImages[0]`,
+  which meant the social card image was whichever file sorted first in
+  `public/assets/home/` — so dropping a new photo into that folder silently
+  changed the OG image, and the one being served (construction.jpg, 800×579) did
+  not match the declared 1200×630 dimensions.
+-->
   <section
     id="hero"
-    class="relative flex min-h-0 w-full flex-1 flex-col items-center justify-center overflow-hidden pb-12 pt-20 sm:pb-16"
-    role="banner"
-    aria-label="Hero section"
+    class="hero-full relative flex w-full flex-col items-center justify-center overflow-hidden pb-12 pt-20 sm:pb-16"
+    aria-labelledby="hero-heading"
   >
     <HeroGalleryBackground client:load images={heroGalleryImages} />
     <div
@@ -27,6 +46,7 @@ const heroGalleryImages = homeHeroImages;
     <div class="relative z-10 mx-auto w-full max-w-5xl px-3 py-6 text-center sm:px-5 sm:py-8 md:px-6">
       <div class="rounded-2xl border border-white/40 bg-white/82 p-5 shadow-lg sm:rounded-3xl sm:p-8">
         <h1
+          id="hero-heading"
           class="mb-3 font-sans text-[1.65rem] font-bold leading-tight tracking-normal text-slate-900 sm:mb-4 sm:font-display sm:text-3xl sm:leading-[1.25] sm:tracking-tight md:text-4xl lg:text-4xl"
         >
           <span class="block text-slate-900">Know your ground &amp;</span>
@@ -41,7 +61,7 @@ const heroGalleryImages = homeHeroImages;
         <p
           class="mb-4 flex w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 font-sans text-sm tracking-wide sm:font-display sm:text-base"
         >
-          <span class="select-none text-base leading-none sm:text-lg" aria-hidden="true">🏆</span>
+          <span class="text-sky-600" aria-hidden="true"><Icon name="award" class="h-5 w-5" /></span>
           <span class="text-base font-extrabold tabular-nums text-sky-600 sm:text-2xl">5,000+</span>
           <span class="text-[0.8125rem] font-semibold uppercase tracking-wide text-slate-800 sm:text-base">
             Projects Completed
@@ -68,3 +88,34 @@ const heroGalleryImages = homeHeroImages;
     </div>
   </section>
 </SiteLayout>
+
+<style>
+  /*
+    The hero must own its height.
+
+    It previously used `flex-1`, which meant it simply absorbed whatever vertical
+    space the footer left over. That was fine when the footer was a single
+    copyright line, but the footer now carries four columns of navigation and both
+    office addresses (~450px desktop, taller stacked on mobile). With `flex-1` the
+    hero collapsed by exactly that amount and the footer rose into mid-screen.
+
+    `svh` — small viewport height — is the correct unit here: on mobile it uses the
+    viewport with browser chrome *visible*, so the hero never gets taller than the
+    space actually on screen and the layout does not jump as the URL bar hides.
+    `vh` is kept as a fallback for anything without `svh` support.
+  */
+  .hero-full {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  /*
+    Landscape phones are shorter than the hero content needs, so cap it there and
+    let the section grow to fit rather than clipping the CTAs.
+  */
+  @media (max-height: 32rem) {
+    .hero-full {
+      min-height: 32rem;
+    }
+  }
+</style>

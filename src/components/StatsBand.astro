@@ -1,0 +1,50 @@
+---
+import { credentials as defaultCredentials } from '../data/credentials.js';
+
+/**
+ * Credentials / stats row.
+ *
+ * Layout adapted from the sample design's hero stat row (display numeral above a
+ * small uppercase label, separated by a hairline rule) — restyled to Montserrat
+ * and sky/slate. The sample used a mono face and brass; neither is used here.
+ */
+interface Props {
+  items?: { value: string; label: string; detail?: string }[];
+  /** `rule` draws a hairline above the row; `tile` wraps it in a sky card. */
+  variant?: 'rule' | 'tile';
+  class?: string;
+}
+
+const { items = defaultCredentials, variant = 'rule', class: className = '' } = Astro.props;
+
+const shell =
+  variant === 'tile'
+    ? 'rounded-2xl bg-gradient-to-br from-sky-50/95 to-white border border-sky-200/70 shadow-sm ring-1 ring-sky-100/80 p-6 md:p-8'
+    : 'border-t border-slate-200/90 pt-8';
+---
+
+<div class:list={[shell, className]}>
+  <dl
+    class="grid grid-cols-2 gap-x-6 gap-y-8 sm:gap-x-10 lg:grid-cols-4"
+    aria-label="GeoDesign credentials"
+  >
+    {
+      items.map((item) => (
+        <div class="min-w-0">
+          <dt class="sr-only">{item.label}</dt>
+          <dd class="m-0">
+            <span class="font-display block text-2xl font-bold leading-none tracking-tight text-sky-700 sm:text-3xl md:text-4xl">
+              {item.value}
+            </span>
+            <span class="mt-2 block text-xs font-semibold uppercase tracking-wide text-slate-800 sm:text-sm">
+              {item.label}
+            </span>
+            {item.detail ? (
+              <span class="mt-1 block text-xs leading-snug text-slate-600">{item.detail}</span>
+            ) : null}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>

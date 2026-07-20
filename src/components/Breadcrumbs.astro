@@ -1,0 +1,48 @@
+---
+/**
+ * Visual breadcrumb trail.
+ *
+ * Extracted from the markup currently inlined in `services/[slug].astro` so every
+ * new service page renders an identical trail.
+ *
+ * NOTE: BreadcrumbList JSON-LD is deliberately NOT emitted here — structured data
+ * is Batch 6, so that it can be validated as one reviewable change. This component
+ * renders the visual trail only.
+ */
+interface Props {
+  /** Ordered trail. The final item is rendered as plain current-page text. */
+  items: { label: string; href?: string }[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+---
+
+<nav class:list={['text-sm text-slate-600', className]} aria-label="Breadcrumb">
+  <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+    {
+      items.map((item, index) => {
+        const isLast = index === items.length - 1;
+        return (
+          <>
+            <li class="min-w-0">
+              {item.href && !isLast ? (
+                <a
+                  href={item.href}
+                  class="rounded hover:text-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <span class="font-medium text-slate-900" aria-current="page">
+                  {item.label}
+                </span>
+              )}
+            </li>
+            {!isLast ? <li aria-hidden="true">/</li> : null}
+          </>
+        );
+      })
+    }
+  </ol>
+</nav>

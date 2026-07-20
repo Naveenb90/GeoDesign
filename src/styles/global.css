@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Anchor targets clear the fixed header without needing `scroll-mt-*` per element. */
+html {
+  scroll-padding-top: 7.5rem;
+}
+
 /* Match legacy site: Inter body + Montserrat display (see root index.html) */
 @theme {
   --font-family-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -7,11 +12,8 @@
 }
 
 @layer components {
-  /** Inner pages: sticky header offset + horizontal rhythm (matches React `page-shell`) */
-  .page-shell {
-    @apply flex-1 min-h-0 min-w-0 w-full px-3 pt-28 pb-14 sm:px-4 sm:pb-16 md:px-6 lg:px-8 bg-stone-50;
-  }
-
+  /* `.page-shell` (stone canvas) was removed — it was defined but used by zero
+     pages. Reinstate from git history if a non-white band is ever needed. */
   .page-shell-white {
     @apply flex-1 min-h-0 min-w-0 w-full px-3 pt-28 pb-6 sm:px-4 sm:pb-8 md:px-6 lg:px-8 bg-white;
   }

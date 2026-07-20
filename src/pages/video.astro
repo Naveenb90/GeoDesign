@@ -1,12 +1,16 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
 import { videoConfig } from '../data/data.js';
+import { videoSchema } from '../data/schema.js';
 ---
 
 <SiteLayout
-  title="Watch Our Video - GeoDesign"
+  title="Soil Testing & Geotechnical Investigation Video | GeoDesign"
   description="Watch how scientific ground investigation helps reduce construction risk — geotechnical insight for your project."
   canonicalPath="/video"
+  schemas={[videoSchema(videoConfig)]}
 >
   <div class="page-shell-white">
     <div class="page-shell-inner">
@@ -15,30 +19,92 @@ import { videoConfig } from '../data/data.js';
         class="w-full min-w-0 py-8 md:py-10"
         aria-labelledby="video-heading"
       >
-        <header class="mx-auto mb-8 max-w-3xl text-center md:mb-10">
-          <h1
-            id="video-heading"
-            class="font-display text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
-          >
-            Watch Our Video
-          </h1>
-          <p class="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-slate-600 md:text-lg">
-            See how scientific ground investigation supports safer design decisions.
-          </p>
-        </header>
+        <PageHero
+          class="mb-10 md:mb-12"
+          kicker="Watch"
+          heading="Watch Our Video"
+          intro="See how scientific ground investigation supports safer design decisions."
+          id="video-heading"
+        />
         <div
           class="relative mx-auto aspect-video w-full max-w-5xl overflow-hidden rounded-2xl border border-slate-200/90 bg-slate-100 shadow-lg ring-1 ring-slate-200/60"
         >
-          <iframe
-            class="absolute inset-0 h-full w-full border-0"
-            src={videoConfig.embedUrl}
-            title="YouTube video player"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy"
-          ></iframe>
+          {/*
+            Click-to-play facade. The YouTube iframe pulls several hundred KB of
+            third-party script and sets cookies before anyone presses play, so it
+            is injected on click instead. The poster is YouTube's own thumbnail.
+            A <noscript> copy keeps the video playable without JavaScript.
+          */}
+          <div
+            class="absolute inset-0"
+            data-video-slot
+            data-embed={`${videoConfig.embedUrl}&autoplay=1`}
+          >
+            <button
+              type="button"
+              data-video-trigger
+              class="group relative h-full w-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-500"
+              aria-label="Play the GeoDesign soil testing video"
+            >
+              <img
+                src={`https://i.ytimg.com/vi/${videoConfig.videoId}/maxresdefault.jpg`}
+                alt=""
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="1280"
+                height="720"
+              />
+              <span class="absolute inset-0 bg-slate-900/25 transition-colors group-hover:bg-slate-900/15"></span>
+              <span
+                class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 shadow-lg ring-1 ring-slate-900/10 transition-transform group-hover:scale-105 motion-reduce:transition-none sm:h-20 sm:w-20"
+                aria-hidden="true"
+              >
+                <svg class="ml-1 h-7 w-7 text-sky-700 sm:h-9 sm:w-9" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <noscript>
+            <iframe
+              class="absolute inset-0 h-full w-full border-0"
+              src={videoConfig.embedUrl}
+              title="GeoDesign — geotechnical investigation and soil testing"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"></iframe>
+          </noscript>
         </div>
+        <CtaBand
+          class="mt-12 md:mt-16"
+          heading="Have a project in mind?"
+          body="Tell us about your site and we will outline the investigation it needs."
+        />
       </section>
     </div>
   </div>
 </SiteLayout>
+
+<script is:inline>
+  (function () {
+    var slot = document.querySelector('[data-video-slot]');
+    if (!slot) return;
+    var trigger = slot.querySelector('[data-video-trigger]');
+    if (!trigger) return;
+    trigger.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.src = slot.getAttribute('data-embed');
+      frame.title = 'GeoDesign — geotechnical investigation and soil testing';
+      frame.className = 'absolute inset-0 h-full w-full border-0';
+      frame.setAttribute(
+        'allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+      );
+      frame.setAttribute('allowfullscreen', '');
+      slot.innerHTML = '';
+      slot.appendChild(frame);
+    });
+  })();
+</script>

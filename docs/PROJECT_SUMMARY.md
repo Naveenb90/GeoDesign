@@ -6,7 +6,11 @@
 
 Marketing site for **GeoDesign** (geotechnical / soil testing, Tamil Nadu).
 
-**Stack:** **Astro 6** at the **repository root** — file-based routes under `src/pages/`, **`BaseLayout.astro`** for meta/OG/JSON-LD, Tailwind v4, `@astrojs/sitemap`, React islands (`@astrojs/react`) for the contact form and projects gallery. Shared copy in **`src/data/`**.
+**Stack:** **Astro 6** at the **repository root** — file-based routes under `src/pages/`, **`BaseLayout.astro`** for meta/OG/JSON-LD, Tailwind v4, `@astrojs/sitemap`, React islands (`@astrojs/react`) for the contact form, projects gallery, and hero background. Shared copy in **`src/data/`**.
+
+**Scale (V2, July 2026):** 20 indexed routes, 19 components, 8 data modules, 6 structured-data types. Services follow a deliberate **two-tier model** — 7 commercial pages plus 5 technical reference pages — documented in [SERVICES_PAGES.md](./SERVICES_PAGES.md).
+
+**Start here for V2 context:** [`req/ANALYSIS_AND_PLAN.md`](../req/ANALYSIS_AND_PLAN.md) (audit and plan) and [`req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md) (what shipped, and what still needs client review).
 
 **Production reference:** [https://geodesign.co.in](https://geodesign.co.in)
 

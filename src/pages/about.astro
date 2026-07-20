@@ -1,34 +1,60 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
 import { aboutPoints } from '../data/data.js';
 ---
 
 <SiteLayout
-  title="About Us - GeoDesign"
+  title="About GeoDesign — Geotechnical Engineers, Coimbatore & Chennai"
   description="GeoDesign — geotechnical engineers reducing construction risk with scientific ground investigation. DTCP & CMDA registered. 5,000+ projects in Tamil Nadu."
   canonicalPath="/about"
 >
   <div class="page-shell-white">
     <div class="page-shell-inner">
-      <section id="about" class="w-full min-w-0 space-y-10 py-8 md:space-y-14 md:py-10" aria-labelledby="about-heading">
+      <section id="about" class="w-full min-w-0 space-y-12 py-8 md:space-y-16 md:py-10" aria-labelledby="about-hero-heading">
+        <PageHero
+          kicker="Who we are"
+          heading="About GeoDesign"
+          id="about-hero-heading"
+        />
         <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
           <div class="relative min-h-[280px] w-full overflow-hidden rounded-lg shadow-lg md:h-full md:min-h-0">
-            <img
-              src="/assets/web/engineers_at_work.jpeg"
-              alt="GeoDesign engineers at work"
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-              width="800"
-              height="600"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="/assets/web/engineers_at_work-600.webp 600w, /assets/web/engineers_at_work-1024.webp 1024w"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <img
+                src="/assets/web/engineers_at_work.jpeg"
+                alt="GeoDesign geotechnical engineers operating drilling equipment during a site investigation"
+                title="GeoDesign engineers on site"
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+            </picture>
           </div>
           <div class="flex flex-col justify-center">
-            <h2 id="about-heading" class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900">
+            <h2 id="about-heading" class="font-display mb-4 text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
               About Us
             </h2>
             <ul class="space-y-4 leading-relaxed text-slate-600" role="list">
               {aboutPoints.map((point) => (
-                <li>✔️ {point}</li>
+                <li class="flex gap-3">
+                  <span
+                    class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"
+                    aria-hidden="true"
+                  >
+                    <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span>{point}</span>
+                </li>
               ))}
             </ul>
           </div>
@@ -39,34 +65,52 @@ import { aboutPoints } from '../data/data.js';
             <h2 class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900">Our Vision</h2>
             <p class="leading-relaxed text-slate-600">
               Our vision is to expand and strengthen our Geotechnical team to provide a comprehensive range of
-              specialized engineering and consulting services, becoming our clients&apos; preferred professional
-              service partner. We aim to deliver every project—whether a building or civil engineering
-              endeavor—with excellence, efficiency, and innovation, consistently exceeding expectations and
+              specialised engineering and consulting services, becoming our clients’ preferred professional
+              service partner. We aim to deliver every project — whether a building or civil engineering
+              endeavour — with excellence, efficiency, and innovation, consistently exceeding expectations and
               setting new industry standards.
             </p>
           </div>
           <div class="relative order-1 min-h-[280px] w-full overflow-hidden rounded-lg shadow-lg md:order-2 md:h-full md:min-h-0">
-            <img
-              src="/assets/web/vision.jpg"
-              alt="GeoDesign vision"
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-              width="800"
-              height="600"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="/assets/web/vision-600.webp 600w, /assets/web/vision-1200.webp 1200w"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <img
+                src="/assets/web/vision.jpg"
+                alt="Construction site overlooking a developing skyline, representing GeoDesign’s vision"
+                title="GeoDesign vision"
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+            </picture>
           </div>
         </div>
 
         <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10 lg:gap-12">
           <div class="relative min-h-[280px] w-full overflow-hidden rounded-lg shadow-lg md:h-full md:min-h-0">
-            <img
-              src="/assets/web/mission.jpg"
-              alt="GeoDesign mission"
-              class="absolute inset-0 h-full w-full object-cover"
-              loading="lazy"
-              width="800"
-              height="600"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcset="/assets/web/mission-600.webp 600w, /assets/web/mission-800.webp 800w"
+                sizes="(min-width: 768px) 50vw, 100vw"
+              />
+              <img
+                src="/assets/web/mission.jpg"
+                alt="Engineers reviewing soil investigation data, representing GeoDesign’s mission"
+                title="GeoDesign mission"
+                class="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+            </picture>
           </div>
           <div class="flex flex-col justify-center text-center md:text-left">
             <h2 class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900">Our Mission</h2>
@@ -78,6 +122,11 @@ import { aboutPoints } from '../data/data.js';
             </p>
           </div>
         </div>
+        <CtaBand
+          class="mt-4"
+          heading="Working with a site you don’t know yet?"
+          body="Our engineers investigate the ground first, then tell you what the foundation actually needs."
+        />
       </section>
     </div>
   </div>

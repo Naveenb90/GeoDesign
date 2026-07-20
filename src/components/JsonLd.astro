@@ -1,0 +1,23 @@
+---
+/**
+ * Emits a JSON-LD block.
+ *
+ * Kept as a component so every schema on the site is serialised the same way and
+ * `is:inline` / `set:html` handling lives in one place rather than being repeated
+ * per page.
+ *
+ * NOTE ON SAFETY: `set:html` is used because JSON-LD must not be HTML-escaped.
+ * The `data` passed in is always built from our own static data files, never from
+ * user input, so there is no injection surface. `</script>` sequences are escaped
+ * defensively regardless.
+ */
+interface Props {
+  data: unknown;
+}
+
+const { data } = Astro.props;
+
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
+---
+
+<script type="application/ld+json" is:inline set:html={json} />

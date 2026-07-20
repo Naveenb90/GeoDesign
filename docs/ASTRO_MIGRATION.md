@@ -1,5 +1,7 @@
 # Astro site (repository root)
 
+> **Note:** this documents the SPA → Astro migration (April 2026). The V2 content and structure programme that followed is recorded in [`../req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md).
+
 **Goals:** SEO-first static HTML per URL, React only as islands, Netlify deploy from `dist/`.
 
 The **Vite + React SPA** at the former repo root has been **removed**; this repository is **Astro-only**.

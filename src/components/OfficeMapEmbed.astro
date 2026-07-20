@@ -5,6 +5,18 @@ interface Props {
 }
 
 const { title, embedUrl } = Astro.props;
+
+/**
+ * Google Maps embed behind a click-to-load facade.
+ *
+ * Previously the iframe rendered immediately. Two Maps iframes on `/our-offices`
+ * pulled a substantial third-party payload — and set Google cookies — on every
+ * visit, whether or not anyone looked at a map.
+ *
+ * The facade is static markup; the iframe is injected only on click. A
+ * `<noscript>` copy loads the map directly when JavaScript is unavailable, so
+ * the map is never unreachable.
+ */
 ---
 
 <div
@@ -13,17 +25,64 @@ const { title, embedUrl } = Astro.props;
   <div class="shrink-0 border-b border-sky-100/80 px-4 py-2.5 md:px-5 md:py-3">
     <h3 class="text-base font-semibold text-slate-900 md:text-lg">{title}</h3>
   </div>
-  <div class="min-h-0 w-full flex-1">
-    <iframe
-      src={embedUrl}
-      width="100%"
-      height="100%"
-      style="border:0"
-      allowfullscreen
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      title={title}
-      class="block h-full min-h-[260px] w-full md:min-h-[300px] lg:min-h-0"
-    ></iframe>
+
+  <div class="relative min-h-0 w-full flex-1" data-map-slot data-embed={embedUrl} data-title={title}>
+    <button
+      type="button"
+      data-map-trigger
+      class="group flex h-full min-h-[260px] w-full cursor-pointer flex-col items-center justify-center gap-3 bg-slate-50 p-6 text-center transition-colors hover:bg-sky-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sky-500 md:min-h-[300px]"
+      aria-label={`Load the interactive map for ${title}`}
+    >
+      <span
+        class="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-700 ring-1 ring-sky-200 transition-transform group-hover:scale-105 motion-reduce:transition-none"
+        aria-hidden="true"
+      >
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"
+          ></path>
+        </svg>
+      </span>
+      <span class="text-sm font-semibold text-slate-800">Load map</span>
+      <span class="max-w-[16rem] text-xs leading-snug text-slate-500">
+        Loads Google Maps and may set third-party cookies.
+      </span>
+    </button>
+
+    <noscript>
+      <iframe
+        src={embedUrl}
+        width="100%"
+        height="100%"
+        style="border:0"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title={title}
+        class="block h-full min-h-[260px] w-full md:min-h-[300px]"></iframe>
+    </noscript>
   </div>
 </div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-map-slot]').forEach(function (slot) {
+      var trigger = slot.querySelector('[data-map-trigger]');
+      if (!trigger) return;
+      trigger.addEventListener('click', function () {
+        var frame = document.createElement('iframe');
+        frame.src = slot.getAttribute('data-embed');
+        frame.title = slot.getAttribute('data-title') || 'Map';
+        frame.loading = 'lazy';
+        frame.referrerPolicy = 'no-referrer-when-downgrade';
+        frame.setAttribute('allowfullscreen', '');
+        frame.setAttribute('style', 'border:0');
+        frame.className = 'block h-full min-h-[260px] w-full md:min-h-[300px]';
+        frame.width = '100%';
+        frame.height = '100%';
+        trigger.remove();
+        slot.appendChild(frame);
+      });
+    });
+  })();
+</script>

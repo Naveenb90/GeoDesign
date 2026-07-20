@@ -1,16 +1,31 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import ProjectsGallery from '../components/ProjectsGallery.jsx';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
 ---
 
 <SiteLayout
-  title="Our Projects - GeoDesign Portfolio"
+  title="5,000+ Geotechnical Projects Across Tamil Nadu | GeoDesign"
   description="Who we work with — 5,000+ geotechnical projects across Tamil Nadu. Partners who rely on science-led ground insight to reduce construction risk."
   canonicalPath="/projects"
 >
   <div class="page-shell-white">
     <div class="page-shell-inner">
-      <ProjectsGallery client:load />
+      <PageHero
+        class="mb-10 mt-8 md:mb-12"
+        kicker="Who we work with"
+        heading="Who We Work With"
+        intro="Organisations that rely on GeoDesign to reduce construction risk — scientific ground investigation, testing, and foundation-related insight across Tamil Nadu and South India."
+        id="projects-heading"
+      />
+
+      <ProjectsGallery client:visible />
+      <CtaBand
+        class="mb-10 mt-4"
+        heading="Add your project to the list"
+        body="Tell us what you are building and where. We will outline the investigation it needs."
+      />
     </div>
   </div>
 </SiteLayout>

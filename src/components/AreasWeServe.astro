@@ -1,0 +1,68 @@
+---
+import { getRegion } from '../data/serviceAreas.js';
+
+/**
+ * "Areas We Serve" block, rendered from `src/data/serviceAreas.js`.
+ *
+ * DUPLICATE-CONTENT MITIGATION
+ * The requirement documents repeat an identical ~35-locality list verbatim across
+ * every service page. Publishing that as-is across 8+ pages would make a large
+ * share of each page's body text identical to the others.
+ *
+ * The locality data is therefore shared, but the `lead` prop is REQUIRED so each
+ * page states its own reason for serving these areas. Do not pass the same `lead`
+ * to two pages.
+ */
+interface Props {
+  /** Region id from `serviceAreas.js` — currently "chennai" or "coimbatore". */
+  region?: string;
+  /**
+   * Service-specific opening sentence. Required, and must be unique per page —
+   * this is what stops the shared locality list reading as duplicate content.
+   */
+  lead: string;
+  /**
+   * Heading level for each area group. Defaults to `h3`, which assumes an `h2`
+   * section heading sits above this block. Pass `h2` if placing it directly under
+   * the page `h1`, otherwise the page will contain a heading-level skip.
+   */
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  class?: string;
+}
+
+const {
+  region: regionId = 'chennai',
+  lead,
+  headingLevel: GroupHeading = 'h3',
+  class: className = '',
+} = Astro.props;
+
+const region = getRegion(regionId);
+
+if (!region) {
+  throw new Error(
+    `AreasWeServe: unknown region "${regionId}". Known regions: chennai, coimbatore.`
+  );
+}
+---
+
+<div class:list={['min-w-0', className]}>
+  <p class="max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">{lead}</p>
+
+  <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
+    {
+      region.groups.map((group) => (
+        <li class="min-w-0 rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
+          <GroupHeading class="font-display text-sm font-bold uppercase tracking-wide text-sky-800">
+            {group.title}
+          </GroupHeading>
+          <p class="mt-2 text-sm leading-relaxed text-slate-600">
+            {group.localities.join(' · ')}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mt-6 text-sm leading-relaxed text-slate-600">{region.closing}</p>
+</div>

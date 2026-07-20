@@ -1,376 +1,127 @@
-# Code Validation, Best Practices, and Improvements
-
-This document outlines validation, improvements, and best practices for the GeoDesign **Astro** site at the repo root. Older sections may still mention legacy patterns; trim or update when you touch related areas.
+# Technical debt & known issues
 
-## Astro site
-
-- **Routes:** Implemented under `src/pages/` (see [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md)); dynamic services use `getStaticPaths` in `src/pages/services/[slug].astro`.
-- **Netlify:** `netlify.toml` publishes **`dist/`** (no SPA catch-all).
-- **Assets:** Static files live under **`public/`** (e.g. `public/assets/...`).
-- **Tests:** Add smoke tests for `npm run build` and critical routes when CI is introduced.
-
-## ✅ Code Correctness & Reliability
-
-### Implemented Improvements
-
-1. **React Best Practices**
-   - ✅ Component-based architecture with single responsibility
-   - ✅ Proper state management using React hooks
-   - ✅ Event handlers properly bound
-   - ✅ Clean component lifecycle management
-   - ✅ No memory leaks (proper cleanup in useEffect)
-
-2. **Error Handling**
-   - ✅ Form validation with user feedback
-   - ✅ Try-catch blocks for async operations
-   - ✅ Fallback UI for failed image loads
-   - ✅ Intersection Observer fallback for older browsers
-
-3. **Type Safety**
-   - ⚠️ **Recommendation**: Consider migrating to TypeScript or JSDoc typedefs for catalog data
-   - PropTypes are not enforced project-wide on pages; align with team standards if added
+**Updated:** 18 July 2026 (V2)
 
-## Modern Web Standards
+> This file was rewritten for V2. The previous version documented a Vite + React SPA — CDN-loaded Fancybox, `react-vendor` manual chunks, route-level `React.lazy`, `ScrollToTop`. **None of that architecture exists.** The site is Astro static with three React islands.
 
-### HTML5 Semantic Elements
-- ✅ Proper use of `<header>`, `<main>`, `<section>`, `<footer>`, `<nav>`
-- ✅ Semantic HTML improves SEO and accessibility
-- ✅ ARIA labels and roles where appropriate
-
-### CSS Best Practices
-- ✅ Tailwind CSS for utility-first styling
-- ✅ Custom CSS variables for maintainability
-- ✅ Responsive design with mobile-first approach
-- ✅ CSS animations optimized for performance
+---
 
-### JavaScript/React Standards
-- ✅ ES6+ syntax (arrow functions, destructuring, etc.)
-- ✅ React 18 features (StrictMode, concurrent features)
-- ✅ Modern async/await instead of callbacks
-- ✅ Proper use of React hooks
-
-## Performance Optimizations
+## Current state
 
-### Implemented
-
-1. **Code Splitting**
-   - ✅ Vite automatically splits vendor code
-   - ✅ `vite.config.js` defines a **`react-vendor`** manual chunk (`react`, `react-dom`); Fancybox is loaded from CDN in `ProjectsSection`, not bundled as a chunk
-   - ⚠️ **Future**: Route-level `React.lazy` / `Suspense` for non-home routes; lazy below-the-fold sections if bundle grows
-
-2. **Image Optimization**
-   - ✅ Lazy loading with `loading="lazy"` attribute
-   - ✅ Proper image formats (consider WebP conversion)
-   - ✅ Responsive images with appropriate sizing
+| Area | Status |
+|------|--------|
+| Build | 21 pages, clean |
+| Heading structure | 1 H1/page, 0 skips (verified in compiled output) |
+| Duplicate element ids | 0 |
+| Images without `alt` | 0 |
+| JSON-LD | 6 schema types, all parsing |
+| JavaScript shipped | 0 KB on most routes |
+| Tests | **None** — see below |
 
-3. **Lazy Loading**
-   - ✅ YouTube video lazy loads when section enters viewport
-   - ✅ Custom Intersection Observer hook
-   - ✅ Reduces initial page load time
-
-4. **Bundle Optimization**
-   - ✅ Vite build configuration optimized
-   - ✅ Tree shaking enabled
-   - ✅ Minification in production builds
-
-### Recommendations for Further Optimization
+---
 
-1. **Image Optimization**
-   ```bash
-   # Convert images to WebP format
-   # Use tools like sharp or imagemin
-   ```
+## Open debt, by priority
 
-2. **Component Lazy Loading**
-   ```jsx
-   // Example for large components
-   const ProjectsSection = React.lazy(() => import('./components/ProjectsSection'))
-   ```
+### High
 
-3. **Service Worker**
-   - Implement PWA features for offline support
-   - Cache static assets
+**1. No automated tests or CI.**
+The entire V2 programme was verified by ad-hoc scripts run against `dist/`. Those checks are reproducible but not committed, so nothing prevents a regression.
 
-## Security Considerations
+Worth encoding as a build-time or CI check:
+- one H1 per page, no heading-level skips
+- no duplicate element ids
+- no `<img>` without `alt`
+- every `srcset`/`src` candidate resolves on disk
+- all JSON-LD parses
+- all 20 routes present in the sitemap
 
-### Implemented
+That list is not hypothetical — **every one of those checks caught a real bug during V2.**
 
-1. **Form Security**
-   - ✅ Honeypot field for spam prevention
-   - ✅ Client-side validation (UX only)
-   - ✅ Server-side validation required (Netlify handles this)
-   - ✅ CSRF protection via Netlify Forms
+**2. Three hero images below usable resolution.**
 
-2. **XSS Prevention**
-   - ✅ React automatically escapes content
-   - ✅ No `dangerouslySetInnerHTML` usage
-   - ✅ Proper input sanitization
+| File | Size |
+|------|------|
+| `Railway.jpg` | 539×360 |
+| `Soil-Testing.jpg` | 700×298 |
+| `construction.jpg` | 800×579 |
 
-3. **External Resources**
-   - ✅ External scripts loaded securely
-   - ✅ `rel="noopener noreferrer"` on external links
-   - ✅ HTTPS for all external resources
+Used full-bleed at `100vw`. Compression cannot help; they need ~1600px replacements. `hero-site.jpg` (1600×733) is fine.
 
-### Recommendations
+**3. Image variant generation is manual and unguarded.**
+WebP variants were produced by a one-off script that correctly refuses to upscale. Hand-written `srcset` in `.astro` files does not know which widths were actually produced — hardcoding a `1200w` candidate for a 1024px source ships a 404 and the image breaks. **This happened on `/about`.**
 
-1. **Content Security Policy (CSP)**
-   ```html
-   <meta http-equiv="Content-Security-Policy" 
-         content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net; ...">
-   ```
-
-2. **Environment Variables**
-   - Move sensitive data to environment variables
-   - Use `.env` files (not committed to git)
-
-3. **Rate Limiting**
-   - Implement rate limiting on form submissions
-   - Add CAPTCHA for additional spam protection
-
-## Responsiveness & Cross-Browser Compatibility
-
-### Implemented
-
-1. **Responsive Design**
-   - ✅ Mobile-first approach
-   - ✅ Breakpoints: sm (640px), md (768px), lg (1024px)
-   - ✅ Flexible grid layouts
-   - ✅ Touch-friendly button sizes
-
-2. **Cross-Browser Support**
-   - ✅ Autoprefixer for CSS vendor prefixes
-   - ✅ Polyfills for modern features (Intersection Observer fallback)
-   - ✅ Tested on modern browsers
-
-### Testing Recommendations
-
-1. **Browser Testing**
-   - Chrome, Firefox, Safari, Edge
-   - Mobile browsers (iOS Safari, Chrome Mobile)
-   - Test on actual devices, not just emulators
-
-2. **Responsive Testing**
-   - Test at various viewport sizes
-   - Test landscape/portrait orientations
-   - Test on tablets and phones
+`homeHeroImages.js` avoids the problem by pairing sources with variants found on disk. Either extend that pattern to other images, or add the disk-existence check to CI.
 
-3. **Accessibility Testing**
-   - Screen reader testing (NVDA, JAWS, VoiceOver)
-   - Keyboard navigation testing
-   - Color contrast validation
+### Medium
 
-## Accessibility (A11y)
-
-### Implemented
+**4. Emoji used as iconography.**
+`soilIssueGroups`, `credentials`, service icons, and section icons all use emoji. They render differently per OS/browser, cannot be colour-matched to the brand, and on service detail pages are assigned by **cycling an array by index** (`getSectionIcon`), so the icon bears no relationship to the content it sits above. A small inline SVG set would fix all three problems.
 
-1. **ARIA Attributes**
-   - ✅ Proper ARIA labels
-   - ✅ ARIA roles where needed
-   - ✅ ARIA live regions for dynamic content
+**5. Three card treatments remain slightly divergent.**
+`SKY_OUTCOME_TILE_CLASS`, `SKY_FACTOR_TILE_CLASS`, and the ad-hoc white `factorCardClass` in `why-it-matters.astro`. Consolidating means touching 5 consuming files at once, which is why it was deferred.
 
-2. **Keyboard Navigation**
-   - ✅ Focus management
-   - ✅ Visible focus indicators
-   - ✅ Tab order is logical
+**6. Gradient utility drift.**
+`ContactForm.jsx` uses Tailwind v4 `bg-linear-to-r`; everything else uses v3-style `bg-gradient-to-r`. Both work; the mix is confusing.
 
-3. **Semantic HTML**
-   - ✅ Proper heading hierarchy
-   - ✅ Form labels associated with inputs
-   - ✅ Alt text for images
+**7. `prop-types` ships to production.**
+Runtime prop validation in a TypeScript-configured project. Removable.
 
-### Recommendations
+**8. Contact form has no offline handling.**
+A submission on a flaky connection fails with a generic error and the user loses their message. Worth retaining form state on failure.
 
-1. **WCAG 2.1 Compliance**
-   - Aim for AA level compliance
-   - Test color contrast ratios
-   - Ensure keyboard-only navigation works
+### Low
 
-2. **Screen Reader Testing**
-   - Test with actual screen readers
-   - Ensure all content is accessible
-   - Test form error messages
+**9. Unreferenced large assets.**
+`public/assets/web/logo.png` and `logo2.png` (2.1 MB each) are no longer referenced by anything. They cost **zero page weight** — an unreferenced file is never downloaded — but they bloat the repo. Keep as masters or delete.
 
-## Scalability & Future Extensibility
+**10. Gallery filename inconsistency.**
+`gallery1–27.JPG` (uppercase) vs `gallery28–31.jpg`. `getGalleryImages()` works around it with an index threshold, which will break silently if images are added out of order.
 
-### Architecture Decisions
+**11. `docs/PROJECT_REPORT.md` is a point-in-time snapshot** dated 15 April 2026, pre-V2. Retained as history; do not treat as current.
 
-1. **Component Structure**
-   - ✅ Modular components
-   - ✅ Reusable hooks
-   - ✅ Centralized data (easy to move to CMS)
+---
 
-2. **State Management**
-   - ✅ Local state for component-specific data
-   - ⚠️ **Future**: Consider Context API or Redux for global state if needed
+## Deliberate decisions that look like debt
 
-3. **Data Management**
-   - ✅ Data arrays in components (easy to extract)
-   - ⚠️ **Future**: Move to JSON files or CMS
-   - ⚠️ **Future**: Consider GraphQL/REST API integration
+These are choices, not oversights. Do not "fix" them without reading the reasoning.
 
-### Recommendations for Scaling
+| Looks like | Actually |
+|------------|----------|
+| Two overlapping service catalogs | Deliberate two-tier model — see `SERVICES_PAGES.md` |
+| Home page has only 116 words | Client decision; sections were built and removed |
+| Promoted subsections still on Tier 2 pages | Anchors and internal links are load-bearing for SEO |
+| Duplicated locality data across 7 pages | Rendered from one source; `lead` prop enforces uniqueness |
+| FAQ is `<details>` not a React component | Free a11y, crawlable answers, zero JS |
+| No `AggregateRating` schema | No genuine reviews — emitting it is a manual-action risk |
+| `videoConfig.uploadDate` missing | Refusing to invent a date for structured data |
+| Maps/YouTube behind facades | Deliberate; do not reinstate eager iframes |
+| Hero has a hardcoded `min-height` | Required — see the flex-height trap below |
 
-1. **Content Management**
-   ```jsx
-   // Move to separate data files
-   // src/data/services.js
-   export const services = [...]
-   
-   // Or integrate with headless CMS
-   // Contentful, Strapi, Sanity, etc.
-   ```
+---
 
-2. **Internationalization (i18n)**
-   - Consider react-i18next for multi-language support
-   - Extract all text to translation files
+## The flex-height trap
 
-3. **Testing**
-   - Add unit tests (Jest + React Testing Library)
-   - Add E2E tests (Playwright or Cypress)
-   - Add visual regression tests
+`<body>` is `min-h-screen flex flex-col`, `<main>` is `flex-1`, the footer is `shrink-0`.
 
-## Potential Bugs & Edge Cases
+Any page whose content relies on `flex-1` **with no intrinsic height** is coupled to the footer's height. The V2 footer is much taller than V1's single copyright line, and pages relying on `flex-1` alone collapsed — the footer rose into mid-screen. Two pages carry explicit floors (`index.astro` hero, `404.astro` inner).
 
-### Identified Issues
+If you add a short page, give it a height floor. Use `svh`, not `vh`.
 
-1. **Gallery Images**
-   - ⚠️ **Issue**: Mixed file extensions (.JPG vs .jpg)
-   - ✅ **Fixed**: Code handles both extensions
-   - **Recommendation**: Standardize file naming
+---
 
-2. **Fancybox Loading**
-   - ⚠️ **Issue**: Fancybox may not be loaded when button clicked
-   - ✅ **Fixed**: Added check before opening
-   - **Recommendation**: Load Fancybox in head or use npm package
+## Security
 
-3. **Form Submission**
-   - ⚠️ **Issue**: No offline handling
-   - **Recommendation**: Add offline detection and queue submissions
+Unchanged from previous review and still sound: Netlify Forms with honeypot, no `dangerouslySetInnerHTML`, `rel="noopener noreferrer"` on external links, HTTPS throughout.
 
-4. **Image Loading Errors**
-   - ⚠️ **Issue**: No error handling for broken images
-   - **Recommendation**: Add error boundaries and fallback images
+`JsonLd.astro` uses `set:html` — necessary because JSON-LD must not be HTML-escaped. Input is always our own static data, never user input, and `<` is escaped defensively.
 
-### Edge Cases to Handle
+Still worth adding: a Content Security Policy header (hosting-side).
 
-1. **Slow Network**
-   - Images may load slowly
-   - **Solution**: Add loading skeletons
-
-2. **JavaScript Disabled**
-   - Site should have basic functionality
-   - **Solution**: Progressive enhancement
-
-3. **Old Browsers**
-   - Intersection Observer not supported
-   - **Solution**: Polyfill or fallback (implemented)
-
-## Technical Debt
-
-### Current Technical Debt
-
-1. **Mixed File Extensions**
-   - Gallery images use both .JPG and .jpg
-   - **Fix**: Standardize to lowercase .jpg
-
-2. **Hardcoded Data**
-   - Services, issues, etc. are in components
-   - **Fix**: Extract to data files or CMS
+---
 
-3. **External Dependencies**
-   - Fancybox loaded from CDN
-   - **Fix**: Install via npm for better control
+## Browser support notes
 
-4. **No Error Boundaries**
-   - React errors will crash entire app
-   - **Fix**: Add error boundaries
-
-### Recommended Fixes Priority
-
-1. **High Priority**
-   - Add error boundaries
-   - Standardize image file extensions
-   - Add loading states for async operations
-
-2. **Medium Priority**
-   - Extract data to separate files
-   - Add unit tests
-   - Implement proper error handling
-
-3. **Low Priority**
-   - Migrate to TypeScript
-   - Add PWA features
-   - Implement i18n
-
-## Best Practices Applied
-
-### Code Quality
-
-- ✅ Consistent code formatting
-- ✅ Clear variable and function names
-- ✅ Comprehensive comments
-- ✅ DRY (Don't Repeat Yourself) principle
-- ✅ Single Responsibility Principle
-
-### React Patterns
-
-- ✅ Functional components with hooks
-- ✅ Custom hooks for reusable logic
-- ✅ Proper prop passing
-- ✅ Conditional rendering
-- ✅ Event handling best practices
-
-### Performance
-
-- ✅ Lazy loading where appropriate
-- ✅ Optimized re-renders
-- ✅ Memoization where beneficial (can add React.memo if needed)
-- ✅ Efficient state updates
-
-## Testing Recommendations
-
-### Unit Tests
-```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom jest
-```
-
-### E2E Tests
-```bash
-npm install --save-dev @playwright/test
-```
-
-### Test Coverage Goals
-- Components: 80%+
-- Hooks: 90%+
-- Utilities: 100%
-
-## Deployment Checklist
-
-- [ ] Build production bundle
-- [ ] Test production build locally
-- [ ] Optimize images (WebP conversion)
-- [ ] Set up CDN for static assets
-- [ ] Configure environment variables
-- [ ] Set up error tracking (Sentry, etc.)
-- [ ] Set up analytics
-- [ ] Test form submission
-- [ ] Test on multiple devices/browsers
-- [ ] Run Lighthouse audit
-- [ ] Check SEO meta tags
-- [ ] Verify all links work
-- [ ] Test accessibility with screen reader
-
-## Performance Metrics Goals
-
-- **Lighthouse Score**: 90+ in all categories
-- **First Contentful Paint (FCP)**: < 1.8s
-- **Largest Contentful Paint (LCP)**: < 2.5s
-- **Time to Interactive (TTI)**: < 3.8s
-- **Cumulative Layout Shift (CLS)**: < 0.1
-- **Total Blocking Time (TBT)**: < 200ms
-
-## Conclusion
-
-The React conversion follows modern best practices and is production-ready with the recommended improvements. The codebase is maintainable, scalable, and performant. Regular updates and monitoring will ensure continued quality.
-
-
+- **`svh` units** — used for viewport-height sections. Universally supported as of 2026; `100vh` declared first as fallback.
+- **`<details>`/`<summary>`** — universal.
+- **WebP** — universal; original-format fallback retained in every `<picture>` regardless.
+- **`color-mix()` / `inset-block`** — used in card hover styles, well supported.

@@ -1,166 +1,148 @@
-# SEO audit — GeoDesign React (codebase review)
+# SEO audit — GeoDesign (Astro static site)
 
-**Audit date:** 4 April 2026  
-**Scope:** Static review of `src/`, `index.html`, and `public/` (robots, sitemap).  
-**Canonical origin:** `https://geodesign.co.in` — matches `src/components/SEO.jsx` default `url` prop.
+**Audit date:** 18 July 2026
+**Scope:** Compiled output in `dist/` — 20 indexed routes + 404
+**Canonical origin:** `https://geodesign.co.in`
 
-**Note:** This is a **client-rendered SPA** (Vite + React). Search engines that execute JavaScript will see per-route `<title>` and meta from `react-helmet-async`. The initial `index.html` still ships default meta; avoid conflicting canonicals between static HTML and hydrated app (see [Issues](#8-issues--recommendations)).
+> **Supersedes** the April 2026 audit, which described a client-rendered Vite + React SPA using `SEO.jsx` and `react-helmet-async`. That architecture no longer exists. The site is Astro static — every route ships complete HTML with no JavaScript-rendering dependency, which removes the entire class of SPA indexing concerns that audit raised.
 
 ---
 
 ## Executive summary
 
 | Area | Rating | Notes |
-|------|--------|--------|
-| Technical (robots, sitemap, URLs) | **Strong** | `robots.txt` + `@astrojs/sitemap` (`sitemap-index.xml`); URLs aligned to **geodesign.co.in** (updated this audit). |
-| On-page (titles, descriptions) | **Strong** | Every route renders `<SEO />` with unique `title` / `description` / `keywords`. |
-| Structured data | **Good** | Organization JSON-LD on all pages; room to add `WebPage` / `LocalBusiness` refinement. |
-| Content & headings | **Good** | Clear H1 on most routes; **Video** page lacks a visible H1 (see below). |
-| SPA / indexing | **Watch** | Canonical uses `window.location.pathname` client-side; prerender/SSR would be stronger for non-JS crawlers. |
-
-**Overall:** **~82 / 100** — solid marketing-site SEO foundation; main gaps are SPA mechanics, one heading issue, and schema duplication—not missing meta on routes.
-
----
-
-## 1. Technical SEO
-
-### Implemented
-
-| Item | Location | Status |
-|------|----------|--------|
-| **robots.txt** | `public/robots.txt` | `Allow: /`; **Sitemap** points to `https://geodesign.co.in/sitemap-index.xml` |
-| **Sitemap** | Build output | **`@astrojs/sitemap`** emits **`sitemap-index.xml`** (and chunks) at `npm run build` |
-| **Clean URLs** | React Router | Kebab-case paths; service slugs match catalog |
-| **404** | `App.jsx` | Friendly message + link home (not in sitemap — correct) |
-| **lang** | `index.html` | `<html lang="en">` |
-| **Viewport** | `index.html` | Present |
-| **Scroll restoration** | `ScrollToTop.jsx` | Scroll to top on navigation — improves UX signals |
-
-### SPA considerations
-
-- **Canonical & OG URL:** Built in `SEO.jsx` as `` `${url}${window.location.pathname}` `` after load. Ensure production host redirects (e.g. apex ↔ www) match **one** canonical host (**geodesign.co.in**).
-- **HTTPS:** Expected on Netlify/production; not enforced in repo (hosting concern).
+|------|--------|-------|
+| Technical (robots, sitemap, URLs) | **Strong** | 20 URLs, clean kebab-case, all originals preserved |
+| On-page (titles, descriptions) | **Strong** | Unique per route, keyword-led |
+| Structured data | **Strong** | 6 schema types, all generated from site data |
+| Headings | **Strong** | 1 H1/page, 0 level skips — verified in compiled output |
+| Internal linking | **Strong** | 23–24 links/page, was 2–7 |
+| Content depth | **Good** | Service pages 986–1325 words; home page thin by choice |
+| Performance | **Good** | Major payload issues resolved; hero image resolution outstanding |
+| Local SEO | **Good** | NAP site-wide, `ProfessionalService` ×2 with coordinates |
 
 ---
 
-## 2. On-page SEO (per route)
+## 1. Technical
 
-All listed pages use **`src/components/SEO.jsx`** with route-specific props.
+| Item | Status |
+|------|--------|
+| `robots.txt` | `Allow: /`, points to `sitemap-index.xml` |
+| Sitemap | `@astrojs/sitemap`, 20 URLs, 404 correctly excluded |
+| Canonicals | Present on every page, built from `Astro.site` |
+| 404 | `noindex, nofollow`, excluded from sitemap |
+| `lang` / viewport | Present |
+| Rendering | Static HTML — no JS dependency for indexing |
 
-| Route | Document title (via `<SEO title=…>`) | Notes |
-|-------|--------------------------------------|--------|
-| `/` | GeoDesign - Expert Soil Testing Services in India | Matches brand + scope |
-| `/about` | About Us - GeoDesign | Short; acceptable |
-| `/why-it-matters` | Why Soil Testing Matters - GeoDesign | Clear intent |
-| `/services` | What We Do — Geotechnical Services | Hub |
-| `/services/…` | From `servicesCatalog` `metaTitle` | Unique per service |
-| `/projects` | Our Projects - GeoDesign Portfolio | |
-| `/contact` | Get Started - Contact GeoDesign | |
-| `/video` | Watch Our Video - GeoDesign | |
-| `/our-offices` | Our Offices - GeoDesign | |
+**Outstanding (hosting-side, not in repo):** confirm apex ↔ www redirects resolve to one canonical host.
 
-**Title pattern:** If `title` does not include “GeoDesign”, the component appends ` | GeoDesign`.
+## 2. Headings
 
-**Meta keywords:** Still output; Google largely ignores them — low priority to maintain.
+Verified against compiled HTML across all 20 routes: **exactly one H1 per page, zero heading-level skips.**
 
-**Obsolete meta:** `revisit-after` in `SEO.jsx` is outdated for modern crawlers — safe to remove later.
+Fixed in V2:
+- `/about` had **no H1** — the "About Us" H2 was promoted in place
+- `/services` and all 5 technical service pages jumped **H1 → H3** — card and subsection headings became H2, the correct level under the page H1
 
----
+Enforced going forward by the heading contract in `SERVICES_PAGES.md` and `headingLevel` props on shared components.
 
-## 3. Headings (accessibility & SEO)
+## 3. Structured data
 
-| Page | Visible H1 | Note |
-|------|------------|------|
-| Home | Yes (Hero) | |
-| About, Why It Matters, Services hub, Projects, Contact, Offices | Yes | |
-| Service detail | Yes | From catalog |
-| **Video** | **No** | `VideoSection` uses `aria-label` on `<section>` only — **recommend adding a visible `<h1>`** (e.g. “Watch our video”) for outline and SEO |
+| Schema | Where | Count |
+|--------|-------|-------|
+| `Organization` | every page | 20 |
+| `BreadcrumbList` | all service pages | 12 |
+| `Service` | Tier 1 service pages | 7 |
+| `FAQPage` | Tier 1 service pages | 7 |
+| `ProfessionalService` | `/our-offices` | 2 |
+| `VideoObject` | `/video` | 1 |
 
----
+All generated by `src/data/schema.js` from the same data the pages render, so schema cannot drift from visible content. Every block verified as parsing.
 
-## 4. Structured data (`SEO.jsx`)
+**`FAQPage` is only emitted where answers are visibly rendered** — `FaqAccordion` uses native `<details>`, which keeps answers in the DOM. Emitting FAQ schema for content not on the page is a violation.
 
-- **Type:** `Organization` with name, url, logo, description, address (Coimbatore), `ContactPoint`.
-- **Issue:** Same block is emitted on **every** page; `description` follows **page** meta — Organization description can drift from a single brand definition.
-- **Recommendation:** Emit **Organization** once (e.g. home only) or keep fixed `description` for Organization; add **`WebPage`** (or `Service` for service URLs) with page-specific fields if you extend schema.
+**Deliberately omitted:** `AggregateRating` / `Review`. Emitting review schema without genuine verifiable reviews is a manual-action risk. Add only when real reviews exist.
 
----
+**Outstanding:** `videoConfig.uploadDate` is unset, so `VideoObject` omits `uploadDate`. Google wants it for video rich results. Supply the real YouTube publish date — do not invent one.
 
-## 5. Open Graph & Twitter
+## 4. Internal linking
 
-- **og:title, og:description, og:image, og:url** — set.
-- **twitter:card** — `summary_large_image`.
-- **Default image:** `/assets/home/hero-site.jpg` (absolute URL resolved against site origin).
-- **Locale:** `og:locale` = `en_IN`.
+The single largest V2 improvement. Before: the home page had 2 outbound internal links, and service pages were reachable only via the hub. After: **23–24 internal links per page**, driven by the footer, which carries all 12 service links plus company links on every page.
 
----
+Also added: header services dropdown, `RelatedServices` cross-links on every service page, and reciprocal Tier 1 ↔ Tier 2 linking.
 
-## 6. Performance & Core Web Vitals (SEO-adjacent)
+## 5. Duplicate content
 
-- Hero **LCP** image preloaded in `index.html`.
-- Fonts: async CSS pattern for Google Fonts.
-- Images: many use `loading="lazy"`; **WebP/AVIF** not mandated — opportunity for LCP/weight on gallery assets.
-- **Analytics:** Commented in `index.html` — enable one stack for measurement (Plausible/GA4) when ready.
+**Managed risk.** The client-supplied copy repeated identical "Areas We Serve", "Why Choose Us", and "Industries" blocks verbatim across all four source documents, and repeated `"<service> in Chennai"` 10–14 times per page.
 
----
+Mitigations applied:
+- Locality data rendered from one source (`serviceAreas.js`) with a **required unique `lead`** per page
+- Keyword repetition cut to 3–4 natural occurrences; density now 0.81%–2.41%
+- Service-specific "Why Choose Us" rather than generic
+- ≥986 words of unique content per page
 
-## 7. Internal linking
+**Measured worst-case pairwise 8-gram overlap between the 7 Tier 1 pages: 15.4%** (threshold of concern ≈ 25%).
 
-- Header nav covers main sections.
-- Breadcrumbs on **service detail** (Home → What We Do → service).
-- Cross-links (e.g. Contact → Our Offices) present in copy.
+Re-measure after any bulk copy edit.
 
----
+## 6. Images
 
-## 8. Issues & recommendations
+- All non-decorative images have descriptive `alt` and `title`
+- Generic alt text (`"Project 1"`…`"Project 6"`) replaced with real descriptions
+- Client logos: the first marquee copy carries alt; the duplicate is `aria-hidden` with empty alt, so screen readers do not hear every client name twice
+- WebP `srcset` throughout with original-format fallback
 
-### High
+**Regression to guard:** variants are never upscaled, so a source narrower than a listed `srcset` width produces a 404 and the image breaks. This shipped briefly on `/about` and was caught in review. **Verify every `srcset` candidate resolves after regenerating images.**
 
-1. **Video page H1** — Add a visible page title for users and heading hierarchy.
-2. **Domain consistency** — Use **one** primary host everywhere (this audit aligned **robots** / **sitemap** to **geodesign.co.in**). Configure Netlify redirects if **geodesign.in** still serves traffic.
+## 7. Performance
 
-### Medium
+| Change | Impact |
+|--------|--------|
+| Header logo | **2151.7 KB → 7.4 KB** (was eager on every page, and served as a 32×32 favicon) |
+| `/projects` previews | **2754 KB → 134 KB** (95%) |
+| `/about` images | **322 KB → 84 KB** (74%) |
+| Google Fonts | No longer render-blocking |
+| Google Maps ×2 | Click-to-load facade — no third-party JS or cookies until requested |
+| YouTube | Click-to-load facade with poster |
+| JavaScript | 0 KB on most routes; islands only where genuinely interactive |
 
-3. **Organization JSON-LD** — Use a **stable** organization description; add **`WebPage`** for key URLs if you invest in rich results.
-4. **Canonical in SPA** — Validate in **Google Search Console** URL Inspection after deploy; consider **prerender** or **SSR** if non-JS crawlers matter.
-5. **Remove** `meta name="revisit-after"` — cosmetic cleanup.
+**Outstanding:** three hero images are below usable resolution for full-bleed use (`Railway.jpg` 539×360, `Soil-Testing.jpg` 700×298, `construction.jpg` 800×579). Compression cannot fix this. Replace with ~1600px originals.
 
-### Low
+## 8. Local SEO
 
-6. **meta keywords** — Optional removal to reduce noise.
-7. **Sitemap `lastmod`** — Currently uniform; regenerate on meaningful deploys or automate in CI.
-8. **Client logo alts** on Projects — generic “Client N”; improve if you have names.
+Implemented in V2:
+- NAP for both offices in the footer, on every page
+- `ProfessionalService` schema ×2 with real coordinates (reused from the map embeds)
+- `areaServed` on every `Service`
+- `AreasWeServe` locality blocks
 
----
+**Strategy note:** service copy is deliberately **city-neutral**, with location relevance carried by the `areas` block. The client's source copy was 100% Chennai; adopting that wholesale would have diluted Coimbatore, where the head office and one of the two laboratories sit.
 
-## 9. Verification checklist (post-deploy)
+**Deferred:** city-variant pages (`/soil-testing-chennai`, `/soil-testing-coimbatore`). Build only after the pillars have indexed and Search Console shows real local volume — ~16 near-identical variants launched alongside 7 new pages is the most likely way to damage existing rankings.
 
-- [ ] **Search Console** property for **geodesign.co.in**, submit sitemap `https://geodesign.co.in/sitemap-index.xml`
-- [ ] **URL Inspection** on `/`, `/services`, one service detail
-- [ ] **Rich Results Test** on a page with JSON-LD
-- [ ] **Lighthouse** SEO category on key routes
-- [ ] Confirm **301** from old domain if migrating
+**Not in repo:** Google Business Profile claim/optimisation for both offices. Worth doing.
 
----
+## 9. Content depth
 
-## 10. Files reference
+| Route | Body words |
+|-------|-----------|
+| Tier 1 service pages | 986–1325 |
+| Tier 2 service pages | 214–545 |
+| `/about`, `/contact`, `/our-offices`, `/why-it-matters` | 222–354 |
+| **`/`** | **116** |
 
-| Concern | File |
-|---------|------|
-| Meta, canonical, OG, JSON-LD | `src/components/SEO.jsx` |
-| Per-route titles/descriptions | `src/pages/*.jsx`, `src/constants/servicesCatalog.js` |
-| Crawlers | `public/robots.txt`, build-generated `sitemap-index.xml` |
-| Shell document | `index.html` |
+**The home page is thin by explicit client decision.** It is hero-only; a services grid and supporting sections were built and then removed because the footer already carried the links. It leans on hero copy, title, and description for topical relevance.
 
----
-
-## Addendum — Astro static site (repo root)
-
-The **Astro** app ships per-route **HTML with meta and canonical in the first response** via [`src/layouts/BaseLayout.astro`](../src/layouts/BaseLayout.astro). **`@astrojs/sitemap`** generates **`sitemap-index.xml`** at build time; [`public/robots.txt`](../public/robots.txt) references **`https://geodesign.co.in/sitemap-index.xml`**. Re-run Lighthouse and Rich Results after substantive content changes.
+If `/` loses ranking, the remedy is prose about what GeoDesign does — not a link grid.
 
 ---
 
-## Changelog
+## Priority actions
 
-- **2026-04-05:** Addendum for Astro migration branch and static HTML SEO.
-- **2026-04-04:** Full rewrite from codebase audit; aligned **robots.txt** / **sitemap.xml** to **https://geodesign.co.in**; updated sitemap **lastmod**; removed obsolete / corrupted table fragments from prior version.
+1. **Export a Search Console baseline for the original 13 URLs before deploying.** Without it, a regression is guesswork.
+2. Submit the updated sitemap (20 URLs, up from 13).
+3. Validate a sample of pages in Google's Rich Results Test.
+4. **Watch `/services/drilling-sampling` and `/services/specialised-field-testing`** — most exposed to cannibalisation from the new Tier 1 pages. If either drops >20% over 14 days, revert the hub restructure first.
+5. Replace the three low-resolution hero images.
+6. Supply `videoConfig.uploadDate`.
+7. Claim/optimise Google Business Profile for both offices.

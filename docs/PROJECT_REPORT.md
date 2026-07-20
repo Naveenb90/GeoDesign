@@ -1,5 +1,14 @@
 # GeoDesign Web — Full Project Report
 
+> ⚠️ **HISTORICAL SNAPSHOT — superseded.**
+> This report describes the site as of **15 April 2026**, before the V2 programme.
+> Route list, component inventory, SEO findings, and performance figures here are
+> all out of date. It is retained as a record of the pre-V2 state.
+>
+> For current state see [`../CLAUDE.md`](../CLAUDE.md), [`SEO_AUDIT.md`](./SEO_AUDIT.md),
+> [`TECH_DEBT.md`](./TECH_DEBT.md), and [`../req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md).
+
+
 **Prepared by:** Technical Consultant (AI-assisted analysis)  
 **Date:** 15 April 2026  
 **Scope:** Full codebase review — `src/`, `public/`, `docs/`, `netlify.toml`, `astro.config.mjs`, git history  

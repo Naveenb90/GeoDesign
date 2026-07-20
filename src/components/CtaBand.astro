@@ -1,0 +1,107 @@
+---
+import { contactInfo } from '../data/data.js';
+
+/**
+ * Reusable conversion band.
+ *
+ * Fixes the largest UX gap found in the audit: 6 of 9 page types currently have
+ * no conversion path at all (`/about`, `/services`, `/services/*`, `/why-it-matters`,
+ * `/projects`, `/video`).
+ *
+ * Primary CTA is "Get Free Consultation" — the single primary confirmed by Naveen.
+ * Secondary is click-to-call, which matters in a phone-driven industry.
+ */
+interface Props {
+  heading?: string;
+  body?: string;
+  /** Primary button label. */
+  ctaLabel?: string;
+  /** Primary button href. Pass `?service=<slug>` to pre-select in the contact form. */
+  ctaHref?: string;
+  /** Show the click-to-call secondary action. */
+  showCall?: boolean;
+  /** Explicit heading id. Defaults to a slug of `heading`. */
+  id?: string;
+  /** Tone: `tile` matches the sky cards; `plain` is a bordered band. */
+  variant?: 'tile' | 'plain';
+  class?: string;
+}
+
+/**
+ * Derive the heading id from the heading text.
+ *
+ * A page may legitimately carry more than one CTA band (e.g. mid-page and above
+ * the footer). A fixed id would emit duplicates, which is invalid HTML and breaks
+ * `aria-labelledby` resolution. Deriving from the text keeps ids stable across
+ * builds; pass `id` explicitly if two bands ever share a heading.
+ */
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48);
+}
+
+const {
+  heading = 'Discuss your site with a geotechnical engineer',
+  body = 'Tell us about your project and we will respond with clear next steps, scope, and timelines.',
+  ctaLabel = 'Get Free Consultation',
+  ctaHref = '/contact',
+  showCall = true,
+  variant = 'tile',
+  id,
+  class: className = '',
+} = Astro.props;
+
+const phone = contactInfo.phone.mobile;
+const phoneDigits = phone.replace(/\D/g, '');
+
+const shell =
+  variant === 'tile'
+    ? 'rounded-2xl bg-gradient-to-br from-sky-50/95 to-white border border-sky-200/70 shadow-sm ring-1 ring-sky-100/80'
+    : 'rounded-2xl border border-slate-200/90 bg-white shadow-sm';
+
+const headingId = id ?? `cta-${slugify(heading)}`;
+---
+
+<aside
+  class:list={[shell, 'p-6 text-center md:p-10', className]}
+  aria-labelledby={headingId}
+>
+  <h2
+    id={headingId}
+    class="font-display text-balance text-xl font-bold leading-snug text-slate-900 md:text-2xl"
+  >
+    {heading}
+  </h2>
+
+  <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+    {body}
+  </p>
+
+  <div class="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+    <a
+      href={ctaHref}
+      class="inline-flex min-w-[220px] items-center justify-center rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-8 py-3 font-semibold text-white shadow-md transition hover:from-sky-700 hover:to-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+    >
+      {ctaLabel}
+    </a>
+
+    {
+      showCall ? (
+        <a
+          href={`tel:${phoneDigits}`}
+          class="inline-flex min-w-[220px] items-center justify-center gap-2 rounded-xl border-2 border-slate-300 bg-white px-6 py-3 font-semibold text-slate-800 transition hover:border-sky-400 hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+        >
+          <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+            />
+          </svg>
+          <span class="tabular-nums">{phone}</span>
+        </a>
+      ) : null
+    }
+  </div>
+</aside>

@@ -1,0 +1,57 @@
+---
+/**
+ * Numbered process steps.
+ *
+ * Every requirement document contains an "Our Process" section (site inspection →
+ * planning → field work → analysis → report). This renders them from data instead
+ * of hand-writing the markup per page.
+ *
+ * Numeral-in-a-rail layout is adapted from the sample design, using Montserrat and
+ * the existing sky-100/sky-800 chip treatment already used on `why-it-matters`.
+ */
+interface Props {
+  steps: { title: string; description: string }[];
+  /** Two columns on wide screens once there are enough steps to warrant it. */
+  columns?: 1 | 2;
+  /**
+   * Heading level for each step. Defaults to `h3`, which assumes an `h2` section
+   * heading sits above this block. Pass `h2` if placing it directly under the
+   * page `h1`, otherwise the page will contain a heading-level skip.
+   */
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  class?: string;
+}
+
+const {
+  steps,
+  columns = 2,
+  headingLevel: StepHeading = 'h3',
+  class: className = '',
+} = Astro.props;
+
+const gridClass = columns === 2 ? 'sm:grid-cols-2' : '';
+---
+
+<ol class:list={['m-0 grid list-none gap-6 p-0 md:gap-8', gridClass, className]} role="list">
+  {
+    steps.map((step, index) => (
+      <li class="flex min-w-0 gap-4">
+        <span
+          class="font-display flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-base font-bold text-sky-800 shadow-inner ring-1 ring-sky-200/80 tabular-nums"
+          aria-hidden="true"
+        >
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <div class="min-w-0 flex-1">
+          <StepHeading class="font-display text-base font-bold leading-snug text-slate-900 md:text-lg">
+            <span class="sr-only">Step {index + 1}: </span>
+            {step.title}
+          </StepHeading>
+          <p class="mt-1.5 text-sm leading-relaxed text-slate-600 md:text-base">
+            {step.description}
+          </p>
+        </div>
+      </li>
+    ))
+  }
+</ol>

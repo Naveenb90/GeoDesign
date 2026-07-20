@@ -9,11 +9,17 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   robotsNoindex={true}
 >
   <div class="page-shell-white">
-    <div class="page-shell-inner mx-auto flex min-h-[50vh] max-w-lg flex-col items-center justify-center px-4 py-20 text-center">
+    <!--
+      `min-h-[60svh]` rather than a `vh` fraction: with the expanded footer, a
+      50vh guard left the footer starting mid-screen on short pages, because the
+      shell's `flex-1` only ever hands over the space the footer does not use.
+      Giving this page its own floor keeps the footer below the fold.
+    -->
+    <div class="page-shell-inner mx-auto flex min-h-[60svh] max-w-lg flex-col items-center justify-center px-4 py-20 text-center">
       <h1 class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">
         404 — Page Not Found
       </h1>
-      <p class="mb-8 text-base leading-relaxed text-slate-600">The page you&apos;re looking for doesn&apos;t exist.</p>
+      <p class="mb-8 text-base leading-relaxed text-slate-600">The page you’re looking for doesn’t exist.</p>
       <a
         href="/"
         class="inline-block rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-semibold text-white shadow-md transition hover:from-sky-700 hover:to-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2"

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { previewImages, getGalleryImages, clientLogos } from '../data/data.js';
 import { SKY_OUTCOME_TILE_CLASS } from '../data/skyTileClasses.js';
@@ -11,6 +12,9 @@ export function ProjectsGallery() {
   const galleryImages = getGalleryImages();
   const fancyboxRef = React.useRef(null);
   const [fancyboxStatus, setFancyboxStatus] = useState('loading');
+  const [galleryError, setGalleryError] = useState(false);
+  /** WCAG 2.2.2 — moving content lasting more than 5s needs a user-accessible pause. */
+  const [marqueePaused, setMarqueePaused] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -38,22 +42,19 @@ export function ProjectsGallery() {
   }, []);
 
   const handleOpenGallery = () => {
-    if (fancyboxStatus === 'loading') {
-      return;
-    }
+    if (fancyboxStatus === 'loading') return;
 
     const Fancybox = fancyboxRef.current;
     if (fancyboxStatus === 'error' || !Fancybox) {
-      window.alert('Gallery is temporarily unavailable. Please refresh the page and try again.');
+      setGalleryError(true);
       return;
     }
 
+    setGalleryError(false);
     Fancybox.show(galleryImages, {
       Thumbs: false,
       Toolbar: true,
-      Carousel: {
-        transition: 'slide',
-      },
+      Carousel: { transition: 'slide' },
     });
   };
 
@@ -61,31 +62,34 @@ export function ProjectsGallery() {
   const marqueeTile = `${SKY_OUTCOME_TILE_CLASS} overflow-hidden`;
 
   return (
-    <section id="projects" className="w-full min-w-0 py-8 md:py-10" aria-labelledby="projects-heading">
-      <div className="mb-8 text-center md:mb-10">
-        <h1
-          id="projects-heading"
-          className="font-display mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
-        >
-          Who We Work With
-        </h1>
-        <p className="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
-          Organisations that rely on GeoDesign to reduce construction risk — scientific ground investigation, testing,
-          and foundation-related insight across Tamil Nadu and South India.
-        </p>
-      </div>
-
+    <section id="projects" className="w-full min-w-0 py-8 md:py-10" aria-labelledby="projects-gallery-heading">
       <div className={tile}>
         <div className="mb-8 grid grid-cols-2 gap-5 md:grid-cols-3 md:gap-7">
-          {previewImages.map((image) => (
-            <img
-              key={image.src}
-              src={image.src}
-              alt={image.alt}
-              className="w-full rounded-lg shadow-md transition hover:scale-105"
-              loading="lazy"
-            />
-          ))}
+          {previewImages.map((image) => {
+            // WebP variants are generated alongside each original at 400w/800w.
+            // <picture> keeps the original JPEG as the fallback source, so nothing
+            // breaks if a variant is ever missing.
+            const base = image.src.replace(/\.[^.]+$/, '');
+            return (
+              <picture key={image.src}>
+                <source
+                  type="image/webp"
+                  srcSet={`${base}-400.webp 400w, ${base}-800.webp 800w`}
+                  sizes="(min-width: 768px) 33vw, 50vw"
+                />
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  title={image.title}
+                  width="400"
+                  height="300"
+                  className="w-full rounded-lg shadow-md transition hover:scale-105"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            );
+          })}
         </div>
 
         <button
@@ -125,29 +129,69 @@ export function ProjectsGallery() {
             'View Full Gallery'
           )}
         </button>
+
+        {galleryError && (
+          <p className="mt-3 text-sm text-red-600" role="alert">
+            Gallery is temporarily unavailable. Please refresh the page and try again.
+          </p>
+        )}
       </div>
 
-      <h2 className="mb-3 text-center text-2xl font-bold text-slate-900 md:mb-4 md:text-3xl">Trusted By</h2>
+      <h2
+        id="projects-gallery-heading"
+        className="mb-3 text-center text-2xl font-bold text-slate-900 md:mb-4 md:text-3xl"
+      >
+        Trusted By
+      </h2>
       <p className="mx-auto mb-8 max-w-2xl text-center text-lg leading-relaxed text-slate-600 md:mb-10">
         Developers, contractors, and institutions we&apos;ve supported on geotechnical assignments.
       </p>
 
       <div className={marqueeTile}>
+        <div className="mb-4 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setMarqueePaused((p) => !p)}
+            className="rounded-lg border border-sky-200 bg-white px-3 py-1.5 text-sm font-semibold text-sky-800 transition-colors hover:bg-sky-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            aria-pressed={marqueePaused}
+          >
+            {marqueePaused ? 'Play' : 'Pause'} logo scroll
+          </button>
+        </div>
         <div className="relative overflow-hidden" aria-label="Client logos">
-          <div className="animate-marquee flex space-x-12">
-            {[...clientLogos, ...clientLogos].map((logo, index) => (
-              <div
-                key={`${logo}-${index}`}
-                className="flex flex-shrink-0 items-center justify-center rounded-xl border border-sky-200/50 bg-white/90 p-4 shadow-sm"
-              >
-                <img src={logo} alt={`Client ${index + 1}`} className="h-16 object-contain" loading="lazy" />
-              </div>
-            ))}
+          <div
+            className="animate-marquee flex space-x-12"
+            style={marqueePaused ? { animationPlayState: 'paused' } : undefined}
+          >
+            {[...clientLogos, ...clientLogos].map((logo, index) => {
+              // The list is duplicated to make the marquee loop seamlessly. Only the
+              // first copy carries alt text; the second is decorative, so announcing
+              // it would repeat every client name to screen reader users.
+              const isDuplicate = index >= clientLogos.length;
+              return (
+                <div
+                  key={`${logo}-${index}`}
+                  className="flex shrink-0 items-center justify-center rounded-xl border border-sky-200/50 bg-white/90 p-4 shadow-sm"
+                  aria-hidden={isDuplicate ? 'true' : undefined}
+                >
+                  <img
+                    src={logo}
+                    alt={isDuplicate ? '' : 'Client of GeoDesign geotechnical services'}
+                    width="120"
+                    height="64"
+                    className="h-16 w-auto object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+ProjectsGallery.propTypes = {};
 
 export default ProjectsGallery;

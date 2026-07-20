@@ -1,96 +1,159 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import Icon from '../../components/Icon.astro';
+import CommercialServiceBody from '../../components/CommercialServiceBody.astro';
+import RelatedServices from '../../components/RelatedServices.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import {
   geotechnicalServicePages,
   getSectionIcon,
   getServiceBySlug,
 } from '../../data/servicesCatalog.js';
+import { commercialServices, getCommercialServiceBySlug } from '../../data/commercialServices.js';
 import { SKY_OUTCOME_TILE_CLASS } from '../../data/skyTileClasses.js';
+import { serviceSchema, faqSchema, breadcrumbSchema } from '../../data/schema.js';
 
+/**
+ * Two-tier service route.
+ *
+ *  Tier 1 — commercial services (`commercialServices.js`): long-form landing pages
+ *           for what customers search for and buy.
+ *  Tier 2 — technical disciplines (`servicesCatalog.js`): the existing method
+ *           reference pages, URLs unchanged.
+ *
+ * Both tiers live under `/services/:slug`. Existing Tier 2 URLs are untouched.
+ */
 export function getStaticPaths() {
-  return geotechnicalServicePages.map((p) => ({ params: { slug: p.slug } }));
+  return [
+    ...commercialServices.map((s) => ({ params: { slug: s.slug } })),
+    ...geotechnicalServicePages.map((s) => ({ params: { slug: s.slug } })),
+  ];
 }
 
 const { slug } = Astro.params;
-const service = getServiceBySlug(slug ?? '');
+
+const commercial = getCommercialServiceBySlug(slug ?? '');
+const technical = commercial ? undefined : getServiceBySlug(slug ?? '');
+const service = commercial ?? technical;
 
 if (!service) {
   return Astro.redirect('/404');
 }
 
+const isCommercial = Boolean(commercial);
 const outcomeTile = `${SKY_OUTCOME_TILE_CLASS} flex h-full flex-col scroll-mt-28 text-left`;
+
+const breadcrumbItems = [
+  { label: 'Home', href: '/' },
+  { label: 'What We Do', href: '/services' },
+  { label: service.title },
+];
+
+/**
+ * Hero quick-facts. Tier 1 pages state the credentials that apply to every
+ * engagement; Tier 2 pages state the size of the reference instead. Both are
+ * derived from real data — nothing here is a marketing claim we cannot support.
+ */
+const heroMeta = isCommercial
+  ? ['IS Code compliant', 'Own laboratories', '5,000+ projects']
+  : [`${technical?.sections.length ?? 0} tests documented`];
+
+/**
+ * FAQPage schema is only emitted for commercial pages, because only those render
+ * visible FAQ content. Emitting it where the answers are not on the page would be
+ * a structured-data violation.
+ */
+const schemas = [
+  breadcrumbSchema(breadcrumbItems),
+  ...(isCommercial ? [serviceSchema(service), faqSchema(service.faqs)] : []),
+];
 ---
 
-<SiteLayout title={service.metaTitle} description={service.metaDescription} canonicalPath={`/services/${slug}`}>
+<SiteLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonicalPath={`/services/${slug}`}
+  schemas={schemas}
+>
   <div class="page-shell-white">
     <div class="page-shell-inner">
       <section class="w-full min-w-0 py-8 md:py-10" aria-labelledby="service-detail-heading">
-        <nav class="mb-8 text-sm text-slate-600 md:mb-10" aria-label="Breadcrumb">
-          <ol class="m-0 flex list-none flex-wrap items-center gap-2 p-0">
-            <li>
-              <a
-                href="/"
-                class="rounded hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-              >
-                Home
-              </a>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li>
-              <a
-                href="/services"
-                class="rounded hover:text-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
-              >
-                What We Do
-              </a>
-            </li>
-            <li aria-hidden="true">/</li>
-            <li class="font-medium text-slate-900" aria-current="page">
-              {service.title}
-            </li>
-          </ol>
-        </nav>
+        <article class="w-full">
+          <ServiceHero
+            class="mb-14 md:mb-20"
+            title={service.title}
+            description={service.shortDescription}
+            iconKey={service.iconKey}
+            eyebrow={isCommercial ? 'Service' : 'Technical reference'}
+            breadcrumbs={breadcrumbItems}
+            meta={heroMeta}
+            ctaHref={isCommercial ? `/contact?service=${slug}` : '/contact'}
+          />
 
-        <article class="w-full" aria-labelledby="service-detail-heading">
-          <header class="mx-auto mb-10 max-w-3xl text-center">
-            <span class="mb-4 block text-4xl text-sky-600 sm:text-5xl" aria-hidden="true">{service.icon}</span>
-            <h1
-              id="service-detail-heading"
-              class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
-            >
-              {service.title}
-            </h1>
-            <p class="text-base leading-relaxed text-slate-600 md:text-lg">{service.shortDescription}</p>
-          </header>
+          {
+            isCommercial ? (
+              <CommercialServiceBody service={service} />
+            ) : (
+              <>
+                {/* Tier 2 — technical reference, layout unchanged from the original */}
+                <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 md:gap-8">
+                  {service.sections.map(
+                    (
+                      sec: {
+                        title: string;
+                        body: string;
+                        promotedTo?: { slug: string; label: string };
+                      },
+                      index: number
+                    ) => (
+                      <li class="min-w-0">
+                        <section class={outcomeTile} aria-labelledby={`service-section-${slug}-${index}`}>
+                          <span
+                            class="mb-4 inline-flex h-11 w-11 shrink-0 items-center justify-center self-start rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-200/70"
+                            aria-hidden="true"
+                          >
+                            <Icon name={getSectionIcon(sec.title)} class="h-5 w-5" />
+                          </span>
+                          <h2
+                            id={`service-section-${slug}-${index}`}
+                            class="mb-3 text-lg font-bold text-slate-900 md:text-xl"
+                          >
+                            {sec.title}
+                          </h2>
+                          <p class="flex-1 text-base leading-relaxed text-slate-600">{sec.body}</p>
 
-          <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-2 md:gap-8">
-            {
-              service.sections.map((sec, index) => (
-                <li class="min-w-0">
-                  <section
-                    class={outcomeTile}
-                    aria-labelledby={`service-section-${slug}-${index}`}
-                  >
-                    <span class="mb-4 block text-center text-5xl text-sky-600" aria-hidden="true">
-                      {getSectionIcon(index)}
-                    </span>
-                    <h3
-                      id={`service-section-${slug}-${index}`}
-                      class="mb-3 text-center text-xl font-bold text-slate-900 md:text-2xl"
-                    >
-                      {sec.title}
-                    </h3>
-                    <p class="flex-1 text-base leading-relaxed text-slate-600">{sec.body}</p>
-                  </section>
-                </li>
-              ))
-            }
-          </ul>
+                          {/*
+                            This topic now has a dedicated service page. Linking onward
+                            keeps the anchor and the internal link intact while making the
+                            commercial page the clear destination for the query.
+                          */}
+                          {sec.promotedTo ? (
+                            <a
+                              href={`/services/${sec.promotedTo.slug}`}
+                              class="mt-4 inline-block rounded font-semibold text-sky-700 hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                            >
+                              Full service: {sec.promotedTo.label} →
+                            </a>
+                          ) : null}
+                        </section>
+                      </li>
+                    )
+                  )}
+                </ul>
 
-          <footer class="mt-10 border-t border-stone-200/80 pt-8 md:mt-12">
+                <div class="mt-14 space-y-14 md:mt-20 md:space-y-20">
+                  <RelatedServices currentSlug={slug} />
+                  <CtaBand heading="Need this test for your project?" />
+                </div>
+              </>
+            )
+          }
+
+          <footer class="mt-12 border-t border-stone-200/80 pt-8">
             <a
               href="/services"
-              class="rounded font-semibold text-sky-700 hover:text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2"
+              class="rounded font-semibold text-sky-700 hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
             >
               ← All services
             </a>

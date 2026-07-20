@@ -1,0 +1,124 @@
+---
+import Icon from './Icon.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+
+/**
+ * Service page hero.
+ *
+ * Replaces a centred emoji + H1 + paragraph with a left-aligned editorial header
+ * on a soft sky field. The backdrop uses two radial washes and a faint blueprint
+ * grid, masked so it fades out — an engineering-drawing reference that stays
+ * within the existing sky/slate palette. No new brand colours.
+ */
+interface Props {
+  title: string;
+  description: string;
+  iconKey?: string;
+  eyebrow?: string;
+  breadcrumbs: { label: string; href?: string }[];
+  /** Quick-fact chips, e.g. IS-code compliance or turnaround. */
+  meta?: string[];
+  ctaHref?: string;
+  ctaLabel?: string;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  iconKey = 'report',
+  eyebrow = 'Service',
+  breadcrumbs,
+  meta = [],
+  ctaHref = '/contact',
+  ctaLabel = 'Get Free Consultation',
+  class: className = '',
+} = Astro.props;
+---
+
+<header
+  class:list={[
+    'service-hero relative isolate overflow-hidden rounded-3xl border border-sky-200/60 bg-white px-6 py-10 shadow-sm sm:px-10 sm:py-14',
+    className,
+  ]}
+>
+  <div class="service-hero__wash" aria-hidden="true"></div>
+  <div class="service-hero__grid" aria-hidden="true"></div>
+
+  <div class="relative">
+    <Breadcrumbs class="mb-8" items={breadcrumbs} />
+
+    <div class="flex flex-col gap-7 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+      <div class="max-w-2xl">
+        <p class="font-sans mb-4 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-sky-700">
+          <span class="h-px w-5 shrink-0 bg-sky-600"></span>
+          {eyebrow}
+        </p>
+
+        <h1
+          id="service-detail-heading"
+          class="font-display text-balance text-3xl font-bold leading-[1.12] tracking-tight text-slate-900 sm:text-4xl md:text-[2.75rem]"
+        >
+          {title}
+        </h1>
+
+        <p class="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">{description}</p>
+
+        {
+          meta.length ? (
+            <ul class="m-0 mt-7 flex list-none flex-wrap gap-2 p-0" role="list">
+              {meta.map((item) => (
+                <li class="inline-flex items-center gap-1.5 rounded-full border border-sky-200/80 bg-sky-50/70 px-3 py-1.5 text-xs font-semibold text-sky-900">
+                  <svg class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : null
+        }
+
+        <a
+          href={ctaHref}
+          class="mt-8 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-sky-700 px-6 py-3 font-semibold text-white shadow-md transition hover:from-sky-700 hover:to-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+        >
+          {ctaLabel}
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+
+      <div
+        class="hidden shrink-0 items-center justify-center rounded-2xl border border-sky-200/70 bg-gradient-to-br from-white to-sky-50 p-6 text-sky-700 shadow-sm lg:flex"
+        aria-hidden="true"
+      >
+        <Icon name={iconKey} class="h-20 w-20" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* Soft directional light — keeps the panel from reading as a flat white box. */
+  .service-hero__wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60rem 26rem at 88% -20%, rgba(14, 165, 233, 0.13), transparent 62%),
+      radial-gradient(ellipse 40rem 24rem at 0% 110%, rgba(2, 132, 199, 0.08), transparent 60%);
+  }
+
+  /* Faint blueprint grid, masked so it never reaches the text. */
+  .service-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 80% 0%, black 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 70% 60% at 80% 0%, black 10%, transparent 70%);
+  }
+</style>

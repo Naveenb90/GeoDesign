@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import JsonLd from '../components/JsonLd.astro';
+import { organizationSchema } from '../data/schema.js';
 
 export interface Props {
   title: string;
@@ -9,14 +11,24 @@ export interface Props {
   ogImagePath?: string;
   /** Set for error pages so search engines do not index soft 404 */
   robotsNoindex?: boolean;
+  /** Page-specific JSON-LD. Falsy entries are dropped, so builders may return null. */
+  schemas?: unknown[];
 }
 
 const {
   title,
   description = 'GeoDesign reduces construction risk using scientific geotechnical expertise — soil investigation, testing, and foundation insight across Tamil Nadu, Coimbatore & Chennai.',
   canonicalPath,
-  ogImagePath = '/assets/home/hero-site.jpg',
+  /**
+   * Social card image. Must be a real 1200×630 asset, because `og:image:width` and
+   * `og:image:height` below are declared as 1200×630 — declaring dimensions that do
+   * not match the file makes social platforms lay the card out incorrectly.
+   * `og-image.jpg` is a purpose-built 1.91:1 crop; do not point this at an
+   * arbitrary photo without also correcting the dimension tags.
+   */
+  ogImagePath = '/assets/web/og-image.jpg',
   robotsNoindex = false,
+  schemas,
 } = Astro.props;
 
 const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://geodesign.co.in';
@@ -26,37 +38,17 @@ const ogImage = ogImagePath.startsWith('http') ? ogImagePath : `${site}${ogImage
 
 const fullTitle = title.includes('GeoDesign') ? title : `${title} | GeoDesign`;
 
-const orgJsonLd = JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'GeoDesign India Private Limited',
-  url: site,
-  logo: `${site}/assets/web/logo.png`,
-  description,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Old No. 40, New No. 29, 8th Street, K.K.Pudur',
-    addressLocality: 'Coimbatore',
-    postalCode: '641038',
-    addressCountry: 'IN',
-  },
-  contactPoint: [
-    {
-      '@type': 'ContactPoint',
-      telephone: '+91-9043344488',
-      contactType: 'customer service',
-      areaServed: 'Coimbatore',
-      email: 'geodesign123@gmail.com',
-    },
-    {
-      '@type': 'ContactPoint',
-      telephone: '+91-9043344088',
-      contactType: 'customer service',
-      areaServed: 'Chennai',
-      email: 'geodesign123@gmail.com',
-    },
-  ],
-});
+/**
+ * Organization schema is emitted site-wide from `src/data/schema.js`, so it is
+ * generated from the same `contactInfo` the pages render rather than being
+ * duplicated by hand here.
+ *
+ * Pages pass additional schema (Service, FAQPage, BreadcrumbList, LocalBusiness,
+ * VideoObject) via the `schemas` prop.
+ */
+const orgJsonLd = JSON.stringify(organizationSchema()).replace(/</g, '\\u003c');
+
+const extraSchemas = (schemas ?? []).filter(Boolean);
 ---
 
 <!doctype html>
@@ -74,6 +66,9 @@ const orgJsonLd = JSON.stringify({
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={description} />
     <meta property="og:site_name" content="GeoDesign" />
     <meta property="og:locale" content="en_IN" />
 
@@ -84,19 +79,42 @@ const orgJsonLd = JSON.stringify({
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" is:inline set:html={orgJsonLd} />
+    {extraSchemas.map((schema) => <JsonLd data={schema} />)}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    {/*
+      Fonts are loaded without blocking first render.
+
+      `rel="preload" as="style"` fetches at high priority, then `onload` promotes
+      it to a real stylesheet. Previously this was a plain `<link rel=stylesheet>`
+      to a third-party origin, which blocked rendering on every page.
+
+      All four Inter weights (400/500/600/700) and both Montserrat weights are
+      genuinely in use across the site — checked against the compiled HTML — so
+      there is nothing to drop from the request itself.
+
+      `display=swap` means text paints immediately in the fallback face; the
+      `<noscript>` copy keeps fonts working with JavaScript disabled.
+    */}
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+      />
+    </noscript>
 
     <slot name="head" />
 
-    <!-- Same logo as header: place file at `public/assets/web/logo.png` -->
-    <link rel="icon" type="image/png" href="/assets/web/logo.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/assets/web/logo.png" />
+    <!-- Purpose-built icons (square, padded) derived from `public/assets/web/logo.png` -->
+    <link rel="icon" type="image/png" href="/assets/web/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/web/apple-touch-icon.png" />
   </head>
   <body class="flex min-h-screen min-w-0 flex-col overflow-x-hidden bg-white font-sans text-slate-800 antialiased">
     <slot />

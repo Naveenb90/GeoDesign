@@ -1,0 +1,96 @@
+---
+/**
+ * Page header for the non-service pages.
+ *
+ * A lighter sibling of `ServiceHero`: same visual language (soft sky wash, faint
+ * blueprint grid, kicker rule, balanced display heading) without the icon panel,
+ * quick-fact chips, or CTA that a service page needs.
+ *
+ * Exists so `/about`, `/why-it-matters`, `/projects`, `/our-offices`, `/contact`
+ * and `/video` stop each having their own bespoke header treatment.
+ */
+interface Props {
+  kicker?: string;
+  heading: string;
+  intro?: string;
+  /** Heading id, so the parent section can use `aria-labelledby`. */
+  id?: string;
+  as?: 'h1' | 'h2';
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  kicker,
+  heading,
+  intro,
+  id,
+  as: Tag = 'h1',
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+
+const centered = align === 'center';
+---
+
+<header
+  class:list={[
+    'page-hero relative isolate overflow-hidden rounded-3xl border border-sky-200/60 bg-white px-6 py-10 shadow-sm sm:px-10 sm:py-12',
+    className,
+  ]}
+>
+  <div class="page-hero__wash" aria-hidden="true"></div>
+  <div class="page-hero__grid" aria-hidden="true"></div>
+
+  <div class:list={['relative max-w-3xl', centered && 'mx-auto text-center']}>
+    {
+      kicker ? (
+        <p
+          class:list={[
+            'font-sans mb-4 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-sky-700',
+            centered && 'justify-center',
+          ]}
+        >
+          <span class="h-px w-5 shrink-0 bg-sky-600"></span>
+          {kicker}
+        </p>
+      ) : null
+    }
+
+    <Tag
+      id={id}
+      class="font-display text-balance text-3xl font-bold leading-[1.12] tracking-tight text-slate-900 sm:text-4xl md:text-[2.75rem]"
+    >
+      {heading}
+    </Tag>
+
+    {
+      intro ? (
+        <p class="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">{intro}</p>
+      ) : null
+    }
+
+    <slot />
+  </div>
+</header>
+
+<style>
+  .page-hero__wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60rem 26rem at 88% -20%, rgba(14, 165, 233, 0.13), transparent 62%),
+      radial-gradient(ellipse 40rem 24rem at 0% 110%, rgba(2, 132, 199, 0.08), transparent 60%);
+  }
+
+  .page-hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+    background-size: 3rem 3rem;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 80% 0%, black 10%, transparent 70%);
+    mask-image: radial-gradient(ellipse 70% 60% at 80% 0%, black 10%, transparent 70%);
+  }
+</style>

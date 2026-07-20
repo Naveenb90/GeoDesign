@@ -1,0 +1,296 @@
+---
+import SectionHead from './SectionHead.astro';
+import ProcessSteps from './ProcessSteps.astro';
+import FaqAccordion from './FaqAccordion.astro';
+import AreasWeServe from './AreasWeServe.astro';
+import RelatedServices from './RelatedServices.astro';
+import CtaBand from './CtaBand.astro';
+import PageToc from './PageToc.astro';
+import Icon from './Icon.astro';
+import { getSectionIcon } from '../data/servicesCatalog.js';
+import { SKY_FACTOR_TILE_CLASS } from '../data/skyTileClasses.js';
+
+/**
+ * Renders a Tier 1 (commercial) service page from `commercialServices.js`.
+ *
+ * Section order follows the template used consistently across the supplied
+ * requirement documents, so the pages read the way the client specified — while
+ * the shared locality and FAQ components keep the repeated blocks from turning
+ * into duplicate content across eight near-identical pages.
+ *
+ * Heading contract: this component owns every H2. Nested components render H3.
+ * The page supplies the single H1.
+ */
+interface Props {
+  service: any;
+}
+
+const { service } = Astro.props;
+
+/**
+ * TOC entries are derived from the sections this page will actually render, so
+ * the list can never drift from the content. Each id matches the `aria-labelledby`
+ * target already present on the corresponding <section>.
+ */
+const tocItems = [
+  service.whyImportant && { id: 'why-important-heading', label: 'Why it matters' },
+  service.whyChooseUs && { id: 'why-choose-heading', label: 'Why GeoDesign' },
+  service.ourServices && { id: 'our-services-heading', label: 'What’s included' },
+  service.types && { id: 'types-heading', label: 'Types' },
+  service.process && { id: 'process-heading', label: 'Process' },
+  service.industries && { id: 'industries-heading', label: 'Projects we support' },
+  service.areas && { id: 'areas-heading', label: 'Areas we serve' },
+  service.faqs?.length && { id: 'faq-heading', label: 'FAQ' },
+].filter(Boolean);
+
+const listItemClass = 'flex gap-3 text-slate-700';
+const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
+---
+
+<div class="flex flex-col gap-10 lg:flex-row-reverse lg:items-start lg:gap-12">
+  <PageToc items={tocItems} />
+
+  <div class="min-w-0 flex-1 space-y-14 md:space-y-20">
+  <!-- Intro -->
+  <section aria-labelledby="service-intro-heading">
+    <h2 id="service-intro-heading" class="sr-only">Overview</h2>
+    <div class="max-w-3xl space-y-4">
+      {
+        service.intro.map((para: string) => (
+          <p class="text-base leading-relaxed text-slate-700 md:text-lg">{para}</p>
+        ))
+      }
+    </div>
+
+    {
+      service.scopeNote ? (
+        <p
+          class="mt-6 max-w-3xl rounded-xl border-l-4 border-sky-500 bg-sky-50/70 p-5 text-sm leading-relaxed text-slate-700 md:text-base"
+          role="note"
+        >
+          {service.scopeNote}
+        </p>
+      ) : null
+    }
+  </section>
+
+  <!-- Why it matters -->
+  {
+    service.whyImportant ? (
+      <section aria-labelledby="why-important-heading">
+        <SectionHead heading={service.whyImportant.heading} id="why-important-heading" />
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
+          {service.whyImportant.body}
+        </p>
+
+        {service.whyImportant.listHeading ? (
+          <p class="mt-8 font-semibold text-slate-900">{service.whyImportant.listHeading}</p>
+        ) : null}
+
+        <ul class="m-0 mt-4 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+          {service.whyImportant.items.map((item: string) => (
+            <li class={listItemClass}>
+              <span
+                class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"
+                aria-hidden="true"
+              >
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                </svg>
+              </span>
+              <span class="leading-snug">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        {service.whyImportant.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">
+            {service.whyImportant.closing}
+          </p>
+        ) : null}
+      </section>
+    ) : null
+  }
+
+  <!-- Why choose us -->
+  {
+    service.whyChooseUs ? (
+      <section aria-labelledby="why-choose-heading">
+        <SectionHead heading={service.whyChooseUs.heading} id="why-choose-heading" />
+        <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
+          {service.whyChooseUs.body}
+        </p>
+
+        <ul class="m-0 mt-8 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+          {service.whyChooseUs.items.map((item: string) => (
+            <li class={listItemClass}>
+              <span
+                class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"
+                aria-hidden="true"
+              >
+                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" />
+                </svg>
+              </span>
+              <span class="leading-snug">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        {service.whyChooseUs.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">
+            {service.whyChooseUs.closing}
+          </p>
+        ) : null}
+      </section>
+    ) : null
+  }
+
+  <!-- What's included -->
+  {
+    service.ourServices ? (
+      <section aria-labelledby="our-services-heading">
+        <SectionHead
+          heading={service.ourServices.heading}
+          intro={service.ourServices.body}
+          id="our-services-heading"
+        />
+        <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
+          {service.ourServices.items.map((item: { title: string; description: string }) => (
+            <li class="min-w-0">
+              <div class={detailTile}>
+                <span
+                  class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sky-700 ring-1 ring-sky-200/80"
+                  aria-hidden="true"
+                >
+                  <Icon name={getSectionIcon(item.title)} class="h-5 w-5" />
+                </span>
+                <h3 class="mb-2 text-base font-bold leading-snug text-slate-900 md:text-lg">
+                  {item.title}
+                </h3>
+                <p class="text-sm leading-relaxed text-slate-600 md:text-[0.95rem]">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+  }
+
+  <!-- Types -->
+  {
+    service.types ? (
+      <section aria-labelledby="types-heading">
+        <SectionHead heading={service.types.heading} intro={service.types.body} id="types-heading" />
+        <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
+          {service.types.items.map((item: { title: string; description: string }) => (
+            <li class="min-w-0">
+              <div class={detailTile}>
+                <span
+                  class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white text-sky-700 ring-1 ring-sky-200/80"
+                  aria-hidden="true"
+                >
+                  <Icon name={getSectionIcon(item.title)} class="h-5 w-5" />
+                </span>
+                <h3 class="mb-2 text-base font-bold leading-snug text-slate-900 md:text-lg">
+                  {item.title}
+                </h3>
+                <p class="text-sm leading-relaxed text-slate-600 md:text-[0.95rem]">
+                  {item.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+  }
+
+  <!-- Process -->
+  {
+    service.process ? (
+      <section aria-labelledby="process-heading">
+        <SectionHead
+          heading={service.process.heading}
+          intro={service.process.body}
+          id="process-heading"
+        />
+        <ProcessSteps class="mt-8" steps={service.process.steps} />
+      </section>
+    ) : null
+  }
+
+  <!-- Industries -->
+  {
+    service.industries ? (
+      <section aria-labelledby="industries-heading">
+        <SectionHead
+          heading={service.industries.heading}
+          intro={service.industries.body}
+          id="industries-heading"
+        />
+        <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3 md:gap-5" role="list">
+          {service.industries.items.map((item: { title: string; description: string }) => (
+            <li class="min-w-0 rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
+              <h3 class="mb-1.5 text-base font-bold text-slate-900">{item.title}</h3>
+              <p class="text-sm leading-relaxed text-slate-600">{item.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ) : null
+  }
+
+  <!-- Technical deep dive: Tier 1 → Tier 2 link -->
+  {
+    service.technicalDeepDive ? (
+      <section aria-labelledby="deep-dive-heading">
+        <div class="rounded-2xl border border-slate-200/90 bg-stone-50/80 p-6 md:p-8">
+          <h2 id="deep-dive-heading" class="font-display text-lg font-bold text-slate-900 md:text-xl">
+            Technical reference
+          </h2>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+            {service.technicalDeepDive.note}
+          </p>
+          <a
+            href={`/services/${service.technicalDeepDive.slug}`}
+            class="mt-4 inline-block rounded font-semibold text-sky-700 hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+          >
+            {service.technicalDeepDive.label} →
+          </a>
+        </div>
+      </section>
+    ) : null
+  }
+
+  <!-- Areas served -->
+  {
+    service.areas ? (
+      <section aria-labelledby="areas-heading">
+        <SectionHead heading="Areas we serve" id="areas-heading" />
+        <AreasWeServe class="mt-6" region={service.areas.region} lead={service.areas.lead} />
+      </section>
+    ) : null
+  }
+
+  <!-- FAQ -->
+  {
+    service.faqs?.length ? (
+      <section aria-labelledby="faq-heading">
+        <SectionHead heading="Frequently asked questions" id="faq-heading" />
+        <FaqAccordion class="mt-6" items={service.faqs} />
+      </section>
+    ) : null
+  }
+
+  <!-- Related -->
+  <RelatedServices currentSlug={service.slug} slugs={service.related} />
+
+  <CtaBand
+    heading={service.ctaHeading ?? 'Discuss your project with a geotechnical engineer'}
+    ctaHref={`/contact?service=${service.slug}`}
+  />
+  </div>
+</div>

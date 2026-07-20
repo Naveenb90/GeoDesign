@@ -1,55 +1,185 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import StatsBand from '../../components/StatsBand.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
 import { geotechnicalServicePages } from '../../data/servicesCatalog.js';
+import { commercialServices } from '../../data/commercialServices.js';
 import { SKY_FACTOR_TILE_CLASS } from '../../data/skyTileClasses.js';
+
+/**
+ * Services hub — two-tier.
+ *
+ *  Tier 1 — commercial services: what customers search for and buy.
+ *  Tier 2 — technical disciplines: the existing method reference pages.
+ *
+ * Presenting both tiers explicitly is what prevents the two taxonomies from
+ * competing for the same queries. Tier 1 cards lead; Tier 2 is framed as
+ * supporting reference rather than as an alternative route to the same thing.
+ */
+const commercialTile = `${SKY_FACTOR_TILE_CLASS} service-card relative block h-full text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2`;
 ---
 
 <SiteLayout
   title="What We Do — Geotechnical Services | GeoDesign"
-  description="How we reduce construction risk: structured geotechnical investigation — drilling, testing, lab analysis, and foundation recommendations — Coimbatore, Chennai, Tamil Nadu."
+  description="Soil testing, foundation design, plate and pile load testing, bridge load testing, resistivity surveys, and topographical survey — geotechnical services across Tamil Nadu."
   canonicalPath="/services"
 >
   <div class="page-shell-white">
     <div class="page-shell-inner">
       <section class="w-full min-w-0 py-8 md:py-10" aria-labelledby="services-hub-heading">
-        <header class="mx-auto mb-8 max-w-3xl text-center md:mb-10">
-          <h1
-            id="services-hub-heading"
-            class="font-display mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl"
-          >
-            What We Do
-          </h1>
-          <p class="mx-auto max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">
-            We reduce risk in construction using scientific expertise — structured investigation from field drilling
-            and specialised testing through laboratory analysis and foundation recommendations. Open a topic for full
-            scope and methodology.
-          </p>
-        </header>
+        <PageHero
+          kicker="What we do"
+          heading="Geotechnical services"
+          intro="We reduce risk in construction using scientific expertise — from site investigation and laboratory analysis through to foundation design, load testing, and survey. Open a service for full scope, process, and typical questions."
+          id="services-hub-heading"
+          class="mb-12 md:mb-14"
+        />
 
-        <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5">
-          {
-            geotechnicalServicePages.map((svc, index) => {
-              const isPrimary = index === 0;
-              const tile = `${SKY_FACTOR_TILE_CLASS} block h-full transition-all focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-white ${isPrimary ? 'ring-2 ring-sky-400/70' : ''}`;
-              return (
-                <li>
-                  <a href={`/services/${svc.slug}`} class={tile}>
-                    {isPrimary ? (
-                      <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-sky-700">Start here</p>
-                    ) : null}
-                    <span class="mb-2 block text-4xl text-sky-600" aria-hidden="true">
-                      {svc.icon}
+        <StatsBand class="mb-14 md:mb-16" />
+
+        <!-- Tier 1 — commercial services -->
+        <div class="mb-16 md:mb-20">
+          <h2 class="font-display mb-2 text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
+            Services
+          </h2>
+          <p class="mb-8 max-w-3xl text-base leading-relaxed text-slate-600">
+            What we are most often engaged for.
+          </p>
+
+          <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3 md:gap-5" role="list">
+            {
+              commercialServices.map((svc) => (
+                <li class="min-w-0">
+                  <a href={`/services/${svc.slug}`} class={commercialTile}>
+                    <span
+                      class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-sky-700 shadow-sm ring-1 ring-sky-200/80"
+                      aria-hidden="true"
+                    >
+                      <Icon name={svc.iconKey} class="h-6 w-6" />
                     </span>
-                    <h3 class="mb-1.5 text-base font-bold text-slate-900 md:text-lg">{svc.title}</h3>
-                    <p class="mb-3 text-sm leading-snug text-slate-600">{svc.shortDescription}</p>
-                    <span class="inline-block text-sm font-semibold text-sky-700">View details →</span>
+                    <h3 class="mb-2 text-lg font-bold leading-snug tracking-tight text-slate-900">
+                      {svc.title}
+                    </h3>
+                    <p class="mb-4 text-sm leading-relaxed text-slate-600">{svc.shortDescription}</p>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-700">
+                      View details
+                      <svg class="card-arrow h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                      </svg>
+                    </span>
                   </a>
                 </li>
-              );
-            })
-          }
-        </ul>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Tier 2 — technical reference -->
+        <div class="border-t border-slate-200/90 pt-12 md:pt-16">
+          <h2 class="font-display mb-2 text-2xl font-bold leading-tight text-slate-900 md:text-3xl">
+            Technical reference
+          </h2>
+          <p class="mb-8 max-w-3xl text-base leading-relaxed text-slate-600">
+            The methods behind the work, grouped by discipline — 41 individual tests and procedures,
+            with what each one measures and why it matters.
+          </p>
+
+          <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
+            {
+              geotechnicalServicePages.map((svc) => (
+                <li class="min-w-0">
+                  <a
+                    href={`/services/${svc.slug}`}
+                    class="service-card relative block h-full rounded-xl border border-slate-200/90 bg-white p-5 text-left shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+                  >
+                    <span
+                      class="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50 text-slate-500 ring-1 ring-slate-200"
+                      aria-hidden="true"
+                    >
+                      <Icon name={svc.iconKey} class="h-5 w-5" />
+                    </span>
+                    <h3 class="mb-2 text-base font-bold leading-snug text-slate-900">{svc.title}</h3>
+                    <p class="mb-4 text-sm leading-relaxed text-slate-600">{svc.shortDescription}</p>
+                    <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-700">
+                      View details
+                      <svg class="card-arrow h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" />
+                      </svg>
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <CtaBand
+          class="mt-16 md:mt-20"
+          heading="Not sure which test your project needs?"
+          body="Tell us about the structure and the site — we will tell you what investigation is actually required, and what is not."
+        />
       </section>
     </div>
   </div>
 </SiteLayout>
+
+<style>
+  .service-card {
+    transition:
+      transform 0.22s cubic-bezier(0.22, 0.68, 0.32, 1),
+      box-shadow 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 3px;
+    background-color: var(--color-sky-500, #0ea5e9);
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    border-start-start-radius: inherit;
+    border-end-start-radius: inherit;
+  }
+
+  .service-card:hover,
+  .service-card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.45);
+    border-color: var(--color-sky-300, #7dd3fc);
+  }
+
+  .service-card:hover::before,
+  .service-card:focus-visible::before {
+    opacity: 1;
+  }
+
+  .card-arrow {
+    transition: transform 0.22s cubic-bezier(0.22, 0.68, 0.32, 1);
+  }
+
+  .service-card:hover .card-arrow,
+  .service-card:focus-visible .card-arrow {
+    transform: translateX(3px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-card::before,
+    .card-arrow {
+      transition: none;
+    }
+    .service-card:hover .card-arrow,
+    .service-card:focus-visible .card-arrow {
+      transform: none;
+    }
+    .service-card:hover,
+    .service-card:focus-visible {
+      transform: none;
+    }
+  }
+</style>

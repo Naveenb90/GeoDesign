@@ -9,9 +9,11 @@ export interface Props {
   canonicalPath?: string;
   ogImagePath?: string;
   robotsNoindex?: boolean;
+  /** Page-specific JSON-LD, forwarded to BaseLayout. */
+  schemas?: unknown[];
 }
 
-const { title, description, canonicalPath, ogImagePath, robotsNoindex } = Astro.props;
+const { title, description, canonicalPath, ogImagePath, robotsNoindex, schemas } = Astro.props;
 
 /** Match nav `href` values (no trailing slash) so active states work on `/projects` and `/projects/`. */
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -23,6 +25,7 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
   canonicalPath={canonicalPath}
   ogImagePath={ogImagePath}
   robotsNoindex={robotsNoindex}
+  schemas={schemas}
 >
   <slot name="head" slot="head" />
   <a href="#main-content" class="skip-link">Skip to main content</a>

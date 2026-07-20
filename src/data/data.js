@@ -42,27 +42,27 @@ export const soilIssueGroups = [
     blurb: 'How the ground behaves under load and when excavated.',
     items: [
       {
-        icon: '🧱',
+        iconKey: 'strata',
         title: 'Type of Soil',
         description: 'Clay is reactive, sand settles under load, silt loses strength when wet.',
       },
       {
-        icon: '⚠️',
+        iconKey: 'alert',
         title: 'Soft Soil',
-        description: 'Can settle under load affecting stability.',
+        description: 'Can settle under load, affecting stability.',
       },
       {
-        icon: '🌊',
+        iconKey: 'water',
         title: 'Marine Clays',
         description: 'May have low or no bearing capacity.',
       },
       {
-        icon: '🪨',
+        iconKey: 'rock',
         title: 'Rock Boulders',
         description: 'May move underground or create voids when excavated.',
       },
       {
-        icon: '🪨',
+        iconKey: 'rock',
         title: 'Rock Layers',
         description: 'May impact excavation.',
       },
@@ -74,22 +74,22 @@ export const soilIssueGroups = [
     blurb: 'Access for investigation and groundwater-related risks.',
     items: [
       {
-        icon: '📍',
+        iconKey: 'pin',
         title: 'Site Access',
         description: 'Quality of access impacts site investigation.',
       },
       {
-        icon: '💦',
+        iconKey: 'water',
         title: 'Water Table',
         description: 'Depths can affect excavation feasibility.',
       },
       {
-        icon: '💧',
+        iconKey: 'water',
         title: 'Low-Lying Areas',
         description: 'Could contain acid sulfate soils.',
       },
       {
-        icon: '⛰️',
+        iconKey: 'slope',
         title: 'Slopes',
         description: 'Steeper slopes may have slip potential.',
       },
@@ -101,17 +101,17 @@ export const soilIssueGroups = [
     blurb: 'Vegetation and man-made changes to levels.',
     items: [
       {
-        icon: '🌳',
+        iconKey: 'tree',
         title: 'Trees & Roots',
         description: 'Roots may draw moisture, causing shrinkage near footings.',
       },
       {
-        icon: '🛠️',
+        iconKey: 'fill',
         title: 'Filled Areas',
-        description: 'May have un-compacted soils causing settlement.',
+        description: 'May have uncompacted soils, causing settlement.',
       },
       {
-        icon: '⚡',
+        iconKey: 'settlement',
         title: 'Cut & Fill Pads',
         description: 'Could experience differential settlement.',
       },
@@ -123,12 +123,12 @@ export const soilIssueGroups = [
     blurb: 'On-site suitability for wastewater and similar uses.',
     items: [
       {
-        icon: '🚰',
+        iconKey: 'pipe',
         title: 'Wastewater Suitability',
         description: 'Soil suitability for sewerage and greywater disposal.',
       },
       {
-        icon: '🏞️',
+        iconKey: 'land',
         title: 'Land Block',
         description: 'Suitability for on-site wastewater disposal.',
       },
@@ -141,17 +141,17 @@ export const soilIssueGroups = [
  */
 export const importanceCards = [
   {
-    icon: '🏦',
+    iconKey: 'shield',
     title: 'Protect Your Investment',
     description: 'Proper foundations prevent building movement and wall cracks.',
   },
   {
-    icon: '💰',
+    iconKey: 'cost',
     title: 'Prevent Future Costs',
     description: 'Identify issues early, estimate costs, make informed land decisions.',
   },
   {
-    icon: '🌍',
+    iconKey: 'foundation',
     title: 'Build on Solid Ground',
     description: 'Ensure safety and stability with accurate soil analysis for foundations that last a lifetime.',
   },
@@ -161,64 +161,47 @@ export const importanceCards = [
  * About us points
  */
 export const aboutPoints = [
-  'Founded by experienced Geotechnical Engineers, our company specializes in providing expert geotechnical consulting services for civil engineering projects.',
-  'Registered Geotechical engineers in DTCP and CMDA.',
+  'Founded by experienced Geotechnical Engineers, our company specialises in providing expert geotechnical consulting services for civil engineering projects.',
+  'Registered Geotechnical Engineers with DTCP and CMDA.',
   'We conduct comprehensive soil testing for bore-hole investigations across a wide range of constructions, including residential buildings, apartments, high-rises, commercial complexes, and bridges.',
   'With over 5,000 successful projects completed throughout Tamil Nadu and South India, our company operates well-equipped soil mechanics laboratories in Coimbatore and Chennai.',
   'We perform thorough testing of soil and rock samples both on-site and in the laboratory, supported by a skilled team of 5 Geotechnical Engineers and 20 Civil Engineers, ensuring reliable and efficient project execution.',
 ]
 
 /**
- * Services offered by GeoDesign
- */
-export const services = [
-  {
-    title: 'Soil Testing for All Types of Constructions',
-    description:
-      'Comprehensive soil investigation to determine bearing capacity, settlement behavior, and suitability for buildings, roads, and industrial projects.',
-  },
-  {
-    title: 'Laboratory Soil Testing',
-    description:
-      'State-of-the-art soil mechanics laboratory for analyzing strength, composition, and moisture properties that influence design and performance.',
-  },
-  {
-    title: 'Pile Foundation & Foundation Design',
-    description:
-      'Expert design and execution of deep foundations to support high-rise buildings, bridges, and heavy structures.',
-  },
-  {
-    title: 'Plate Load Test',
-    description:
-      'On-site testing to evaluate soil bearing capacity and settlement characteristics for shallow foundations.',
-  },
-  {
-    title: 'Pile Load Test / Pull Out Test',
-    description:
-      'Critical testing to validate the load-carrying capacity and stability of piles, ensuring reliability in foundation systems.',
-  },
-  {
-    title: 'Electrical Resistivity Test',
-    description:
-      'Subsurface investigation to map soil stratification, groundwater, and rock layers using resistivity methods for better foundation planning.',
-  },
-  {
-    title: 'Topographical & Contour Survey',
-    description:
-      'Precise land surveys to capture terrain features and elevation data, supporting site planning, drainage design, and infrastructure projects.',
-  },
-]
-
-/**
  * Gallery preview images
  */
 export const previewImages = [
-  { src: '/assets/gallery/gallery6.JPG', alt: 'Project 1' },
-  { src: '/assets/gallery/gallery3.JPG', alt: 'Project 2' },
-  { src: '/assets/gallery/gallery18.JPG', alt: 'Project 3' },
-  { src: '/assets/gallery/gallery28.jpg', alt: 'Project 4' },
-  { src: '/assets/gallery/gallery29.jpg', alt: 'Project 5' },
-  { src: '/assets/gallery/gallery30.jpg', alt: 'Project 6' },
+  {
+    src: '/assets/gallery/gallery6.JPG',
+    alt: 'Borehole drilling rig positioned for soil investigation at a construction site',
+    title: 'Borehole drilling for geotechnical investigation',
+  },
+  {
+    src: '/assets/gallery/gallery3.JPG',
+    alt: 'GeoDesign engineers collecting soil samples during a site investigation',
+    title: 'Soil sampling on site',
+  },
+  {
+    src: '/assets/gallery/gallery18.JPG',
+    alt: 'Standard Penetration Test equipment set up over a borehole',
+    title: 'Standard Penetration Test in progress',
+  },
+  {
+    src: '/assets/gallery/gallery28.jpg',
+    alt: 'Geotechnical field testing underway on a Tamil Nadu construction project',
+    title: 'Field testing on a construction project',
+  },
+  {
+    src: '/assets/gallery/gallery29.jpg',
+    alt: 'Drilling equipment operating on an infrastructure project site',
+    title: 'Site investigation for infrastructure works',
+  },
+  {
+    src: '/assets/gallery/gallery30.jpg',
+    alt: 'Soil investigation works at a large development site',
+    title: 'Soil investigation at a development site',
+  },
 ]
 
 /**

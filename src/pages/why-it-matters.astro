@@ -1,5 +1,8 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
 import { importanceCards, soilIssueGroups, whyItMattersIntro } from '../data/data.js';
 
 const factorCardClass =
@@ -14,25 +17,13 @@ const factorCardClass =
   <div class="page-shell-white">
     <div class="page-shell-inner">
       <section id="issue" class="w-full min-w-0 py-8 md:py-10" aria-labelledby="issue-heading">
-        <!-- Split hero: left title, right intro panel (distinct from old all-centered layout) -->
-        <div
-          class="mb-12 flex flex-col gap-8 border-b border-slate-200/90 pb-10 md:mb-14 md:gap-10 md:pb-12 lg:flex-row lg:items-stretch lg:justify-between lg:gap-12"
-        >
-          <div class="max-w-xl lg:shrink-0">
-            <p class="mb-2 font-sans text-xs font-semibold uppercase tracking-wider text-sky-700">Understanding site risk</p>
-            <h1
-              id="issue-heading"
-              class="font-display text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-[2.5rem] md:leading-[1.15]"
-            >
-              Why Soil Testing Matters?
-            </h1>
-          </div>
-          <div
-            class="min-w-0 flex-1 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-sky-50/90 p-6 shadow-sm ring-1 ring-slate-200/80 md:p-8 lg:max-w-2xl"
-          >
-            <p class="text-base leading-relaxed text-slate-700 md:text-lg">{whyItMattersIntro}</p>
-          </div>
-        </div>
+        <PageHero
+          class="mb-12 md:mb-14"
+          kicker="Understanding site risk"
+          heading="Why Soil Testing Matters?"
+          intro={whyItMattersIntro}
+          id="issue-heading"
+        />
 
         <!-- Grouped factors: sticky TOC (lg+) + anchor regions -->
         <div class="mb-14 md:mb-16">
@@ -105,9 +96,12 @@ const factorCardClass =
                     >
                       {group.items.map((issue) => (
                         <li class={factorCardClass}>
-                          <div class="flex gap-3">
-                            <span class="shrink-0 text-2xl leading-none text-sky-600" aria-hidden="true">
-                              {issue.icon}
+                          <div class="flex gap-3.5">
+                            <span
+                              class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-sky-700 ring-1 ring-sky-200/70"
+                              aria-hidden="true"
+                            >
+                              <Icon name={issue.iconKey} class="h-5 w-5" />
                             </span>
                             <div class="min-w-0">
                               <p class="font-semibold text-slate-900">{issue.title}</p>
@@ -140,10 +134,10 @@ const factorCardClass =
               importanceCards.map((card, index) => (
                 <li class="flex flex-col gap-4 py-8 first:pt-0 last:pb-0 sm:flex-row sm:items-start sm:gap-6">
                   <div
-                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-2xl text-sky-800 shadow-inner ring-1 ring-sky-200/80"
+                    class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-sky-800 ring-1 ring-sky-200/80"
                     aria-hidden="true"
                   >
-                    {card.icon}
+                    <Icon name={card.iconKey} class="h-6 w-6" />
                   </div>
                   <div class="min-w-0 flex-1">
                     <div class="mb-1 flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -159,6 +153,11 @@ const factorCardClass =
             }
           </ol>
         </div>
+        <CtaBand
+          class="mt-14 md:mt-16"
+          heading="Find out what is under your site"
+          body="A site investigation turns these unknowns into measured data your structural engineer can design against."
+        />
       </section>
     </div>
   </div>

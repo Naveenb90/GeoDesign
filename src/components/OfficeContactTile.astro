@@ -1,5 +1,6 @@
 ---
 import OfficePhoneRow from './OfficePhoneRow.astro';
+import Icon from './Icon.astro';
 import { SKY_OFFICE_TILE_SHELL_CLASS } from '../data/skyTileClasses.js';
 
 interface Props {
@@ -27,14 +28,16 @@ const rowGrid = 'grid grid-cols-[2.75rem_1fr] items-start gap-x-3';
   <address class="not-italic">
     <div class="flex flex-col gap-2.5 text-sm leading-snug text-slate-600 sm:gap-3 sm:text-[0.9375rem] sm:leading-relaxed">
       <div class={rowGrid}>
-        <span class="flex justify-center pt-0.5 text-base leading-none" aria-hidden="true">📍</span>
+        <span class="flex justify-center pt-0.5 text-sky-600" aria-hidden="true">
+          <Icon name="pin" class="h-4 w-4" />
+        </span>
         <span class="min-w-0 pt-0.5">{address}</span>
       </div>
       {
         landline ? (
           <div class={rowGrid}>
-            <span class="flex justify-center pt-0.5 text-base leading-none" aria-hidden="true">
-              📞
+            <span class="flex justify-center pt-0.5 text-sky-600" aria-hidden="true">
+              <Icon name="phone" class="h-4 w-4" />
             </span>
             <span class="tabular-nums pt-0.5">{landline}</span>
           </div>
@@ -42,7 +45,9 @@ const rowGrid = 'grid grid-cols-[2.75rem_1fr] items-start gap-x-3';
       }
       <OfficePhoneRow phone={mobile} officeLabel={officeLabel} />
       <div class={rowGrid}>
-        <span class="flex justify-center pt-0.5 text-base leading-none" aria-hidden="true">✉️</span>
+        <span class="flex justify-center pt-0.5 text-sky-600" aria-hidden="true">
+          <Icon name="mail" class="h-4 w-4" />
+        </span>
         <a
           href={`mailto:${email}`}
           class="min-w-0 break-all pt-0.5 hover:text-sky-700 hover:underline sm:break-normal"

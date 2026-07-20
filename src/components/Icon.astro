@@ -1,0 +1,113 @@
+---
+/**
+ * Inline SVG icon set.
+ *
+ * Replaces the emoji previously used across the services pages. Emoji rendered
+ * differently on every OS, could not be brand-coloured, and on service detail
+ * pages were assigned by cycling an array by index — so the icon bore no
+ * relationship to the section it sat above.
+ *
+ * These are stroke-based on a 24×24 grid, inherit `currentColor`, and use
+ * `vector-effect="non-scaling-stroke"` so weight stays consistent at any size.
+ *
+ * Adding an icon: add a key to `PATHS`. Keys are referenced from
+ * `commercialServices.js` / `servicesCatalog.js` via `iconKey`.
+ */
+interface Props {
+  name: string;
+  class?: string;
+  /** Decorative by default; pass a label when the icon carries meaning alone. */
+  label?: string;
+}
+
+const { name, class: className = 'h-6 w-6', label } = Astro.props;
+
+const PATHS: Record<string, string> = {
+  // Borehole drilling — mast above ground, drill string descending below it.
+  // Note the direction: this must read as penetrating DOWN, or it collides
+  // visually with `uplift`, which is the opposite action.
+  drill: `<path d="M12 2v9"/><path d="M8 5h8"/><path d="M3 11h18"/><path d="M12 11v6"/><path d="M9.5 17h5l-2.5 5-2.5-5Z"/><path d="M6 14h2"/><path d="M16 14h2"/>`,
+  // Layered strata — soil profile, laboratory
+  strata: `<path d="M3 7h18"/><path d="M3 12h18"/><path d="M3 17h18"/><path d="M7 4v3"/><path d="M14 9v3"/><path d="M10 14v3"/>`,
+  // Pile cap at grade, shaft driven through soft ground to bearing stratum
+  pile: `<path d="M3 8h18"/><path d="M7 5h10v3H7z"/><path d="M10 8v11"/><path d="M14 8v11"/><path d="M3 19h18"/><path d="M10 12h4"/>`,
+  // Load plate with downward force — plate load test
+  plate: `<path d="M12 2v7"/><path d="M8.5 5.5 12 9l3.5-3.5"/><path d="M4 12h16"/><path d="M6 12v3"/><path d="M12 12v3"/><path d="M18 12v3"/><path d="M3 19h18"/>`,
+  // Upward pull — pull out / tension test
+  uplift: `<path d="M12 22V9"/><path d="M8.5 12.5 12 9l3.5 3.5"/><path d="M4 5h16"/><path d="M7 22h10"/><path d="M9 18h6"/>`,
+  // Bridge span with piers
+  bridge: `<path d="M2 9h20"/><path d="M2 9c4 0 4 6 8 6s4-6 8-6 4 6 4 6"/><path d="M6 9v11"/><path d="M18 9v11"/><path d="M2 20h20"/>`,
+  // Current through ground — resistivity
+  resistivity: `<path d="M13 2 6 13h5l-1 9 7-11h-5l1-9Z"/><path d="M3 20h4"/><path d="M17 20h4"/>`,
+  // Contour lines — topographical survey
+  contour: `<path d="M3 18c3-4 6-2 9-6s6-2 9-6"/><path d="M3 21c3-4 6-2 9-6s6-2 9-6"/><path d="M12 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>`,
+  // Laboratory flask
+  flask: `<path d="M9 2h6"/><path d="M10 2v6.5L4.5 18A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 8.5V2"/><path d="M7 15h10"/>`,
+  // Rock mass / outcrop
+  rock: `<path d="M2 20h20"/><path d="m5 20 5-11 4 6 2-3 5 8"/><path d="m10 9 2 3"/>`,
+  // Vernier calipers — precision measurement, specialised field testing
+  calipers: `<path d="M4 4v11"/><path d="M4 6h12a2 2 0 0 1 2 2v7"/><path d="M2 15h4v5H2z"/><path d="M16 15h4v5h-4z"/><path d="M9 6v3"/>`,
+  // Foundation footing under a structure
+  foundation: `<path d="M4 21h16"/><path d="M6 21v-6h12v6"/><path d="M9 15V9h6v6"/><path d="M12 9V4"/><path d="M8 4h8"/>`,
+  // Clipboard / report
+  report: `<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h3"/>`,
+  // Water table / groundwater
+  water: `<path d="M12 3s5.5 6 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9 12 3 12 3Z"/><path d="M4 21c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5"/>`,
+  // Magnifier over layered ground — sampling and investigation.
+  // No minus inside the lens: that reads as "zoom out" rather than "examine".
+  inspect: `<circle cx="11" cy="10" r="6"/><path d="m20 20-4.5-4.5"/><path d="M7.5 9h7"/><path d="M8.5 12h5"/>`,
+  // Gauge — measurement, bearing capacity
+  gauge: `<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 14 4-4"/><path d="M4 18h16"/>`,
+  // Compass / survey control
+  compass: `<circle cx="12" cy="12" r="9"/><path d="m15 9-2 5-5 2 2-5 5-2Z"/>`,
+  // Building / structure
+  building: `<path d="M3 21h18"/><path d="M6 21V6a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v15"/><path d="M14 10h3a1 1 0 0 1 1 1v10"/><path d="M9 9h2"/><path d="M9 13h2"/><path d="M9 17h2"/>`,
+
+  // ── Site-factor icons (Why It Matters) ──────────────────────────────────
+  // Settlement / ground warning
+  alert: `<path d="M12 3 2 20h20L12 3Z"/><path d="M12 10v4"/><path d="M12 17h.01"/>`,
+  // Map pin — site access, locality
+  pin: `<path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>`,
+  // Slope with slip plane
+  slope: `<path d="M3 20h18"/><path d="M3 20 17 6"/><path d="M11 12l4 4"/><path d="M17 6h4v4"/>`,
+  // Tree with roots drawing moisture from the founding zone
+  tree: `<path d="M12 3a6 6 0 0 0-3.7 10.7A5 5 0 0 0 12 15a5 5 0 0 0 3.7-1.3A6 6 0 0 0 12 3Z"/><path d="M12 15v3"/><path d="M12 18c-1.5 0-3 1-4 3"/><path d="M12 18c1.5 0 3 1 4 3"/>`,
+  // Filled / made ground
+  fill: `<path d="M3 20h18"/><path d="M5 20v-4l7-4 7 4v4"/><path d="M8 20v-2"/><path d="M12 20v-3"/><path d="M16 20v-2"/>`,
+  // Differential settlement across a pad
+  settlement: `<path d="M3 8h18"/><path d="M3 8v4c3 1 6 3 9 3s6-2 9-3V8"/><path d="M7 15v5"/><path d="M17 15v5"/>`,
+  // Wastewater / disposal
+  pipe: `<path d="M6 3v6a3 3 0 0 0 3 3h6a3 3 0 0 1 3 3v6"/><path d="M4 3h4"/><path d="M16 21h4"/>`,
+  // Land parcel
+  land: `<path d="M4 19h16"/><path d="m4 19 4-8 4 4 3-6 5 10"/><path d="M3 5h18"/>`,
+
+  // ── Outcome icons ───────────────────────────────────────────────────────
+  // Protect investment
+  shield: `<path d="M12 21s7-3.5 7-9V5.5L12 3 5 5.5V12c0 5.5 7 9 7 9Z"/><path d="m9 12 2 2 4-4"/>`,
+  // Cost / value
+  cost: `<circle cx="12" cy="12" r="9"/><path d="M12 7v10"/><path d="M14.5 9.5c0-1-1.1-1.5-2.5-1.5s-2.5.6-2.5 1.7S10.5 11.5 12 12s2.5.9 2.5 2-1.1 1.7-2.5 1.7-2.5-.6-2.5-1.5"/>`,
+  // Award / track record
+  award: `<circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-1.5 7L12 18l5 2.5-1.5-7"/>`,
+
+  // ── Contact ─────────────────────────────────────────────────────────────
+  mail: `<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/>`,
+  phone: `<path d="M7 3h3l2 5-2.5 1.5a12 12 0 0 0 5 5L16 12l5 2v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/>`,
+};
+
+const path = PATHS[name] ?? PATHS.report;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.5"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  vector-effect="non-scaling-stroke"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  set:html={path}
+/>

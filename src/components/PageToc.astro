@@ -1,0 +1,101 @@
+---
+/**
+ * Sticky "On this page" table of contents with scroll-spy.
+ *
+ * The commercial service pages run 1000–1250 words across 8–10 sections, which is
+ * a lot to scroll through to reach one answer. This reuses the pattern already
+ * proven on `/why-it-matters` rather than inventing a second one.
+ *
+ * Hidden below `lg` — on narrow screens a sticky sidebar costs more room than it
+ * saves, and the sections are short enough to scroll.
+ */
+interface Props {
+  items: { id: string; label: string }[];
+  class?: string;
+}
+
+const { items, class: className = '' } = Astro.props;
+---
+
+{
+  items.length > 1 ? (
+    <aside
+      class:list={['hidden lg:sticky lg:top-28 lg:block lg:w-[13.5rem] lg:shrink-0', className]}
+      aria-label="On this page"
+    >
+      <nav
+        class="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm ring-1 ring-slate-100"
+        aria-labelledby="page-toc-heading"
+      >
+        <p
+          id="page-toc-heading"
+          class="mb-3 font-sans text-xs font-semibold uppercase tracking-wider text-slate-500"
+        >
+          On this page
+        </p>
+        <ul class="flex flex-col gap-0.5" role="list">
+          {items.map((item) => (
+            <li>
+              <a
+                href={`#${item.id}`}
+                data-toc-for={item.id}
+                class="page-toc-link block rounded-lg border border-transparent px-2 py-2 text-sm leading-snug text-slate-700 transition-colors hover:border-sky-200 hover:bg-sky-50/80 hover:text-sky-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 data-[active=true]:border-sky-300 data-[active=true]:bg-sky-50 data-[active=true]:font-semibold data-[active=true]:text-sky-900"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  ) : null
+}
+
+<script is:inline>
+  (function () {
+    var links = document.querySelectorAll('a[data-toc-for]');
+    if (!links.length) return;
+
+    var sections = [];
+    links.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute('data-toc-for'));
+      if (el) sections.push(el);
+    });
+    if (!sections.length) return;
+
+    /* Matches the fixed header offset used by `scroll-padding-top`. */
+    var offset = 128;
+
+    function sync() {
+      var y = window.scrollY + offset;
+      var current = sections[0].id;
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().top + window.scrollY <= y) {
+          current = sections[i].id;
+        }
+      }
+      links.forEach(function (a) {
+        var match = a.getAttribute('data-toc-for') === current;
+        a.setAttribute('data-active', match ? 'true' : 'false');
+        if (match) a.setAttribute('aria-current', 'location');
+        else a.removeAttribute('aria-current');
+      });
+    }
+
+    var ticking = false;
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(function () {
+          sync();
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+    window.addEventListener('hashchange', sync);
+    sync();
+  })();
+</script>

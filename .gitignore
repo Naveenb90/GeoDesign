@@ -201,6 +201,7 @@ tmp/
 temp/
 .tmp/
 .temp/
+req/
 
 # Optional: ignore yarn.lock or pnpm-lock if you standardize on npm only
 # yarn.lock
