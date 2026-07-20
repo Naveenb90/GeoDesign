@@ -45,6 +45,9 @@ Islands use `client:load`, `client:visible`, or `client:idle` directives in Astr
 | Component | Purpose |
 |---|---|
 | `Header.astro` | Fixed header, pill nav, **services dropdown**, mobile sheet |
+| `PageHero.astro` | Page header for non-service pages |
+| `ServiceHero.astro` | Page header for service pages (icon, chips, CTA) |
+| `Icon.astro` | Inline SVG icon set — **no emoji in UI** |
 | `Footer.astro` | Four-column nav + NAP for both offices (on every page) |
 | `SectionHead.astro` | Kicker + heading + intro; level via `as` |
 | `CtaBand.astro` | Reusable conversion band; heading id derived from text |
@@ -74,14 +77,17 @@ All content is in static JS files in `src/data/`:
 
 ### The two-tier services model — read before editing services
 
-The site deliberately runs **two taxonomies** over overlapping content:
+Two taxonomies run over overlapping content, deliberately: **Tier 1 commercial**
+(`commercialServices.js`, 7 pages) and **Tier 2 technical** (`servicesCatalog.js`,
+5 pages). Both are served by one `[slug].astro` that branches on which catalog owns the
+slug. Tier 1 links down, Tier 2 links up — that reciprocal linking is what stops them
+competing for the same queries.
 
-- **Tier 1 — commercial** (`commercialServices.js`): what a customer searches for and buys. Long-form pages with intro, why-it-matters, process, FAQ, areas served.
-- **Tier 2 — technical** (`servicesCatalog.js`): engineering disciplines. The reference depth that proves competence.
+**Never delete a promoted subsection** (one carrying a `promotedTo` field) — its anchor
+and internal link are load-bearing.
 
-Both live under `/services/:slug`, routed by a single `[slug].astro` that branches on which catalog owns the slug. **Tier 1 links down, Tier 2 links up.** That reciprocal linking is what stops the two competing for the same queries.
-
-Three Tier 2 subsections were *promoted* to Tier 1 pages (electrical resistivity, plate load, pile foundation). They keep their original anchor and body but carry a `promotedTo` field rendering a "Full service →" link. **Never delete a promoted subsection** — the anchor and internal link are load-bearing.
+Full model, page anatomy, heading contract and editing rules:
+[docs/SERVICES_PAGES.md](./docs/SERVICES_PAGES.md).
 
 ### SEO pattern
 
@@ -132,20 +138,20 @@ Three Tier 2 subsections were *promoted* to Tier 1 pages (electrical resistivity
 
 ## Layout trap — read before touching page height
 
-`<body>` is `min-h-screen flex flex-col`, `<main>` is `flex-1`, the footer is `shrink-0`.
+Any page whose content relies on `flex-1` **with no intrinsic height** is coupled to the
+footer's height, and the footer is tall. Two pages carry explicit floors: the
+`index.astro` hero (`.hero-full`) and `404.astro` (`min-h-[60svh]`).
 
-Any page whose content relies on `flex-1` **with no intrinsic height** is coupled to the footer's height. The footer grew substantially in V2 (four columns, 27 links, two addresses), and pages relying on `flex-1` alone collapsed — the footer rose into mid-screen. Two pages therefore carry explicit floors:
-
-- `index.astro` — hero uses `.hero-full` (`100svh`, `100vh` fallback, landscape cap)
-- `404.astro` — inner uses `min-h-[60svh]`
-
-Use `svh`, not `vh`, for viewport-height heroes: on mobile `svh` measures with browser chrome visible, so the layout does not jump as the URL bar hides.
+Give short pages a height floor, and use `svh` not `vh`. Full explanation:
+[docs/DESIGN_SYSTEM.md](./docs/DESIGN_SYSTEM.md#the-flex-height-trap).
 
 ## Home page
 
-**Hero-only, by decision.** A credentials band, services grid, why-it-matters teaser, and CTA were built and then removed at the client's direction — the footer already carries every service link on every page, so those sections duplicated links without extending reach.
+**Hero-only, by client decision.** A credentials band, services grid, why-it-matters
+teaser and CTA were built and then removed — the footer already carries every service
+link on every page. Do not re-add them without asking.
 
-The trade-off is recorded: the page carries ~116 body words and leans on the hero copy, title, and description for topical relevance. If homepage rankings slip, the fix is prose, not a link grid.
+The content-depth trade-off is recorded in [docs/SEO.md](./docs/SEO.md#content-depth).
 
 ## Verifying changes
 
@@ -153,14 +159,15 @@ Astro **inlines small `<style>` blocks into the HTML** rather than emitting them
 
 Worth checking after any structural change: one H1 per page, no heading-level skips, no duplicate element ids, no `<img>` without `alt`, all JSON-LD parsing, and that all 20 routes still build.
 
-## Docs
+## Open items
 
-`docs/` holds `DESIGN_SYSTEM.md`, `ASTRO_MIGRATION.md`, `TECH_DEBT.md`, `SERVICES_PAGES.md`, `SEO_AUDIT.md`, plus point-in-time reports. The V2 programme is recorded in `req/ANALYSIS_AND_PLAN.md` and `req/IMPLEMENTATION_RECORD.md`.
+Bugs, debt, known traps, and items awaiting client input are tracked in
+**[docs/TECH_DEBT.md](./docs/TECH_DEBT.md)**. Read it before starting — several entries
+are deliberate decisions that look like defects.
 
-## Open items needing client input
+## Documentation
 
-- **Three Tier 1 pages are drafted, not client-supplied** — `plate-load-test`, `pile-load-test`, `topographical-survey`. Flagged `reviewStatus: 'drafted-needs-review'` in `commercialServices.js`.
-- **Coimbatore locality list is a draft** — flagged in `serviceAreas.js`. The Chennai list is verbatim from client documents.
-- **`videoConfig.uploadDate` is unset** — `VideoObject` omits `uploadDate` until a real date is supplied. Do not invent one.
-- **Three hero images are below usable resolution** for full-bleed use (`Railway.jpg` 539×360, `Soil-Testing.jpg` 700×298, `construction.jpg` 800×579). They need ~1600px replacements; compression cannot recover detail that is not there.
-- **Pile foundation scope** — GeoDesign provides foundation *design and supervision*, not pile installation. The supplied source copy described construction; it was deliberately rewritten. Do not reinstate.
+Index and single-source-of-truth map: **[docs/README.md](./docs/README.md)**.
+
+Every non-obvious fact has exactly one owning document. Link to it rather than restating
+it — a restated fact is a fact that will go stale.

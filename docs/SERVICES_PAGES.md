@@ -97,7 +97,7 @@ Breaking this reintroduces heading-level skips, which the site was explicitly fi
 4. **Brand is "GeoDesign", one word.** Client source documents use "Geo Design"; that form must not reach production.
 5. **Adding a Tier 1 entry** automatically creates the route, sitemap entry, footer link, header dropdown item, and contact-form option. Nothing else needs touching.
 
-## Outstanding
+## Copy provenance and review status
 
 - `plate-load-test`, `pile-load-test`, `topographical-survey` are **drafted from the technical catalog, not client-supplied**. They assert capability that needs confirming. Flagged via `reviewStatus` in the data file.
 - `pile-foundation` was rewritten because the supplied copy described pile *installation*; GeoDesign provides *design and supervision*. Do not reinstate the original wording.

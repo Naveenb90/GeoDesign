@@ -80,6 +80,8 @@ Use **`svh`, not `vh`**, for viewport-height sections: on mobile `svh` measures 
 
 ### Chrome
 
+### Header
+
 **`Header.astro`** — fixed, `bg-slate-100`, single-row pill nav plus a gradient "Get in Touch" button.
 
 The nav is `overflow-x-auto` — this is the guard that stops the pill row breaking the header grid. Consequently the **services dropdown panel is a direct child of `<header>`, not of `<nav>`**: nested inside, it would be clipped. `<header>` is `position: fixed`, which establishes the containing block.
@@ -114,7 +116,12 @@ Tokens live in `src/data/skyTileClasses.js`:
 
 **Interactive cards** add a hover treatment adapted from the V2 sample reference: `translateY(-3px)`, a soft shadow, and a 3px `sky-500` accent rail fading in from the left. `:focus-visible` is styled **identically to `:hover`** so keyboard users get the same affordance. All of it sits behind `prefers-reduced-motion`.
 
-> Astro **inlines small `<style>` blocks into the HTML** rather than the CSS bundle. When verifying a scoped style shipped, grep the built HTML too — checking only `_astro/*.css` gives false negatives.
+### Verifying styles shipped
+
+Astro **inlines small `<style>` blocks into the HTML** rather than emitting them to the
+CSS bundle. When checking whether a scoped style shipped, grep the built HTML too —
+checking only `_astro/*.css` produces false negatives. This caused a false bug report
+during V2.
 
 ---
 
@@ -145,14 +152,9 @@ for every srcset/src URL in dist/**/*.html -> assert the file exists
 
 ### Known image debt
 
-Three hero sources are below usable resolution for full-bleed use and cannot be fixed by compression:
+Three hero sources are below usable resolution for full-bleed use and cannot be
+fixed by compression. Details and current status: [TECH_DEBT.md](./TECH_DEBT.md#open-debt).
 
-| File | Size | Needed |
-|------|------|--------|
-| `Railway.jpg` | 539×360 | ~1600px |
-| `Soil-Testing.jpg` | 700×298 | ~1600px |
-| `construction.jpg` | 800×579 | ~1600px |
-| `hero-site.jpg` | 1600×733 | OK |
 
 ---
 
@@ -177,9 +179,8 @@ Do not reinstate eager iframes.
 
 ## Home page
 
-**Hero-only, by decision.** A credentials band, services grid, why-it-matters teaser, and CTA were built and then removed at the client's direction — the footer already carries every service link on every page, so those sections duplicated links without extending reach.
+Hero-only, by client decision. The content-depth trade-off is recorded in [SEO.md](./SEO.md#content-depth).
 
-Trade-off on record: ~116 body words, leaning on hero copy, title, and description for topical relevance.
 
 ---
 

@@ -1,4 +1,13 @@
-# Astro site (repository root)
+# SPA → Astro migration (April 2026)
+
+> **Historical record.** This documents the one-off migration from the Vite + React SPA
+> to Astro. The current stack, routes, and component inventory are in
+> **[ARCHITECTURE.md](./ARCHITECTURE.md)** — the tables below are not maintained.
+>
+> The V2 content and design programme that followed is recorded in
+> [`../req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md).
+>
+> Index: [README.md](./README.md)
 
 > **Note:** this documents the SPA → Astro migration (April 2026). The V2 content and structure programme that followed is recorded in [`../req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md).
 
