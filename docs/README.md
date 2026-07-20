@@ -56,22 +56,23 @@ which meant updating one left the rest silently wrong.
 | [TECH_DEBT.md](./TECH_DEBT.md) | Open debt, known traps, deliberate decisions, client items |
 | [git-local.example.md](./git-local.example.md) | Template for personal git notes (copy to `git-local.md`) |
 
-## Archive — historical, do not treat as current
+## Archival records
 
-These are point-in-time records. They are kept because they document *why* decisions
-were made, but their route lists, metrics, and findings are superseded.
+Point-in-time records of the V2 programme, kept because they document *why* decisions
+were made. Their route lists and metrics are superseded — do not cite them as current.
 
-| File | Snapshot of |
+| File | Record of |
 |---|---|
-| [PROJECT_REPORT.md](./PROJECT_REPORT.md) | Full codebase review, 15 April 2026 (pre-V2) |
-| [ASTRO_MIGRATION.md](./ASTRO_MIGRATION.md) | SPA → Astro migration, April 2026 |
-| [PROJECT_SUMMARY.md](./PROJECT_SUMMARY.md) | Superseded by ARCHITECTURE.md |
-| [`../req/ANALYSIS_AND_PLAN.md`](../req/ANALYSIS_AND_PLAN.md) | V2 audit and plan, July 2026 |
+| [`../req/ANALYSIS_AND_PLAN.md`](../req/ANALYSIS_AND_PLAN.md) | V2 audit, options and client Q&A, July 2026 |
 | [`../req/IMPLEMENTATION_RECORD.md`](../req/IMPLEMENTATION_RECORD.md) | V2 delivery record, July 2026 |
 
-The two `req/` documents intentionally restate facts owned elsewhere — they are a
-record of what was found and decided at a moment in time, and rewriting them would
-falsify that record. Do not sync them with the live docs; do not cite them as current.
+These two intentionally restate facts owned elsewhere — they record what was found and
+decided at a moment in time, and rewriting them would falsify that record. Do not sync
+them with the live docs.
+
+**Removed in the July 2026 consolidation:** `PROJECT_SUMMARY.md`, `SEO_AUDIT.md`,
+`ASTRO_MIGRATION.md` and `PROJECT_REPORT.md` were deleted. All four were superseded by
+the current documents above, and all four remain in git history if needed.
 
 ---
 

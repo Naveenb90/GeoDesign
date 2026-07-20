@@ -4,11 +4,10 @@
 **Scope:** measured against compiled output in `dist/` — 20 indexed routes + 404
 **Canonical origin:** `https://geodesign.co.in`
 
-Replaces `SEO_AUDIT.md`, whose April 2026 edition described a client-rendered
-Vite + React SPA using `SEO.jsx` and `react-helmet-async`. That architecture no longer
-exists; the site is Astro static, so every route ships complete HTML with no
-JavaScript-rendering dependency. The entire class of SPA indexing concerns that audit
-raised is gone.
+The previous audit (April 2026) described a client-rendered Vite + React SPA using
+`react-helmet-async`. **That architecture no longer exists** — the site is Astro static,
+so every route ships complete HTML with no JavaScript-rendering dependency. The whole
+class of SPA indexing concerns that audit raised is gone.
 
 ---
 

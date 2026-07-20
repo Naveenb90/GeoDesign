@@ -3,8 +3,6 @@
 **Updated:** 18 July 2026
 Production: [https://geodesign.co.in](https://geodesign.co.in)
 
-Supersedes `PROJECT_SUMMARY.md` and the layout section of `ASTRO_MIGRATION.md`.
-
 ---
 
 ## Stack
