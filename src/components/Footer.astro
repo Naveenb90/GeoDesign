@@ -47,8 +47,8 @@ const offices = [
 ];
 
 const linkClass =
-  'block rounded py-1 text-sm leading-snug text-slate-600 transition-colors hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500';
-const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-wider text-slate-900';
+  'block rounded py-0.5 text-sm leading-snug text-slate-600 transition-colors hover:text-sky-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500';
+const colHeadingClass = 'font-display mb-2.5 text-xs font-bold uppercase tracking-wider text-slate-900';
 ---
 
 <footer
@@ -56,10 +56,10 @@ const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-
   role="contentinfo"
   aria-label="Site footer"
 >
-  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-7 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
       <!-- Brand -->
-      <div class="lg:col-span-4">
+      <div class="lg:col-span-3">
         <a
           href="/"
           class="inline-flex items-center gap-3 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
@@ -93,33 +93,38 @@ const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-
         </p>
       </div>
 
-      <!-- Services -->
-      <nav class="lg:col-span-3" aria-labelledby="footer-services-heading">
-        <h2 id="footer-services-heading" class={colHeadingClass}>Services</h2>
-        <ul class="m-0 list-none p-0" role="list">
-          {
-            serviceLinks.map((link) => (
-              <li>
-                <a href={link.href} class={linkClass}>
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-
-        <h2 class:list={[colHeadingClass, 'mt-6']}>Technical reference</h2>
-        <ul class="m-0 list-none p-0" role="list">
-          {
-            technicalLinks.map((link) => (
-              <li>
-                <a href={link.href} class={linkClass}>
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+      <!-- Services — two lists side by side to keep the footer compact -->
+      <nav class="lg:col-span-4" aria-labelledby="footer-services-heading">
+        <div class="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+          <div>
+            <h2 id="footer-services-heading" class={colHeadingClass}>Services</h2>
+            <ul class="m-0 list-none p-0" role="list">
+              {
+                serviceLinks.map((link) => (
+                  <li>
+                    <a href={link.href} class={linkClass}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <h2 class={colHeadingClass}>Technical reference</h2>
+            <ul class="m-0 list-none p-0" role="list">
+              {
+                technicalLinks.map((link) => (
+                  <li>
+                    <a href={link.href} class={linkClass}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
       </nav>
 
       <!-- Company -->
@@ -144,7 +149,7 @@ const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-
       <!-- NAP: name, address, phone — the standard local signal, now on every page -->
       <div class="lg:col-span-3">
         <h2 class={colHeadingClass}>Contact</h2>
-        <div class="space-y-5">
+        <div class="space-y-4">
           {
             offices.map((office) => (
               <address class="not-italic">
@@ -177,7 +182,7 @@ const colHeadingClass = 'font-display mb-3 text-xs font-bold uppercase tracking-
     </div>
 
     <div
-      class="mt-10 flex flex-col gap-2 border-t border-slate-200 pt-6 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between"
+      class="mt-7 flex flex-col gap-2 border-t border-slate-200 pt-5 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between"
     >
       <p class="m-0">© {year} GEODESIGN INDIA PRIVATE LIMITED&reg;. All Rights Reserved.</p>
       <p class="m-0">

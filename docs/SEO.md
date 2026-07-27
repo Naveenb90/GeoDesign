@@ -107,14 +107,24 @@ In place:
 - `areaServed` on every `Service`
 - `AreasWeServe` locality blocks
 
-**Copy is deliberately city-neutral**, with location relevance carried by the `areas`
-block. The client's source copy was 100% Chennai; adopting that wholesale would have
-diluted Coimbatore, where the head office and one of the two laboratories sit.
+**Chennai focus is the client's deliberate revenue strategy** (confirmed July 2026):
+GeoDesign is actively growing the Chennai market, which is why the content provider's
+documents are Chennai-specific and why the four document-applied pages target
+"… in Chennai" heavily. This is intentional, not an oversight.
 
-**Deferred:** city-variant pages (`/soil-testing-chennai`, `/soil-testing-coimbatore`).
-Build only once the pillars have indexed and Search Console shows real local volume.
-Launching ~16 near-identical variants alongside 7 new pages is the most likely way to
-damage existing rankings.
+- The **four client-document pages** (soil-testing, pile-foundation, bridge-load-test,
+  electrical-resistivity-test) are **Chennai-targeted** by design.
+- The **three Claude-drafted pages** (plate-load-test, pile-load-test,
+  topographical-survey) are still **city-neutral**, with location carried by the
+  `areas` block. If the client wants full Chennai consistency, these three should be
+  rewritten Chennai-first to match — flag before doing so.
+
+**Coimbatore** (head office + one lab) still matters: keep it in the footer NAP, the
+`Organization`/`ProfessionalService` schema, and site-wide metas so those rankings are
+not abandoned while Chennai is pushed.
+
+**City-variant pages** (`/soil-testing-chennai` etc.) remain deferred until the pillars
+have indexed and Search Console shows the volume to justify them.
 
 **Not in the repo:** Google Business Profile claim and optimisation for both offices.
 Worth doing.

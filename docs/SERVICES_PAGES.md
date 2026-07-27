@@ -93,7 +93,7 @@ Breaking this reintroduces heading-level skips, which the site was explicitly fi
 
 1. **`AreasWeServe` requires a unique `lead` per page.** The locality data is shared across all Tier 1 pages; the lead sentence is the only thing keeping those blocks from being byte-identical. Enforced by making the prop required.
 2. **Keyword density: two regimes.** The 3 Claude-drafted pages keep `"<service> in Chennai"` to 3–4 occurrences. The 4 client-document pages carry the provider's verbatim copy with 20–25 occurrences of "in Chennai" by design — do not "fix" this; it is the content provider's deliberate SEO and is contractually required to match.
-3. **Copy is city-neutral.** Location relevance comes from the `areas` block. This protects Coimbatore (head office) rankings while still capturing local intent, and leaves room for city variants later.
+3. **Chennai is the deliberate revenue focus** (client-confirmed). The four client-document pages are Chennai-targeted by design. The three Claude-drafted pages remain city-neutral (location via the `areas` block) — align them Chennai-first only on client instruction. Either way, keep Coimbatore in the footer NAP and schema so the head-office market is not abandoned.
 4. **Brand is "GeoDesign", one word.** Client source documents use "Geo Design"; that form must not reach production.
 5. **Adding a Tier 1 entry** automatically creates the route, sitemap entry, footer link, header dropdown item, and contact-form option. Nothing else needs touching.
 
