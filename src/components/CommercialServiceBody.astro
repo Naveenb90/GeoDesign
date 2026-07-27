@@ -88,7 +88,7 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
         ) : null}
 
         <ul class="m-0 mt-4 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
-          {service.whyImportant.items.map((item: string) => (
+          {(service.whyImportant.items ?? []).map((item: string) => (
             <li class={listItemClass}>
               <span
                 class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"
@@ -121,8 +121,12 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
           {service.whyChooseUs.body}
         </p>
 
-        <ul class="m-0 mt-8 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
-          {service.whyChooseUs.items.map((item: string) => (
+        {service.whyChooseUs.listHeading ? (
+          <p class="mt-8 font-semibold text-slate-900">{service.whyChooseUs.listHeading}</p>
+        ) : null}
+
+        <ul class="m-0 mt-4 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+          {(service.whyChooseUs.items ?? []).map((item: string) => (
             <li class={listItemClass}>
               <span
                 class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700"
@@ -155,8 +159,11 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
           intro={service.ourServices.body}
           id="our-services-heading"
         />
+        {service.ourServices.listHeading ? (
+          <p class="mt-6 font-semibold text-slate-900">{service.ourServices.listHeading}</p>
+        ) : null}
         <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
-          {service.ourServices.items.map((item: { title: string; description: string }) => (
+          {(service.ourServices.items ?? []).map((item: { title: string; description: string }) => (
             <li class="min-w-0">
               <div class={detailTile}>
                 <span
@@ -175,6 +182,21 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
             </li>
           ))}
         </ul>
+        {service.ourServices.strItems?.length ? (
+          <ul class="m-0 mt-6 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+            {service.ourServices.strItems.map((item: string) => (
+              <li class={listItemClass}>
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700" aria-hidden="true">
+                  <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" /></svg>
+                </span>
+                <span class="leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {service.ourServices.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">{service.ourServices.closing}</p>
+        ) : null}
       </section>
     ) : null
   }
@@ -184,8 +206,11 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
     service.types ? (
       <section aria-labelledby="types-heading">
         <SectionHead heading={service.types.heading} intro={service.types.body} id="types-heading" />
+        {service.types.listHeading ? (
+          <p class="mt-6 font-semibold text-slate-900">{service.types.listHeading}</p>
+        ) : null}
         <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
-          {service.types.items.map((item: { title: string; description: string }) => (
+          {(service.types.items ?? []).map((item: { title: string; description: string }) => (
             <li class="min-w-0">
               <div class={detailTile}>
                 <span
@@ -204,6 +229,21 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
             </li>
           ))}
         </ul>
+        {service.types.strItems?.length ? (
+          <ul class="m-0 mt-6 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+            {service.types.strItems.map((item: string) => (
+              <li class={listItemClass}>
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700" aria-hidden="true">
+                  <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" /></svg>
+                </span>
+                <span class="leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {service.types.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">{service.types.closing}</p>
+        ) : null}
       </section>
     ) : null
   }
@@ -217,7 +257,15 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
           intro={service.process.body}
           id="process-heading"
         />
+        {service.process.listHeading ? (
+          <p class="mt-6 font-semibold text-slate-900">{service.process.listHeading}</p>
+        ) : null}
         <ProcessSteps class="mt-8" steps={service.process.steps} />
+        {service.process.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">
+            {service.process.closing}
+          </p>
+        ) : null}
       </section>
     ) : null
   }
@@ -231,14 +279,32 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
           intro={service.industries.body}
           id="industries-heading"
         />
+        {service.industries.listHeading ? (
+          <p class="mt-6 font-semibold text-slate-900">{service.industries.listHeading}</p>
+        ) : null}
         <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3 md:gap-5" role="list">
-          {service.industries.items.map((item: { title: string; description: string }) => (
+          {(service.industries.items ?? []).map((item: { title: string; description: string }) => (
             <li class="min-w-0 rounded-xl border border-slate-200/90 bg-white p-5 shadow-sm">
               <h3 class="mb-1.5 text-base font-bold text-slate-900">{item.title}</h3>
               <p class="text-sm leading-relaxed text-slate-600">{item.description}</p>
             </li>
           ))}
         </ul>
+        {service.industries.strItems?.length ? (
+          <ul class="m-0 mt-6 grid list-none gap-3 p-0 sm:grid-cols-2" role="list">
+            {service.industries.strItems.map((item: string) => (
+              <li class={listItemClass}>
+                <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700" aria-hidden="true">
+                  <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="m5 13 4 4L19 7" /></svg>
+                </span>
+                <span class="leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        {service.industries.closing ? (
+          <p class="mt-6 max-w-3xl text-base leading-relaxed text-slate-600">{service.industries.closing}</p>
+        ) : null}
       </section>
     ) : null
   }
@@ -269,8 +335,13 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
   {
     service.areas ? (
       <section aria-labelledby="areas-heading">
-        <SectionHead heading="Areas we serve" id="areas-heading" />
-        <AreasWeServe class="mt-6" region={service.areas.region} lead={service.areas.lead} />
+        <SectionHead heading={service.areas.heading ?? 'Areas we serve'} id="areas-heading" />
+        <AreasWeServe
+          class="mt-6"
+          region={service.areas.region}
+          lead={service.areas.lead}
+          closing={service.areas.closing}
+        />
       </section>
     ) : null
   }
@@ -279,7 +350,7 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
   {
     service.faqs?.length ? (
       <section aria-labelledby="faq-heading">
-        <SectionHead heading="Frequently asked questions" id="faq-heading" />
+        <SectionHead heading="Frequently Asked Questions" id="faq-heading" />
         <FaqAccordion class="mt-6" items={service.faqs} />
       </section>
     ) : null
@@ -290,6 +361,7 @@ const detailTile = `${SKY_FACTOR_TILE_CLASS} h-full text-left`;
 
   <CtaBand
     heading={service.ctaHeading ?? 'Discuss your project with a geotechnical engineer'}
+    body={service.ctaBody}
     ctaHref={`/contact?service=${service.slug}`}
   />
   </div>

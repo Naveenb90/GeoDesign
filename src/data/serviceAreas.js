@@ -57,6 +57,7 @@ export const chennaiAreas = {
         'Oragadam',
         'Maraimalai Nagar',
         'Kanchipuram',
+        'surrounding areas',
       ],
     },
   ],

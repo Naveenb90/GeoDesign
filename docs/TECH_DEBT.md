@@ -145,6 +145,7 @@ Blocking items that no amount of engineering resolves.
 |---|---|
 | **Three service pages are drafts, not client copy** | `plate-load-test`, `pile-load-test`, `topographical-survey`. They assert capability that needs confirming. Flagged via `reviewStatus` in `commercialServices.js` |
 | **Coimbatore locality list is a draft** | Flagged in `serviceAreas.js`. Stating a service area is a business claim. The Chennai list is verbatim from client documents and needs no review |
+| **Pile-foundation states installation scope** | The 4 client-document pages were applied verbatim by client instruction; pile-foundation now describes pile *installation/construction*. Confirm this matches what GeoDesign actually offers before the page is promoted |
 | **`videoConfig.uploadDate` is unset** | `VideoObject` omits `uploadDate` until a real YouTube publish date is supplied. Google wants it for video rich results. **Do not invent one** |
 | **Hero image replacements** | See item 2 above |
 | **Google Business Profile** | Unclaimed/unoptimised for both offices — [SEO.md](./SEO.md#local-seo) |

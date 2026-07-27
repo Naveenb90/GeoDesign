@@ -30,12 +30,12 @@ Both tiers are served by one route, `src/pages/services/[slug].astro`, which bra
 | Path | Tier | H1 | Copy provenance |
 |------|------|----|-----------------|
 | `/services` | hub | Geotechnical services | — |
-| `/services/soil-testing` | 1 | Soil Testing for Construction | Adapted from client doc |
-| `/services/pile-foundation` | 1 | Pile Foundation & Foundation Design | **Rewritten** — scope corrected |
+| `/services/soil-testing` | 1 | Soil Testing for Construction in Chennai | **Verbatim** from client doc |
+| `/services/pile-foundation` | 1 | Pile Foundation in Chennai | **Verbatim** from client doc (installation scope) |
 | `/services/plate-load-test` | 1 | Plate Load Test | ⚠️ Drafted — needs review |
 | `/services/pile-load-test` | 1 | Pile Load Test & Pull Out Test | ⚠️ Drafted — needs review |
-| `/services/bridge-load-test` | 1 | Bridge Load Test | Adapted from client doc |
-| `/services/electrical-resistivity-test` | 1 | Electrical Resistivity Test | Adapted from client doc |
+| `/services/bridge-load-test` | 1 | Bridge Load Test in Chennai | **Verbatim** from client doc |
+| `/services/electrical-resistivity-test` | 1 | Electrical Resistivity Test in Chennai | **Verbatim** from client doc |
 | `/services/topographical-survey` | 1 | Topographical & Contour Survey | ⚠️ Drafted — needs review |
 | `/services/drilling-sampling` | 2 | Drilling & Sampling | Original (PDF) |
 | `/services/foundation-recommendations` | 2 | Foundation Recommendations | Original (PDF) |
@@ -92,7 +92,7 @@ Breaking this reintroduces heading-level skips, which the site was explicitly fi
 ## Editing rules
 
 1. **`AreasWeServe` requires a unique `lead` per page.** The locality data is shared across all Tier 1 pages; the lead sentence is the only thing keeping those blocks from being byte-identical. Enforced by making the prop required.
-2. **Keep keyword density under ~2.5%.** The supplied copy repeated `"<service> in Chennai"` 10–14 times per page; that was cut to 3–4 natural occurrences. Re-check after editing.
+2. **Keyword density: two regimes.** The 3 Claude-drafted pages keep `"<service> in Chennai"` to 3–4 occurrences. The 4 client-document pages carry the provider's verbatim copy with 20–25 occurrences of "in Chennai" by design — do not "fix" this; it is the content provider's deliberate SEO and is contractually required to match.
 3. **Copy is city-neutral.** Location relevance comes from the `areas` block. This protects Coimbatore (head office) rankings while still capturing local intent, and leaves room for city variants later.
 4. **Brand is "GeoDesign", one word.** Client source documents use "Geo Design"; that form must not reach production.
 5. **Adding a Tier 1 entry** automatically creates the route, sitemap entry, footer link, header dropdown item, and contact-form option. Nothing else needs touching.
@@ -100,5 +100,6 @@ Breaking this reintroduces heading-level skips, which the site was explicitly fi
 ## Copy provenance and review status
 
 - `plate-load-test`, `pile-load-test`, `topographical-survey` are **drafted from the technical catalog, not client-supplied**. They assert capability that needs confirming. Flagged via `reviewStatus` in the data file.
-- `pile-foundation` was rewritten because the supplied copy described pile *installation*; GeoDesign provides *design and supervision*. Do not reinstate the original wording.
+- **soil-testing, pile-foundation, bridge-load-test, electrical-resistivity-test carry the client content provider's copy VERBATIM** (July 2026), by client instruction — the provider requires an exact match for their SEO keywords. Only the brand was normalised to one-word "GeoDesign". Do not reduce keyword density, deduplicate the locality lists, or reword these without the client's sign-off.
+- `pile-foundation` states pile *installation/construction*. Naveen initially indicated design+supervision only, then chose "apply the document exactly". The installation scope is intentional — confirm before changing.
 - City-variant pages (`/soil-testing-chennai` etc.) are **deliberately deferred** until the pillars have indexed and Search Console shows real local volume. Building ~16 near-identical variants alongside 7 new pages is the most likely way to damage existing rankings.

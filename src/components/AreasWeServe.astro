@@ -27,6 +27,11 @@ interface Props {
    * the page `h1`, otherwise the page will contain a heading-level skip.
    */
   headingLevel?: 'h2' | 'h3' | 'h4';
+  /**
+   * Optional closing sentence, overriding the region default. Used where a service
+   * page must reproduce a specific closing line verbatim (e.g. supplied copy).
+   */
+  closing?: string;
   class?: string;
 }
 
@@ -34,6 +39,7 @@ const {
   region: regionId = 'chennai',
   lead,
   headingLevel: GroupHeading = 'h3',
+  closing,
   class: className = '',
 } = Astro.props;
 
@@ -49,6 +55,8 @@ if (!region) {
 <div class:list={['min-w-0', className]}>
   <p class="max-w-3xl text-base leading-relaxed text-slate-600 md:text-lg">{lead}</p>
 
+  <p class="mt-6 font-semibold text-slate-900">Our service areas include:</p>
+
   <ul class="m-0 mt-8 grid list-none gap-4 p-0 sm:grid-cols-2 md:gap-5" role="list">
     {
       region.groups.map((group) => (
@@ -57,12 +65,16 @@ if (!region) {
             {group.title}
           </GroupHeading>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">
-            {group.localities.join(' · ')}
+            {
+              group.localities.length > 1
+                ? `${group.localities.slice(0, -1).join(', ')}, and ${group.localities[group.localities.length - 1]}.`
+                : `${group.localities[0]}.`
+            }
           </p>
         </li>
       ))
     }
   </ul>
 
-  <p class="mt-6 text-sm leading-relaxed text-slate-600">{region.closing}</p>
+  <p class="mt-6 text-sm leading-relaxed text-slate-600">{closing ?? region.closing}</p>
 </div>

@@ -90,10 +90,13 @@ documents, and repeated `"<service> in Chennai"` 10–14 times per page.
 Mitigations, and the rules that keep them working, are in
 [SERVICES_PAGES.md](./SERVICES_PAGES.md#editing-rules).
 
-**Measured worst-case pairwise 8-gram overlap between the 7 Tier 1 pages: 15.4%**
-(threshold of concern ≈ 25%). Keyword density now 0.81%–2.41%.
-
-Re-measure after any bulk copy edit.
+**Update (July 2026):** four Tier 1 pages (soil-testing, pile-foundation, bridge-load-test,
+electrical-resistivity-test) now carry the client content provider's **verbatim copy**, by
+client instruction — the provider requires an exact keyword match. These pages repeat
+"in Chennai" 20–25 times each and share the provider's "Areas We Serve" / "Why Choose Us"
+blocks. This is a **deliberate, client-mandated** trade-off, not an oversight. The earlier
+mitigation (3–4 occurrences, 15.4% overlap) still applies to the 3 Claude-drafted pages.
+Monitor these four in Search Console for keyword-stuffing or duplicate-content signals.
 
 ## Local SEO
 
@@ -137,7 +140,8 @@ which is what was already tried and removed.
 
 - **British English.** `analyse`, `behaviour`, `specialised`, `metres`, `programme`.
   Verified consistent site-wide.
-- **Brand is "GeoDesign", one word.** See
+- **Brand is "GeoDesign", one word** — including inside the four verbatim client-copy
+  pages, where "Geo Design" from the source was normalised. See
   [SERVICES_PAGES.md](./SERVICES_PAGES.md#copy-provenance-and-review-status).
 - **Em-dashes are spaced** ( — ); en-dashes are used unspaced for numeric ranges (1–5).
 - **Typographic apostrophes** (’) throughout, not straight quotes.
