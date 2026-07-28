@@ -30,12 +30,12 @@ Both tiers are served by one route, `src/pages/services/[slug].astro`, which bra
 | Path | Tier | H1 | Copy provenance |
 |------|------|----|-----------------|
 | `/services` | hub | Geotechnical services | — |
-| `/services/soil-testing` | 1 | Soil Testing for Construction in Chennai | **Verbatim** from client doc |
-| `/services/pile-foundation` | 1 | Pile Foundation in Chennai | **Verbatim** from client doc (installation scope) |
+| `/services/soil-testing-for-construction-in-chennai` | 1 | Soil Testing for Construction in Chennai | **Verbatim** from client doc |
+| `/services/pile-foundation-in-chennai` | 1 | Pile Foundation in Chennai | **Verbatim** from client doc (installation scope) |
 | `/services/plate-load-test` | 1 | Plate Load Test | ⚠️ Drafted — needs review |
 | `/services/pile-load-test` | 1 | Pile Load Test & Pull Out Test | ⚠️ Drafted — needs review |
-| `/services/bridge-load-test` | 1 | Bridge Load Test in Chennai | **Verbatim** from client doc |
-| `/services/electrical-resistivity-test` | 1 | Electrical Resistivity Test in Chennai | **Verbatim** from client doc |
+| `/services/bridge-load-test-in-chennai` | 1 | Bridge Load Test in Chennai | **Verbatim** from client doc |
+| `/services/electrical-resistivity-test-in-chennai` | 1 | Electrical Resistivity Test in Chennai | **Verbatim** from client doc |
 | `/services/topographical-survey` | 1 | Topographical & Contour Survey | ⚠️ Drafted — needs review |
 | `/services/drilling-sampling` | 2 | Drilling & Sampling | Original (PDF) |
 | `/services/foundation-recommendations` | 2 | Foundation Recommendations | Original (PDF) |
@@ -53,9 +53,9 @@ Three Tier 2 subsections became full Tier 1 pages. The subsections **still exist
 
 | Tier 2 page | Subsection | Promoted to |
 |---|---|---|
-| `specialised-field-testing` | Electric resistivity / soil resistivity test | `/services/electrical-resistivity-test` |
+| `specialised-field-testing` | Electric resistivity / soil resistivity test | `/services/electrical-resistivity-test-in-chennai` |
 | `specialised-field-testing` | Plate load test | `/services/plate-load-test` |
-| `foundation-recommendations` | Deep foundations — pile foundations | `/services/pile-foundation` |
+| `foundation-recommendations` | Deep foundations — pile foundations | `/services/pile-foundation-in-chennai` |
 
 **Do not delete a promoted subsection.** Its anchor and internal link carry accumulated ranking signal; removing it discards that and breaks external links to the anchor.
 
@@ -96,6 +96,23 @@ Breaking this reintroduces heading-level skips, which the site was explicitly fi
 3. **Chennai is the deliberate revenue focus** (client-confirmed). The four client-document pages are Chennai-targeted by design. The three Claude-drafted pages remain city-neutral (location via the `areas` block) — align them Chennai-first only on client instruction. Either way, keep Coimbatore in the footer NAP and schema so the head-office market is not abandoned.
 4. **Brand is "GeoDesign", one word.** Client source documents use "Geo Design"; that form must not reach production.
 5. **Adding a Tier 1 entry** automatically creates the route, sitemap entry, footer link, header dropdown item, and contact-form option. Nothing else needs touching.
+
+## SEO metadata (titles, descriptions, keywords, URLs)
+
+The meta title, description, keywords, canonical, and **URL slug** for the four
+client-document pages come from `req/GEO DESIGN -  TITLE DESCRIPTION.docx` (applied
+July 2026), brand normalised to one-word "GeoDesign".
+
+- URLs were changed to the document's slugs (e.g. `/services/soil-testing` →
+  `/services/soil-testing-for-construction-in-chennai`). These were new pages, so no
+  ranking was lost — but the old short URLs now 404. If they were ever live, add
+  Netlify redirects old → new.
+- A `<meta name="keywords">` tag is rendered from the document's keyword list.
+  **Google ignores meta keywords** — this is applied only because the content provider
+  specifies it; it has no ranking effect.
+- The Electrical Resistivity meta description in the source is a copy-paste error (it
+  describes bridge load testing). By client instruction it was applied verbatim, with
+  the correct resistivity sentence appended. The provider should fix the source.
 
 ## Copy provenance and review status
 

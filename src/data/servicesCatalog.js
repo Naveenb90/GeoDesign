@@ -137,7 +137,7 @@ export const geotechnicalServicePages = [
         title: 'Deep foundations — pile foundations',
         body:
           'Deep foundations transfer load through weak or compressible strata to competent soil or rock. Design integrates structural loads, geotechnical parameters, and installation feasibility.',
-        promotedTo: { slug: 'pile-foundation', label: 'Pile Foundation & Foundation Design' },
+        promotedTo: { slug: 'pile-foundation-in-chennai', label: 'Pile Foundation & Foundation Design' },
       },
     ],
   },
@@ -158,7 +158,7 @@ export const geotechnicalServicePages = [
         title: 'Electric resistivity / soil resistivity test',
         body:
           'A non-destructive geophysical method that measures how strongly soil resists electric current, used to map soil layers, rock depth, and groundwater — and to design electrical earthing systems.',
-        promotedTo: { slug: 'electrical-resistivity-test', label: 'Electrical Resistivity Test' },
+        promotedTo: { slug: 'electrical-resistivity-test-in-chennai', label: 'Electrical Resistivity Test' },
       },
       {
         title: 'Vane shear test',

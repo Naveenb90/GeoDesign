@@ -11,6 +11,12 @@ export interface Props {
   ogImagePath?: string;
   /** Set for error pages so search engines do not index soft 404 */
   robotsNoindex?: boolean;
+  /**
+   * Comma-separated meta keywords, supplied by the client's SEO documents.
+   * Note: Google ignores the keywords meta tag; rendered only because the client
+   * content provider specifies it. No effect on Google ranking.
+   */
+  keywords?: string;
   /** Page-specific JSON-LD. Falsy entries are dropped, so builders may return null. */
   schemas?: unknown[];
 }
@@ -28,6 +34,7 @@ const {
    */
   ogImagePath = '/assets/web/og-image.jpg',
   robotsNoindex = false,
+  keywords,
   schemas,
 } = Astro.props;
 
@@ -57,6 +64,7 @@ const extraSchemas = (schemas ?? []).filter(Boolean);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    {keywords ? <meta name="keywords" content={keywords} /> : null}
     <meta name="robots" content={robotsNoindex ? 'noindex, nofollow' : 'index, follow'} />
     <link rel="canonical" href={canonical} />
     <title>{fullTitle}</title>

@@ -39,16 +39,16 @@
 export const commercialServices = [
   // ───────────────────────────────────────────────────────────── soil testing
           {
-    slug: "soil-testing",
+    slug: "soil-testing-for-construction-in-chennai",
     tier: 'commercial',
     title: "Soil Testing for Construction in Chennai",
     navLabel: "Soil Testing",
     iconKey: "drill",
     reviewStatus: 'applied-from-client-document-verbatim',
     shortDescription: "Borehole investigation, sampling, and laboratory analysis that establish safe bearing capacity and foundation requirements before you build.",
-    metaTitle: "Soil Testing for Construction | Borehole Investigation & SBC",
-    metaDescription: "GeoDesign provides soil testing for construction — borehole drilling, SPT, soil bearing capacity, and IS Code-compliant geotechnical reports across Tamil Nadu.",
-    keywords: "soil testing for construction, soil test before construction, soil bearing capacity, SBC test, borehole drilling, geotechnical investigation",
+    metaTitle: "Soil Testing in Chennai | Geotechnical Investigation | GeoDesign",
+    metaDescription: "GeoDesign offers professional soil testing for construction in Chennai, including SBC testing, geotechnical investigation, borehole drilling, soil analysis, and foundation recommendations.",
+    keywords: "Soil Testing for Construction in Chennai,Soil Testing in Chennai, Geotechnical Investigation Chennai, Soil Investigation Chennai, Soil Bearing Capacity Test Chennai, SBC Test Chennai, Borehole Drilling Chennai, Geotechnical Engineering Chennai, Foundation Design Chennai, Plate Load Test Chennai, Ground Investigation Chennai, GeoDesign",
     intro: [
       "Building a strong and durable structure starts with understanding the ground beneath it. At GeoDesign, we provide professional soil testing for construction in Chennai to help homeowners, builders, architects, engineers, and developers make informed foundation decisions. Our geotechnical investigation services evaluate soil properties, determine Soil Bearing Capacity (SBC), and provide accurate recommendations for safe and cost-effective construction.",
       "Whether you're building a house, apartment, commercial building, or industrial facility, GeoDesign delivers reliable soil testing in Chennai using advanced equipment, laboratory analysis, and experienced geotechnical engineers to ensure your project begins on a solid foundation.",
@@ -133,21 +133,21 @@ export const commercialServices = [
     ],
     ctaHeading: "Contact us for Professional Soil Testing in Chennai",
     ctaBody: "Planning a construction project? GeoDesign offers reliable soil testing for construction in Chennai with accurate geotechnical investigations, laboratory testing, Soil Bearing Capacity (SBC) evaluation, and detailed engineering reports. Our experienced team provides dependable soil testing in Chennai for residential, commercial, industrial, and infrastructure projects. Contact us today to schedule your soil investigation and build on a strong foundation.",
-    related: ['plate-load-test', 'pile-foundation', 'laboratory-tests'],
+    related: ['plate-load-test', 'pile-foundation-in-chennai', 'laboratory-tests'],
   },
 
   // ────────────────────────────────────────────────────────── pile foundation
           {
-    slug: "pile-foundation",
+    slug: "pile-foundation-in-chennai",
     tier: 'commercial',
     title: "Pile Foundation in Chennai",
     navLabel: "Pile Foundation & Design",
     iconKey: "pile",
     reviewStatus: 'applied-from-client-document-verbatim',
     shortDescription: "Foundation design and construction supervision — from soil investigation through pile specification, load test verification, and quality assurance.",
-    metaTitle: "Pile Foundation Design & Supervision | Foundation Engineering",
-    metaDescription: "GeoDesign provides pile foundation design and construction supervision — soil investigation, pile specification, load test verification, and IS Code-compliant documentation.",
-    keywords: "pile foundation design, foundation design, deep foundation design, pile design consultant, foundation engineering, construction supervision",
+    metaTitle: "Pile Foundation in Chennai | Foundation Design | GeoDesign",
+    metaDescription: "GeoDesign provides expert pile foundation in Chennai with soil investigation, foundation design, bore pile construction, and geotechnical engineering for safe, durable, and cost-effective residential, commercial, industrial, and infrastructure projects.",
+    keywords: "Pile Foundation in Chennai, Foundation Design in Chennai, Pile Foundation Services Chennai, Bore Pile Foundation Chennai, RCC Pile Foundation Chennai, Cast in Situ Piles Chennai, Deep Foundation Chennai, Foundation Contractor Chennai, Geotechnical Engineering Chennai, GeoDesign",
     intro: [
       "Every successful construction project begins with a strong and properly engineered foundation. At GeoDesign, we provide professional Pile Foundation in Chennai and Foundation Design in Chennai for residential, commercial, industrial, and infrastructure projects. Our experienced geotechnical and structural engineers design safe, economical, and durable foundation systems based on detailed soil investigation, structural loads, and site conditions.",
       "From footing foundation design for individual houses to complex deep foundation systems for high-rise buildings and industrial facilities, we deliver complete engineering solutions that ensure long-term structural stability and compliance with Indian Standards (IS Codes).",
@@ -249,7 +249,7 @@ export const commercialServices = [
     ],
     ctaHeading: "Contact Us for Pile Foundation in Chennai",
     ctaBody: "Looking for reliable Pile Foundation in Chennai? GeoDesign provides professional foundation engineering solutions for residential, commercial, industrial, and infrastructure projects. From soil investigation and pile foundation design to pile installation and engineering consultation, our experienced team delivers safe, durable, and cost-effective solutions tailored to your project requirements.",
-    related: ['pile-load-test', 'soil-testing', 'plate-load-test'],
+    related: ['pile-load-test', 'soil-testing-for-construction-in-chennai', 'plate-load-test'],
   },
 
   // ───────────────────────────────────────────────────────── plate load test
@@ -423,7 +423,7 @@ export const commercialServices = [
       label: 'Specialised Field Testing',
       note: 'This test sits alongside vane shear, permeability, resistivity, and density testing in our field testing reference.',
     },
-    related: ['soil-testing', 'pile-load-test', 'pile-foundation'],
+    related: ['soil-testing-for-construction-in-chennai', 'pile-load-test', 'pile-foundation-in-chennai'],
   },
 
   // ────────────────────────────────────────────────────────── pile load test
@@ -606,21 +606,21 @@ export const commercialServices = [
       label: 'Foundation Recommendations',
       note: 'For background on deep foundation design and selection, see our technical reference.',
     },
-    related: ['pile-foundation', 'plate-load-test', 'bridge-load-test'],
+    related: ['pile-foundation-in-chennai', 'plate-load-test', 'bridge-load-test-in-chennai'],
   },
 
   // ──────────────────────────────────────────────────────── bridge load test
           {
-    slug: "bridge-load-test",
+    slug: "bridge-load-test-in-chennai",
     tier: 'commercial',
     title: "Bridge Load Test in Chennai",
     navLabel: "Bridge Load Test",
     iconKey: "bridge",
     reviewStatus: 'applied-from-client-document-verbatim',
     shortDescription: "Static and dynamic load testing of bridges, flyovers, and culverts — verifying structural capacity, deflection, and strain under controlled load.",
-    metaTitle: "Bridge Load Test | Static, Dynamic & Proof Load Testing",
-    metaDescription: "GeoDesign provides bridge load testing — static and dynamic testing, deflection monitoring, and strain measurement for road bridges, railway bridges, and flyovers.",
-    keywords: "bridge load test, static load test, dynamic load test, proof load test, bridge deflection monitoring, structural load testing",
+    metaTitle: "Bridge Load Test in Chennai | Structural Testing | GeoDesign",
+    metaDescription: "GeoDesign provides professional Bridge Load Test in Chennai with static and dynamic load testing, structural assessment, deflection monitoring, and detailed engineering reports for safe, reliable bridge performance.",
+    keywords: "Bridge Load Test in Chennai, Bridge Load Testing Chennai, Structural Load Testing Chennai, Static Load Test Chennai, Dynamic Load Test Chennai, Bridge Structural Testing Chennai, Bridge Deflection Monitoring Chennai, Bridge Engineering Services Chennai, Infrastructure Load Testing Chennai, GeoDesign",
     intro: [
       "Every bridge must be evaluated to ensure it can safely withstand the loads it is designed to carry. At GeoDesign, we provide professional Bridge Load Test in Chennai for road bridges, railway bridges, flyovers, culverts, and other infrastructure projects. Our experienced structural and geotechnical engineers conduct comprehensive load testing to assess the strength, stability, and performance of bridge structures under controlled loading conditions.",
       "From newly constructed bridges to existing structures requiring safety assessments, we deliver accurate load testing solutions that help verify structural integrity, ensure compliance with engineering standards, and support long-term public safety. Using advanced testing equipment and industry-approved methodologies, GeoDesign provides reliable bridge load testing services for government, private, and infrastructure projects.",
@@ -731,21 +731,21 @@ export const commercialServices = [
     ],
     ctaHeading: "Contact GeoDesign for Professional Bridge Load Testing in Chennai",
     ctaBody: "Planning a new bridge, structural assessment, or rehabilitation project? GeoDesign provides reliable Bridge Load Test in Chennai services with accurate load testing, structural performance evaluation, deflection monitoring, strain measurement, and comprehensive engineering reports. Our experienced team conducts professional bridge load testing for road bridges, railway bridges, flyovers, pedestrian bridges, and other infrastructure projects to ensure safety, stability, and compliance with engineering standards. Contact us today to schedule your bridge load test and verify the structural performance of your bridge with confidence.",
-    related: ['pile-load-test', 'plate-load-test', 'soil-testing'],
+    related: ['pile-load-test', 'plate-load-test', 'soil-testing-for-construction-in-chennai'],
   },
 
   // ────────────────────────────────────────────── electrical resistivity test
           {
-    slug: "electrical-resistivity-test",
+    slug: "electrical-resistivity-test-in-chennai",
     tier: 'commercial',
     title: "Electrical Resistivity Test in Chennai",
     navLabel: "Electrical Resistivity Test",
     iconKey: "resistivity",
     reviewStatus: 'applied-from-client-document-verbatim',
     shortDescription: "Non-destructive geophysical survey mapping subsurface soil, rock, and groundwater — for earthing design, borewell siting, and site investigation.",
-    metaTitle: "Electrical Resistivity Test | Soil Resistivity & Geophysical Survey",
-    metaDescription: "GeoDesign provides electrical resistivity testing — VES, resistivity tomography, groundwater exploration, and earthing design surveys across Tamil Nadu.",
-    keywords: "electrical resistivity test, soil resistivity test, vertical electrical sounding, VES, resistivity tomography, groundwater survey, earthing design",
+    metaTitle: "Electrical Resistivity Test in Chennai | GeoDesign",
+    metaDescription: "GeoDesign provides professional Bridge Load Test in Chennai with static and dynamic load testing, structural assessment, deflection monitoring, and detailed engineering reports for safe, reliable bridge performance. GeoDesign provides electrical resistivity testing — VES, resistivity tomography, groundwater exploration, and earthing design surveys across Tamil Nadu.",
+    keywords: "Electrical Resistivity Test in Chennai, Geophysical Survey Chennai, Electrical Resistivity Survey Chennai, Groundwater Exploration Chennai, Subsurface Investigation Chennai, Foundation Investigation Chennai, Geological Survey Chennai, Resistivity Testing Chennai, Soil Investigation Chennai, GeoDesign",
     intro: [
       "Every successful construction project begins with a thorough understanding of the subsurface conditions. At GeoDesign, we provide professional Electrical Resistivity Test in Chennai for residential, commercial, industrial, and infrastructure projects. Our experienced geotechnical engineers use advanced resistivity testing methods to assess underground soil and rock conditions, groundwater availability, and subsurface formations with high accuracy.",
       "From individual house construction to large-scale infrastructure developments, our Electrical Resistivity Test helps identify suitable foundation conditions, groundwater potential, rock depth, and soil strata before construction begins. We deliver reliable investigation reports that support safe foundation design and informed engineering decisions while complying with industry standards.",
@@ -844,7 +844,7 @@ export const commercialServices = [
     ],
     ctaHeading: "Contact us  Electrical Resistivity Testing in Chennai",
     ctaBody: "Looking for a reliable Electrical Resistivity Test in Chennai? GeoDesign provides professional geophysical investigation services for residential, commercial, industrial, and infrastructure projects. From groundwater exploration and subsurface investigations to foundation assessment and engineering consultation, our experienced team delivers accurate, reliable, and cost-effective solutions tailored to your project requirements.",
-    related: ['soil-testing', 'topographical-survey', 'plate-load-test'],
+    related: ['soil-testing-for-construction-in-chennai', 'topographical-survey', 'plate-load-test'],
   },
 
   // ─────────────────────────────────────────────────── topographical survey
@@ -1018,7 +1018,7 @@ export const commercialServices = [
           'Yes, and there is a real advantage in doing so. When both are carried out together, borehole positions and levels are recorded against the same survey control, so the geotechnical data ties directly to the survey drawing.',
       },
     ],
-    related: ['soil-testing', 'electrical-resistivity-test', 'pile-foundation'],
+    related: ['soil-testing-for-construction-in-chennai', 'electrical-resistivity-test-in-chennai', 'pile-foundation-in-chennai'],
   },
 ]
 

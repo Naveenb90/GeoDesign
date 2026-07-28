@@ -43,12 +43,12 @@ Node ≥ 22.12.0 (`.nvmrc`). Deploy: Netlify runs `npm ci && npm run build`, pub
 /our-offices  /contact  /video  /404
 
 /services                                  hub, both tiers
-/services/soil-testing                     ┐
-/services/pile-foundation                  │
+/services/soil-testing-for-construction-in-chennai                     ┐
+/services/pile-foundation-in-chennai                  │
 /services/plate-load-test                  │ Tier 1
 /services/pile-load-test                   │ commercial
-/services/bridge-load-test                 │
-/services/electrical-resistivity-test      │
+/services/bridge-load-test-in-chennai                 │
+/services/electrical-resistivity-test-in-chennai      │
 /services/topographical-survey             ┘
 /services/drilling-sampling                ┐
 /services/foundation-recommendations       │ Tier 2
