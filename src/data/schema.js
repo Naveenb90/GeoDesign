@@ -18,7 +18,7 @@ export const ORG_ID = `${SITE}/#organization`
 /** Coordinates already used for the office map embeds in `data.js`. */
 const OFFICE_GEO = {
   headOffice: { latitude: 11.033309, longitude: 76.940973 },
-  branchOffice: { latitude: 13.0924, longitude: 80.2197 },
+  branchOffice: { latitude: 12.898465, longitude: 80.1746741 },
 }
 
 /**

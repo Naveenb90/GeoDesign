@@ -6,6 +6,7 @@
 
 | You want to… | Read |
 |---|---|
+| Run the site on your own machine | [RUNNING_LOCALLY.md](./RUNNING_LOCALLY.md) |
 | Run or deploy the site | [`../README.md`](../README.md) |
 | Work on the code (agent or developer) | [`../CLAUDE.md`](../CLAUDE.md) |
 | Understand the stack and routes | [ARCHITECTURE.md](./ARCHITECTURE.md) |
@@ -49,6 +50,7 @@ which meant updating one left the rest silently wrong.
 
 | File | Scope |
 |---|---|
+| [RUNNING_LOCALLY.md](./RUNNING_LOCALLY.md) | Prerequisites, install, dev/build/preview, troubleshooting |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Stack, framework roles, routes, data layer, deployment |
 | [DESIGN_SYSTEM.md](./DESIGN_SYSTEM.md) | Brand tokens, layout, components, icons, images, motion |
 | [SERVICES_PAGES.md](./SERVICES_PAGES.md) | Two-tier service model, page anatomy, editing rules |

@@ -265,7 +265,8 @@ export const contactInfo = {
     mobile: '+91 9043344488',
   },
   branchOffice: {
-    address: 'No. 15, Periyar Pathai, Choolaimedu, Chennai - 600094',
+    address:
+      '1st Floor, DJR Complex, 286, 1st Street, Bharathi Nagar, Noothencheri, Vengavasal, Tambaram, Chennai - 600126',
     regionLabel: 'Chennai, Tamil Nadu',
     /** Mobile & WhatsApp — Chennai branch */
     mobile: '+91 9043344088',
@@ -286,7 +287,7 @@ export const mapEmbedUrls = {
   headOffice:
     'https://www.google.com/maps?q=11.033309,76.940973&hl=en&z=16&output=embed',
   branchOffice:
-    'https://www.google.com/maps?q=13.0924,80.2197&hl=en&z=16&output=embed',
+    'https://www.google.com/maps?q=12.898465,80.1746741&hl=en&z=16&output=embed',
 }
 
 /**
