@@ -118,6 +118,115 @@ export function localBusinessSchema() {
 }
 
 /**
+ * Per-service `serviceType` lists for the Chennai `ProfessionalService` node,
+ * transcribed from `req/TECHNICAL SEO FOR GEO DESIGN.docx`.
+ */
+const CHENNAI_SERVICE_TYPES = {
+  'soil-testing-for-construction-in-chennai': [
+    'Soil Testing',
+    'Geotechnical Investigation',
+    'Soil Investigation',
+    'Soil Bearing Capacity Test',
+    'Borehole Drilling',
+    'Foundation Design',
+    'Plate Load Test',
+    'Ground Investigation',
+  ],
+  'pile-foundation-in-chennai': [
+    'Pile Foundation',
+    'Foundation Design',
+    'Bore Pile Foundation',
+    'Cast in Situ Piles',
+    'RCC Pile Foundation',
+    'Deep Foundation',
+    'Geotechnical Investigation',
+    'Soil Testing',
+    'Geotechnical Engineering',
+  ],
+  'bridge-load-test-in-chennai': [
+    'Soil Testing',
+    'Geotechnical Investigation',
+    'Pile Foundation',
+    'Foundation Design',
+    'Bridge Load Test',
+    'Structural Load Testing',
+    'Static Load Test',
+    'Dynamic Load Test',
+    'Bridge Deflection Monitoring',
+    'Geotechnical Engineering',
+  ],
+  'electrical-resistivity-test-in-chennai': [
+    'Electrical Resistivity Test',
+    'Geophysical Survey',
+    'Groundwater Exploration',
+    'Subsurface Investigation',
+    'Soil Investigation',
+    'Foundation Investigation',
+    'Geological Survey',
+    'Geotechnical Engineering',
+  ],
+}
+
+/**
+ * ProfessionalService node for the Chennai office, emitted on the four
+ * client-document service pages per `TECHNICAL SEO FOR GEO DESIGN.docx`.
+ *
+ * Deviations from the source document, made deliberately to avoid shipping invalid
+ * structured data:
+ *   - `@id` uses the existing Chennai office node (`/our-offices#chennai`) instead of
+ *     the document's `#organization`, which already belongs to the site-wide
+ *     `Organization` node — two nodes sharing one `@id` with different `@type` is a
+ *     structured-data error.
+ *   - Brand rendered as one-word "GeoDesign" (site standard); the document uses
+ *     "Geo Design".
+ *   - The document's placeholder `sameAs` (bare facebook.com / linkedin.com/company/)
+ *     is omitted rather than published as broken profile links.
+ * Address, geo, phone, hours, priceRange and serviceType follow the document.
+ *
+ * @param {string} slug
+ * @returns {object|null}
+ */
+export function chennaiOfficeSchema(slug) {
+  const serviceType = CHENNAI_SERVICE_TYPES[slug]
+  if (!serviceType) return null
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${SITE}/our-offices#chennai`,
+    name: 'GeoDesign — Chennai',
+    parentOrganization: { '@id': ORG_ID },
+    url: `${SITE}/`,
+    image: `${SITE}/assets/web/logo-256.png`,
+    logo: `${SITE}/assets/web/logo-256.png`,
+    description:
+      'GeoDesign provides professional soil testing, geotechnical investigation, pile foundation, bridge load testing, electrical resistivity testing, and foundation engineering services in Chennai and Tamil Nadu.',
+    telephone: contactInfo.branchOffice.mobile.replace(/\s/g, ''),
+    email: contactInfo.email,
+    priceRange: '$$',
+    address: splitAddress(contactInfo.branchOffice.address, 'Chennai'),
+    geo: { '@type': 'GeoCoordinates', ...OFFICE_GEO.branchOffice },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        opens: '09:00',
+        closes: '17:00',
+      },
+    ],
+    areaServed: { '@type': 'City', name: 'Chennai' },
+    serviceType,
+  }
+}
+
+/**
  * Service schema for a commercial service page.
  * @param {object} service entry from `commercialServices.js`
  */

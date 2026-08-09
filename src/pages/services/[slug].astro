@@ -12,7 +12,7 @@ import {
 } from '../../data/servicesCatalog.js';
 import { commercialServices, getCommercialServiceBySlug } from '../../data/commercialServices.js';
 import { SKY_OUTCOME_TILE_CLASS } from '../../data/skyTileClasses.js';
-import { serviceSchema, faqSchema, breadcrumbSchema } from '../../data/schema.js';
+import { serviceSchema, faqSchema, breadcrumbSchema, chennaiOfficeSchema } from '../../data/schema.js';
 
 /**
  * Two-tier service route.
@@ -44,6 +44,46 @@ if (!service) {
 const isCommercial = Boolean(commercial);
 const outcomeTile = `${SKY_OUTCOME_TILE_CLASS} flex h-full flex-col scroll-mt-28 text-left`;
 
+/**
+ * Per-page social-card metadata for the four client-document Chennai pages, from
+ * `req/TECHNICAL SEO FOR GEO DESIGN.docx`. Brand normalised to one-word "GeoDesign".
+ * `og:image` files are purpose-built 1200×630 cards in `public/assets/images/`.
+ */
+const OG_BY_SLUG = {
+  'soil-testing-for-construction-in-chennai': {
+    image: '/assets/images/soil-testing-construction-chennai.webp',
+    alt: 'Soil Testing for Construction in Chennai by GeoDesign',
+    twitter:
+      'GeoDesign provides expert soil testing, geotechnical investigation, SBC testing, borehole drilling, and foundation recommendations for construction projects in Chennai.',
+  },
+  'pile-foundation-in-chennai': {
+    image: '/assets/images/pile-foundation-chennai.webp',
+    alt: 'Pile Foundation in Chennai by GeoDesign',
+    twitter:
+      'GeoDesign offers professional pile foundation services in Chennai, including bore pile construction, foundation design, soil investigation, and geotechnical engineering for residential, commercial, and industrial projects.',
+  },
+  'bridge-load-test-in-chennai': {
+    image: '/assets/images/bridge-load-test-chennai.webp',
+    alt: 'Bridge Load Test in Chennai by GeoDesign',
+    twitter:
+      'GeoDesign provides expert bridge load testing in Chennai, including static and dynamic load testing, structural assessment, deflection monitoring, and engineering reports.',
+  },
+  'electrical-resistivity-test-in-chennai': {
+    image: '/assets/images/electrical-resistivity-test-chennai.webp',
+    alt: 'Electrical Resistivity Test in Chennai by GeoDesign',
+    twitter:
+      'GeoDesign offers professional Electrical Resistivity Testing in Chennai for groundwater exploration, geological surveys, subsurface investigation, and foundation planning.',
+  },
+};
+
+const og = OG_BY_SLUG[slug ?? ''];
+
+/**
+ * The four client-document pages carry a trailing-slash canonical, per the document's
+ * "correction" note. Other routes keep the site's no-trailing-slash convention.
+ */
+const canonicalPath = og ? `/services/${slug}/` : `/services/${slug}`;
+
 const breadcrumbItems = [
   { label: 'Home', href: '/' },
   { label: 'What We Do', href: '/services' },
@@ -67,6 +107,8 @@ const heroMeta = isCommercial
 const schemas = [
   breadcrumbSchema(breadcrumbItems),
   ...(isCommercial ? [serviceSchema(service), faqSchema(service.faqs)] : []),
+  // ProfessionalService (Chennai office) on the four client-document pages only.
+  chennaiOfficeSchema(slug ?? ''),
 ];
 ---
 
@@ -74,7 +116,10 @@ const schemas = [
   title={service.metaTitle}
   description={service.metaDescription}
   keywords={service.keywords}
-  canonicalPath={`/services/${slug}`}
+  canonicalPath={canonicalPath}
+  ogImagePath={og?.image}
+  ogImageAlt={og?.alt}
+  twitterDescription={og?.twitter}
   schemas={schemas}
 >
   <div class="page-shell-white">

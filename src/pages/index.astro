@@ -25,7 +25,14 @@ const heroGalleryImages = homeHeroImages;
   title="GeoDesign — Reduce Construction Risk in India"
   description="We reduce risk in construction using scientific expertise — geotechnical investigation and testing across South India for residential, commercial, and government projects."
   canonicalPath="/"
-><!--
+>
+  {/* Google Search Console verification — home page only, per client SEO document. */}
+  <meta
+    slot="head"
+    name="google-site-verification"
+    content="eQQWpFUccBe5LllEaC9Iuk1ewlRcZi3e5n1bBI4xE7Q"
+  />
+  <!--
   ogImagePath intentionally omitted so the page uses the purpose-built 1200×630
   `og-image.jpg` from BaseLayout. It previously passed `heroGalleryImages[0]`,
   which meant the social card image was whichever file sorted first in
